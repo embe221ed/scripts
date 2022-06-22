@@ -1,0 +1,7 @@
+is_debug = false
+target_cpu = "x64"
+symbol_level = 2
+v8_enable_backtrace = true
+v8_enable_disassembler = true
+v8_enable_object_print = true
+v8_enable_verify_heap = true
