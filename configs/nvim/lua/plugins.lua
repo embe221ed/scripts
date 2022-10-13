@@ -22,10 +22,6 @@ return require('packer').startup(function(use)
   }
   use 'neovim/nvim-lspconfig'									-- Configurations for Nvim LSP
   use {
-    'ms-jpq/coq_nvim',											-- Fast as FUCK and loads of features
-    branch = 'coq'
-  }
-  use {
     'RRethy/vim-illuminate',									-- highlight word under cursor
     requires = 'neovim/nvim-lspconfig'
   }
@@ -36,4 +32,31 @@ return require('packer').startup(function(use)
   }
   use "windwp/nvim-autopairs"									-- auto-pairs
   use "lukas-reineke/indent-blankline.nvim"						-- indent blankline
+  use 'simrat39/rust-tools.nvim'								-- A plugin to improve your rust experience in neovim.
+  use {'iamcco/markdown-preview.nvim'}                  -- Markdown Preview
+  use {
+    'rmagatti/goto-preview',                            -- GoTo preview
+    config = function()
+      require('goto-preview').setup {}
+    end
+  }
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',      -- telescope
+  -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
+  use { 'simrat39/symbols-outline.nvim' }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-buffer' }
+  use { 'hrsh7th/cmp-path' }
+  use { 'hrsh7th/cmp-cmdline' }
+  use { 'hrsh7th/nvim-cmp' }
+  use { 'hrsh7th/cmp-vsnip' }
+  use { 'hrsh7th/vim-vsnip' }
 end)

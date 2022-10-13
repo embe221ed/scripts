@@ -4,6 +4,7 @@ require('opts')         -- Options
 require('keys')         -- Keymaps
 require('plugins')         -- Plugins: UNCOMMENT THIS LINE
 
+
 -- PLUGINS
 -- -- nvim-tree
 require('nvim-tree').setup {
@@ -14,7 +15,6 @@ require('nvim-tree').setup {
 	adaptive_size = true,
 	centralize_selection = false,
 	width = 40,
-	height = 30,
 	hide_root_folder = false,
 	side = "left",
 	preserve_window_proportions = false,
@@ -35,8 +35,17 @@ vim.api.nvim_create_autocmd('BufEnter', {
     nested = true,
 })
 
+-- -- Comment
+require('Comment').setup {}
+
+-- -- Symbols Outline
+require('symbols-outline').setup {}
+
 -- -- auto-pairs
 require('nvim-autopairs').setup {}
+
+-- -- telescope
+require('telescope').setup {}
 
 -- -- nvim-treesitter
 require('nvim-treesitter.configs').setup {
@@ -77,12 +86,82 @@ require('lualine').setup {
 require('bufferline').setup {
   options = {}
 }
+  -- Set up nvim-cmp.
+local cmp = require('cmp')
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+  }, {
+    { name = 'buffer' },
+    { name = 'path' },
+  })
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+-- Set up lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
 -- -- COQ config
-vim.cmd [[
-  let g:coq_settings = { 'auto_start': v:true, 'keymap.jump_to_mark': v:null }
-]]
-local coq = require('coq')
+-- vim.cmd [[
+--   let g:coq_settings = { 'auto_start': v:true, 'keymap.jump_to_mark': v:null }
+-- ]]
+-- local coq = require('coq')
+
+-- -- goto-preview config
+require('goto-preview').setup {
+  default_mappings = true;
+  width = 120; -- Width of the floating window
+  height = 20; -- Height of the floating window
+}
 
 -- -- LSP config
 local opts = { noremap=true, silent=true }
@@ -96,6 +175,8 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+	vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -104,7 +185,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
@@ -115,6 +196,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+
   require('illuminate').on_attach(client)
 end
 local lsp_flags = {
@@ -125,38 +207,65 @@ local lsp_flags = {
 local lsp = require('lspconfig')
 
 -- -- -- pyright
-lsp.pyright.setup(
-  coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    flags = lsp_flags,
-  })
-)
+lsp.pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
 -- -- -- clangd
-lsp.clangd.setup(
-  coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    flags = lsp_flags,
-  })
-)
+lsp.clangd.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
 -- -- -- tsserver
-lsp.tsserver.setup(
-  coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    flags = lsp_flags,
-  })
-)
+lsp.tsserver.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
 -- -- -- rls
-lsp.rls.setup(
-  coq.lsp_ensure_capabilities({
-	settings = {
-	  rust = {
-		unstable_features = true,
-		build_on_save = false,
-		all_features = true,
-	  },
-	},
-  })
-)
+-- lsp.rls.setup(
+--   coq.lsp_ensure_capabilities({
+-- 	settings = {
+-- 	  rust = {
+-- 		unstable_features = true,
+-- 		build_on_save = false,
+-- 		all_features = true,
+-- 	  },
+-- 	},
+--   })
+-- )
+-- -- -- rust-analyzer
+local opts = {
+    tools = { -- rust-tools options
+        autoSetHints = true,
+        hover_with_actions = true,
+        inlay_hints = {
+            auto = true,
+            show_parameter_hints = true,
+            parameter_hints_prefix = "<- ",
+            other_hints_prefix = "=> ",
+        },
+    },
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+    server = {
+        -- on_attach is a callback called when the language server attachs to the buffer
+        on_attach = on_attach,
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
 
 -- INITIALIZE MATERIAL SCHEME
 vim.g.material_style = "palenight"
