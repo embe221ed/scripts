@@ -51,6 +51,7 @@ return require('packer').startup(function(use)
           require('Comment').setup()
       end
   }
+  -- autocompletion
   use { 'simrat39/symbols-outline.nvim' }
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
@@ -59,4 +60,7 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/nvim-cmp' }
   use { 'hrsh7th/cmp-vsnip' }
   use { 'hrsh7th/vim-vsnip' }
+  -- end
+
+  use { 'lervag/vimtex' }                                 -- LaTeX
 end)

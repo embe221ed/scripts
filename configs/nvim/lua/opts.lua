@@ -7,6 +7,7 @@ vim.o.relativenumber  = true
 vim.o.clipboard       = "unnamedplus"
 vim.o.expandtab       = true
 
+vim.g.vimtex_view_method = "skim"
 
 local api = vim.api
 
