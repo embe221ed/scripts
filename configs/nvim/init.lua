@@ -61,6 +61,7 @@ require('nvim-treesitter.configs').setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
+    disable = { "latex" },
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -147,7 +148,7 @@ cmp.setup.cmdline(':', {
 })
 
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
 -- -- COQ config
@@ -218,6 +219,11 @@ lsp.clangd.setup({
 })
 -- -- -- tsserver
 lsp.tsserver.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
+-- -- -- texlab
+lsp.texlab.setup({
   on_attach = on_attach,
   capabilities = capabilities
 })
