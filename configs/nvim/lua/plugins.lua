@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',							-- tree-sitter functionality and highlighting
     run = ':TSUpdate'
   }
+  use { 'nvim-treesitter/playground' }
   use 'p00f/nvim-ts-rainbow'									-- rainbow parentheses
   use {
     'nvim-lualine/lualine.nvim',								-- status line
