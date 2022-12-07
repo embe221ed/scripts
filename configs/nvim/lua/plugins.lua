@@ -34,7 +34,7 @@ return require('packer').startup(function(use)
   use "windwp/nvim-autopairs"									-- auto-pairs
   use "lukas-reineke/indent-blankline.nvim"						-- indent blankline
   use 'simrat39/rust-tools.nvim'								-- A plugin to improve your rust experience in neovim.
-  use {'iamcco/markdown-preview.nvim'}                  -- Markdown Preview
+  use { "iamcco/markdown-preview.nvim" }
   use {
     'rmagatti/goto-preview',                            -- GoTo preview
     config = function()
