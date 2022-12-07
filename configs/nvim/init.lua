@@ -48,6 +48,18 @@ require('nvim-autopairs').setup {}
 require('telescope').setup {}
 
 -- -- nvim-treesitter
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.move = {
+  install_info = {
+    url = "/opt/tree-sitter-parsers/tree-sitter-move/", -- local path or git repo
+    files = {"src/parser.c"},
+    -- optional entries:
+    -- branch = "master", -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
+  }
+}
+
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "cpp", "lua", "rust", "python", "javascript" },
@@ -161,7 +173,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 require('goto-preview').setup {
   default_mappings = true;
   width = 120; -- Width of the floating window
-  height = 20; -- Height of the floating window
+  height = 40; -- Height of the floating window
 }
 
 -- -- LSP config
@@ -224,6 +236,11 @@ lsp.tsserver.setup({
 })
 -- -- -- texlab
 lsp.texlab.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
+-- -- -- move-analyzer
+lsp.move_analyzer.setup({
   on_attach = on_attach,
   capabilities = capabilities
 })
