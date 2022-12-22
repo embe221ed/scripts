@@ -46,6 +46,8 @@ require('nvim-autopairs').setup {}
 
 -- -- telescope
 require('telescope').setup {}
+-- -- -- telescope plenary
+require('plenary.filetype').add_file('move')
 
 -- -- nvim-treesitter
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()

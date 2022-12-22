@@ -64,4 +64,5 @@ return require('packer').startup(function(use)
   -- end
 
   use { 'lervag/vimtex' }                                 -- LaTeX
+  -- use { 'rvmelkonian/move.vim' }
 end)
