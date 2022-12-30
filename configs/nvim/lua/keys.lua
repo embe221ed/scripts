@@ -19,3 +19,11 @@ map('n', '<C-H>', [[<C-w>h]], {})
 -- buffer movement
 map('n', 'b]', [[:BufferLineCycleNext<CR>]], {})
 map('n', 'b[', [[:BufferLineCyclePrev<CR>]], {})
+
+-- terminal
+-- :tnoremap <Esc> <C-\><C-n>
+map('t', '<Esc>', [[<C-\><C-n>]], {})
+map('t', '<C-J>', [[<C-\><C-n><C-w>j]], {})
+map('t', '<C-K>', [[<C-\><C-n><C-w>k]], {})
+map('t', '<C-L>', [[<C-\><C-n><C-w>l]], {})
+map('t', '<C-H>', [[<C-\><C-n><C-w>h]], {})
