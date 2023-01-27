@@ -16,9 +16,11 @@ map('n', '<C-K>', [[<C-w>k]], {})
 map('n', '<C-L>', [[<C-w>l]], {})
 map('n', '<C-H>', [[<C-w>h]], {})
 
--- buffer movement
+-- buffer management
 map('n', 'b]', [[:BufferLineCycleNext<CR>]], {})
 map('n', 'b[', [[:BufferLineCyclePrev<CR>]], {})
+map('n', 'bx', [[:BufferLinePickClose<CR>]], {})
+map('n', 'bp', [[:BufferLinePick<CR>]], {})
 
 -- terminal
 -- :tnoremap <Esc> <C-\><C-n>
