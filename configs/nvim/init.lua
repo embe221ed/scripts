@@ -5,12 +5,15 @@ require('keys')         -- Keymaps
 require('plugins')         -- Plugins: UNCOMMENT THIS LINE
 
 
+local function open_nvim_tree()
+  -- open the tree
+  require("nvim-tree.api").tree.open({})
+end
+
+
 -- PLUGINS
 -- -- nvim-tree
 require('nvim-tree').setup {
-  open_on_tab = false,
-  open_on_setup = true,
-  open_on_setup_file = true,
   view = {
 	adaptive_size = true,
 	centralize_selection = false,
@@ -34,6 +37,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
     nested = true,
 })
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    callback = open_nvim_tree
+})
+
+require("chatgpt").setup {}
 
 -- -- Comment
 require('Comment').setup {}
@@ -46,6 +54,7 @@ require('nvim-autopairs').setup {}
 
 -- -- telescope
 require('telescope').setup {}
+
 -- -- -- telescope plenary
 require('plenary.filetype').add_file('move')
 
@@ -99,7 +108,10 @@ require('lualine').setup {
 
 -- -- tabline
 require('bufferline').setup {
-  options = {}
+  options = {
+    separator_style = "slant",
+    diagnostics = "nvim_lsp",
+  }
 }
   -- Set up nvim-cmp.
 local cmp = require('cmp')
@@ -214,6 +226,7 @@ local on_attach = function(client, bufnr)
 
   require('illuminate').on_attach(client)
 end
+
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
@@ -259,10 +272,16 @@ lsp.move_analyzer.setup({
 --   })
 -- )
 -- -- -- rust-analyzer
+local rt = require("rust-tools")
+
+local rust_on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+end
+
 local opts = {
     tools = { -- rust-tools options
         autoSetHints = true,
-        hover_with_actions = true,
         inlay_hints = {
             auto = true,
             show_parameter_hints = true,
@@ -276,7 +295,7 @@ local opts = {
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
     server = {
         -- on_attach is a callback called when the language server attachs to the buffer
-        on_attach = on_attach,
+        on_attach = rust_on_attach,
         settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -290,7 +309,7 @@ local opts = {
     },
 }
 
-require('rust-tools').setup(opts)
+rt.setup(opts)
 
 -- INITIALIZE MATERIAL SCHEME
 vim.g.material_style = "palenight"

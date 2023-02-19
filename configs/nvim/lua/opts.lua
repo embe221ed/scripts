@@ -21,3 +21,5 @@ api.nvim_create_autocmd(
     end,
   }
 )
+
+-- vim.lsp.set_log_level("debug")

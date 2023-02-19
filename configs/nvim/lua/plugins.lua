@@ -65,4 +65,12 @@ return require('packer').startup(function(use)
 
   use { 'lervag/vimtex' }                                 -- LaTeX
   -- use { 'rvmelkonian/move.vim' }
+  use({
+    "jackMort/ChatGPT.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+})
 end)
