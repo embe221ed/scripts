@@ -7,7 +7,9 @@ require('plugins')         -- Plugins: UNCOMMENT THIS LINE
 
 local function open_nvim_tree()
   -- open the tree
-  require("nvim-tree.api").tree.open({})
+  require("nvim-tree.api").tree.toggle({
+    focus = false
+  })
 end
 
 
