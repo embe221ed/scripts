@@ -7,7 +7,18 @@ vim.o.relativenumber  = true
 vim.o.clipboard       = "unnamedplus"
 vim.o.expandtab       = true
 
+vim.g.one_allow_italics = true
 vim.g.vimtex_view_method = "skim"
+vim.g.indentLine_fileTypeExclude = {
+  "lspinfo",
+  "packer",
+  "checkhealth",
+  "help",
+  "man",
+  "diff",
+  "git",
+  "",
+}
 
 local api = vim.api
 

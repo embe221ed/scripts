@@ -104,7 +104,8 @@ require('nvim-treesitter.configs').setup {
 -- -- lualine
 require('lualine').setup {
   options = {
-    theme = 'material'
+    -- theme = 'material'
+    theme = 'catppuccin'
   }
 }
 
@@ -314,8 +315,53 @@ local opts = {
 rt.setup(opts)
 
 -- INITIALIZE MATERIAL SCHEME
-vim.g.material_style = "palenight"
-vim.cmd 'colorscheme material'
+-- vim.g.material_style = "palenight"
+-- vim.cmd 'colorscheme material'
+
+-- INITIALIZE CATPUCCIN SCHEME
+require("catppuccin").setup({
+    flavour = "frappe", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "frappe",
+        dark = "frappe",
+    },
+    transparent_background = true,
+    show_end_of_buffer = false, -- show the '~' characters after the end of buffers
+    term_colors = false,
+    dim_inactive = {
+        enabled = false,
+        shade = "dark",
+        percentage = 0.05,
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+        notify = false,
+        mini = false,
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
+vim.cmd.colorscheme "catppuccin"
 
 -- SETUP INDENT
 vim.opt.termguicolors = true
@@ -334,6 +380,7 @@ require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = true,
     space_char_blankline = " ",
+    use_treesitter = true,
     char_highlight_list = {
         "IndentBlanklineIndent1",
         "IndentBlanklineIndent2",
