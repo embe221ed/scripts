@@ -386,49 +386,72 @@ require('bufferline').setup {
     styles = { "bold" },
     custom = {
       all = {
-        fill = {
-          bg = fg_selected,
-        },
-        background = {
-          bg = bg_visible,
-        },
-        buffer_visible = {
-          bg = bg_visible,
-        },
-        buffer_selected = {
-          bg = bg_selected,
-        },
-        separator_selected = {
-          fg = fg_selected,
-          bg = bg_selected,
-        },
-        separator_visible = {
-          fg = fg_selected,
-          bg = bg_visible
-        },
-        separator = {
-          fg = fg_selected,
-          bg = bg_visible
-        },
-        close_button = {
-          bg = bg_visible,
-        },
-        close_button_visible = {
-          bg = bg_visible,
-        },
-        close_button_selected = {
-          bg = bg_selected,
-        },
-        diagnostic = {
-            bg = bg_visible,
-        },
-        diagnostic_visible = {
-            bg = bg_visible,
-        },
-        diagnostic_selected = {
-            bg = bg_selected,
-        },
-      }
+        fill = { bg = fg_selected, },
+
+        background = { bg = bg_visible, },
+        buffer_visible = { bg = bg_visible, },
+        buffer_selected = { bg = bg_selected, },
+
+        separator = { fg = fg_selected, bg = bg_visible },
+        separator_visible = { fg = fg_selected, bg = bg_visible },
+        separator_selected = { fg = fg_selected, bg = bg_selected, },
+
+        close_button = { bg = bg_visible, },
+        close_button_visible = { bg = bg_visible, },
+        close_button_selected = { bg = bg_selected, },
+
+        diagnostic = { bg = bg_visible, },
+        diagnostic_visible = { bg = bg_visible, },
+        diagnostic_selected = { bg = bg_selected, },
+
+        pick = { bg = bg_visible, },
+        pick_visible = { bg = bg_visible, },
+        pick_selected = { bg = bg_selected, },
+
+        hint = { bg = bg_visible, },
+        hint_visible = { bg = bg_visible, },
+        hint_selected = { bg = bg_selected, },
+
+        info = { bg = bg_visible, },
+        info_visible = { bg = bg_visible, },
+        info_selected = { bg = bg_selected, },
+
+        warning = { bg = bg_visible, },
+        warning_visible = { bg = bg_visible, },
+        warning_selected = { bg = bg_selected, },
+
+        error = { bg = bg_visible, },
+        error_visible = { bg = bg_visible, },
+        error_selected = { bg = bg_selected, },
+
+        modified = { bg = bg_visible, },
+        modified_visible = { bg = bg_visible, },
+        modified_selected = { bg = bg_selected, },
+
+        duplicate = { bg = bg_visible, },
+        duplicate_visible = { bg = bg_visible, },
+        duplicate_selected = { bg = bg_selected, },
+
+        numbers = { bg = bg_visible, },
+        numbers_visible = { bg = bg_visible, },
+        numbers_selected = { bg = bg_selected, },
+
+        hint_diagnostic = { bg = bg_visible, },
+        hint_diagnostic_visible = { bg = bg_visible, },
+        hint_diagnostic_selected = { bg = bg_selected, },
+
+        info_diagnostic = { bg = bg_visible, },
+        info_diagnostic_visible = { bg = bg_visible, },
+        info_diagnostic_selected = { bg = bg_selected, },
+
+        warning_diagnostic = { bg = bg_visible, },
+        warning_diagnostic_visible = { bg = bg_visible, },
+        warning_diagnostic_selected = { bg = bg_selected, },
+
+        error_diagnostic = { bg = bg_visible, },
+        error_diagnostic_visible = { bg = bg_visible, },
+        error_diagnostic_selected = { bg = bg_selected, },
+      },
     }
   },
   options = {
