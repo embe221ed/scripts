@@ -418,7 +418,16 @@ require('bufferline').setup {
         },
         close_button_selected = {
           bg = bg_selected,
-        }
+        },
+        diagnostic = {
+            bg = bg_visible,
+        },
+        diagnostic_visible = {
+            bg = bg_visible,
+        },
+        diagnostic_selected = {
+            bg = bg_selected,
+        },
       }
     }
   },
