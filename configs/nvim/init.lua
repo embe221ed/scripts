@@ -377,35 +377,47 @@ require("catppuccin").setup({
 vim.cmd.colorscheme "catppuccin"
 
 local frappe = require("catppuccin.palettes").get_palette "frappe"
+local fg_selected = frappe.crust
+local bg_selected = frappe.mantle
+local fg_visible = "#2f3445"
+local bg_visible = "#1d1f2a"
 require('bufferline').setup {
   highlights = require("catppuccin.groups.integrations.bufferline").get {
     styles = { "bold" },
     custom = {
       all = {
         fill = {
-          bg = frappe.crust,
+          bg = fg_selected,
+        },
+        background = {
+          bg = bg_visible,
         },
         buffer_visible = {
-          bg = frappe.mantle,
+          bg = bg_visible,
         },
         buffer_selected = {
-          bg = "#2f3445",
+          bg = bg_selected,
         },
         separator_selected = {
-          fg = frappe.crust,
-          bg = "#2f3445",
+          fg = fg_selected,
+          bg = bg_selected,
         },
         separator_visible = {
-          fg = frappe.crust
+          fg = fg_selected,
+          bg = bg_visible
         },
         separator = {
-          fg = frappe.crust
+          fg = fg_selected,
+          bg = bg_visible
+        },
+        close_button = {
+          bg = bg_visible,
         },
         close_button_visible = {
-          bg = frappe.mantle,
+          bg = bg_visible,
         },
         close_button_selected = {
-          bg = "#2f3445",
+          bg = bg_selected,
         }
       }
     }
