@@ -4,6 +4,7 @@ require('opts')         -- Options
 require('keys')         -- Keymaps
 require('plugins')         -- Plugins: UNCOMMENT THIS LINE
 
+vim.opt.termguicolors = true
 
 local function open_nvim_tree()
   -- open the tree
@@ -109,13 +110,6 @@ require('lualine').setup {
   }
 }
 
--- -- tabline
-require('bufferline').setup {
-  options = {
-    separator_style = "slant",
-    diagnostics = "nvim_lsp",
-  }
-}
   -- Set up nvim-cmp.
 local cmp = require('cmp')
 
@@ -358,13 +352,71 @@ require("catppuccin").setup({
         telescope = true,
         notify = false,
         mini = false,
+        indent_blankline = {
+            enabled = true,
+            colored_indent_levels = false,
+        },
+        native_lsp = {
+            enabled = true,
+            virtual_text = {
+                errors = { "italic" },
+                hints = { "italic" },
+                warnings = { "italic" },
+                information = { "italic" },
+            },
+            underlines = {
+                errors = { "underline" },
+                hints = { "underline" },
+                warnings = { "underline" },
+                information = { "underline" },
+            },
+        },
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
 vim.cmd.colorscheme "catppuccin"
 
+local frappe = require("catppuccin.palettes").get_palette "frappe"
+require('bufferline').setup {
+  highlights = require("catppuccin.groups.integrations.bufferline").get {
+    styles = { "bold" },
+    custom = {
+      all = {
+        fill = {
+          bg = frappe.crust,
+        },
+        buffer_visible = {
+          bg = frappe.mantle,
+        },
+        buffer_selected = {
+          bg = "#2f3445",
+        },
+        separator_selected = {
+          fg = frappe.crust,
+          bg = "#2f3445",
+        },
+        separator_visible = {
+          fg = frappe.crust
+        },
+        separator = {
+          fg = frappe.crust
+        },
+        close_button_visible = {
+          bg = frappe.mantle,
+        },
+        close_button_selected = {
+          bg = "#2f3445",
+        }
+      }
+    }
+  },
+  options = {
+    separator_style = "slant",
+    diagnostics = "nvim_lsp",
+  }
+}
+
 -- SETUP INDENT
-vim.opt.termguicolors = true
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]

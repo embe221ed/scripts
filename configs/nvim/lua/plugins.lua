@@ -30,7 +30,8 @@ return require("packer").startup(function(use)
   use {
     "akinsho/bufferline.nvim",                                -- tabline for nvim
     tag = "v2.*",
-    requires = "kyazdani42/nvim-web-devicons"
+    requires = "kyazdani42/nvim-web-devicons",
+    after = "catppuccin",
   }
   use "windwp/nvim-autopairs"                                 -- auto-pairs
   use "lukas-reineke/indent-blankline.nvim"                   -- indent blankline
