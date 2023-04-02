@@ -49,6 +49,9 @@ require("chatgpt").setup {}
 -- -- Comment
 require('Comment').setup {}
 
+-- -- todo-comments
+require("todo-comments").setup {}
+
 -- -- Symbols Outline
 require('symbols-outline').setup {}
 
