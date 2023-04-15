@@ -18,21 +18,21 @@ end
 -- -- nvim-tree
 require('nvim-tree').setup {
   view = {
-	adaptive_size = true,
-	centralize_selection = false,
-	width = 40,
-	hide_root_folder = false,
-	side = "left",
-	preserve_window_proportions = false,
-	number = false,
-	relativenumber = false,
-	signcolumn = "yes",
-	mappings = {
-	  custom_only = false,
-	  list = {
-		-- user mappings go here
-	  },
-	},
+    adaptive_size = true,
+    centralize_selection = false,
+    width = 40,
+    hide_root_folder = false,
+    side = "left",
+    preserve_window_proportions = false,
+    number = true,
+    relativenumber = true,
+    signcolumn = "yes",
+    mappings = {
+      custom_only = false,
+      list = {
+      -- user mappings go here
+      },
+    },
   }
 }
 -- -- -- auto_close working implementation
@@ -53,7 +53,13 @@ require('Comment').setup {}
 require("todo-comments").setup {}
 
 -- -- Symbols Outline
-require('symbols-outline').setup {}
+require('symbols-outline').setup {
+  auto_preview = true,
+  show_relative_numbers = true,
+  show_numbers = true,
+  relative_width = true,
+  width = 15,
+}
 
 -- -- auto-pairs
 require('nvim-autopairs').setup {}
@@ -256,6 +262,11 @@ lsp.texlab.setup({
 })
 -- -- -- move-analyzer
 lsp.move_analyzer.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
+-- -- -- golang
+lsp.gopls.setup({
   on_attach = on_attach,
   capabilities = capabilities
 })
