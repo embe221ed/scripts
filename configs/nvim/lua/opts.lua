@@ -8,6 +8,7 @@ vim.o.relativenumber  = true
 vim.o.clipboard       = "unnamedplus"
 vim.o.expandtab       = true
 vim.o.splitright      = true
+vim.o.splitbelow      = true
 
 vim.g.one_allow_italics = true
 vim.g.vimtex_view_method = "skim"
