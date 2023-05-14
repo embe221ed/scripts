@@ -47,7 +47,9 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 require("chatgpt").setup {}
 
 -- -- Comment
-require('Comment').setup {}
+require('Comment').setup {
+  comment_empty = false
+}
 
 -- -- todo-comments
 require("todo-comments").setup {}
@@ -471,6 +473,7 @@ require('bufferline').setup {
   options = {
     separator_style = "slant",
     diagnostics = "nvim_lsp",
+    buffer_close_icon = "󰅖"
   }
 }
 

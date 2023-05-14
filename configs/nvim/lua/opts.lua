@@ -38,5 +38,15 @@ api.nvim_create_autocmd(
 
 api.nvim_create_user_command('Markserv', '!tmux new -d "markserv . --silent"', {})
 
+api.nvim_create_autocmd(
+  "FileType",
+  {
+    pattern = { "move" },
+    callback = function()
+      vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+    end,
+  }
+)
+
 -- vim.lsp.set_log_level("debug")
 
