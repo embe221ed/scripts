@@ -9,6 +9,7 @@ vim.o.clipboard       = "unnamedplus"
 vim.o.expandtab       = true
 vim.o.splitright      = true
 vim.o.splitbelow      = true
+vim.o.updatetime      = 500
 
 vim.g.one_allow_italics = true
 vim.g.vimtex_view_method = "skim"

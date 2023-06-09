@@ -8,7 +8,7 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   use {
     "kyazdani42/nvim-tree.lua",                               -- filesystem navigation
-    requires = "kyazdani42/nvim-web-devicons"                 -- filesystem icons
+    requires = { "kyazdani42/nvim-web-devicons" }             -- filesystem icons
   }
   use "marko-cerovac/material.nvim"                           -- material theme plugin
   use { "catppuccin/nvim", as = "catppuccin" }                -- cattpuccin theme plugin
@@ -29,12 +29,16 @@ return require("packer").startup(function(use)
   }
   use {
     "akinsho/bufferline.nvim",                                -- tabline for nvim
-    tag = "v2.*",
-    requires = "kyazdani42/nvim-web-devicons"
+    requires = { "kyazdani42/nvim-web-devicons" }             -- filesystem icons
   }
   use "windwp/nvim-autopairs"                                 -- auto-pairs
   use "lukas-reineke/indent-blankline.nvim"                   -- indent blankline
-  use "simrat39/rust-tools.nvim"                              -- A plugin to improve your rust experience in neovim.
+  use { "simrat39/rust-tools.nvim" }                          -- A plugin to improve your rust experience in neovim.
+  use { "mfussenegger/nvim-jdtls" }
+  use {
+    "scalameta/nvim-metals",
+    requires = { "nvim-lua/plenary.nvim" }
+  }
   use { "iamcco/markdown-preview.nvim" }
   use {
     "rmagatti/goto-preview",                                  -- GoTo preview
