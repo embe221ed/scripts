@@ -117,8 +117,8 @@ require('nvim-treesitter.configs').setup {
 require('lualine').setup {
   options = {
     -- theme = 'material'
-    theme = 'catppuccin'
-  }
+    theme = 'catppuccin',
+  },
 }
 
   -- Set up nvim-cmp.
@@ -463,7 +463,8 @@ vim.cmd.colorscheme "catppuccin"
 
 local frappe = require("catppuccin.palettes").get_palette "frappe"
 local fg_selected = frappe.crust
-local bg_selected = frappe.mantle
+-- local bg_selected = frappe.mantle
+local bg_selected = frappe.base
 local fg_visible = "#2f3445"
 local bg_visible = "#1d1f2a"
 require('bufferline').setup {
