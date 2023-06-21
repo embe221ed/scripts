@@ -44,8 +44,6 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = open_nvim_tree
 })
 
-require("chatgpt").setup {}
-
 -- -- Comment
 require('Comment').setup {
   comment_empty = false
@@ -408,7 +406,7 @@ require("catppuccin").setup({
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
     term_colors = false,
     dim_inactive = {
-        enabled = true,
+        enabled = false,
         shade = "dark",
         percentage = 0.01,
     },
@@ -433,6 +431,7 @@ require("catppuccin").setup({
     custom_highlights = {},
     integrations = {
         cmp = true,
+        symbols_outline = true,
         gitsigns = true,
         nvimtree = true,
         telescope = true,
