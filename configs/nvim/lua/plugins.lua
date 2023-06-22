@@ -33,7 +33,10 @@ return require("packer").startup(function(use)
   }
   use "windwp/nvim-autopairs"                                 -- auto-pairs
   use "lukas-reineke/indent-blankline.nvim"                   -- indent blankline
-  use { "simrat39/rust-tools.nvim" }                          -- A plugin to improve your rust experience in neovim.
+  use {
+    "simrat39/rust-tools.nvim",
+    requires = { "mfussenegger/nvim-dap" }
+  }                          -- A plugin to improve your rust experience in neovim.
   use { "mfussenegger/nvim-jdtls" }
   use {
     "scalameta/nvim-metals",
