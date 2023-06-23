@@ -223,7 +223,8 @@ require("illuminate").configure({
   filetypes_denylist = {
     'qf',
     'fugitive',
-    'NvimTree'
+    'NvimTree',
+    'dashboard'
   },
 })
 
