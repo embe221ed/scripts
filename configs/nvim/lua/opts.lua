@@ -17,6 +17,7 @@ vim.g.indentLine_fileTypeExclude = {
   "lspinfo",
   "packer",
   "checkhealth",
+  "dashboard",
   "help",
   "man",
   "diff",

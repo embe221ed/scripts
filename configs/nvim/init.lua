@@ -13,7 +13,6 @@ local function open_nvim_tree()
   })
 end
 
-
 -- PLUGINS
 -- -- nvim-tree
 require('nvim-tree').setup {
@@ -40,8 +39,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
     nested = true,
 })
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-    callback = open_nvim_tree
+vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre" }, {
+    callback = open_nvim_tree,
+    once = true
 })
 
 -- -- Comment
