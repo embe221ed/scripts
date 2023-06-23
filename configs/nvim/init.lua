@@ -39,10 +39,10 @@ vim.api.nvim_create_autocmd('BufEnter', {
     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
     nested = true,
 })
-vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre" }, {
-    callback = open_nvim_tree,
-    once = true
-})
+-- vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre", "BufNewFile" }, {
+--     callback = open_nvim_tree,
+--     once = true
+-- })
 
 -- -- Comment
 require('Comment').setup {
