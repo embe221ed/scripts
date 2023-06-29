@@ -58,7 +58,7 @@ require('symbols-outline').setup {
   show_relative_numbers = true,
   show_numbers = true,
   relative_width = true,
-  width = 20,
+  width = 15,
 }
 
 -- -- auto-pairs

@@ -29,3 +29,11 @@ map('t', '<C-J>', [[<C-\><C-n><C-w>j]], {})
 map('t', '<C-K>', [[<C-\><C-n><C-w>k]], {})
 map('t', '<C-L>', [[<C-\><C-n><C-w>l]], {})
 map('t', '<C-H>', [[<C-\><C-n><C-w>h]], {})
+
+-- remap search keys to put the result in the middle
+map('n', 'n', 'nzz', {})
+map('n', 'N', 'Nzz', {})
+map('n', '*', '*zz', {})
+map('n', '#', '#zz', {})
+map('n', 'g*', 'g*zz', {})
+map('n', '#', 'g#zz', {})
