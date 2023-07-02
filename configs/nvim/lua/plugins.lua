@@ -78,7 +78,10 @@ return require("packer").startup(function(use)
   --     "nvim-telescope/telescope.nvim"
   --   }
   -- } 
-  use { "tpope/vim-fugitive" }
+  use {
+    "tpope/vim-fugitive",
+    requires = { "tpope/vim-rhubarb" }
+  }
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",

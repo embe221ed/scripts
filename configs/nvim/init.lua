@@ -209,6 +209,7 @@ end
 require('goto-preview').setup {
   default_mappings = true;
   width = 150; -- Width of the floating window
+  -- width = 200; -- Width of the floating window
   height = 40; -- Height of the floating window
 }
 
@@ -231,6 +232,10 @@ require("illuminate").configure({
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  -- Enable inlayHints if LSP provides such
+  if client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint(bufnr, true)
+  end
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
@@ -293,7 +298,7 @@ lsp.move_analyzer.setup({
 -- -- -- golang
 lsp.gopls.setup({
   on_attach = on_attach,
-  capabilities = capabilities
+  capabilities = capabilities,
 })
 -- -- -- java
 lsp.jdtls.setup({
