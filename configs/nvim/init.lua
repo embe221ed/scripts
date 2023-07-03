@@ -299,6 +299,19 @@ lsp.move_analyzer.setup({
 lsp.gopls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
+  settings = {
+    gopls = {
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true
+      }
+    }
+  }
 })
 -- -- -- java
 lsp.jdtls.setup({
