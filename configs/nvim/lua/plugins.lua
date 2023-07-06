@@ -22,6 +22,7 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",                              -- status line
     requires = { "kyazdani42/nvim-web-devicons", opt = true } -- filesystem icons
   }
+  use { "arkav/lualine-lsp-progress" }                        -- LSP progress bar
   use "neovim/nvim-lspconfig"                                 -- Configurations for Nvim LSP
   use {
     "RRethy/vim-illuminate",                                  -- highlight word under cursor
@@ -34,31 +35,27 @@ return require("packer").startup(function(use)
   use "windwp/nvim-autopairs"                                 -- auto-pairs
   use "lukas-reineke/indent-blankline.nvim"                   -- indent blankline
   use {
-    "simrat39/rust-tools.nvim",
+    "simrat39/rust-tools.nvim",                               -- A plugin to improve your rust experience in neovim.
     requires = { "mfussenegger/nvim-dap" }
-  }                          -- A plugin to improve your rust experience in neovim.
-  use { "mfussenegger/nvim-jdtls" }
+  }
+  use { "mfussenegger/nvim-jdtls" }                           -- Java LSP
   use {
-    "scalameta/nvim-metals",
+    "scalameta/nvim-metals",                                  -- Scala LSP
     requires = { "nvim-lua/plenary.nvim" }
   }
-  use { "iamcco/markdown-preview.nvim" }
+  use { "iamcco/markdown-preview.nvim" }                      -- Markdown preview in the browser
   use {
     "rmagatti/goto-preview",                                  -- GoTo preview
   }
   use {
-    "nvim-telescope/telescope.nvim", tag = "0.1.0",           -- telescope
-  -- or                            , branch = "0.1.x",
+    "nvim-telescope/telescope.nvim",                          -- telescope
     requires = { {"nvim-lua/plenary.nvim"} }
   }
   use {
-      "numToStr/Comment.nvim",
-      -- config = function()
-      --     require("Comment").setup()
-      -- end
+      "numToStr/Comment.nvim",                                -- Comments
   }
+  use { "simrat39/symbols-outline.nvim" }                     -- Symbols bar
   -- autocompletion
-  use { "simrat39/symbols-outline.nvim" }
   use { "hrsh7th/cmp-nvim-lsp" }
   use { "hrsh7th/cmp-buffer" }
   use { "hrsh7th/cmp-path" }
@@ -69,25 +66,16 @@ return require("packer").startup(function(use)
   -- end
 
   use { "lervag/vimtex" }                                     -- LaTeX
-  -- use { "rvmelkonian/move.vim" }
-  -- use {
-  --   "jackMort/ChatGPT.nvim",
-  --   requires = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim"
-  --   }
-  -- } 
   use {
-    "tpope/vim-fugitive",
-    requires = { "tpope/vim-rhubarb" }
+    "tpope/vim-fugitive",                                     -- Git integration
+    requires = { "tpope/vim-rhubarb" }                        -- :GBrowse
   }
   use {
-    "folke/todo-comments.nvim",
+    "folke/todo-comments.nvim",                               -- special comments like TODO, FIXME, BUG etc
     requires = "nvim-lua/plenary.nvim",
   }
   use {
-    'glepnir/dashboard-nvim',
+    'glepnir/dashboard-nvim',                                 -- dashboard
     event = 'VimEnter',
     config = function()
       require('dashboard').setup {

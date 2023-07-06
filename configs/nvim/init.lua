@@ -117,6 +117,12 @@ require('lualine').setup {
     -- theme = 'material'
     theme = 'catppuccin',
   },
+  sections = {
+    lualine_c = {
+      'filename',
+      'lsp_progress'
+    }
+  }
 }
 
   -- Set up nvim-cmp.
@@ -483,6 +489,9 @@ require("catppuccin").setup({
                 warnings = { "underline" },
                 information = { "underline" },
             },
+            inlay_hints = {
+              background = true
+            }
         },
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
@@ -579,6 +588,12 @@ require('bufferline').setup {
           separator = true,
       }
     },
+    custom_filter = function(buf_number, buf_numbers)
+        -- filter out by buffer name
+        if vim.fn.bufname(buf_number) ~= "" then
+            return true
+        end
+    end,
   }
 }
 
