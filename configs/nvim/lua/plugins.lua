@@ -17,6 +17,7 @@ return require("packer").startup(function(use)
     run = ":TSUpdate"
   }
   use { "nvim-treesitter/playground" }
+  use { "nvim-treesitter/nvim-treesitter-context" }           -- pin the current context at the top of the screen
   use "p00f/nvim-ts-rainbow"                                  -- rainbow parentheses
   use {
     "nvim-lualine/lualine.nvim",                              -- status line

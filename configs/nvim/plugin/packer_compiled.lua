@@ -115,7 +115,7 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
   ["dashboard-nvim"] = {
-    config = { "\27LJ\2\n�\3\0\0\6\0\f\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\4\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\4=\4\n\3=\3\v\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\vaction\24Telescope live_grep\ngroup\19DiagnosticHint\bkey\6s\ticon\t \tdesc\vsearch\1\0\6\ngroup\nLabel\vaction\25Telescope find_files\ficon_hl\14@variable\bkey\6f\ticon\t \tdesc\nfiles\1\0\5\vaction\15PackerSync\ngroup\14@property\bkey\6u\ticon\n󰊳 \tdesc\vupdate\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
+    config = { "\27LJ\2\n�\3\0\0\6\0\f\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\4\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\4=\4\n\3=\3\v\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\tdesc\vsearch\ticon\t \bkey\6s\ngroup\19DiagnosticHint\vaction\24Telescope live_grep\1\0\6\vaction\25Telescope find_files\ticon\t \ficon_hl\14@variable\ngroup\nLabel\bkey\6f\tdesc\nfiles\1\0\5\tdesc\vupdate\ticon\n󰊳 \bkey\6u\ngroup\14@property\vaction\15PackerSync\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -191,6 +191,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
   ["nvim-ts-rainbow"] = {
     loaded = true,
