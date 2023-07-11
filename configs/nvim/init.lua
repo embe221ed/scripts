@@ -126,6 +126,9 @@ require('treesitter-context').setup {
   on_attach = nil,          -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
+vim.cmd [[highlight TreesitterContext guibg=combine]]
+vim.cmd [[highlight TreesitterContextLineNumber cterm=bold gui=bold guifg=#a5adce guibg=#303446]]
+
 -- -- lualine
 require('lualine').setup {
   options = {

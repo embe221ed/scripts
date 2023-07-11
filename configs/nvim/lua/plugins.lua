@@ -10,13 +10,12 @@ return require("packer").startup(function(use)
     "kyazdani42/nvim-tree.lua",                               -- filesystem navigation
     requires = { "kyazdani42/nvim-web-devicons" }             -- filesystem icons
   }
-  use "marko-cerovac/material.nvim"                           -- material theme plugin
   use { "catppuccin/nvim", as = "catppuccin" }                -- cattpuccin theme plugin
   use {
     "nvim-treesitter/nvim-treesitter",                        -- tree-sitter functionality and highlighting
     run = ":TSUpdate"
   }
-  use { "nvim-treesitter/playground" }
+  -- use { "nvim-treesitter/playground" }
   use { "nvim-treesitter/nvim-treesitter-context" }           -- pin the current context at the top of the screen
   use "p00f/nvim-ts-rainbow"                                  -- rainbow parentheses
   use {
