@@ -51,5 +51,3 @@ api.nvim_create_autocmd(
 )
 
 vim.lsp.set_log_level("off")
-
-vim.cmd.syntax 'off'

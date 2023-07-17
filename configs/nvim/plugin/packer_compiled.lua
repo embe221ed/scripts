@@ -115,7 +115,7 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
   ["dashboard-nvim"] = {
-    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\bkey\6q\ngroup\20DiagnosticError\ticon\t \tdesc\tquit\vaction\fquitall\1\0\5\bkey\6s\ngroup\19DiagnosticHint\ticon\t \tdesc\vsearch\vaction\24Telescope live_grep\1\0\6\ficon_hl\14@variable\bkey\6f\ngroup\nLabel\ticon\t \tdesc\nfiles\vaction\25Telescope find_files\1\0\5\bkey\6u\ngroup\14@property\ticon\n󰊳 \tdesc\vupdate\vaction\15PackerSync\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
+    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\ticon\t \vaction\fquitall\bkey\6q\tdesc\tquit\ngroup\20DiagnosticError\1\0\5\ticon\t \vaction\24Telescope live_grep\bkey\6s\tdesc\vsearch\ngroup\19DiagnosticHint\1\0\6\vaction\25Telescope find_files\ticon\t \ficon_hl\14@variable\bkey\6f\tdesc\nfiles\ngroup\nLabel\1\0\5\ticon\n󰊳 \vaction\15PackerSync\bkey\6u\tdesc\vupdate\ngroup\14@property\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
