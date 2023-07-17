@@ -107,6 +107,13 @@ return require("packer").startup(function(use)
               action = 'Telescope live_grep',
               key = 's',
             },
+            {
+              icon = ' ',
+              desc = 'quit',
+              group = 'DiagnosticError',
+              action = 'quitall',
+              key = 'q',
+            },
             -- {
             --   desc = ' dotfiles',
             --   group = 'Number',
