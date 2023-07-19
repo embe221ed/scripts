@@ -79,7 +79,7 @@ if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 		#"ifstat_sys 30 255" \
 		"lan_ip 62 252 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
 		"wan_ip 62 252" \
-		"vcs_branch 111 92" \
+		"vcs_branch 111 55" \
 		# "vcs_compare 60 255" \
 		#"vcs_staged 64 255" \
 		#"vcs_modified 9 255" \
@@ -90,14 +90,14 @@ fi
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
 		# "earthquake 3 0" \
-		"pwd 133 219" \
+		"pwd 133 252" \
 		#"macos_notification_count 29 255" \
 		#"mailcount 9 255" \
 		"now_playing 35 235" \
 		# "cpu 240 136" \
 		# "load 237 167" \
 		# "tmux_mem_cpu_load 234 136" \
-		"battery 105 7" \
+		"battery 105 195" \
 		# "weather 37 255" \
 		#"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
 		#"xkb_layout 125 117" \
