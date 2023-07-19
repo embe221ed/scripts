@@ -1,15 +1,31 @@
 #
 # _embe221ed_theme
+# with catppuccin colors
 #
+
+thm_bg="#303446"
+thm_fg="#c6d0f5"
+thm_cyan="#99d1db"
+thm_black="#292c3c"
+thm_gray="#414559"
+thm_magenta="#ca9ee6"
+thm_pink="#f4b8e4"
+thm_red="#e78284"
+thm_green="#a6d189"
+thm_yellow="#e5c890"
+thm_blue="#8caaee"
+thm_orange="#ef9f76"
+thm_black4="#626880"
+spotify_green="#1db954"
+spotify_black="#191414"
 
 TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
 TMUX_POWERLINE_SEPARATOR_LEFT_THIN=""
 TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD=""
 TMUX_POWERLINE_SEPARATOR_RIGHT_THIN=""
 
-# TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-'235'}
-TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-'0'}
-TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR:-'250'}
+TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-$thm_bg}
+TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR:-$thm_fg}
 
 TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR:-$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD}
 TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR:-$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD}
@@ -90,20 +106,20 @@ fi
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
 		# "earthquake 3 0" \
-		"pwd 133 252" \
+		"pwd $thm_magenta $thm_bg" \
 		#"macos_notification_count 29 255" \
 		#"mailcount 9 255" \
-		"now_playing 35 235" \
+		"now_playing $spotify_green $spotify_black" \
 		# "cpu 240 136" \
 		# "load 237 167" \
 		# "tmux_mem_cpu_load 234 136" \
-		"battery 105 195" \
+		"battery $thm_blue $thm_bg" \
 		# "weather 37 255" \
 		#"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
 		#"xkb_layout 125 117" \
-		"date_day 38 55" \
-		"date 38 55 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		"time 38 55 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"date_day $thm_cyan $thm_bg" \
+		"date $thm_cyan $thm_bg ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"time $thm_cyan $thm_bg ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 		#"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 	)
 fi
