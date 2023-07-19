@@ -14,6 +14,21 @@ local function open_nvim_tree()
 end
 
 -- PLUGINS
+-- -- guess indent
+require('guess-indent').setup {
+  auto_cmd = true,  -- Set to false to disable automatic execution
+  override_editorconfig = false, -- Set to true to override settings set by .editorconfig
+  filetype_exclude = {  -- A list of filetypes for which the auto command gets disabled
+    "netrw",
+    "tutor",
+  },
+  buftype_exclude = {  -- A list of buffer types for which the auto command gets disabled
+    "help",
+    "nofile",
+    "terminal",
+    "prompt",
+  },
+}
 -- -- nvim-tree
 require('nvim-tree').setup {
   view = {
@@ -135,6 +150,9 @@ require('lualine').setup {
     theme = 'catppuccin',
     component_separators = '|',
     section_separators = { left = '', right = '' },
+    disabled_filetypes = {
+      'packer',
+    },
   },
   sections = {
     lualine_a = {
@@ -157,7 +175,13 @@ require('lualine').setup {
     lualine_z = { 'location' },
   },
   tabline = {},
-  extensions = {},
+  extensions = {
+    'nvim-tree',
+    'fugitive',
+    'man',
+    'symbols-outline',
+    'quickfix',
+  },
 }
 
   -- Set up nvim-cmp.

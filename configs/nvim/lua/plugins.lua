@@ -126,4 +126,5 @@ return require("packer").startup(function(use)
     end,
     requires = {'nvim-tree/nvim-web-devicons'}
   }
+  use { 'nmac427/guess-indent.nvim' }                         -- guess the indent type in the current buffer
 end)
