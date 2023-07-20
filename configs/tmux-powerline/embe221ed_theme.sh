@@ -39,6 +39,8 @@ surface0="#414559"
 base="#303446"
 mantle="#292c3c"
 crust="#232634"
+eggplant="#e889d2"
+sky_blue="#a7c7e7"
 
 spotify_green="#1db954"
 spotify_black="#191414"
@@ -115,12 +117,12 @@ fi
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
 		"tmux_session_info $blue $thm_bg" \
-		"hostname 177 $thm_bg" \
+		"hostname $eggplant $thm_bg" \
 		# "ifstat 30 255" \
 		#"ifstat_sys 30 255" \
-		"lan_ip 62 252 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
-		"wan_ip 62 252" \
-		"vcs_branch 111 55" \
+		"lan_ip $sky_blue $thm_bg ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
+		"wan_ip $sky_blue $thm_bg" \
+		"vcs_branch $thm_gray" \
 		# "vcs_compare 60 255" \
 		#"vcs_staged 64 255" \
 		#"vcs_modified 9 255" \
