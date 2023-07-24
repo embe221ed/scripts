@@ -22,7 +22,7 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",                              -- status line
     requires = { "kyazdani42/nvim-web-devicons", opt = true } -- filesystem icons
   }
-  use { "arkav/lualine-lsp-progress" }                        -- LSP progress bar
+  -- use { "arkav/lualine-lsp-progress" }                        -- LSP progress bar
   use "neovim/nvim-lspconfig"                                 -- Configurations for Nvim LSP
   use {
     "RRethy/vim-illuminate",                                  -- highlight word under cursor
@@ -127,4 +127,5 @@ return require("packer").startup(function(use)
     requires = {'nvim-tree/nvim-web-devicons'}
   }
   use { 'nmac427/guess-indent.nvim' }                         -- guess the indent type in the current buffer
+  use { 'rcarriga/nvim-notify' }
 end)
