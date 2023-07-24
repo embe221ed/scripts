@@ -115,7 +115,7 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
   ["dashboard-nvim"] = {
-    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\ngroup\20DiagnosticError\ticon\t \tdesc\tquit\bkey\6q\vaction\fquitall\1\0\5\ngroup\19DiagnosticHint\ticon\t \tdesc\vsearch\bkey\6s\vaction\24Telescope live_grep\1\0\6\ngroup\nLabel\ticon\t \tdesc\nfiles\ficon_hl\14@variable\bkey\6f\vaction\25Telescope find_files\1\0\5\ngroup\14@property\ticon\n󰊳 \tdesc\vupdate\bkey\6u\vaction\15PackerSync\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
+    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\ngroup\20DiagnosticError\ticon\t \tdesc\tquit\vaction\fquitall\bkey\6q\1\0\5\ngroup\19DiagnosticHint\ticon\t \tdesc\vsearch\vaction\24Telescope live_grep\bkey\6s\1\0\6\ngroup\nLabel\vaction\25Telescope find_files\tdesc\nfiles\bkey\6f\ticon\t \ficon_hl\14@variable\1\0\5\ngroup\14@property\ticon\n󰊳 \tdesc\vupdate\vaction\15PackerSync\bkey\6u\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -146,6 +146,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
+  ["noice.nvim"] = {
+    loaded = true,
+    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/noice.nvim",
+    url = "https://github.com/folke/noice.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
