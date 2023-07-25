@@ -35,6 +35,18 @@ require("noice").setup({
     inc_rename = false, -- enables an input dialog for inc-rename.nvim
     lsp_doc_border = false, -- add a border to hover docs and signature help
   },
+  views = {
+    cmdline_popup = {
+      border = {
+        style = "none",
+        padding = { 1, 3 },
+      },
+      filter_options = {},
+      win_options = {
+        winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+      },
+    },
+  },
 })
 -- -- guess indent
 require('guess-indent').setup {
@@ -102,7 +114,7 @@ require('symbols-outline').setup {
 require('nvim-autopairs').setup {}
 
 -- -- telescope
-require('telescope').setup {}
+require('telescope').setup { }
 
 -- -- -- telescope plenary
 require('plenary.filetype').add_file('move')
