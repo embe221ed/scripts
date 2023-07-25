@@ -19,6 +19,11 @@ end
 -- PLUGINS
 -- -- noice
 require("noice").setup({
+  cmdline = {
+    format = {
+      cmdline = { pattern = "^:", icon = "_", lang = "vim" },
+    }
+  },
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
     override = {
@@ -33,7 +38,7 @@ require("noice").setup({
     command_palette = true, -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
     inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
+    lsp_doc_border = true, -- add a border to hover docs and signature help
   },
   views = {
     cmdline_popup = {
@@ -295,22 +300,6 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 --   let g:coq_settings = { 'auto_start': v:true, 'keymap.jump_to_mark': v:null }
 -- ]]
 -- local coq = require('coq')
-local border = {
-      {"┌", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"┐", "FloatBorder"},
-      {"│", "FloatBorder"},
-      {"┘", "FloatBorder"},
-      {"─", "FloatBorder"},
-      {"└", "FloatBorder"},
-      {"│", "FloatBorder"},
-}
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or border
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
 
 -- -- goto-preview config
 require('goto-preview').setup {
