@@ -1,2 +1,2 @@
-# ctf-scripts
-All scripts that may be useful when playing CTFs
+# scripts
+Useful scripts, configs, etc.
