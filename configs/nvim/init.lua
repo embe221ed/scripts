@@ -18,7 +18,7 @@ end
 
 -- PLUGINS
 -- -- noice
-require("noice").setup({
+require("noice").setup {
   cmdline = {
     format = {
       cmdline = { pattern = "^:", icon = "_", lang = "vim" },
@@ -60,7 +60,7 @@ require("noice").setup({
       },
     },
   },
-})
+}
 -- -- guess indent
 require('guess-indent').setup {
   auto_cmd = true,  -- Set to false to disable automatic execution
