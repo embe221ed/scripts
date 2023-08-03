@@ -115,7 +115,7 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
   ["dashboard-nvim"] = {
-    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\bkey\6q\ticon\t \tdesc\tquit\vaction\fquitall\ngroup\20DiagnosticError\1\0\5\bkey\6s\ticon\t \tdesc\vsearch\vaction\24Telescope live_grep\ngroup\19DiagnosticHint\1\0\6\vaction\25Telescope find_files\bkey\6f\ticon\t \tdesc\nfiles\ficon_hl\14@variable\ngroup\nLabel\1\0\5\bkey\6u\ticon\n󰊳 \tdesc\vupdate\vaction\15PackerSync\ngroup\14@property\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
+    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\ticon\t \vaction\fquitall\ngroup\20DiagnosticError\bkey\6q\tdesc\tquit\1\0\5\ticon\t \vaction\24Telescope live_grep\ngroup\19DiagnosticHint\bkey\6s\tdesc\vsearch\1\0\6\ticon\t \vaction\25Telescope find_files\ngroup\nLabel\bkey\6f\ficon_hl\14@variable\tdesc\nfiles\1\0\5\ticon\n󰊳 \vaction\15PackerSync\ngroup\14@property\bkey\6u\tdesc\vupdate\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -176,12 +176,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
-  },
-  ["nvim-gpt"] = {
-    config = { "\27LJ\2\n`\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\17window_width\3-\nmodel\18gpt-3.5-turbo\nsetup\rnvim-gpt\frequire\0" },
-    loaded = true,
-    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/nvim-gpt",
-    url = "https://github.com/archibate/nvim-gpt"
   },
   ["nvim-jdtls"] = {
     loaded = true,
@@ -286,10 +280,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-gpt
-time([[Config for nvim-gpt]], true)
-try_loadstring("\27LJ\2\n`\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\17window_width\3-\nmodel\18gpt-3.5-turbo\nsetup\rnvim-gpt\frequire\0", "config", "nvim-gpt")
-time([[Config for nvim-gpt]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
