@@ -207,9 +207,10 @@ require('lualine').setup {
     },
     lualine_b = { 'filename', 'branch', --[[ 'lsp_progress' ]] },
     lualine_c = { 'fileformat' },
-    lualine_x = {},
+    lualine_x = {  },
     lualine_y = { 'filetype', 'progress' },
     lualine_z = {
+      'selectioncount',
       { 'location', separator = { right = '' }, left_padding = 2 },
     },
   },
