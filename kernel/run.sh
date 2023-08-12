@@ -9,4 +9,4 @@ sudo cp exp ./unpacked/exp
 sudo ./pack.sh
 
 QEMU_COMMAND='whoami'
-tmux splitw -h "$QEMU_COMMAND"
+tmux new-window "$QEMU_COMMAND"
