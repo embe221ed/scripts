@@ -2,7 +2,8 @@
 -- require('vars')         -- Variables
 require('opts')         -- Options
 require('keys')         -- Keymaps
-require('plugins')         -- Plugins: UNCOMMENT THIS LINE
+require('plugins')      -- Plugins: UNCOMMENT THIS LINE
+require('snippets')     -- LuaSnip custom snippets
 
 -- vim.notify = require("notify")
 -- require('notify_recipes')
