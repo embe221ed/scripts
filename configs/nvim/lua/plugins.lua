@@ -61,8 +61,14 @@ return require("packer").startup(function(use)
   use { "hrsh7th/cmp-path" }
   use { "hrsh7th/cmp-cmdline" }
   use { "hrsh7th/nvim-cmp" }
-  use { "hrsh7th/cmp-vsnip" }
-  use { "hrsh7th/vim-vsnip" }
+  use { "saadparwaiz1/cmp_luasnip" }                          -- Snippets source for nvim-cmp
+  use {
+    "L3MON4D3/LuaSnip",
+    run = "make install_jsregexp",
+    requires = {
+      "rafamadriz/friendly-snippets"
+    }
+  }                                                           -- Snippets plugin
   -- end
 
   use { "lervag/vimtex" }                                     -- LaTeX

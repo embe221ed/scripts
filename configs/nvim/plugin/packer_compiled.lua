@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
@@ -109,18 +114,23 @@ _G.packer_plugins = {
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["cmp-vsnip"] = {
+  cmp_luasnip = {
     loaded = true,
-    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
+    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["dashboard-nvim"] = {
-    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\ticon\t \vaction\fquitall\ngroup\20DiagnosticError\bkey\6q\tdesc\tquit\1\0\5\ticon\t \vaction\24Telescope live_grep\ngroup\19DiagnosticHint\bkey\6s\tdesc\vsearch\1\0\6\ticon\t \vaction\25Telescope find_files\ngroup\nLabel\bkey\6f\ficon_hl\14@variable\tdesc\nfiles\1\0\5\ticon\n󰊳 \vaction\15PackerSync\ngroup\14@property\bkey\6u\tdesc\vupdate\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
+    config = { "\27LJ\2\n�\3\0\0\6\0\r\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\5\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\4=\4\v\3=\3\f\2B\0\2\1K\0\1\0\vconfig\rshortcut\1\0\5\ngroup\20DiagnosticError\bkey\6q\tdesc\tquit\ticon\t \vaction\fquitall\1\0\5\ngroup\19DiagnosticHint\bkey\6s\tdesc\vsearch\ticon\t \vaction\24Telescope live_grep\1\0\6\ticon\t \bkey\6f\tdesc\nfiles\ficon_hl\14@variable\ngroup\nLabel\vaction\25Telescope find_files\1\0\5\ngroup\14@property\bkey\6u\tdesc\vupdate\ticon\n󰊳 \vaction\15PackerSync\16week_header\1\0\0\1\0\1\venable\2\1\0\1\ntheme\nhyper\nsetup\14dashboard\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/opt/dashboard-nvim",
     url = "https://github.com/glepnir/dashboard-nvim"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["goto-preview"] = {
     loaded = true,
@@ -266,11 +276,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
     url = "https://github.com/tpope/vim-rhubarb"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/Users/embe221ed/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
   },
   vimtex = {
     loaded = true,
