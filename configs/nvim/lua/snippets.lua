@@ -15,8 +15,31 @@ end
 -- -- Move
 ls.add_snippets("move", {
   s("test", {
+    t("// Parameters: "),
+    -- function, first parameter is the function, second the placeholder's index
+    -- whose text it gets as input. 
+    f(copy, 2),
     -- simple text with a linebreak (`"\t"`)
     t("#[test]", "\t"),
+    -- text
+    -- text
+    t({ "", "public fun " }),
+    -- placeholder/insert
+    i(1),
+    -- text
+    t("("),
+    -- placeholder/insert
+    i(2, "val: u64"),
+    -- text + linebreak
+    t({ ") {", "\t" }),
+    -- last placeholder, exit point of the snippet (idx: 0)
+    i(0),
+    -- text
+    t({ "", "}" }),
+  }),
+  s("debug", {
+    -- simple text with a linebreak (`"\t"`)
+    t("#[test_only]", "\t"),
     -- text
     t("// Parameters: "),
     -- function, first parameter is the function, second the placeholder's index
