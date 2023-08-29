@@ -2,85 +2,96 @@
 
 -- Only required if you have packer configured as `opt`
 -- vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-return require("packer").startup(function(use)
-  -- Packer can manage itself
-  use "wbthomason/packer.nvim"
-  use {
-    "kyazdani42/nvim-tree.lua",                               -- filesystem navigation
-    requires = { "kyazdani42/nvim-web-devicons" }             -- filesystem icons
-  }
-  use { "catppuccin/nvim", as = "catppuccin" }                -- cattpuccin theme plugin
-  use {
+-- return require("packer").startup(function(use)
+return require("lazy").setup({
+  {
+    "nvim-tree/nvim-tree.lua",                               -- filesystem navigation
+    dependencies = { "nvim-tree/nvim-web-devicons" }             -- filesystem icons
+  },
+  { "catppuccin/nvim", as = "catppuccin" },                -- cattpuccin theme plugin
+  {
     "nvim-treesitter/nvim-treesitter",                        -- tree-sitter functionality and highlighting
     run = ":TSUpdate"
-  }
-  -- use { "nvim-treesitter/playground" }
-  use { "nvim-treesitter/nvim-treesitter-context" }           -- pin the current context at the top of the screen
-  use "p00f/nvim-ts-rainbow"                                  -- rainbow parentheses
-  use {
+  },
+  -- { "nvim-treesitter/playground" }
+  { "nvim-treesitter/nvim-treesitter-context" },           -- pin the current context at the top of the screen
+  "p00f/nvim-ts-rainbow",                                  -- rainbow parentheses
+  {
     "nvim-lualine/lualine.nvim",                              -- status line
-    requires = { "kyazdani42/nvim-web-devicons", opt = true } -- filesystem icons
-  }
-  -- use { "arkav/lualine-lsp-progress" }                        -- LSP progress bar
-  use "neovim/nvim-lspconfig"                                 -- Configurations for Nvim LSP
-  use {
+    dependencies = { "nvim-tree/nvim-web-devicons", opt = true }, -- filesystem icons
+  },
+  -- { "arkav/lualine-lsp-progress" },                        -- LSP progress bar
+  "neovim/nvim-lspconfig",                                 -- Configurations for Nvim LSP
+  {
     "RRethy/vim-illuminate",                                  -- highlight word under cursor
-    requires = "neovim/nvim-lspconfig"
-  }
-  use {
+    dependencies = "neovim/nvim-lspconfig"
+  },
+  {
     "akinsho/bufferline.nvim",                                -- tabline for nvim
-    requires = { "kyazdani42/nvim-web-devicons" }             -- filesystem icons
-  }
-  use "windwp/nvim-autopairs"                                 -- auto-pairs
-  use "lukas-reineke/indent-blankline.nvim"                   -- indent blankline
-  use {
+    dependencies = { "nvim-tree/nvim-web-devicons" },             -- filesystem icons
+  },
+  "windwp/nvim-autopairs",                                -- auto-pairs
+  "lukas-reineke/indent-blankline.nvim",                   -- indent blankline
+  {
     "simrat39/rust-tools.nvim",                               -- A plugin to improve your rust experience in neovim.
-    requires = { "mfussenegger/nvim-dap" }
-  }
-  use { "mfussenegger/nvim-jdtls" }                           -- Java LSP
-  use {
+    dependencies = { "mfussenegger/nvim-dap" },
+  },
+  { "mfussenegger/nvim-jdtls" },                           -- Java LSP
+  {
     "scalameta/nvim-metals",                                  -- Scala LSP
-    requires = { "nvim-lua/plenary.nvim" }
-  }
-  use { "iamcco/markdown-preview.nvim" }                      -- Markdown preview in the browser
-  use {
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  { "iamcco/markdown-preview.nvim" },                      -- Markdown preview in the browser
+  {
     "rmagatti/goto-preview",                                  -- GoTo preview
-  }
-  use {
+  },
+  {
     "nvim-telescope/telescope.nvim",                          -- telescope
-    requires = { {"nvim-lua/plenary.nvim"} }
-  }
-  use {
+    dependencies = { {"nvim-lua/plenary.nvim"}, },
+  },
+  {
       "numToStr/Comment.nvim",                                -- Comments
-  }
-  use { "simrat39/symbols-outline.nvim" }                     -- Symbols bar
+  },
+  { "simrat39/symbols-outline.nvim" },                     -- Symbols bar
   -- autocompletion
-  use { "hrsh7th/cmp-nvim-lsp" }
-  use { "hrsh7th/cmp-buffer" }
-  use { "hrsh7th/cmp-path" }
-  use { "hrsh7th/cmp-cmdline" }
-  use { "hrsh7th/nvim-cmp" }
-  use { "saadparwaiz1/cmp_luasnip" }                          -- Snippets source for nvim-cmp
-  use {
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-cmdline" },
+  { "hrsh7th/nvim-cmp" },
+  { "saadparwaiz1/cmp_luasnip" },                          -- Snippets source for nvim-cmp
+  {
     "L3MON4D3/LuaSnip",
     run = "make install_jsregexp",
-    requires = {
+    dependencies = {
       "rafamadriz/friendly-snippets"
-    }
-  }                                                           -- Snippets plugin
+    },
+  },                                                           -- Snippets plugin
   -- end
 
-  use { "lervag/vimtex" }                                     -- LaTeX
-  use {
+  { "lervag/vimtex" },                                     -- LaTeX
+  {
     "tpope/vim-fugitive",                                     -- Git integration
-    requires = { "tpope/vim-rhubarb" }                        -- :GBrowse
-  }
-  use {
+    dependencies = { "tpope/vim-rhubarb" },                        -- :GBrowse
+  },
+  {
     "folke/todo-comments.nvim",                               -- special comments like TODO, FIXME, BUG etc
-    requires = "nvim-lua/plenary.nvim",
-  }
-  use {
+    dependencies = "nvim-lua/plenary.nvim",
+  },
+  {
     'glepnir/dashboard-nvim',                                 -- dashboard
     event = 'VimEnter',
     config = function()
@@ -95,7 +106,7 @@ return require("packer").startup(function(use)
               icon = '󰊳 ',
               desc = 'update',
               group = '@property',
-              action = 'PackerSync',
+              action = 'Lazy sync',
               key = 'u'
             },
             {
@@ -130,15 +141,15 @@ return require("packer").startup(function(use)
         },
       }
     end,
-    requires = {'nvim-tree/nvim-web-devicons'}
-  }
-  use { 'nmac427/guess-indent.nvim' }                         -- guess the indent type in the current buffer
-  use {
+    dependencies = {'nvim-tree/nvim-web-devicons'},
+  },
+  { 'nmac427/guess-indent.nvim' },                         -- guess the indent type in the current buffer
+  {
     "folke/noice.nvim",
-    requires = {
+    dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-    }
-  }
-  use { 'onsails/lspkind.nvim' }                              -- vscode-like pictograms
-end)
+    },
+  },
+  { 'onsails/lspkind.nvim' },                              -- vscode-like pictograms
+})
