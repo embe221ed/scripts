@@ -18,81 +18,87 @@ vim.opt.rtp:prepend(lazypath)
 -- return require("packer").startup(function(use)
 return require("lazy").setup({
   {
-    "nvim-tree/nvim-tree.lua",                               -- filesystem navigation
-    dependencies = { "nvim-tree/nvim-web-devicons" }             -- filesystem icons
+    "nvim-tree/nvim-tree.lua",                                      -- filesystem navigation
+    dependencies = { "nvim-tree/nvim-web-devicons" }                -- filesystem icons
   },
-  { "catppuccin/nvim", as = "catppuccin" },                -- cattpuccin theme plugin
+  { "catppuccin/nvim", name = "catppuccin" },                       -- cattpuccin theme plugin
   {
-    "nvim-treesitter/nvim-treesitter",                        -- tree-sitter functionality and highlighting
-    run = ":TSUpdate"
+    "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
+    build = ":TSUpdate"
   },
-  -- { "nvim-treesitter/playground" }
-  { "nvim-treesitter/nvim-treesitter-context" },           -- pin the current context at the top of the screen
-  "p00f/nvim-ts-rainbow",                                  -- rainbow parentheses
   {
-    "nvim-lualine/lualine.nvim",                              -- status line
-    dependencies = { "nvim-tree/nvim-web-devicons", opt = true }, -- filesystem icons
+    "nvim-treesitter/playground",
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
   },
-  -- { "arkav/lualine-lsp-progress" },                        -- LSP progress bar
-  "neovim/nvim-lspconfig",                                 -- Configurations for Nvim LSP
   {
-    "RRethy/vim-illuminate",                                  -- highlight word under cursor
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
+  },                                                                -- pin the current context at the top of the screen
+  "p00f/nvim-ts-rainbow",                                           -- rainbow parentheses
+  {
+    "nvim-lualine/lualine.nvim",                                    -- status line
+    dependencies = { "nvim-tree/nvim-web-devicons", opt = true },   -- filesystem icons
+  },
+  -- { "arkav/lualine-lsp-progress" },                              -- LSP progress bar
+  "neovim/nvim-lspconfig",                                          -- Configurations for Nvim LSP
+  {
+    "RRethy/vim-illuminate",                                        -- highlight word under cursor
     dependencies = "neovim/nvim-lspconfig"
   },
   {
-    "akinsho/bufferline.nvim",                                -- tabline for nvim
-    dependencies = { "nvim-tree/nvim-web-devicons" },             -- filesystem icons
+    "akinsho/bufferline.nvim",                                      -- tabline for nvim
+    dependencies = { "nvim-tree/nvim-web-devicons" },               -- filesystem icons
   },
-  "windwp/nvim-autopairs",                                -- auto-pairs
-  "lukas-reineke/indent-blankline.nvim",                   -- indent blankline
+  "windwp/nvim-autopairs",                                          -- auto-pairs
+  "lukas-reineke/indent-blankline.nvim",                            -- indent blankline
   {
-    "simrat39/rust-tools.nvim",                               -- A plugin to improve your rust experience in neovim.
+    "simrat39/rust-tools.nvim",                                     -- A plugin to improve your rust experience in neovim.
     dependencies = { "mfussenegger/nvim-dap" },
   },
-  { "mfussenegger/nvim-jdtls" },                           -- Java LSP
+  { "mfussenegger/nvim-jdtls" },                                    -- Java LSP
   {
-    "scalameta/nvim-metals",                                  -- Scala LSP
+    "scalameta/nvim-metals",                                        -- Scala LSP
     dependencies = { "nvim-lua/plenary.nvim" },
   },
-  { "iamcco/markdown-preview.nvim" },                      -- Markdown preview in the browser
+  { "iamcco/markdown-preview.nvim" },                               -- Markdown preview in the browser
   {
-    "rmagatti/goto-preview",                                  -- GoTo preview
+    "rmagatti/goto-preview",                                        -- GoTo preview
   },
   {
-    "nvim-telescope/telescope.nvim",                          -- telescope
+    "nvim-telescope/telescope.nvim",                                -- telescope
     dependencies = { {"nvim-lua/plenary.nvim"}, },
   },
   {
-      "numToStr/Comment.nvim",                                -- Comments
+      "numToStr/Comment.nvim",                                      -- Comments
   },
-  { "simrat39/symbols-outline.nvim" },                     -- Symbols bar
+  { "simrat39/symbols-outline.nvim" },                              -- Symbols bar
   -- autocompletion
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
   { "hrsh7th/cmp-cmdline" },
   { "hrsh7th/nvim-cmp" },
-  { "saadparwaiz1/cmp_luasnip" },                          -- Snippets source for nvim-cmp
+  { "saadparwaiz1/cmp_luasnip" },                                   -- Snippets source for nvim-cmp
   {
     "L3MON4D3/LuaSnip",
-    run = "make install_jsregexp",
+    build = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets"
     },
-  },                                                           -- Snippets plugin
+  },                                                                -- Snippets plugin
   -- end
 
-  { "lervag/vimtex" },                                     -- LaTeX
+  { "lervag/vimtex" },                                              -- LaTeX
   {
-    "tpope/vim-fugitive",                                     -- Git integration
-    dependencies = { "tpope/vim-rhubarb" },                        -- :GBrowse
+    "tpope/vim-fugitive",                                           -- Git integration
+    dependencies = { "tpope/vim-rhubarb" },                         -- :GBrowse
   },
   {
-    "folke/todo-comments.nvim",                               -- special comments like TODO, FIXME, BUG etc
+    "folke/todo-comments.nvim",                                     -- special comments like TODO, FIXME, BUG etc
     dependencies = "nvim-lua/plenary.nvim",
   },
   {
-    'glepnir/dashboard-nvim',                                 -- dashboard
+    'glepnir/dashboard-nvim',                                       -- dashboard
     event = 'VimEnter',
     config = function()
       require('dashboard').setup {
@@ -143,7 +149,7 @@ return require("lazy").setup({
     end,
     dependencies = {'nvim-tree/nvim-web-devicons'},
   },
-  { 'nmac427/guess-indent.nvim' },                         -- guess the indent type in the current buffer
+  { 'nmac427/guess-indent.nvim' },                                  -- guess the indent type in the current buffer
   {
     "folke/noice.nvim",
     dependencies = {
@@ -151,5 +157,5 @@ return require("lazy").setup({
       "rcarriga/nvim-notify",
     },
   },
-  { 'onsails/lspkind.nvim' },                              -- vscode-like pictograms
+  { 'onsails/lspkind.nvim' },                                       -- vscode-like pictograms
 })
