@@ -262,7 +262,7 @@ require("illuminate").configure({
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable inlayHints if LSP provides such
-  if client.server_capabilities.inlayHintProvider then
+  if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
       vim.lsp.inlay_hint(bufnr, true)
   end
   -- Enable completion triggered by <c-x><c-o>
@@ -287,10 +287,17 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 
   require('illuminate').on_attach(client)
 end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    on_attach(client, bufnr)
+  end,
+})
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -301,32 +308,26 @@ local lsp = require('lspconfig')
 
 -- -- -- pyright
 lsp.pyright.setup({
-  on_attach = on_attach,
   capabilities = capabilities
 })
 -- -- -- clangd
 lsp.clangd.setup({
-  on_attach = on_attach,
   capabilities = capabilities
 })
 -- -- -- tsserver
 lsp.tsserver.setup({
-  on_attach = on_attach,
   capabilities = capabilities
 })
 -- -- -- texlab
 lsp.texlab.setup({
-  on_attach = on_attach,
   capabilities = capabilities
 })
 -- -- -- move-analyzer
 lsp.move_analyzer.setup({
-  on_attach = on_attach,
   capabilities = capabilities
 })
 -- -- -- golang
 lsp.gopls.setup({
-  on_attach = on_attach,
   capabilities = capabilities,
   settings = {
     gopls = {
@@ -344,11 +345,11 @@ lsp.gopls.setup({
 })
 -- -- -- java
 lsp.jdtls.setup({
-  on_attach = on_attach,
   capabilities = capabilities
 })
 -- -- -- lua
 lsp.lua_ls.setup {
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
@@ -366,6 +367,9 @@ lsp.lua_ls.setup {
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
+      },
+      hint = {
+        enable = true,
       },
     },
   },
@@ -695,28 +699,6 @@ require('treesitter-context').setup {
   on_attach = nil,          -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
-vim.cmd [[highlight TreesitterContext guibg=combine]]
-vim.cmd [[highlight TreesitterContextLineNumber cterm=bold gui=bold guifg=#a5adce guibg=#303446]]
-
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:↴"
-
-require("indent_blankline").setup {
-    show_current_context = true,
-    show_current_context_start = true,
-    space_char_blankline = " ",
-    use_treesitter = true,
-    char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-    },
-}
-
 -- -- noice
 require("noice").setup {
   cmdline = {
@@ -761,3 +743,32 @@ require("noice").setup {
     },
   },
 }
+
+
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+vim.opt.listchars:append "eol:↴"
+
+require("indent_blankline").setup {
+    show_current_context = true,
+    show_current_context_start = true,
+    space_char_blankline = " ",
+    use_treesitter = true,
+    char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+        "IndentBlanklineIndent3",
+        "IndentBlanklineIndent4",
+        "IndentBlanklineIndent5",
+        "IndentBlanklineIndent6",
+    },
+}
+
+-- HIGHLIGHTS
+vim.cmd [[highlight TreesitterContext guibg=combine]]
+vim.cmd [[highlight TreesitterContextBottom cterm=NONE gui=NONE guibg=combine]]
+vim.cmd [[highlight TreesitterContextLineNumber cterm=bold gui=bold guifg=#a5adce guibg=#303446]]
+vim.cmd [[highlight IndentBlanklineChar guifg=#51576d]]
+vim.cmd [[highlight IndentBlanklineSpaceChar guifg=#51576d]]
+vim.cmd [[highlight IndentBlanklineSpaceCharBlankline guifg=#51576d]]
+

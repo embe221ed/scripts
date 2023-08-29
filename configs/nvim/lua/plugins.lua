@@ -34,7 +34,6 @@ return require("lazy").setup({
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = { 'nvim-treesitter/nvim-treesitter' }
   },                                                                -- pin the current context at the top of the screen
-  "p00f/nvim-ts-rainbow",                                           -- rainbow parentheses
   {
     "nvim-lualine/lualine.nvim",                                    -- status line
     dependencies = { "nvim-tree/nvim-web-devicons", opt = true },   -- filesystem icons
