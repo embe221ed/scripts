@@ -42,10 +42,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
     nested = true,
 })
--- vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre", "BufNewFile" }, {
---     callback = open_nvim_tree,
---     once = true
--- })
 
 -- -- Comment
 require('Comment').setup {
@@ -53,7 +49,15 @@ require('Comment').setup {
 }
 
 -- -- todo-comments
-require("todo-comments").setup {}
+require("todo-comments").setup {
+  keywords = {
+    AUDIT   = { icon = "󰒃 ", color = "audit" },
+    FINDING = { icon = "󰈸 ", color = "error" },
+  },
+  colors = {
+    audit   = { "#b941d1" },
+  }
+}
 
 -- -- Symbols Outline
 require('symbols-outline').setup {
