@@ -98,7 +98,6 @@ return require("lazy").setup({
   },
   {
     'glepnir/dashboard-nvim',                                       -- dashboard
-    event = 'VimEnter',
     config = function()
       require('dashboard').setup {
         theme = 'hyper',

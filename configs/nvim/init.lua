@@ -51,11 +51,13 @@ require('Comment').setup {
 -- -- todo-comments
 require("todo-comments").setup {
   keywords = {
-    AUDIT   = { icon = "󰒃 ", color = "audit" },
-    FINDING = { icon = "󰈸 ", color = "error" },
+    AUDIT     = { icon = "󰒃 ", color = "audit" },
+    QUESTION  = { icon = " ", color = "question" },
+    FINDING   = { icon = "󰈸 ", color = "error" },
   },
   colors = {
-    audit   = { "#b941d1" },
+    audit     = { "#b941d1" },
+    question  = { "#ffffd8" }
   }
 }
 
