@@ -29,7 +29,6 @@ require('nvim-tree').setup {
     adaptive_size = true,
     centralize_selection = false,
     width = 40,
-    hide_root_folder = false,
     side = "left",
     preserve_window_proportions = false,
     number = true,
@@ -56,8 +55,8 @@ require("todo-comments").setup {
     FINDING   = { icon = "󰈸 ", color = "error" },
   },
   colors = {
-    audit     = { "#b941d1" },
-    question  = { "#ffffd8" }
+    audit     = { "#de85f5" },
+    question  = { "#ffffc6" }
   }
 }
 
