@@ -53,10 +53,12 @@ require("todo-comments").setup {
     AUDIT     = { icon = "󰒃 ", color = "audit" },
     QUESTION  = { icon = " ", color = "question" },
     FINDING   = { icon = "󰈸 ", color = "error" },
+    IDEA      = { icon = " ", color = "idea" },
   },
   colors = {
     audit     = { "#de85f5" },
-    question  = { "#ffffc6" }
+    question  = { "#ffffc6" },
+    idea      = { "#ffd600" }
   }
 }
 
