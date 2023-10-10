@@ -162,8 +162,7 @@ cmp.setup({
   },
   window = {
     completion = {
-      -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-      winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:None",
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
       col_offset = -3,
       side_padding = 0,
     },
@@ -501,8 +500,10 @@ require("noice").setup {
       },
       filter_options = {},
       win_options = {
-        -- winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-        winhighlight = "NormalFloat:NormalFloat",
+        winhighlight = {
+          NormalFloat = "CmdlineNormalFloat",
+          FloatBorder = "FloatBorder"
+        },
       },
     },
   },
