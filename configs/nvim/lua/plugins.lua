@@ -59,7 +59,7 @@ return require("lazy").setup({
     "scalameta/nvim-metals",                                        -- Scala LSP
     dependencies = { "nvim-lua/plenary.nvim" },
   },
-  {                                                               -- Markdown preview in the browser
+  {                                                                 -- Markdown preview in the browser
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
     init = function() vim.g.mkdp_filetypes = { "markdown" } end,
@@ -76,6 +76,10 @@ return require("lazy").setup({
       "numToStr/Comment.nvim",                                      -- Comments
   },
   { "simrat39/symbols-outline.nvim" },                              -- Symbols bar
+  {
+    "Wansmer/symbol-usage.nvim",
+    event = "LspAttach"
+  },
   -- autocompletion
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-buffer" },

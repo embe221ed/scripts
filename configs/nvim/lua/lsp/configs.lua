@@ -1,6 +1,27 @@
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Set border for floating windows
+local _border = "rounded"
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = _border
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = _border
+  }
+)
+
+vim.diagnostic.config{
+  float = {
+    border = _border
+  }
+}
+
 -- -- goto-preview config
 require('goto-preview').setup {
   default_mappings = true;
@@ -25,8 +46,8 @@ local on_attach = function(client, bufnr)
   end
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-	vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-	vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+  vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -227,3 +248,38 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   group = nvim_metals_group,
 })
+
+-- local SymbolKind = vim.lsp.protocol.SymbolKind
+
+require("symbol-usage").setup {
+--   kinds = {
+--     SymbolKind.Function,
+--     SymbolKind.File,
+--     SymbolKind.Module,
+--     SymbolKind.Namespace,
+--     SymbolKind.Package,
+--     SymbolKind.Class,
+--     SymbolKind.Method,
+--     SymbolKind.Property,
+--     SymbolKind.Field,
+--     SymbolKind.Constructor,
+--     SymbolKind.Enum,
+--     SymbolKind.Interface,
+--     SymbolKind.Function,
+--     SymbolKind.Variable,
+--     SymbolKind.Constant,
+--     SymbolKind.String,
+--     SymbolKind.Number,
+--     SymbolKind.Boolean,
+--     SymbolKind.Array,
+--     SymbolKind.Object,
+--     SymbolKind.Key,
+--     SymbolKind.Null,
+--     SymbolKind.EnumMember,
+--     SymbolKind.Struct,
+--     SymbolKind.Event,
+--     SymbolKind.Operator,
+--     SymbolKind.TypeParameter,
+--   },
+--
+}
