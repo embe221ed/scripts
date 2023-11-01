@@ -238,10 +238,10 @@ require("illuminate").configure({
 
 -- INITIALIZE CATPUCCIN SCHEME
 require("catppuccin").setup({
-    flavour = "frappe", -- latte, frappe, macchiato, mocha
+    flavour = "macchiato", -- latte, frappe, macchiato, mocha
     background = { -- :h background
-        light = "frappe",
-        dark = "frappe",
+        light = "macchiato",
+        dark = "macchiato",
     },
     -- transparent_background = true,
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
@@ -307,10 +307,9 @@ require("catppuccin").setup({
 })
 vim.cmd.colorscheme "catppuccin"
 
-local frappe = require("catppuccin.palettes").get_palette "frappe"
-local fg_selected = frappe.crust
--- local bg_selected = frappe.mantle
-local bg_selected = frappe.base
+local macchiato = require("catppuccin.palettes").get_palette "macchiato"
+local fg_selected = macchiato.crust
+local bg_selected = macchiato.base
 local fg_visible = "#2f3445"
 local bg_visible = "#1d1f2a"
 require('bufferline').setup {

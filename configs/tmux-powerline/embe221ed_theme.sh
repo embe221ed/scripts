@@ -4,7 +4,10 @@
 #
 
 # COLORS
+# frappe
 thm_bg="#303446"
+# macchiato
+thm_bg="#24273A"
 thm_fg="#c6d0f5"
 thm_cyan="#99d1db"
 thm_black="#292c3c"
