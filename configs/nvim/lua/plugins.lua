@@ -59,12 +59,6 @@ return require("lazy").setup({
     "scalameta/nvim-metals",                                        -- Scala LSP
     dependencies = { "nvim-lua/plenary.nvim" },
   },
-  {                                                                 -- Markdown preview in the browser
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
-    ft = "markdown"
-  },
   {
     "rmagatti/goto-preview",                                        -- GoTo preview
   },

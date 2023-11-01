@@ -149,6 +149,15 @@ lsp.lua_ls.setup {
     },
   },
 }
+-- -- -- solidity
+lsp.solidity.setup({
+  -- on_attach = on_attach, -- probably you will need this.
+  capabilities = capabilities,
+  settings = {
+    -- example of global remapping
+    -- solidity = { includePath = '', remapping = { ["@OpenZeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@4.6.0/' } }
+  },
+})
 -- -- -- rls
 -- lsp.rls.setup(
 --   coq.lsp_ensure_capabilities({
@@ -249,25 +258,24 @@ vim.api.nvim_create_autocmd("FileType", {
   group = nvim_metals_group,
 })
 
--- local SymbolKind = vim.lsp.protocol.SymbolKind
+local SymbolKind = vim.lsp.protocol.SymbolKind
 
 require("symbol-usage").setup {
---   kinds = {
---     SymbolKind.Function,
+  kinds = {
+    SymbolKind.Function,
 --     SymbolKind.File,
 --     SymbolKind.Module,
 --     SymbolKind.Namespace,
---     SymbolKind.Package,
---     SymbolKind.Class,
---     SymbolKind.Method,
+    SymbolKind.Package,
+    SymbolKind.Class,
+    SymbolKind.Method,
 --     SymbolKind.Property,
 --     SymbolKind.Field,
---     SymbolKind.Constructor,
+    SymbolKind.Constructor,
 --     SymbolKind.Enum,
---     SymbolKind.Interface,
---     SymbolKind.Function,
+    SymbolKind.Interface,
 --     SymbolKind.Variable,
---     SymbolKind.Constant,
+    SymbolKind.Constant,
 --     SymbolKind.String,
 --     SymbolKind.Number,
 --     SymbolKind.Boolean,
@@ -276,10 +284,9 @@ require("symbol-usage").setup {
 --     SymbolKind.Key,
 --     SymbolKind.Null,
 --     SymbolKind.EnumMember,
---     SymbolKind.Struct,
---     SymbolKind.Event,
+    SymbolKind.Struct,
+    SymbolKind.Event,
 --     SymbolKind.Operator,
 --     SymbolKind.TypeParameter,
---   },
---
+  },
 }
