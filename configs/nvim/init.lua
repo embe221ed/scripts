@@ -94,6 +94,44 @@ parser_config.move = {
 }
 
 -- -- lualine
+local function is_loclist()
+  return vim.fn.getloclist(0, { filewinid = 1 }).filewinid ~= 0
+end
+
+local function label()
+  return is_loclist() and 'Location List' or 'Quickfix List'
+end
+
+local function title()
+  if is_loclist() then
+    return vim.fn.getloclist(0, { title = 0 }).title
+  end
+  return vim.fn.getqflist({ title = 0 }).title
+end
+
+local qf_colours = {
+  ll = "#dfebeb",
+  qf = "#a8d1d1",
+}
+
+MY_QUICKFIX = {
+  sections = {
+    lualine_a = {
+      {
+        label,
+        color = function()
+          return is_loclist() and { gui = "bold", bg = qf_colours['ll'] } or { gui = "bold", bg = qf_colours['qf'] }
+        end,
+        separator = { left = '' },
+        right_padding = 2
+      },
+    },
+    lualine_b = { title },
+    lualine_z = { 'location' },
+  },
+  filetypes = { 'qf' }
+}
+
 require('lualine').setup {
   options = {
     theme = 'catppuccin',
@@ -130,7 +168,7 @@ require('lualine').setup {
     'fugitive',
     'man',
     'symbols-outline',
-    'quickfix',
+    MY_QUICKFIX,
   },
 }
 
@@ -231,17 +269,14 @@ require("illuminate").configure({
   },
 })
 
-
--- INITIALIZE MATERIAL SCHEME
--- vim.g.material_style = "palenight"
--- vim.cmd 'colorscheme material'
+local catppuccin_theme = "macchiato"
 
 -- INITIALIZE CATPUCCIN SCHEME
 require("catppuccin").setup({
-    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    flavour = catppuccin_theme, -- latte, frappe, macchiato, mocha
     background = { -- :h background
-        light = "macchiato",
-        dark = "macchiato",
+        light = catppuccin_theme,
+        dark = catppuccin_theme,
     },
     -- transparent_background = true,
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
@@ -305,11 +340,12 @@ require("catppuccin").setup({
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
+
 vim.cmd.colorscheme "catppuccin"
 
-local macchiato = require("catppuccin.palettes").get_palette "macchiato"
-local fg_selected = macchiato.crust
-local bg_selected = macchiato.base
+local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
+local fg_selected = palette.crust
+local bg_selected = palette.base
 local fg_visible = "#2f3445"
 local bg_visible = "#1d1f2a"
 require('bufferline').setup {
