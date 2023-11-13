@@ -41,8 +41,8 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable inlayHints if LSP provides such
-  if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
-      vim.lsp.inlay_hint(bufnr, true)
+  if client.server_capabilities.inlayHintProvider and not vim.lsp.inlay_hint.is_enabled(bufnr) then
+      vim.lsp.inlay_hint.enable(bufnr)
   end
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -150,14 +150,18 @@ lsp.lua_ls.setup {
   },
 }
 -- -- -- solidity
-lsp.solidity.setup({
+lsp.solidity.setup {
   -- on_attach = on_attach, -- probably you will need this.
   capabilities = capabilities,
   settings = {
     -- example of global remapping
     -- solidity = { includePath = '', remapping = { ["@OpenZeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@4.6.0/' } }
   },
-})
+} 
+-- -- -- bash
+lsp.bashls.setup {
+  capabilities = capabilities
+}
 -- -- -- rls
 -- lsp.rls.setup(
 --   coq.lsp_ensure_capabilities({

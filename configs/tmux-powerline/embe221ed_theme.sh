@@ -1,13 +1,16 @@
-#
-# _embe221ed_theme
-# with catppuccin colors
-#
+####################################################################################################
+# This is a bubble theme created by @embe221ed (https://github.com/embe221ed)
+# colors are inspired by catppuccin palettes (https://github.com/catppuccin/catppuccin)
+####################################################################################################
 
 # COLORS
-# frappe
-thm_bg="#303446"
-# macchiato
+
+# background for frappe catppuccin terminal theme
+# thm_bg="#303446"
+
+# background for macchiato catppuccin terminal theme
 thm_bg="#24273A"
+
 thm_fg="#c6d0f5"
 thm_cyan="#99d1db"
 thm_black="#292c3c"
@@ -44,7 +47,6 @@ mantle="#292c3c"
 crust="#232634"
 eggplant="#e889d2"
 sky_blue="#a7c7e7"
-
 spotify_green="#1db954"
 spotify_black="#191414"
 
