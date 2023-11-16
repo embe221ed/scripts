@@ -159,4 +159,5 @@ return require("lazy").setup({
     },
   },
   { 'onsails/lspkind.nvim' },                                       -- vscode-like pictograms
+  { 'shortcuts/no-neck-pain.nvim' }                                 -- center the current buffer
 })

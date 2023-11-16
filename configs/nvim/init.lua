@@ -584,3 +584,24 @@ require("ibl").setup {
 
 -- import custom highlights at the end
 require('highlights')   -- custom highlights
+
+-- center the current buffer
+require("no-neck-pain").setup({
+  width = 180,
+  buffers = {
+    colors = {
+      blend = -0.2,
+    },
+    scratchPad = {
+      -- set to `false` to
+      -- disable auto-saving
+      enabled = true,
+      -- set to `nil` to default 
+      -- to current working directory
+      location = nil,
+    },
+    bo = {
+      filetype = "md"
+    },
+  },
+})
