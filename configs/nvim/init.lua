@@ -593,12 +593,18 @@ require("no-neck-pain").setup({
       blend = -0.2,
     },
     scratchPad = {
-      -- set to `false` to
-      -- disable auto-saving
+      -- When `true`, automatically sets the following options to the side buffers:
+      -- - `autowriteall`
+      -- - `autoread`.
+      --- @type boolean
       enabled = true,
       -- set to `nil` to default 
       -- to current working directory
       location = nil,
+      -- The name of the generated file. See `location` for more information.
+      --- @type string
+      --- @example: `no-neck-pain-left.norg`
+      fileName = "nnp-notes",
     },
     bo = {
       filetype = "md"
