@@ -344,10 +344,10 @@ require("catppuccin").setup({
 vim.cmd.colorscheme "catppuccin"
 
 local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
-local fg_selected = palette.crust
+local fg_selected = palette.mantle
 local bg_selected = palette.base
-local fg_visible = "#2f3445"
-local bg_visible = "#1d1f2a"
+-- local bg_visible = "#1a1c2e"
+local bg_visible = palette.crust
 require('bufferline').setup {
   highlights = require("catppuccin.groups.integrations.bufferline").get {
     styles = { "bold" },
@@ -429,8 +429,15 @@ require('bufferline').setup {
       {
           filetype = "NvimTree",
           text = "  file explorer",
-          separator = true,
-      }
+          separator = false,
+
+      },
+      {
+          filetype = "nnp",
+          text = "󱞁  scratch pad",
+          separator = false,
+          padding = 1,
+      },
     },
     custom_filter = function(buf_number, buf_numbers)
         -- filter out by buffer name
@@ -590,7 +597,13 @@ require("no-neck-pain").setup({
   width = 180,
   buffers = {
     colors = {
-      blend = -0.2,
+      -- Hexadecimal color code to override the current background color of the buffer. (e.g. #24273A)
+      -- Transparent backgrounds are supported by default.
+      --- @type string?
+      background = palette.crust,
+      -- Brighten (positive) or darken (negative) the side buffers background color. Accepted values are [-1..1].
+      --- @type integer
+      blend = 0,
     },
     scratchPad = {
       -- When `true`, automatically sets the following options to the side buffers:
@@ -604,10 +617,15 @@ require("no-neck-pain").setup({
       -- The name of the generated file. See `location` for more information.
       --- @type string
       --- @example: `no-neck-pain-left.norg`
-      fileName = "nnp-notes",
+      -- fileName = "notes",
     },
     bo = {
-      filetype = "md"
+      -- filetype = "md",
+      filetype = "nnp",
     },
   },
 })
+
+-- -- add NoNeckPain scratchPad highlight as markdown
+local ft_to_parsername = require "nvim-treesitter.parsers".filetype_to_parsername
+ft_to_parsername.nnp = "markdown"
