@@ -3,6 +3,7 @@ require('opts')         -- Options
 require('keys')         -- Keymaps
 require('plugins')      -- Plugins: UNCOMMENT THIS LINE
 require('snippets')     -- LuaSnip custom snippets
+require('functions')    -- custom functions
 require('lsp.configs')  -- LSP config
 
 vim.opt.termguicolors = true
@@ -34,7 +35,13 @@ require('nvim-tree').setup {
     number = true,
     relativenumber = true,
     signcolumn = "yes",
-  }
+  },
+  renderer = {
+    symlink_destination = false,
+    indent_markers = {
+      enable = true,
+    },
+  },
 }
 -- -- -- auto_close working implementation
 vim.api.nvim_create_autocmd('BufEnter', {
@@ -109,18 +116,18 @@ local function title()
   return vim.fn.getqflist({ title = 0 }).title
 end
 
-local qf_colours = {
+local qf_colors = {
   ll = "#dfebeb",
   qf = "#a8d1d1",
 }
 
-MY_QUICKFIX = {
+QUICKFIX = {
   sections = {
     lualine_a = {
       {
         label,
         color = function()
-          return is_loclist() and { gui = "bold", bg = qf_colours['ll'] } or { gui = "bold", bg = qf_colours['qf'] }
+          return is_loclist() and { gui = "bold", bg = qf_colors['ll'] } or { gui = "bold", bg = qf_colors['qf'] }
         end,
         separator = { left = '' },
         right_padding = 2
@@ -130,6 +137,24 @@ MY_QUICKFIX = {
     lualine_z = { 'location' },
   },
   filetypes = { 'qf' }
+}
+
+local nnp_colors = {
+  bg = "#a8d1d1",
+}
+
+NO_NECK_PAIN = {
+  sections = {
+    lualine_a = {
+      {
+        function() return "ScratchPad" end,
+        color = { gui = "bold", bg = nnp_colors['bg'] },
+        separator = { left = '', right = "" },
+        right_padding = 2
+      },
+    },
+  },
+  filetypes = { 'nnp' }
 }
 
 require('lualine').setup {
@@ -145,7 +170,7 @@ require('lualine').setup {
     lualine_a = {
       { 'mode', separator = { left = '' }, right_padding = 2 },
     },
-    lualine_b = { 'filename', 'branch', --[[ 'lsp_progress' ]] },
+    lualine_b = { 'filename', 'branch', },
     lualine_c = { 'fileformat' },
     lualine_x = {  },
     lualine_y = { 'filetype', 'progress' },
@@ -168,7 +193,8 @@ require('lualine').setup {
     'fugitive',
     'man',
     'symbols-outline',
-    MY_QUICKFIX,
+    QUICKFIX,
+    NO_NECK_PAIN,
   },
 }
 
@@ -449,14 +475,6 @@ require('bufferline').setup {
   }
 }
 
--- SETUP INDENT
--- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "cpp", "lua", "rust", "python", "javascript" },
@@ -603,7 +621,7 @@ require("no-neck-pain").setup({
       background = palette.crust,
       -- Brighten (positive) or darken (negative) the side buffers background color. Accepted values are [-1..1].
       --- @type integer
-      blend = 0,
+      -- blend = -0.2,
     },
     scratchPad = {
       -- When `true`, automatically sets the following options to the side buffers:
