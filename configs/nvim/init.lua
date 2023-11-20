@@ -141,6 +141,7 @@ QUICKFIX = {
 
 local nnp_colors = {
   bg = "#a8d1d1",
+  fg = "#24273a",
 }
 
 NO_NECK_PAIN = {
@@ -148,11 +149,12 @@ NO_NECK_PAIN = {
     lualine_a = {
       {
         function() return "ScratchPad" end,
-        color = { gui = "bold", bg = nnp_colors['bg'] },
+        color = { gui = "bold", bg = nnp_colors['bg'], fg = nnp_colors['fg'] },
         separator = { left = '', right = "" },
         right_padding = 2
       },
     },
+    lualine_b = { 'filename' },
   },
   filetypes = { 'nnp' }
 }
@@ -370,6 +372,7 @@ require("catppuccin").setup({
 vim.cmd.colorscheme "catppuccin"
 
 local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
+
 local fg_selected = palette.mantle
 local bg_selected = palette.base
 -- local bg_visible = "#1a1c2e"
@@ -638,7 +641,6 @@ require("no-neck-pain").setup({
       -- fileName = "notes",
     },
     bo = {
-      -- filetype = "md",
       filetype = "nnp",
     },
   },
