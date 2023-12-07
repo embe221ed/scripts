@@ -57,10 +57,10 @@ require('Comment').setup {
 -- -- todo-comments
 require("todo-comments").setup {
   keywords = {
-    AUDIT     = { icon = "󰒃 ", color = "audit" },
-    QUESTION  = { icon = " ", color = "question" },
-    FINDING   = { icon = "󰈸 ", color = "error" },
-    IDEA      = { icon = " ", color = "idea" },
+    AUDIT       = { icon = "󰒃 ", color = "audit" },
+    QUESTION    = { icon = " ", color = "question" },
+    FINDING     = { icon = "󰈸 ", color = "error" },
+    IDEA        = { icon = " ", color = "idea" },
   },
   colors = {
     audit     = { "#de85f5" },
@@ -150,7 +150,7 @@ NO_NECK_PAIN = {
       {
         function() return "ScratchPad" end,
         color = { gui = "bold", bg = nnp_colors['bg'], fg = nnp_colors['fg'] },
-        separator = { left = '', right = "" },
+        separator = { left = '' },
         right_padding = 2
       },
     },
@@ -634,7 +634,7 @@ require("no-neck-pain").setup({
       enabled = true,
       -- set to `nil` to default 
       -- to current working directory
-      location = nil,
+      location = os.getenv("HOME") .. "/Desktop/nnp-notes/",
       -- The name of the generated file. See `location` for more information.
       --- @type string
       --- @example: `no-neck-pain-left.norg`

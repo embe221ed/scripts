@@ -1,0 +1,28 @@
+#compdef start_audit
+
+_start_audit() {
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+
+    local -i current_arg=$CURRENT
+
+    case $current_arg in
+        2)
+            # Specify the directory path where you want to list directories
+            local target_directory="${OSEC}/audits"
+            
+            # Suggest directories from the specified path
+            _files -W $target_directory -/
+            ;;
+        3)
+            # Second argument: expect a number
+            _message -r "[NUMBER] - Enter a max length for the tmux session name (optional, default=5)"
+            ;;
+        *)
+            # Default case
+            _default
+            ;;
+    esac
+}
+
+_start_audit "$@"
