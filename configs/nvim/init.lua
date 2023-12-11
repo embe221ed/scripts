@@ -373,11 +373,14 @@ vim.cmd.colorscheme "catppuccin"
 
 local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
 
-local fg_selected = palette.mantle
+local fg_selected = palette.crust
+-- local bg_selected = palette.base
 local bg_selected = palette.base
 -- local bg_visible = "#1a1c2e"
-local bg_visible = palette.crust
-require('bufferline').setup {
+-- local bg_visible = palette.crust
+local bg_visible = palette.mantle
+local bufferline = require('bufferline')
+bufferline.setup {
   highlights = require("catppuccin.groups.integrations.bufferline").get {
     styles = { "bold" },
     custom = {
