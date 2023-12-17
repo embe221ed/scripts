@@ -298,6 +298,7 @@ require("illuminate").configure({
 })
 
 local catppuccin_theme = "macchiato"
+-- local catppuccin_theme = "frappe"
 
 -- INITIALIZE CATPUCCIN SCHEME
 require("catppuccin").setup({
@@ -332,7 +333,11 @@ require("catppuccin").setup({
         operators = {},
     },
     color_overrides = {},
-    custom_highlights = {},
+    custom_highlights = function(colors)
+        return {
+            TabLineSel = { bg = "#b4a4f5" },
+        }
+    end,
     integrations = {
         cmp = true,
         symbols_outline = true,
@@ -373,12 +378,10 @@ vim.cmd.colorscheme "catppuccin"
 
 local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
 
-local fg_selected = palette.crust
--- local bg_selected = palette.base
+local fg_selected = palette.mantle
 local bg_selected = palette.base
--- local bg_visible = "#1a1c2e"
--- local bg_visible = palette.crust
 local bg_visible = palette.mantle
+local separator_fg = palette.surface2
 local bufferline = require('bufferline')
 bufferline.setup {
   highlights = require("catppuccin.groups.integrations.bufferline").get {
@@ -391,9 +394,9 @@ bufferline.setup {
         buffer_visible = { bg = bg_visible, },
         buffer_selected = { bg = bg_selected, },
 
-        separator = { fg = fg_selected, bg = bg_visible },
-        separator_visible = { fg = fg_selected, bg = bg_visible },
-        separator_selected = { fg = fg_selected, bg = bg_selected, },
+        separator = { fg = separator_fg, bg = bg_visible },
+        separator_visible = { fg = separator_fg, bg = bg_visible },
+        separator_selected = { fg = separator_fg, bg = bg_visible, },
 
         close_button = { bg = bg_visible, },
         close_button_visible = { bg = bg_visible, },
@@ -454,9 +457,12 @@ bufferline.setup {
     }
   },
   options = {
-    separator_style = "slant",
+    separator_style = {"|", "|"},
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
+    indicator = {
+      style = "underline",
+    },
     offsets = {
       {
           filetype = "NvimTree",
@@ -478,6 +484,33 @@ bufferline.setup {
         end
         return false
     end,
+    custom_areas = {
+      right = function()
+          local result = {}
+          local seve = vim.diagnostic.severity
+          local error = #vim.diagnostic.get(0, {severity = seve.ERROR})
+          local warning = #vim.diagnostic.get(0, {severity = seve.WARN})
+          local info = #vim.diagnostic.get(0, {severity = seve.INFO})
+          local hint = #vim.diagnostic.get(0, {severity = seve.HINT})
+
+          if error ~= 0 then
+              table.insert(result, { text = "   " .. error, fg = "#EC5241" })
+          end
+
+          if warning ~= 0 then
+              table.insert(result, { text = "   " .. warning, fg = "#EFB839" })
+          end
+
+          if hint ~= 0 then
+              table.insert(result, { text = " 󱜸  " .. hint, fg = "#A3BA5E" })
+          end
+
+          if info ~= 0 then
+              table.insert(result, { text = "   " .. info, fg = "#7EA9A7" })
+          end
+          return result
+      end,
+    }
   }
 }
 
@@ -600,6 +633,7 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
   vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
   vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+  vim.api.nvim_set_hl(0, "IblScope", { fg = "#b4a4f5" })
 end)
 
 require("ibl").setup {

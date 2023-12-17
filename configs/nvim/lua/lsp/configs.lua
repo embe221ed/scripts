@@ -41,7 +41,10 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable inlayHints if LSP provides such
-  if client.server_capabilities.inlayHintProvider and not vim.lsp.inlay_hint.is_enabled(bufnr) then
+  if (
+    client.server_capabilities.inlayHintProvider
+    and vim.lsp.inlay_hint ~= nil
+    and not vim.lsp.inlay_hint.is_enabled(bufnr)) then
       vim.lsp.inlay_hint.enable(bufnr)
   end
   -- Enable completion triggered by <c-x><c-o>

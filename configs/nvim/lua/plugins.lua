@@ -138,6 +138,13 @@ return require("lazy").setup({
               action = 'quitall',
               key = 'q',
             },
+            {
+              icon = ' ',
+              desc = 'lspdebug',
+              group = 'Debug',
+              action = 'lua vim.lsp.set_log_level("debug")',
+              key = 'd',
+            },
             -- {
             --   desc = ' dotfiles',
             --   group = 'Number',
