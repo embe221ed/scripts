@@ -69,7 +69,7 @@ return require("lazy").setup({
   {
       "numToStr/Comment.nvim",                                      -- Comments
   },
-  { "simrat39/symbols-outline.nvim" },                              -- Symbols bar
+  { "hedyhli/outline.nvim" },                                       -- Symbols bar
   {
     "Wansmer/symbol-usage.nvim",
     event = "LspAttach"

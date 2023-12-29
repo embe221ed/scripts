@@ -8,7 +8,7 @@ local map = vim.api.nvim_set_keymap
 map('n', '<C-n>', [[:NvimTreeToggle<CR>]], {})
 
 -- Toggle SymbolsOutline
-map('n', '<C-s>', [[:SymbolsOutline<CR>]], {})
+map('n', '<C-s>', [[:Outline!<CR>]], {})
 
 -- Window movement
 map('n', '<C-J>', [[<C-w>j]], {})

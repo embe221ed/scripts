@@ -70,12 +70,21 @@ require("todo-comments").setup {
 }
 
 -- -- Symbols Outline
-require('symbols-outline').setup {
-  auto_preview = true,
-  show_relative_numbers = true,
-  show_numbers = true,
-  relative_width = true,
-  width = 15,
+require('outline').setup {
+  outline_window = {
+    relative_width = true,
+    -- show_numbers = true,
+    -- show_relative_numbers = true,
+    width = 15,
+  },
+  outline_items = {
+    show_symbol_lineno = true,
+  },
+  preview_window = {
+    auto_preview = true,
+    open_hover_on_preview = true,
+    live = true,
+  }
 }
 
 -- -- auto-pairs
