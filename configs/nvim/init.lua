@@ -33,11 +33,16 @@ require('nvim-tree').setup {
     width = 40,
     side = "left",
     preserve_window_proportions = false,
-    number = true,
-    relativenumber = true,
+    number = false,
+    relativenumber = false,
     signcolumn = "yes",
   },
   renderer = {
+    add_trailing = true,
+    full_name = true,
+    root_folder_label = function(path)
+      return "···/" .. vim.fn.fnamemodify(path, ":t")
+    end,
     symlink_destination = false,
     indent_markers = {
       enable = true,
@@ -209,6 +214,8 @@ require("illuminate").configure({
 
 local catppuccin_theme = "macchiato"
 -- local catppuccin_theme = "frappe"
+--
+local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
 
 -- INITIALIZE CATPUCCIN SCHEME
 require("catppuccin").setup({
@@ -245,7 +252,10 @@ require("catppuccin").setup({
     color_overrides = {},
     custom_highlights = function(colors)
         return {
-            TabLineSel = { bg = "#b4a4f5" },
+            TabLineSel            = { bg = "#b4a4f5" },
+            StatusLine            = { fg = palette.crust, bg = palette.base }, -- status line of current window
+            StatusLineNC          = { fg = palette.crust, bg = palette.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+            NvimTreeStatusLineNC  = { fg = palette.crust, bg = palette.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
         }
     end,
     integrations = {
@@ -285,8 +295,6 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme "catppuccin"
-
-local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
 
 local fg_selected = palette.mantle
 local bg_selected = palette.base

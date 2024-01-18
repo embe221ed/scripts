@@ -88,7 +88,7 @@ ins_left {
     return ''
   end,
   color = { fg = colors.mauve }, -- Sets highlighting of component
-  padding = { left = 0, right = 1 }, -- We don't need space before this
+  padding = { left = 1, right = 1 }, -- We don't need space before this
 }
 
 ins_left {

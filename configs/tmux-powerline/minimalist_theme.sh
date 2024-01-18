@@ -1,5 +1,5 @@
 ####################################################################################################
-# This is a bubble theme created by @embe221ed (https://github.com/embe221ed)
+# This is a minimalist theme created by @embe221ed (https://github.com/embe221ed)
 # colors are inspired by catppuccin palettes (https://github.com/catppuccin/catppuccin)
 ####################################################################################################
 
@@ -51,9 +51,9 @@ spotify_green="#1db954"
 spotify_black="#191414"
 
 
-TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="░"
+TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="┃"
 TMUX_POWERLINE_SEPARATOR_LEFT_THIN="|"
-TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="░"
+TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="┃"
 TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="|"
 TMUX_POWERLINE_SEPARATOR_THIN="|"
 
