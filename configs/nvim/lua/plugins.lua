@@ -50,9 +50,11 @@ return require("lazy").setup({
   },
   "windwp/nvim-autopairs",                                          -- auto-pairs
   "lukas-reineke/indent-blankline.nvim",                            -- indent blankline
-  {
-    "simrat39/rust-tools.nvim",                                     -- A plugin to improve your rust experience in neovim.
-    dependencies = { "mfussenegger/nvim-dap" },
+  {                                                                 -- Rust LSP
+    'mrcjkb/rustaceanvim',
+    version = "^3",
+    event = "BufReadPost",
+    ft = { 'rust' },
   },
   { "mfussenegger/nvim-jdtls" },                                    -- Java LSP
   {
@@ -166,5 +168,14 @@ return require("lazy").setup({
     },
   },
   { 'onsails/lspkind.nvim' },                                       -- vscode-like pictograms
-  { 'shortcuts/no-neck-pain.nvim' }                                 -- center the current buffer
+  { 'shortcuts/no-neck-pain.nvim' },                                -- center the current buffer
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
 })

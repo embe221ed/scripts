@@ -45,7 +45,7 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.inlayHintProvider
     and vim.lsp.inlay_hint ~= nil
     and not vim.lsp.inlay_hint.is_enabled(bufnr)) then
-      vim.lsp.inlay_hint.enable(bufnr)
+      vim.lsp.inlay_hint.enable(bufnr, true)
   end
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()' , { buf = bufnr })
@@ -158,9 +158,12 @@ lsp.solidity_ls_nomicfoundation.setup {
   capabilities = capabilities,
   settings = {
     -- example of global remapping
-    -- solidity = { includePath = '', remapping = { ["@OpenZeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@4.6.0/' } }
+    solidity = {
+      -- includePath = '',
+      -- remapping = { ["@openzeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@5.0.1/' }
+    }
   },
-} 
+}
 -- -- -- bash
 lsp.bashls.setup {
   capabilities = capabilities
@@ -178,8 +181,6 @@ lsp.bashls.setup {
 --   })
 -- )
 -- -- -- rust-analyzer
-local rt = require("rust-tools")
-
 local rust_on_attach = function(client, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   -- Enable completion triggered by <c-x><c-o>
@@ -191,7 +192,6 @@ local rust_on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "K", rt.hover_actions.hover_actions, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -207,7 +207,7 @@ local rust_on_attach = function(client, bufnr)
   require('illuminate').on_attach(client)
 end
 
-local opts = {
+--[[ vim.g.rustaceanvim = {
     tools = { -- rust-tools options
         autoSetHints = true,
         inlay_hints = {
@@ -218,9 +218,6 @@ local opts = {
         },
     },
 
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
     server = {
         -- on_attach is a callback called when the language server attachs to the buffer
         on_attach = rust_on_attach,
@@ -250,9 +247,7 @@ local opts = {
             },
         },
     },
-}
-
-rt.setup(opts)
+} ]]
 
 -- -- -- metals (scala lsp)
 local metals_config = require("metals").bare_config()

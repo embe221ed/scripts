@@ -10,6 +10,12 @@ vim.o.expandtab       = true
 vim.o.splitright      = true
 vim.o.splitbelow      = true
 vim.o.updatetime      = 500
+vim.o.conceallevel    = 1
+
+vim.o.list            = true
+
+vim.opt.listchars:append "eol:↴"
+vim.opt.fillchars:append "vert:▏"
 
 vim.g.one_allow_italics = true
 vim.g.vimtex_view_method = "skim"

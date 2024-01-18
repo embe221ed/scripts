@@ -1,10 +1,11 @@
 -- IMPORTS
-require('opts')         -- Options
-require('keys')         -- Keymaps
-require('plugins')      -- Plugins: UNCOMMENT THIS LINE
-require('snippets')     -- LuaSnip custom snippets
-require('functions')    -- custom functions
-require('lsp.configs')  -- LSP config
+require('opts')           -- Options
+require('keys')           -- Keymaps
+require('plugins')        -- Plugins
+require('lualineconfig')  -- LuaLine config
+require('snippets')       -- LuaSnip custom snippets
+require('functions')      -- custom functions
+require('lsp.configs')    -- LSP config
 
 vim.opt.termguicolors = true
 
@@ -78,7 +79,7 @@ require('outline').setup {
     width = 15,
   },
   outline_items = {
-    show_symbol_lineno = true,
+    -- show_symbol_lineno = true,
   },
   preview_window = {
     auto_preview = true,
@@ -107,106 +108,6 @@ parser_config.move = {
     generate_requires_npm = false, -- if stand-alone parser without npm dependencies
     requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
   }
-}
-
--- -- lualine
-local function is_loclist()
-  return vim.fn.getloclist(0, { filewinid = 1 }).filewinid ~= 0
-end
-
-local function label()
-  return is_loclist() and 'Location List' or 'Quickfix List'
-end
-
-local function title()
-  if is_loclist() then
-    return vim.fn.getloclist(0, { title = 0 }).title
-  end
-  return vim.fn.getqflist({ title = 0 }).title
-end
-
-local qf_colors = {
-  ll = "#dfebeb",
-  qf = "#a8d1d1",
-}
-
-QUICKFIX = {
-  sections = {
-    lualine_a = {
-      {
-        label,
-        color = function()
-          return is_loclist() and { gui = "bold", bg = qf_colors['ll'] } or { gui = "bold", bg = qf_colors['qf'] }
-        end,
-        separator = { left = '' },
-        right_padding = 2
-      },
-    },
-    lualine_b = { title },
-    lualine_z = { 'location' },
-  },
-  filetypes = { 'qf' }
-}
-
-local nnp_colors = {
-  bg = "#a8d1d1",
-  fg = "#24273a",
-}
-
-NO_NECK_PAIN = {
-  sections = {
-    lualine_a = {
-      {
-        function() return "ScratchPad" end,
-        color = { gui = "bold", bg = nnp_colors['bg'], fg = nnp_colors['fg'] },
-        separator = { left = '' },
-        right_padding = 2
-      },
-    },
-    lualine_b = { 'filename' },
-  },
-  filetypes = { 'nnp' }
-}
-
-require('lualine').setup {
-  options = {
-    theme = 'catppuccin',
-    component_separators = '|',
-    section_separators = { left = '', right = '' },
-    disabled_filetypes = {
-      'packer',
-    },
-  },
-  sections = {
-    lualine_a = {
-      { 'mode', separator = { left = '' }, right_padding = 2 },
-    },
-    lualine_b = { 'filename', 'branch', },
-    lualine_c = { 'fileformat' },
-    lualine_x = {  },
-    lualine_y = { 'filetype', 'progress' },
-    lualine_z = {
-      'selectioncount',
-      { 'location', separator = { right = '' }, left_padding = 2 },
-    },
-  },
-  inactive_sections = {
-    lualine_a = { 'filename' },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = { 'location' },
-  },
-  tabline = {},
-  extensions = {
-    'nvim-tree',
-    'fugitive',
-    'man',
-    'symbols-outline',
-    QUICKFIX,
-    NO_NECK_PAIN,
-  },
 }
 
   -- Set up nvim-cmp.
@@ -403,9 +304,10 @@ bufferline.setup {
         buffer_visible = { bg = bg_visible, },
         buffer_selected = { bg = bg_selected, },
 
-        separator = { fg = separator_fg, bg = bg_visible },
-        separator_visible = { fg = separator_fg, bg = bg_visible },
-        separator_selected = { fg = separator_fg, bg = bg_visible, },
+        separator = { fg = separator_fg, },
+        separator_visible = { fg = separator_fg, },
+        separator_selected = { fg = separator_fg, },
+        offset_separator = { bg = bg_visible, },
 
         close_button = { bg = bg_visible, },
         close_button_visible = { bg = bg_visible, },
@@ -466,7 +368,7 @@ bufferline.setup {
     }
   },
   options = {
-    separator_style = {"|", "|"},
+    -- separator_style = {"|", "|"},
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
     indicator = {
@@ -475,15 +377,21 @@ bufferline.setup {
     offsets = {
       {
           filetype = "NvimTree",
-          text = "  file explorer",
+          text = "  EXPLORER",
           separator = false,
-
+          highlight = "NvimTreeNormal",
       },
       {
           filetype = "nnp",
-          text = "󱞁  scratch pad",
+          text = "󱞁  SCRATCHPAD",
           separator = false,
           padding = 1,
+      },
+      {
+          filetype = "Outline",
+          text = "SYMBOLS",
+          separator = "▏",
+          highlight = "NvimTreeNormal",
       },
     },
     custom_filter = function(buf_number, buf_numbers)
@@ -497,25 +405,25 @@ bufferline.setup {
       right = function()
           local result = {}
           local seve = vim.diagnostic.severity
-          local error = #vim.diagnostic.get(0, {severity = seve.ERROR})
-          local warning = #vim.diagnostic.get(0, {severity = seve.WARN})
-          local info = #vim.diagnostic.get(0, {severity = seve.INFO})
-          local hint = #vim.diagnostic.get(0, {severity = seve.HINT})
+          local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
+          local warn = #vim.diagnostic.get(0, { severity = seve.WARN })
+          local info = #vim.diagnostic.get(0, { severity = seve.INFO })
+          local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
           if error ~= 0 then
-              table.insert(result, { text = "   " .. error, fg = "#EC5241" })
+              table.insert(result, { text = "   " .. error .. " ", fg = "#EC5241" })
           end
 
-          if warning ~= 0 then
-              table.insert(result, { text = "   " .. warning, fg = "#EFB839" })
+          if warn ~= 0 then
+              table.insert(result, { text = "   " .. warn .. " ", fg = "#EFB839" })
           end
 
           if hint ~= 0 then
-              table.insert(result, { text = " 󱜸  " .. hint, fg = "#A3BA5E" })
+              table.insert(result, { text = " 󱜸  " .. hint .. " ", fg = "#A3BA5E" })
           end
 
           if info ~= 0 then
-              table.insert(result, { text = "   " .. info, fg = "#7EA9A7" })
+              table.insert(result, { text = "   " .. info .. " ", fg = "#7EA9A7" })
           end
           return result
       end,
@@ -617,38 +525,35 @@ require("noice").setup {
   },
 }
 
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:↴"
 
-local highlight = {
-  "RainbowRed",
-  "RainbowYellow",
-  "RainbowBlue",
-  "RainbowOrange",
-  "RainbowGreen",
-  "RainbowViolet",
-  "RainbowCyan",
-}
+-- local highlight = {
+--   "RainbowRed",
+--   "RainbowYellow",
+--   "RainbowBlue",
+--   "RainbowOrange",
+--   "RainbowGreen",
+--   "RainbowViolet",
+--   "RainbowCyan",
+-- }
 
 local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-  vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-  vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-  vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-  vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-  vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-  vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-  vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+  -- vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+  -- vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+  -- vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+  -- vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+  -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+  -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+  -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
   vim.api.nvim_set_hl(0, "IblScope", { fg = "#b4a4f5" })
 end)
 
 require("ibl").setup {
-  indent = {
-    highlight = highlight
-  },
+  -- indent = {
+  --   highlight = highlight
+  -- },
   exclude = {
     filetypes = {
       "dashboard",
@@ -661,16 +566,16 @@ require('highlights')   -- custom highlights
 
 -- center the current buffer
 require("no-neck-pain").setup({
-  width = 180,
   buffers = {
     colors = {
       -- Hexadecimal color code to override the current background color of the buffer. (e.g. #24273A)
       -- Transparent backgrounds are supported by default.
       --- @type string?
-      background = palette.crust,
+      -- background = "#202334",
+      background = palette.mantle
       -- Brighten (positive) or darken (negative) the side buffers background color. Accepted values are [-1..1].
       --- @type integer
-      -- blend = -0.2,
+      -- blend = 1,
     },
     scratchPad = {
       -- When `true`, automatically sets the following options to the side buffers:
@@ -688,6 +593,24 @@ require("no-neck-pain").setup({
     },
     bo = {
       filetype = "nnp",
+    },
+  },
+})
+
+-- obsidian vault integration
+require("obsidian").setup({
+  -- A list of vault names and paths.
+  -- Each path should be the path to the vault root. If you use the Obsidian app,
+  -- the vault root is the parent directory of the `.obsidian` folder.
+  -- You can also provide configuration overrides for each workspace through the `overrides` field.
+  workspaces = {
+    {
+      name = "CTF",
+      path = "~/Desktop/knowledge/CTF",
+    },
+    {
+      name = "work",
+      path = "~/Desktop/osec_io/knowledge/notes",
     },
   },
 })
