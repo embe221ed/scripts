@@ -11,11 +11,11 @@ local palette = require("catppuccin.palettes").get_palette(current_theme)
 local colors = {
   bg        = palette.base,
   fg        = '#bbc2cf',
-  yellow    = '#ECBE7B',
+  yellow    = palette.yellow,
   cyan      = '#008080',
   darkblue  = '#081633',
-  green     = '#98be65',
-  orange    = '#FF8800',
+  green     = palette.green,
+  orange    = palette.peach,
   violet    = '#a9a1e1',
   magenta   = '#c678dd',
   blue      = palette.blue,
@@ -74,22 +74,31 @@ local config = {
 }
 
 -- Inserts a component in lualine_c at left section
-local function ins_left(component)
+local function ins_left(component, inactive)
   table.insert(config.sections.lualine_c, component)
+  if inactive then
+    table.insert(config.inactive_sections.lualine_c, component)
+  end
 end
 
 -- Inserts a component in lualine_x at right section
-local function ins_right(component)
+local function ins_right(component, inactive)
   table.insert(config.sections.lualine_x, component)
+  if inactive then
+    table.insert(config.inactive_sections.lualine_c, component)
+  end
 end
 
-ins_left {
-  function()
-    return ''
-  end,
-  color = { fg = colors.mauve }, -- Sets highlighting of component
-  padding = { left = 1, right = 1 }, -- We don't need space before this
-}
+ins_left(
+  {
+    function()
+      return ''
+    end,
+    color = { fg = colors.mauve }, -- Sets highlighting of component
+    padding = { left = 1, right = 1 }, -- We don't need space before this
+  },
+  true
+)
 
 ins_left {
   -- mode component
@@ -126,21 +135,24 @@ ins_left {
   padding = { right = 1 },
 }
 
-ins_left {
+--[[ ins_left {
   -- filesize component
   'filesize',
   cond = conditions.buffer_not_empty,
-}
+} ]]
 
-ins_left {
-  'filename',
-  cond = conditions.buffer_not_empty,
-  color = { fg = colors.magenta, gui = 'bold' },
-}
+ins_left(
+  {
+    'filename',
+    cond = conditions.buffer_not_empty,
+    color = { fg = colors.magenta, gui = 'bold' },
+  },
+  true
+)
 
 ins_left { 'location' }
 
-ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+-- ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
 --[[ ins_left {
   'diagnostics',
@@ -209,8 +221,7 @@ ins_right {
 
 ins_right {
   'diff',
-  -- Is it me or the symbol for modified us really weird
-  symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+  symbols = { added = ' ', modified = '󱗜 ', removed = ' ' },
   diff_color = {
     added = { fg = colors.green },
     modified = { fg = colors.orange },

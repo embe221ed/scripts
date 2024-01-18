@@ -253,6 +253,7 @@ require("catppuccin").setup({
     custom_highlights = function(colors)
         return {
             TabLineSel            = { bg = "#b4a4f5" },
+            FloatBorder           = { fg = "#c678dd" },
             StatusLine            = { fg = palette.crust, bg = palette.base }, -- status line of current window
             StatusLineNC          = { fg = palette.crust, bg = palette.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
             NvimTreeStatusLineNC  = { fg = palette.crust, bg = palette.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
@@ -376,7 +377,8 @@ bufferline.setup {
     }
   },
   options = {
-    -- separator_style = {"|", "|"},
+    -- separator_style = {"│", "│"},
+    separator_style = "thin",
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
     indicator = {
