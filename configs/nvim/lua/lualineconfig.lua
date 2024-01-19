@@ -52,7 +52,7 @@ local config = {
       inactive = { c = { fg = colors.fg, bg = colors.bg } },
     },
     disabled_filetypes = {
-      'NvimTree', 'QuickFix', 'LocList', 'Outline'
+      'NvimTree', 'qf', 'loc', 'Outline', 'nnp'
     },
   },
   sections = {
