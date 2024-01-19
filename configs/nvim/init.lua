@@ -47,6 +47,7 @@ require('nvim-tree').setup {
     indent_markers = {
       enable = true,
     },
+    highlight_opened_files = "all",
   },
 }
 -- -- -- auto_close working implementation
@@ -256,8 +257,9 @@ require("catppuccin").setup({
             FloatBorder           = { fg = "#c678dd" },
             StatusLine            = { fg = palette.crust, bg = palette.base },
             StatusLineNC          = { fg = palette.crust, bg = palette.base },
-            NvimTreeStatusLineNC  = { fg = palette.crust, bg = palette.base },
+            NvimTreeNormal        = { bg = "#292c40" },
             NvimTreeRootFolder    = { fg = palette.mauve },
+            NvimTreeStatusLineNC  = { fg = palette.crust, bg = palette.base },
         }
     end,
     integrations = {
@@ -396,15 +398,15 @@ bufferline.setup {
           text = " FILE EXPLORER",
           separator = false,
           text_align = "left",
-          highlight = "BufferlineOffsetTitleDark",
+          highlight = "BufferlineOffsetTitleBright",
       },
-      {
+      --[[ {
           filetype = "nnp",
           text = "",
           separator = false,
           padding = 1,
           highlight = "BufferlineOffsetTitleBase",
-      },
+      }, ]]
       {
           filetype = "Outline",
           text = " OUTLINE",
@@ -590,8 +592,7 @@ require("no-neck-pain").setup({
       -- Hexadecimal color code to override the current background color of the buffer. (e.g. #24273A)
       -- Transparent backgrounds are supported by default.
       --- @type string?
-      -- background = "#202334",
-      background = palette.mantle
+      background = "#292c40",
       -- Brighten (positive) or darken (negative) the side buffers background color. Accepted values are [-1..1].
       --- @type integer
       -- blend = 1,

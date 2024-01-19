@@ -12,5 +12,6 @@ vim.cmd [[ highlight CmdlineNormalFloat guifg=#c6d0f6 guibg=#202334 ]]
 
 vim.cmd [[ highlight CurSearch guifg=#1e2031 guibg=#e95793 ]]
 
-vim.cmd [[ highlight BufferlineOffsetTitleDark  cterm=bold gui=bold guifg=#8aadf4 guibg=#1e2030 ]]
-vim.cmd [[ highlight BufferlineOffsetTitleBase  cterm=bold gui=bold guifg=#8aadf4 guibg=#24273A ]]
+vim.cmd [[ highlight BufferlineOffsetTitleBase cterm=bold gui=bold guifg=#8aadf4 guibg=#24273A ]]
+-- NvimTree
+vim.cmd [[ highlight BufferlineOffsetTitleBright cterm=bold gui=bold guifg=#8aadf4 guibg=#292c40 ]]
