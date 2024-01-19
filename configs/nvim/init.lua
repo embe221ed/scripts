@@ -403,7 +403,7 @@ bufferline.setup {
           text = "",
           separator = false,
           padding = 1,
-          highlight = "BufferlineOffsetTitleDark",
+          highlight = "BufferlineOffsetTitleBase",
       },
       {
           filetype = "Outline",
