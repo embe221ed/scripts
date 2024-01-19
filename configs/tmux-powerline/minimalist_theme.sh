@@ -4,14 +4,6 @@
 ####################################################################################################
 
 # COLORS
-
-# background for frappe catppuccin terminal theme
-# thm_bg="#303446"
-
-# background for macchiato catppuccin terminal theme
-thm_bg="#24273A"
-
-thm_fg="#8e93ab"
 thm_cyan="#99d1db"
 thm_black="#292c3c"
 thm_gray="#414559"
@@ -49,6 +41,15 @@ eggplant="#e889d2"
 sky_blue="#a7c7e7"
 spotify_green="#1db954"
 spotify_black="#191414"
+
+# background for frappe catppuccin terminal theme
+# thm_bg="#303446"
+
+# background for macchiato catppuccin terminal theme
+thm_bg="#24273A"
+
+# thm_fg="#8e93ab"
+thm_fg=$subtext1
 
 
 TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="┃"

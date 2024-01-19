@@ -41,7 +41,7 @@ require('nvim-tree').setup {
     add_trailing = true,
     full_name = true,
     root_folder_label = function(path)
-      return "···/" .. vim.fn.fnamemodify(path, ":t")
+      return "  " .. vim.fn.fnamemodify(path, ":t") .. "/"
     end,
     symlink_destination = false,
     indent_markers = {
@@ -254,9 +254,10 @@ require("catppuccin").setup({
         return {
             TabLineSel            = { bg = "#b4a4f5" },
             FloatBorder           = { fg = "#c678dd" },
-            StatusLine            = { fg = palette.crust, bg = palette.base }, -- status line of current window
-            StatusLineNC          = { fg = palette.crust, bg = palette.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-            NvimTreeStatusLineNC  = { fg = palette.crust, bg = palette.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+            StatusLine            = { fg = palette.crust, bg = palette.base },
+            StatusLineNC          = { fg = palette.crust, bg = palette.base },
+            NvimTreeStatusLineNC  = { fg = palette.crust, bg = palette.base },
+            NvimTreeRootFolder    = { fg = palette.mauve },
         }
     end,
     integrations = {
@@ -387,21 +388,24 @@ bufferline.setup {
     offsets = {
       {
           filetype = "NvimTree",
-          text = "  EXPLORER",
+          text = " FILE EXPLORER",
           separator = false,
-          highlight = "NvimTreeNormal",
+          text_align = "left",
+          highlight = "BufferlineOffsetTitle",
       },
       {
           filetype = "nnp",
-          text = "󱞁  SCRATCHPAD",
+          text = "",
           separator = false,
           padding = 1,
+          highlight = "BufferlineOffsetTitle",
       },
       {
           filetype = "Outline",
-          text = "SYMBOLS",
+          text = " OUTLINE",
+          text_align = "left",
           separator = "▏",
-          highlight = "NvimTreeNormal",
+          highlight = "BufferlineOffsetTitle",
       },
     },
     custom_filter = function(buf_number, buf_numbers)
