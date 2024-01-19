@@ -300,7 +300,8 @@ vim.cmd.colorscheme "catppuccin"
 
 local fg_selected = palette.mantle
 local bg_selected = palette.base
-local bg_visible = palette.mantle
+-- local bg_visible = palette.mantle
+local bg_visible = palette.base
 local separator_fg = palette.surface2
 local bufferline = require('bufferline')
 bufferline.setup {
@@ -308,16 +309,20 @@ bufferline.setup {
     styles = { "bold" },
     custom = {
       all = {
-        fill = { bg = fg_selected, },
+        -- fill = { bg = fg_selected, },
+        fill = { bg = bg_selected, },
 
         background = { bg = bg_visible, },
         buffer_visible = { bg = bg_visible, },
         buffer_selected = { bg = bg_selected, },
 
-        separator = { fg = separator_fg, },
-        separator_visible = { fg = separator_fg, },
-        separator_selected = { fg = separator_fg, },
-        offset_separator = { bg = bg_visible, },
+        separator = { fg = separator_fg, bg = bg_selected, },
+        separator_visible = { fg = separator_fg, bg = bg_selected, },
+        separator_selected = { fg = separator_fg, bg = bg_selected, },
+        offset_separator = { bg = bg_selected, },
+        tab_separator = { fg = separator_fg, bg = bg_selected, },
+
+        indicator_visible = { bg = bg_selected },
 
         close_button = { bg = bg_visible, },
         close_button_visible = { bg = bg_visible, },
@@ -391,21 +396,21 @@ bufferline.setup {
           text = " FILE EXPLORER",
           separator = false,
           text_align = "left",
-          highlight = "BufferlineOffsetTitle",
+          highlight = "BufferlineOffsetTitleDark",
       },
       {
           filetype = "nnp",
           text = "",
           separator = false,
           padding = 1,
-          highlight = "BufferlineOffsetTitle",
+          highlight = "BufferlineOffsetTitleDark",
       },
       {
           filetype = "Outline",
           text = " OUTLINE",
           text_align = "left",
           separator = "▏",
-          highlight = "BufferlineOffsetTitle",
+          highlight = "BufferlineOffsetTitleBase",
       },
     },
     custom_filter = function(buf_number, buf_numbers)
