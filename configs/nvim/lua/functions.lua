@@ -32,7 +32,7 @@ vim.api.nvim_create_user_command(
       if string.match(cmd, "NNP%s+%d+%s+") == nil then return {} end
       for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
         file = string.match(file, "(.*)-left.nnp") or string.match(file, "(.*)-right.nnp")
-        files_set[file] = 1
+        if file ~= nil then files_set[file] = 1 end
       end
       local files = {}
       for filename, _ in pairs(files_set) do

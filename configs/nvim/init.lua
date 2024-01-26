@@ -255,11 +255,12 @@ require("catppuccin").setup({
         return {
             TabLineSel            = { bg = "#b4a4f5" },
             FloatBorder           = { fg = "#c678dd" },
-            StatusLine            = { fg = palette.crust, bg = palette.base },
-            StatusLineNC          = { fg = palette.crust, bg = palette.base },
+            StatusLine            = { fg = palette.base, bg = palette.base },
+            StatusLineNC          = { fg = palette.base, bg = palette.base },
             NvimTreeNormal        = { bg = "#292c40" },
             NvimTreeRootFolder    = { fg = palette.mauve },
-            NvimTreeStatusLineNC  = { fg = palette.crust, bg = palette.base },
+            NvimTreeStatusLine    = { fg = palette.base, bg = palette.base },
+            NvimTreeStatusLineNC  = { fg = palette.base, bg = palette.base },
         }
     end,
     integrations = {
@@ -385,8 +386,8 @@ bufferline.setup {
     }
   },
   options = {
-    -- separator_style = {"│", "│"},
-    separator_style = "thin",
+    separator_style = {"", ""},
+    -- separator_style = "thin",
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
     indicator = {
