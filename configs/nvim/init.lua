@@ -258,6 +258,7 @@ require("catppuccin").setup({
             StatusLine            = { fg = palette.base, bg = palette.base },
             StatusLineNC          = { fg = palette.base, bg = palette.base },
             NvimTreeNormal        = { bg = "#292c40" },
+            NvimTreeExecFile      = { fg = palette.red },
             NvimTreeRootFolder    = { fg = palette.mauve },
             NvimTreeStatusLine    = { fg = palette.base, bg = palette.base },
             NvimTreeStatusLineNC  = { fg = palette.base, bg = palette.base },
@@ -632,6 +633,10 @@ require("obsidian").setup({
     {
       name = "work",
       path = "~/Desktop/osec_io/knowledge/notes",
+    },
+    {
+      name = "general",
+      path = "~/Documents/Obsidian Vault",
     },
   },
 })
