@@ -18,27 +18,45 @@ vim.api.nvim_create_user_command(
       for _, side in ipairs({ "left", "right" }) do
         buffers_config[side].scratchPad.fileName = name
       end
+    elseif #opts.fargs == 3 then
+      local lname = opts.fargs[2]
+      local rname = opts.fargs[3]
+      local buffers_config = config.buffers
+      buffers_config["left"].scratchPad.fileName  = lname
+      buffers_config["right"].scratchPad.fileName = rname
     end
     -- run NoNeckPain command
     vim.cmd("NoNeckPain")
   end,
   {
     nargs = "+",
-    desc = "Open NoNeckPain layout with provided width [and scratchPad name] parameters",
+    desc = "Open NoNeckPain layout with provided width [and scratchPad name(s)] parameters",
     complete = function(_, cmd, _)
-      local files_set = {}
+      local lfiles_set = {}
       local i = string.find(cmd, "NNP")
       if i == nil then return {} end
+      -- first argument was not set (width)
       if string.match(cmd, "NNP%s+%d+%s+") == nil then return {} end
       for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
-        file = string.match(file, "(.*)-left.nnp") or string.match(file, "(.*)-right.nnp")
-        if file ~= nil then files_set[file] = 1 end
+        local lfile = string.match(file, "(.*)-left.nnp")
+        if lfile ~= nil then lfiles_set[lfile] = 1 end
       end
-      local files = {}
-      for filename, _ in pairs(files_set) do
-        table.insert(files, filename)
+      local lfiles = {}
+      for filename, _ in pairs(lfiles_set) do
+        table.insert(lfiles, filename)
       end
-      return files
+      -- second argument was not set (left filename / both)
+      if string.match(cmd, "NNP%s+%d+%s+%w+%s") == nil then return lfiles end
+      local rfiles_set = {}
+      for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
+        local rfile = string.match(file, "(.*)-right.nnp")
+        if rfile ~= nil then rfiles_set[rfile] = 1 end
+      end
+      local rfiles = {}
+      for filename, _ in pairs(rfiles_set) do
+        table.insert(rfiles, filename)
+      end
+      return rfiles
     end
   }
 )
