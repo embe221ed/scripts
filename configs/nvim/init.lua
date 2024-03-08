@@ -253,15 +253,15 @@ require("catppuccin").setup({
     color_overrides = {},
     custom_highlights = function(colors)
         return {
-            TabLineSel            = { bg = "#b4a4f5" },
-            FloatBorder           = { fg = "#b4a4f5" },
-            StatusLine            = { fg = palette.base, bg = palette.base },
-            StatusLineNC          = { fg = palette.base, bg = palette.base },
+            TabLineSel            = { bg = colors.mauve },
+            FloatBorder           = { fg = colors.surface2 },
+            StatusLine            = { fg = colors.base, bg = colors.base },
+            StatusLineNC          = { fg = colors.base, bg = colors.base },
             NvimTreeNormal        = { bg = "#292c40" },
-            NvimTreeExecFile      = { fg = palette.red },
-            NvimTreeRootFolder    = { fg = palette.mauve },
-            NvimTreeStatusLine    = { fg = palette.base, bg = palette.base },
-            NvimTreeStatusLineNC  = { fg = palette.base, bg = palette.base },
+            NvimTreeExecFile      = { fg = colors.red },
+            NvimTreeRootFolder    = { fg = colors.mauve },
+            NvimTreeStatusLine    = { fg = colors.base, bg = colors.base },
+            NvimTreeStatusLineNC  = { fg = colors.base, bg = colors.base },
         }
     end,
     integrations = {
@@ -572,7 +572,7 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
   -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
   -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-  vim.api.nvim_set_hl(0, "IblScope", { fg = "#b4a4f5" })
+  vim.api.nvim_set_hl(0, "IblScope", { fg = palette.surface2 })
 end)
 
 require("ibl").setup {
