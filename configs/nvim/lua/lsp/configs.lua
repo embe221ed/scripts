@@ -276,7 +276,27 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local SymbolKind = vim.lsp.protocol.SymbolKind
 
+local function text_format(symbol)
+  local fragments = {}
+
+  if symbol.references then
+    local num = symbol.references == 0 and 'no' or symbol.references
+    table.insert(fragments, ('%s %s'):format(num, "usages"))
+  end
+
+  if symbol.definition then
+    table.insert(fragments, symbol.definition .. ' defs')
+  end
+
+  if symbol.implementation then
+    table.insert(fragments, symbol.implementation .. ' impls')
+  end
+
+  return table.concat(fragments, ', ')
+end
+
 require("symbol-usage").setup {
+  text_format = text_format,
   kinds = {
     SymbolKind.Function,
 --     SymbolKind.File,
