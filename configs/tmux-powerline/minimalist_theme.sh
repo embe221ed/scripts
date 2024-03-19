@@ -49,7 +49,10 @@ spotify_black="#191414"
 # thm_bg="#24273A"
 
 # background for mocha catppuccin terminal theme
-thm_bg="#1E1E2E"
+# thm_bg="#1E1E2E"
+
+# background for OneDark terminal theme
+thm_bg="#282c34"
 
 # thm_fg="#8e93ab"
 thm_fg=$subtext1

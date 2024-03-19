@@ -4,13 +4,16 @@
 local lualine = require('lualine')
 
 -- local current_theme = "macchiato"
-local current_theme = "mocha"
-local palette = require("catppuccin.palettes").get_palette(current_theme)
+-- local current_theme = "mocha"
+-- local palette = require("catppuccin.palettes").get_palette(current_theme)
+local current_theme = "dark"
+local palette = require("onedark.palette")[current_theme]
 
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg        = palette.base,
+  -- bg        = palette.base,
+  bg        = palette.bg0,
   fg        = '#bbc2cf',
   yellow    = palette.yellow,
   cyan      = '#008080',

@@ -2,7 +2,7 @@
 vim.api.nvim_create_user_command(
   "NNP",
   function(opts)
-    local palette = require("catppuccin.palettes").get_palette("macchiato")
+    local palette = require("onedark.palette")["dark"]
     assert(#opts.fargs > 0, "invalid params number: " .. #opts.fargs .. ", at least 1 argument required")
     -- fetch the NoNeckPain config
     local config = require("no-neck-pain").config

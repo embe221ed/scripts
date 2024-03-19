@@ -213,14 +213,14 @@ require("illuminate").configure({
   },
 })
 
-local catppuccin_theme = "mocha"
+-- local catppuccin_theme = "mocha"
 -- local catppuccin_theme = "macchiato"
 -- local catppuccin_theme = "frappe"
 --
-local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
+-- local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
 
 -- INITIALIZE CATPUCCIN SCHEME
-require("catppuccin").setup({
+--[[ require("catppuccin").setup({
     flavour = catppuccin_theme, -- latte, frappe, macchiato, mocha
     background = { -- :h background
         light = catppuccin_theme,
@@ -302,91 +302,143 @@ require("catppuccin").setup({
     },
 })
 
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "catppuccin" ]]
 
-local fg_selected = palette.mantle
-local bg_selected = palette.base
+-- OneDark theme
+local current_theme = "dark"
+local palette = require("onedark.palette")[current_theme]
+require('onedark').setup  {
+    -- Main options --
+    style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    transparent = false,  -- Show/hide background
+    term_colors = true, -- Change terminal color as per the selected theme style
+    ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+    cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+
+    -- toggle theme style ---
+    toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'}, -- List of styles to toggle between
+
+    -- Change code style ---
+    -- Options are italic, bold, underline, none
+    -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+    code_style = {
+        comments = 'italic',
+        keywords = 'none',
+        functions = 'none',
+        strings = 'none',
+        variables = 'none'
+    },
+
+    -- Lualine options --
+    lualine = {
+        transparent = true, -- lualine center bar transparency
+    },
+
+    -- Custom Highlights --
+    colors = {}, -- Override default colors
+    highlights = {
+        TabLineSel            = { bg = palette.light_grey },
+        FloatBorder           = { fg = palette.grey, bg = palette.bg0 },
+        StatusLine            = { fg = palette.bg0, bg = palette.bg0 },
+        StatusLineNC          = { fg = palette.bg0, bg = palette.bg0 },
+        -- NvimTreeNormal        = { bg = palette.bg0 },
+        NvimTreeExecFile      = { fg = palette.red },
+        NvimTreeRootFolder    = { fg = palette.grey },
+        NvimTreeStatusLine    = { fg = palette.bg0, bg = palette.bg0 },
+        NvimTreeStatusLineNC  = { fg = palette.bg0, bg = palette.bg0 },
+    }, -- Override highlight groups
+
+    -- Plugins Config --
+    diagnostics = {
+        darker = true, -- darker colors for diagnostic
+        undercurl = true,   -- use undercurl instead of underline for diagnostics
+        background = true,    -- use background color for virtual text
+    },
+}
+
+vim.cmd.colorscheme "onedark"
+
+-- local fg_selected = palette.mantle
+-- local bg_selected = palette.base
+local bg_selected = palette.bg0
 -- local bg_visible = palette.mantle
-local bg_visible = palette.base
+local bg_visible = palette.bg0
 local separator_fg = palette.surface2
 local bufferline = require('bufferline')
 bufferline.setup {
-  highlights = require("catppuccin.groups.integrations.bufferline").get {
-    styles = { "bold" },
-    custom = {
-      all = {
-        -- fill = { bg = fg_selected, },
-        fill = { bg = bg_selected, },
+  highlights = {
+    -- styles = { "bold" },
+    -- fill = { bg = fg_selected, },
+    fill = { bg = bg_selected, },
 
-        background = { bg = bg_visible, },
-        buffer_visible = { bg = bg_visible, },
-        buffer_selected = { bg = bg_selected, },
+    background = { bg = bg_visible, },
+    buffer_visible = { bg = bg_visible, },
+    buffer_selected = { bg = bg_selected, },
 
-        separator = { fg = separator_fg, bg = bg_selected, },
-        separator_visible = { fg = separator_fg, bg = bg_selected, },
-        separator_selected = { fg = separator_fg, bg = bg_selected, },
-        offset_separator = { bg = bg_selected, },
-        tab_separator = { fg = separator_fg, bg = bg_selected, },
+    separator = { fg = separator_fg, bg = bg_selected, },
+    separator_visible = { fg = separator_fg, bg = bg_selected, },
+    separator_selected = { fg = separator_fg, bg = bg_selected, },
+    offset_separator = { bg = bg_selected, },
+    tab_separator = { fg = separator_fg, bg = bg_selected, },
 
-        indicator_visible = { bg = bg_selected },
+    indicator_visible = { bg = bg_selected },
 
-        close_button = { bg = bg_visible, },
-        close_button_visible = { bg = bg_visible, },
-        close_button_selected = { bg = bg_selected, },
+    close_button = { bg = bg_visible, },
+    close_button_visible = { bg = bg_visible, },
+    close_button_selected = { bg = bg_selected, },
 
-        diagnostic = { bg = bg_visible, },
-        diagnostic_visible = { bg = bg_visible, },
-        diagnostic_selected = { bg = bg_selected, },
+    diagnostic = { bg = bg_visible, },
+    diagnostic_visible = { bg = bg_visible, },
+    diagnostic_selected = { bg = bg_selected, },
 
-        pick = { bg = bg_visible, },
-        pick_visible = { bg = bg_visible, },
-        pick_selected = { bg = bg_selected, },
+    pick = { bg = bg_visible, },
+    pick_visible = { bg = bg_visible, },
+    pick_selected = { bg = bg_selected, },
 
-        hint = { bg = bg_visible, },
-        hint_visible = { bg = bg_visible, },
-        hint_selected = { bg = bg_selected, },
+    hint = { bg = bg_visible, },
+    hint_visible = { bg = bg_visible, },
+    hint_selected = { bg = bg_selected, },
 
-        info = { bg = bg_visible, },
-        info_visible = { bg = bg_visible, },
-        info_selected = { bg = bg_selected, },
+    info = { bg = bg_visible, },
+    info_visible = { bg = bg_visible, },
+    info_selected = { bg = bg_selected, },
 
-        warning = { bg = bg_visible, },
-        warning_visible = { bg = bg_visible, },
-        warning_selected = { bg = bg_selected, },
+    warning = { bg = bg_visible, },
+    warning_visible = { bg = bg_visible, },
+    warning_selected = { bg = bg_selected, },
 
-        error = { bg = bg_visible, },
-        error_visible = { bg = bg_visible, },
-        error_selected = { bg = bg_selected, },
+    error = { bg = bg_visible, },
+    error_visible = { bg = bg_visible, },
+    error_selected = { bg = bg_selected, },
 
-        modified = { bg = bg_visible, },
-        modified_visible = { bg = bg_visible, },
-        modified_selected = { bg = bg_selected, },
+    modified = { bg = bg_visible, },
+    modified_visible = { bg = bg_visible, },
+    modified_selected = { bg = bg_selected, },
 
-        duplicate = { bg = bg_visible, },
-        duplicate_visible = { bg = bg_visible, },
-        duplicate_selected = { bg = bg_selected, },
+    duplicate = { bg = bg_visible, },
+    duplicate_visible = { bg = bg_visible, },
+    duplicate_selected = { bg = bg_selected, },
 
-        numbers = { bg = bg_visible, },
-        numbers_visible = { bg = bg_visible, },
-        numbers_selected = { bg = bg_selected, },
+    numbers = { bg = bg_visible, },
+    numbers_visible = { bg = bg_visible, },
+    numbers_selected = { bg = bg_selected, },
 
-        hint_diagnostic = { bg = bg_visible, },
-        hint_diagnostic_visible = { bg = bg_visible, },
-        hint_diagnostic_selected = { bg = bg_selected, },
+    hint_diagnostic = { bg = bg_visible, },
+    hint_diagnostic_visible = { bg = bg_visible, },
+    hint_diagnostic_selected = { bg = bg_selected, },
 
-        info_diagnostic = { bg = bg_visible, },
-        info_diagnostic_visible = { bg = bg_visible, },
-        info_diagnostic_selected = { bg = bg_selected, },
+    info_diagnostic = { bg = bg_visible, },
+    info_diagnostic_visible = { bg = bg_visible, },
+    info_diagnostic_selected = { bg = bg_selected, },
 
-        warning_diagnostic = { bg = bg_visible, },
-        warning_diagnostic_visible = { bg = bg_visible, },
-        warning_diagnostic_selected = { bg = bg_selected, },
+    warning_diagnostic = { bg = bg_visible, },
+    warning_diagnostic_visible = { bg = bg_visible, },
+    warning_diagnostic_selected = { bg = bg_selected, },
 
-        error_diagnostic = { bg = bg_visible, },
-        error_diagnostic_visible = { bg = bg_visible, },
-        error_diagnostic_selected = { bg = bg_selected, },
-      },
-    }
+    error_diagnostic = { bg = bg_visible, },
+    error_diagnostic_visible = { bg = bg_visible, },
+    error_diagnostic_selected = { bg = bg_selected, },
   },
   options = {
     separator_style = {"", ""},
@@ -574,7 +626,7 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
   -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
   -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-  vim.api.nvim_set_hl(0, "IblScope", { fg = palette.surface2 })
+  vim.api.nvim_set_hl(0, "IblScope", { fg = palette.light_grey })
 end)
 
 require("ibl").setup {
@@ -601,7 +653,9 @@ require("no-neck-pain").setup({
       --- macchiato
       -- background = "#292c40",
       --- mocha
-      background = "#232334",
+      -- background = "#232334",
+      --- OneDark
+      background = palette.bg_d,
       -- Brighten (positive) or darken (negative) the side buffers background color. Accepted values are [-1..1].
       --- @type integer
       -- blend = 1,
