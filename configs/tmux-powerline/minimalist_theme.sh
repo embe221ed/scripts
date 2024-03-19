@@ -46,7 +46,10 @@ spotify_black="#191414"
 # thm_bg="#303446"
 
 # background for macchiato catppuccin terminal theme
-thm_bg="#24273A"
+# thm_bg="#24273A"
+
+# background for mocha catppuccin terminal theme
+thm_bg="#1E1E2E"
 
 # thm_fg="#8e93ab"
 thm_fg=$subtext1

@@ -213,7 +213,8 @@ require("illuminate").configure({
   },
 })
 
-local catppuccin_theme = "macchiato"
+local catppuccin_theme = "mocha"
+-- local catppuccin_theme = "macchiato"
 -- local catppuccin_theme = "frappe"
 --
 local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
@@ -257,7 +258,8 @@ require("catppuccin").setup({
             FloatBorder           = { fg = colors.surface2 },
             StatusLine            = { fg = colors.base, bg = colors.base },
             StatusLineNC          = { fg = colors.base, bg = colors.base },
-            NvimTreeNormal        = { bg = "#292c40" },
+            -- NvimTreeNormal        = { bg = "#292c40" },
+            NvimTreeNormal        = { bg = "#232334" },
             NvimTreeExecFile      = { fg = colors.red },
             NvimTreeRootFolder    = { fg = colors.mauve },
             NvimTreeStatusLine    = { fg = colors.base, bg = colors.base },
@@ -487,7 +489,7 @@ require('treesitter-context').setup {
   max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
   min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   line_numbers = true,
-  multiline_threshold = 10, -- Maximum number of lines to collapse for a single context line
+  multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
   trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
   mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
   -- Separator between context and content. Should be a single character string, like '-'.
@@ -576,9 +578,9 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 end)
 
 require("ibl").setup {
-  -- indent = {
-  --   highlight = highlight
-  -- },
+  indent = {
+    tab_char = require("ibl.config").default_config.indent.char,
+  },
   exclude = {
     filetypes = {
       "dashboard",
@@ -596,7 +598,10 @@ require("no-neck-pain").setup({
       -- Hexadecimal color code to override the current background color of the buffer. (e.g. #24273A)
       -- Transparent backgrounds are supported by default.
       --- @type string?
-      background = "#292c40",
+      --- macchiato
+      -- background = "#292c40",
+      --- mocha
+      background = "#232334",
       -- Brighten (positive) or darken (negative) the side buffers background color. Accepted values are [-1..1].
       --- @type integer
       -- blend = 1,
