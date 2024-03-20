@@ -6,7 +6,7 @@ local lualine = require('lualine')
 -- local current_theme = "macchiato"
 -- local current_theme = "mocha"
 -- local palette = require("catppuccin.palettes").get_palette(current_theme)
-local current_theme = "dark"
+local current_theme = "darker"
 local palette = require("onedark.palette")[current_theme]
 
 -- Color table for highlights

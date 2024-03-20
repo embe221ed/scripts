@@ -305,11 +305,11 @@ require("illuminate").configure({
 vim.cmd.colorscheme "catppuccin" ]]
 
 -- OneDark theme
-local current_theme = "dark"
+local current_theme = "darker"
 local palette = require("onedark.palette")[current_theme]
 require('onedark').setup  {
     -- Main options --
-    style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    style = current_theme, -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
     transparent = false,  -- Show/hide background
     term_colors = true, -- Change terminal color as per the selected theme style
     ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
@@ -359,10 +359,7 @@ require('onedark').setup  {
 
 vim.cmd.colorscheme "onedark"
 
--- local fg_selected = palette.mantle
--- local bg_selected = palette.base
 local bg_selected = palette.bg0
--- local bg_visible = palette.mantle
 local bg_visible = palette.bg0
 local separator_fg = palette.surface2
 local bufferline = require('bufferline')
@@ -552,6 +549,8 @@ require('treesitter-context').setup {
   on_attach = nil,          -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
+require('highlights')     -- custom highlights
+
 -- -- noice
 require("noice").setup {
   cmdline = {
@@ -596,7 +595,7 @@ require("noice").setup {
       filter_options = {},
       win_options = {
         winhighlight = {
-          NormalFloat = "CmdlineNormalFloat",
+          Normal = "CmdlineNormalFloat",
           FloatBorder = "FloatBorder"
         },
       },
@@ -619,13 +618,6 @@ local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-  -- vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-  -- vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-  -- vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-  -- vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-  -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-  -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-  -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
   vim.api.nvim_set_hl(0, "IblScope", { fg = palette.light_grey })
 end)
 
@@ -639,9 +631,6 @@ require("ibl").setup {
     }
   }
 }
-
--- import custom highlights at the end
-require('highlights')   -- custom highlights
 
 -- center the current buffer
 require("no-neck-pain").setup({
