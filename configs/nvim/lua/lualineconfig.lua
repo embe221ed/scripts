@@ -19,13 +19,13 @@ local colors = {
   cyan      = '#008080',
   darkblue  = '#081633',
   green     = palette.green,
-  orange    = palette.peach,
+  orange    = palette.orange,
   violet    = '#a9a1e1',
   magenta   = '#c678dd',
   blue      = palette.blue,
   red       = palette.red,
-  mauve     = palette.mauve,
-  pink      = palette.pink,
+  mauve     = palette.purple,
+  pink      = palette.cyan,
 }
 
 local conditions = {

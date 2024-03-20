@@ -25,9 +25,10 @@ vim.diagnostic.config{
 -- -- goto-preview config
 require('goto-preview').setup {
   default_mappings = true;
-  width = 150; -- Width of the floating window
+  width = 120; -- Width of the floating window
   -- width = 200; -- Width of the floating window
-  height = 40; -- Height of the floating window
+  border = {"󰮻", "─" ,"╮", "│", "╯", "─", "╰", "│"}; -- Border characters of the floating window
+  height = 20; -- Height of the floating window
 }
 
 -- -- LSP config
@@ -84,8 +85,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- language servers
 local lsp = require('lspconfig')
 
--- -- -- pyright
-lsp.pyright.setup({
+-- -- -- python-lsp-server
+lsp.pylsp.setup({
   capabilities = capabilities
 })
 -- -- -- clangd

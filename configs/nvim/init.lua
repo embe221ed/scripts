@@ -70,9 +70,9 @@ require("todo-comments").setup {
     IDEA        = { icon = " ", color = "idea" },
   },
   colors = {
+    idea      = { "#ffd600" },
     audit     = { "#de85f5" },
     question  = { "#ffffc6" },
-    idea      = { "#ffd600" }
   }
 }
 
@@ -213,97 +213,6 @@ require("illuminate").configure({
   },
 })
 
--- local catppuccin_theme = "mocha"
--- local catppuccin_theme = "macchiato"
--- local catppuccin_theme = "frappe"
---
--- local palette = require("catppuccin.palettes").get_palette(catppuccin_theme)
-
--- INITIALIZE CATPUCCIN SCHEME
---[[ require("catppuccin").setup({
-    flavour = catppuccin_theme, -- latte, frappe, macchiato, mocha
-    background = { -- :h background
-        light = catppuccin_theme,
-        dark = catppuccin_theme,
-    },
-    -- transparent_background = true,
-    show_end_of_buffer = false, -- show the '~' characters after the end of buffers
-    term_colors = false,
-    dim_inactive = {
-        enabled = false,
-        shade = "dark",
-        percentage = 0.01,
-    },
-    no_italic = false, -- Force no italic
-    no_bold = false, -- Force no bold
-    no_underline = false,
-    styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-        operators = {},
-    },
-    color_overrides = {},
-    custom_highlights = function(colors)
-        return {
-            TabLineSel            = { bg = colors.mauve },
-            FloatBorder           = { fg = colors.surface2 },
-            StatusLine            = { fg = colors.base, bg = colors.base },
-            StatusLineNC          = { fg = colors.base, bg = colors.base },
-            -- NvimTreeNormal        = { bg = "#292c40" },
-            NvimTreeNormal        = { bg = "#232334" },
-            NvimTreeExecFile      = { fg = colors.red },
-            NvimTreeRootFolder    = { fg = colors.mauve },
-            NvimTreeStatusLine    = { fg = colors.base, bg = colors.base },
-            NvimTreeStatusLineNC  = { fg = colors.base, bg = colors.base },
-        }
-    end,
-    integrations = {
-        cmp = true,
-        symbols_outline = true,
-        gitsigns = true,
-        nvimtree = true,
-        telescope = true,
-        notify = false,
-        illuminate = true,
-        mini = false,
-        indent_blankline = {
-            enabled = true,
-            colored_indent_levels = true,
-        },
-        native_lsp = {
-            enabled = true,
-            virtual_text = {
-                errors = { "italic" },
-                hints = { "italic" },
-                warnings = { "italic" },
-                information = { "italic" },
-            },
-            underlines = {
-                errors = { "underline" },
-                hints = { "underline" },
-                warnings = { "underline" },
-                information = { "underline" },
-            },
-            inlay_hints = {
-              background = true
-            }
-        },
-        treesitter_context = true,
-        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-    },
-})
-
-vim.cmd.colorscheme "catppuccin" ]]
-
 -- OneDark theme
 local current_theme = "darker"
 local palette = require("onedark.palette")[current_theme]
@@ -338,15 +247,16 @@ require('onedark').setup  {
     -- Custom Highlights --
     colors = {}, -- Override default colors
     highlights = {
-        TabLineSel            = { bg = palette.light_grey },
-        FloatBorder           = { fg = palette.grey, bg = palette.bg0 },
-        StatusLine            = { fg = palette.bg0, bg = palette.bg0 },
-        StatusLineNC          = { fg = palette.bg0, bg = palette.bg0 },
-        -- NvimTreeNormal        = { bg = palette.bg0 },
-        NvimTreeExecFile      = { fg = palette.red },
-        NvimTreeRootFolder    = { fg = palette.grey },
-        NvimTreeStatusLine    = { fg = palette.bg0, bg = palette.bg0 },
-        NvimTreeStatusLineNC  = { fg = palette.bg0, bg = palette.bg0 },
+        TabLineSel              = { bg = palette.light_grey },
+        FloatBorder             = { fg = palette.light_grey, bg = palette.bg0, fmt = "bold" },
+        StatusLine              = { fg = palette.bg0, bg = palette.bg0 },
+        StatusLineNC            = { fg = palette.bg0, bg = palette.bg0 },
+        TelescopeTitle          = { fg = palette.cyan },
+        NvimTreeExecFile        = { fg = palette.red },
+        NvimTreeRootFolder      = { fg = palette.orange },
+        NvimTreeStatusLine      = { fg = palette.bg0, bg = palette.bg0 },
+        NvimTreeStatusLineNC    = { fg = palette.bg0, bg = palette.bg0 },
+        NoiceCmdlinePopupBorder = { fg = palette.light_grey },
     }, -- Override highlight groups
 
     -- Plugins Config --
@@ -557,7 +467,7 @@ require("noice").setup {
     format = {
       cmdline =   { pattern = "^:", icon = "_", lang = "vim" },
       telescope = { pattern = "^:%s*Tel?e?s?c?o?p?e?%s+", icon = "", lang = "vim" },
-    }
+    },
   },
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -589,13 +499,13 @@ require("noice").setup {
         height = "auto",
       },
       border = {
-        style = "none",
-        padding = { 1, 3 },
+        -- style = "none",
+        style = "rounded",
+        -- padding = { 1, 3 },
       },
       filter_options = {},
       win_options = {
         winhighlight = {
-          Normal = "CmdlineNormalFloat",
           FloatBorder = "FloatBorder"
         },
       },
@@ -603,16 +513,6 @@ require("noice").setup {
   },
 }
 
-
--- local highlight = {
---   "RainbowRed",
---   "RainbowYellow",
---   "RainbowBlue",
---   "RainbowOrange",
---   "RainbowGreen",
---   "RainbowViolet",
---   "RainbowCyan",
--- }
 
 local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
@@ -635,20 +535,6 @@ require("ibl").setup {
 -- center the current buffer
 require("no-neck-pain").setup({
   buffers = {
-    colors = {
-      -- Hexadecimal color code to override the current background color of the buffer. (e.g. #24273A)
-      -- Transparent backgrounds are supported by default.
-      --- @type string?
-      --- macchiato
-      -- background = "#292c40",
-      --- mocha
-      -- background = "#232334",
-      --- OneDark
-      background = palette.bg_d,
-      -- Brighten (positive) or darken (negative) the side buffers background color. Accepted values are [-1..1].
-      --- @type integer
-      -- blend = 1,
-    },
     scratchPad = {
       -- When `true`, automatically sets the following options to the side buffers:
       -- - `autowriteall`
