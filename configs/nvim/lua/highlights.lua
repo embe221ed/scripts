@@ -11,6 +11,6 @@ vim.cmd [[ highlight NormalFloat                        guibg=combine ]]
 
 -- Bufferline offsets
 -- Outline
-vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#8aadf4 guibg=#1f2329 ]]
+vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#8aadf4 guibg=#181b20 ]]
 -- NvimTree
 vim.cmd [[ highlight BufferlineOffsetTitleBright        cterm=bold gui=bold guifg=#8aadf4 guibg=#181b20 ]]

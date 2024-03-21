@@ -270,7 +270,13 @@ require('onedark').setup  {
 vim.cmd.colorscheme "onedark"
 
 local bufferline = require('bufferline')
+local bg = palette.bg_d
 bufferline.setup {
+  highlights = {
+    fill              = { bg = bg },
+    offset_separator  = { bg = bg },
+    trunc_marker      = { bg = bg },
+  },
   options = {
     separator_style = "thin",
     diagnostics = "nvim_lsp",
@@ -288,7 +294,7 @@ bufferline.setup {
       },
       {
           filetype = "Outline",
-          text = " OUTLINE",
+          text = " OUTLINE",
           text_align = "left",
           separator = "▏",
           highlight = "BufferlineOffsetTitleBase",
