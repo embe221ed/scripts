@@ -38,8 +38,8 @@ api.nvim_create_autocmd(
   {
     pattern = { "markdown", "txt" },
     callback = function()
-      vim.o.shiftwidth 	= 4
-      vim.o.tabstop 	= 4
+      vim.o.shiftwidth  = 4
+      vim.o.tabstop     = 4
     end,
   }
 )
@@ -51,10 +51,20 @@ api.nvim_create_autocmd(
   {
     pattern = { "move" },
     callback = function()
-      vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+      api.nvim_set_option_value("commentstring",  "// %s", { scope = "local" })
+    end,
+  }
+)
+
+api.nvim_create_autocmd(
+  "TermOpen",
+  {
+    pattern = { "*" },
+    callback = function()
+      api.nvim_set_option_value("number",          false,  { scope = "local" })
+      api.nvim_set_option_value("relativenumber",  false,  { scope = "local" })
     end,
   }
 )
 
 vim.lsp.set_log_level("off")
--- vim.lsp.set_log_level("debug")

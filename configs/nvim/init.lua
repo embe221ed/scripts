@@ -269,87 +269,10 @@ require('onedark').setup  {
 
 vim.cmd.colorscheme "onedark"
 
-local bg_selected = palette.bg0
-local bg_visible = palette.bg0
-local separator_fg = palette.surface2
 local bufferline = require('bufferline')
 bufferline.setup {
-  highlights = {
-    -- styles = { "bold" },
-    -- fill = { bg = fg_selected, },
-    fill = { bg = bg_selected, },
-
-    background = { bg = bg_visible, },
-    buffer_visible = { bg = bg_visible, },
-    buffer_selected = { bg = bg_selected, },
-
-    separator = { fg = separator_fg, bg = bg_selected, },
-    separator_visible = { fg = separator_fg, bg = bg_selected, },
-    separator_selected = { fg = separator_fg, bg = bg_selected, },
-    offset_separator = { bg = bg_selected, },
-    tab_separator = { fg = separator_fg, bg = bg_selected, },
-
-    indicator_visible = { bg = bg_selected },
-
-    close_button = { bg = bg_visible, },
-    close_button_visible = { bg = bg_visible, },
-    close_button_selected = { bg = bg_selected, },
-
-    diagnostic = { bg = bg_visible, },
-    diagnostic_visible = { bg = bg_visible, },
-    diagnostic_selected = { bg = bg_selected, },
-
-    pick = { bg = bg_visible, },
-    pick_visible = { bg = bg_visible, },
-    pick_selected = { bg = bg_selected, },
-
-    hint = { bg = bg_visible, },
-    hint_visible = { bg = bg_visible, },
-    hint_selected = { bg = bg_selected, },
-
-    info = { bg = bg_visible, },
-    info_visible = { bg = bg_visible, },
-    info_selected = { bg = bg_selected, },
-
-    warning = { bg = bg_visible, },
-    warning_visible = { bg = bg_visible, },
-    warning_selected = { bg = bg_selected, },
-
-    error = { bg = bg_visible, },
-    error_visible = { bg = bg_visible, },
-    error_selected = { bg = bg_selected, },
-
-    modified = { bg = bg_visible, },
-    modified_visible = { bg = bg_visible, },
-    modified_selected = { bg = bg_selected, },
-
-    duplicate = { bg = bg_visible, },
-    duplicate_visible = { bg = bg_visible, },
-    duplicate_selected = { bg = bg_selected, },
-
-    numbers = { bg = bg_visible, },
-    numbers_visible = { bg = bg_visible, },
-    numbers_selected = { bg = bg_selected, },
-
-    hint_diagnostic = { bg = bg_visible, },
-    hint_diagnostic_visible = { bg = bg_visible, },
-    hint_diagnostic_selected = { bg = bg_selected, },
-
-    info_diagnostic = { bg = bg_visible, },
-    info_diagnostic_visible = { bg = bg_visible, },
-    info_diagnostic_selected = { bg = bg_selected, },
-
-    warning_diagnostic = { bg = bg_visible, },
-    warning_diagnostic_visible = { bg = bg_visible, },
-    warning_diagnostic_selected = { bg = bg_selected, },
-
-    error_diagnostic = { bg = bg_visible, },
-    error_diagnostic_visible = { bg = bg_visible, },
-    error_diagnostic_selected = { bg = bg_selected, },
-  },
   options = {
-    separator_style = {"", ""},
-    -- separator_style = "thin",
+    separator_style = "thin",
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
     indicator = {
@@ -363,13 +286,6 @@ bufferline.setup {
           text_align = "left",
           highlight = "BufferlineOffsetTitleBright",
       },
-      --[[ {
-          filetype = "nnp",
-          text = "",
-          separator = false,
-          padding = 1,
-          highlight = "BufferlineOffsetTitleBase",
-      }, ]]
       {
           filetype = "Outline",
           text = " OUTLINE",
@@ -459,7 +375,8 @@ require('treesitter-context').setup {
   on_attach = nil,          -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
-require('highlights')     -- custom highlights
+-- -- load custom highlights before `noice.nvim`
+require('highlights')
 
 -- -- noice
 require("noice").setup {
@@ -499,9 +416,7 @@ require("noice").setup {
         height = "auto",
       },
       border = {
-        -- style = "none",
         style = "rounded",
-        -- padding = { 1, 3 },
       },
       filter_options = {},
       win_options = {
@@ -578,5 +493,4 @@ require("obsidian").setup({
 })
 
 -- -- add NoNeckPain scratchPad highlight as markdown
-local ft_to_parsername = require "nvim-treesitter.parsers".filetype_to_parsername
-ft_to_parsername.nnp = "markdown"
+vim.treesitter.language.register("markdown", "nnp")
