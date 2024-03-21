@@ -269,16 +269,21 @@ require('onedark').setup  {
 
 vim.cmd.colorscheme "onedark"
 
-local bufferline = require('bufferline')
-local bg = palette.bg_d
+local bufferline  = require('bufferline')
+local fill_bg     = palette.bg_d
+local visible_bg  = "#1c2025"
 bufferline.setup {
   highlights = {
-    fill              = { bg = bg },
-    offset_separator  = { bg = bg },
-    trunc_marker      = { bg = bg },
+    fill = {
+      bg = fill_bg,
+    },
+    offset_separator = {
+      bg = fill_bg,
+    }
   },
   options = {
-    separator_style = "thin",
+    -- separator_style = "thin",
+    separator_style = { "", "" },
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
     indicator = {
