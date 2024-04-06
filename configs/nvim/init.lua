@@ -32,7 +32,7 @@ require('nvim-tree').setup {
     centralize_selection = false,
     width = 40,
     side = "left",
-    preserve_window_proportions = false,
+    preserve_window_proportions = true,
     number = false,
     relativenumber = false,
     signcolumn = "yes",
@@ -48,6 +48,11 @@ require('nvim-tree').setup {
       enable = true,
     },
     highlight_opened_files = "all",
+  },
+  actions = {
+    open_file = {
+      resize_window = false,
+    }
   },
 }
 -- -- -- auto_close working implementation
@@ -99,6 +104,8 @@ require('nvim-autopairs').setup {}
 
 -- -- telescope
 require('telescope').setup { }
+-- -- -- load additional plugins
+require("telescope").load_extension("file_browser")
 
 -- -- -- telescope plenary
 require('plenary.filetype').add_file('move')
@@ -467,16 +474,6 @@ require("no-neck-pain").setup({
       -- - `autoread`.
       --- @type boolean
       enabled = true,
-      -- set to `nil` to default 
-      -- to current working directory
-      location = os.getenv("HOME") .. "/Desktop/nnp-notes/",
-      -- The name of the generated file. See `location` for more information.
-      --- @type string
-      --- @example: `no-neck-pain-left.norg`
-      -- fileName = "notes",
-    },
-    bo = {
-      filetype = "nnp",
     },
   },
 })
@@ -504,4 +501,4 @@ require("obsidian").setup({
 })
 
 -- -- add NoNeckPain scratchPad highlight as markdown
-vim.treesitter.language.register("markdown", "nnp")
+vim.treesitter.language.register("markdown", "norg")

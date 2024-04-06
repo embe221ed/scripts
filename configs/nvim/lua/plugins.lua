@@ -75,7 +75,11 @@ return require("lazy").setup(
     },
     {
       "nvim-telescope/telescope.nvim",                                -- telescope
-      dependencies = { {"nvim-lua/plenary.nvim"}, },
+      dependencies = { "nvim-lua/plenary.nvim", },
+    },
+    {
+      "nvim-telescope/telescope-file-browser.nvim",
+      dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     },
     {
         "numToStr/Comment.nvim",                                      -- Comments
@@ -134,6 +138,13 @@ return require("lazy").setup(
                 group = 'Label',
                 action = 'Telescope find_files',
                 key = 'f',
+              },
+              {
+                icon = '󰙅 ',
+                desc = 'explorer',
+                group = 'DiagnosticSignOk',
+                action = 'Telescope file_browser',
+                key = 'e',
               },
               {
                 icon = ' ',

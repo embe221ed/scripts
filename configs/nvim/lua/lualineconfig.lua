@@ -56,7 +56,7 @@ local config = {
       inactive = { c = { fg = colors.fg, bg = colors.bg } },
     },
     disabled_filetypes = {
-      'NvimTree', 'qf', 'loc', 'Outline', 'nnp'
+      'NvimTree', 'qf', 'loc', 'Outline', 'norg', 'dashboard'
     },
   },
   sections = {
