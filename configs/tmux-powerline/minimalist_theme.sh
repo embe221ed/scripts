@@ -71,6 +71,8 @@ TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLO
 TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR:-$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}
 TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR:-$TMUX_POWERLINE_SEPARATOR_LEFT_THIN}
 
+TMUX_POWERLINE_SEG_VCS_BRANCH_GIT_SYMBOL_COLOUR=$thm_fg
+
 # See man tmux.conf for additional formatting options for the status line.
 # The `format regular` and `format inverse` functions are provided as conveinences
 
@@ -128,13 +130,13 @@ fi
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info $thm_bg $blue" \
-		"hostname $thm_bg $eggplant" \
+		"tmux_session_info $thm_bg $blue"
+		"hostname $thm_bg $eggplant"
 		# "ifstat 30 255" \
 		#"ifstat_sys 30 255" \
 		# "lan_ip $thm_bg $thm_fg ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
 		# "wan_ip $thm_bg $thm_fg" \
-		"vcs_branch $thm_bg" \
+		"vcs_branch $thm_bg"
 		# "vcs_compare 60 255" \
 		#"vcs_staged 64 255" \
 		#"vcs_modified 9 255" \
@@ -145,20 +147,20 @@ fi
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
 		# "earthquake 3 0" \
-		"pwd $thm_bg $eggplant" \
+		"pwd $thm_bg $eggplant"
 		#"macos_notification_count 29 255" \
 		#"mailcount 9 255" \
 		# "now_playing $thm_bg $spotify_green" \
 		# "cpu 240 136" \
 		# "load 237 167" \
 		# "tmux_mem_cpu_load 234 136" \
-		"battery $thm_bg $blue" \
+		"battery $thm_bg $blue"
 		# "weather 37 255" \
 		#"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
 		#"xkb_layout 125 117" \
 		# "date_day $thm_bg $eggplant" \
-		"date $thm_bg $eggplant ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		"time $thm_bg $eggplant ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"date $thm_bg $eggplant ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+		"time $thm_bg $eggplant ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
 		#"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 	)
 fi

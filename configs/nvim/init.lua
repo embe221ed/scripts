@@ -62,6 +62,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 -- -- Comment
+-- -- -- manually set comments for Move
+local ft = require("Comment.ft")
+ft.set('move', {'//%s', '/*%s*/'})
 require('Comment').setup {
   comment_empty = false
 }
@@ -351,7 +354,7 @@ bufferline.setup {
 
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "cpp", "lua", "rust", "python", "javascript" },
+  ensure_installed = { "c", "cpp", "lua", "rust", "python", "javascript", "markdown", "markdown_inline" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -474,6 +477,7 @@ require("no-neck-pain").setup({
       -- - `autoread`.
       --- @type boolean
       enabled = true,
+      location = os.getenv("HOME") .. "/Desktop/nnp-notes/",
     },
   },
 })

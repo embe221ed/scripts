@@ -38,7 +38,7 @@ vim.api.nvim_create_user_command(
       -- first argument was not set (width)
       if string.match(cmd, "NNP%s+%d+%s+") == nil then return {} end
       for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
-        local lfile = string.match(file, "(.*)-left.nnp")
+        local lfile = string.match(file, "(.*)-left.norg")
         if lfile ~= nil then lfiles_set[lfile] = 1 end
       end
       local lfiles = {}
@@ -49,7 +49,7 @@ vim.api.nvim_create_user_command(
       if string.match(cmd, "NNP%s+%d+%s+%w+%s") == nil then return lfiles end
       local rfiles_set = {}
       for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
-        local rfile = string.match(file, "(.*)-right.nnp")
+        local rfile = string.match(file, "(.*)-right.norg")
         if rfile ~= nil then rfiles_set[rfile] = 1 end
       end
       local rfiles = {}
