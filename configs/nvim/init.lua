@@ -297,7 +297,8 @@ bufferline.setup {
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
     indicator = {
-      style = "underline",
+      icon = '▎', -- this should be omitted if indicator style is not 'icon'
+      style = 'icon',
     },
     offsets = {
       {

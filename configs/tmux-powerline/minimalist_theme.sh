@@ -78,7 +78,7 @@ TMUX_POWERLINE_SEG_VCS_BRANCH_GIT_SYMBOL_COLOUR=$thm_fg
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
-		"│ " \
+		"│" \
 		"#[$(format inverse)]" \
 		" #I#F" \
 		"$TMUX_POWERLINE_SEPARATOR_THIN" \
@@ -97,7 +97,7 @@ if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
 		"#[$(format regular)]" \
 		"│ #I#{#F,}" \
 		"$TMUX_POWERLINE_SEPARATOR_THIN" \
-		" #W"
+		" #W "
 	)
 fi
 
