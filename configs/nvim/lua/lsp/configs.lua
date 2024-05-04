@@ -45,7 +45,7 @@ local on_attach = function(client, bufnr)
   if (
     client.server_capabilities.inlayHintProvider
     and vim.lsp.inlay_hint ~= nil
-    and not vim.lsp.inlay_hint.is_enabled(bufnr)) then
+    and not vim.lsp.inlay_hint.is_enabled({ buf = bufnr })) then
       vim.lsp.inlay_hint.enable(true, { buf = bufnr })
   end
   -- Enable completion triggered by <c-x><c-o>
