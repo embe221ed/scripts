@@ -1,6 +1,6 @@
-#compdef start_audit
+#compdef work
 
-_start_audit() {
+_work() {
     local curcontext="$curcontext" state line
     typeset -A opt_args
 
@@ -25,4 +25,4 @@ _start_audit() {
     esac
 }
 
-_start_audit "$@"
+_work "$@"

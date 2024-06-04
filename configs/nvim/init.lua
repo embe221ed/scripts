@@ -118,7 +118,7 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs() ---
 parser_config.move = {
   install_info = {
     url = "/opt/tree-sitter-parsers/tree-sitter-move/", -- local path or git repo
-    files = {"src/parser.c"},
+    files = { "src/parser.c" },
     -- optional entries:
     -- branch = "master", -- default branch in case of git repo if different from master
     generate_requires_npm = false, -- if stand-alone parser without npm dependencies
@@ -263,6 +263,7 @@ require('onedark').setup  {
         StatusLineNC            = { fg = palette.bg0, bg = palette.bg0 },
         TelescopeTitle          = { fg = palette.cyan },
         NvimTreeExecFile        = { fg = palette.red },
+        NvimTreeOpenedHL        = { fg = palette.yellow, fmt = "italic" },
         NvimTreeRootFolder      = { fg = palette.orange },
         NvimTreeStatusLine      = { fg = palette.bg0, bg = palette.bg0 },
         NvimTreeStatusLineNC    = { fg = palette.bg0, bg = palette.bg0 },
