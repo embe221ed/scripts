@@ -29,8 +29,8 @@ return require("lazy").setup(
       "nvim-tree/nvim-tree.lua",                                      -- filesystem navigation
       dependencies = { "nvim-tree/nvim-web-devicons" }                -- filesystem icons
     },
-    -- { "catppuccin/nvim", name = "catppuccin" },                       -- catppuccin theme plugin
-    { "embe221ed/onedark.nvim", name = "onedark" },                   -- OneDark
+    { "catppuccin/nvim", name = "catppuccin" },                       -- catppuccin theme plugin
+    -- { "embe221ed/onedark.nvim", name = "onedark" },                   -- OneDark
     {
       "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
       build = ":TSUpdate"
