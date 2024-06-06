@@ -268,7 +268,7 @@ require('catppuccin').setup  {
         NvimTreeStatusLineNC    = { fg = palette.base, bg = palette.base },
         NoiceCmdlinePopupBorder = { fg = palette.subtext0 },
     }, -- Override highlight groups
-    default_integrations = true,
+    default_integrations = false,
     integrations = {
         cmp = true,
         gitsigns = true,

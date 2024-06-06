@@ -10,8 +10,7 @@ local palette = require("catppuccin.palettes").get_palette(current_theme)
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  -- bg        = palette.base,
-  bg        = palette.bg0,
+  bg        = palette.base,
   fg        = '#bbc2cf',
   yellow    = palette.yellow,
   cyan      = '#008080',
@@ -22,8 +21,8 @@ local colors = {
   magenta   = '#c678dd',
   blue      = palette.blue,
   red       = palette.red,
-  mauve     = palette.purple,
-  pink      = palette.cyan,
+  mauve     = palette.mauve,
+  pink      = palette.pink,
 }
 
 local conditions = {
@@ -174,8 +173,8 @@ ins_left {
   -- Lsp server name .
   function()
     local msg = 'n/a'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
+    local buf_ft = vim.api.nvim_get_option_value('filetype', { scope = "local" })
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return msg
     end
