@@ -263,7 +263,7 @@ require('catppuccin').setup  {
         TelescopeTitle          = { fg = palette.cyan },
         NvimTreeExecFile        = { fg = palette.red },
         NvimTreeOpenedHL        = { fg = palette.subtext0, style = { "italic" } },
-        NvimTreeRootFolder      = { fg = palette.orange },
+        NvimTreeRootFolder      = { fg = palette.peach },
         NvimTreeStatusLine      = { fg = palette.base, bg = palette.base },
         NvimTreeStatusLineNC    = { fg = palette.base, bg = palette.base },
         NoiceCmdlinePopupBorder = { fg = palette.subtext0 },
@@ -286,7 +286,7 @@ require('catppuccin').setup  {
 vim.cmd.colorscheme "catppuccin"
 
 local bufferline  = require('bufferline')
-local fill_bg     = palette.bg_d
+local fill_bg     = palette.mantle
 bufferline.setup {
   highlights = {
     fill = {
