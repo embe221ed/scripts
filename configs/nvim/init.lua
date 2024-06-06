@@ -263,7 +263,7 @@ require('onedark').setup  {
         StatusLineNC            = { fg = palette.bg0, bg = palette.bg0 },
         TelescopeTitle          = { fg = palette.cyan },
         NvimTreeExecFile        = { fg = palette.red },
-        NvimTreeOpenedHL        = { fg = palette.yellow, fmt = "italic" },
+        NvimTreeOpenedHL        = { fg = palette.light_grey, fmt = "italic" },
         NvimTreeRootFolder      = { fg = palette.orange },
         NvimTreeStatusLine      = { fg = palette.bg0, bg = palette.bg0 },
         NvimTreeStatusLineNC    = { fg = palette.bg0, bg = palette.bg0 },
@@ -282,7 +282,6 @@ vim.cmd.colorscheme "onedark"
 
 local bufferline  = require('bufferline')
 local fill_bg     = palette.bg_d
-local visible_bg  = "#1c2025"
 bufferline.setup {
   highlights = {
     fill = {
@@ -397,7 +396,7 @@ require('treesitter-context').setup {
   max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
   min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   line_numbers = true,
-  multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
+  multiline_threshold = 10, -- Maximum number of lines to collapse for a single context line
   trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
   mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
   -- Separator between context and content. Should be a single character string, like '-'.
