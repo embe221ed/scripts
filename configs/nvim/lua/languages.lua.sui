@@ -1,0 +1,17 @@
+-- nvim-treesitter for Sui
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs() ---@class ParserInfo
+
+parser_config.move = {
+  install_info = {
+    url = "/opt/tree-sitter-parsers/tree-sitter-move-sui/", -- local path or git repo
+    files = {
+      "src/parser.c",
+    },
+    -- optional entries:
+    -- branch = "master", -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
+  }
+}
+-- add NoNeckPain scratchPad highlight as markdown
+vim.treesitter.language.register("markdown", "norg")

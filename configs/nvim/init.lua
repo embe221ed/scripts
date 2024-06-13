@@ -6,6 +6,7 @@ require('lualineconfig')  -- LuaLine config
 require('snippets')       -- LuaSnip custom snippets
 require('functions')      -- custom functions
 require('lsp.configs')    -- LSP config
+require('languages')      -- tree-sitter languages
 
 vim.opt.termguicolors = true
 
@@ -112,19 +113,6 @@ require("telescope").load_extension("file_browser")
 
 -- -- -- telescope plenary
 require('plenary.filetype').add_file('move')
-
--- -- nvim-treesitter
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs() ---@class ParserInfo
-parser_config.move = {
-  install_info = {
-    url = "/opt/tree-sitter-parsers/tree-sitter-move/", -- local path or git repo
-    files = { "src/parser.c" },
-    -- optional entries:
-    -- branch = "master", -- default branch in case of git repo if different from master
-    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
-    requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
-  }
-}
 
   -- Set up nvim-cmp.
 local cmp = require('cmp')
@@ -260,6 +248,7 @@ require('catppuccin').setup  {
         FloatBorder             = { fg = palette.subtext0, bg = palette.base, style = { "bold" } },
         StatusLine              = { fg = palette.base, bg = palette.base },
         StatusLineNC            = { fg = palette.base, bg = palette.base },
+        OutlineCurrent          = { fg = palette.green, bg = palette.base, style = { "bold" } },
         TelescopeTitle          = { fg = palette.cyan },
         NvimTreeExecFile        = { fg = palette.red },
         NvimTreeOpenedHL        = { fg = palette.subtext0, style = { "italic" } },
@@ -508,6 +497,3 @@ require("obsidian").setup({
     },
   },
 })
-
--- -- add NoNeckPain scratchPad highlight as markdown
-vim.treesitter.language.register("markdown", "norg")

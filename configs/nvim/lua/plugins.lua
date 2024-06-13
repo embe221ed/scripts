@@ -59,6 +59,7 @@ return require("lazy").setup(
     },
     "windwp/nvim-autopairs",                                          -- auto-pairs
     "lukas-reineke/indent-blankline.nvim",                            -- indent blankline
+    "HiPhish/rainbow-delimiters.nvim",                                -- rainbow parens
     {                                                                 -- Rust LSP
       'mrcjkb/rustaceanvim',
       version = "^3",

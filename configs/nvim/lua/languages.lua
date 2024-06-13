@@ -1,0 +1,1 @@
+/opt/scripts/configs/nvim/lua/languages.lua.aptos
