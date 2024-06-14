@@ -6,7 +6,8 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 local opts = {
   ui = {
-    border = "rounded"
+    border = "rounded",
+    backdrop = 100,
   },
 }
 

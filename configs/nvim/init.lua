@@ -90,7 +90,8 @@ require('outline').setup {
   outline_window = {
     relative_width = true,
     width = 15,
-    show_cursorline = false,
+    show_cursorline = 'focus_in_outline',
+    hide_cursor = true,
   },
   outline_items = {
     -- show_symbol_lineno = true,
@@ -247,7 +248,7 @@ require('catppuccin').setup  {
         FloatBorder             = { fg = palette.subtext0, bg = palette.base, style = { "bold" } },
         StatusLine              = { fg = palette.base, bg = palette.base },
         StatusLineNC            = { fg = palette.base, bg = palette.base },
-        OutlineCurrent          = { fg = palette.green, bg = palette.base, style = { "bold" } },
+        OutlineCurrent          = { fg = palette.green, bg = "", style = { "bold" } },
         TelescopeTitle          = { fg = palette.cyan },
         NvimTreeExecFile        = { fg = palette.red },
         NvimTreeOpenedHL        = { fg = palette.subtext0, style = { "italic" } },
