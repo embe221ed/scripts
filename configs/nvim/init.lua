@@ -89,9 +89,8 @@ require("todo-comments").setup {
 require('outline').setup {
   outline_window = {
     relative_width = true,
-    -- show_numbers = true,
-    -- show_relative_numbers = true,
     width = 15,
+    show_cursorline = false,
   },
   outline_items = {
     -- show_symbol_lineno = true,
