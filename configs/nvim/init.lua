@@ -244,8 +244,8 @@ require('catppuccin').setup  {
     },
     color_overrides = {},
     custom_highlights = {
-        TabLineSel              = { bg = palette.subtext0 },
-        FloatBorder             = { fg = palette.subtext0, bg = palette.base, style = { "bold" } },
+        TabLineSel              = { bg = palette.mauve },
+        FloatBorder             = { fg = palette.mauve, bg = palette.base, style = { "bold" } },
         StatusLine              = { fg = palette.base, bg = palette.base },
         StatusLineNC            = { fg = palette.base, bg = palette.base },
         OutlineCurrent          = { fg = palette.green, bg = "", style = { "bold" } },
@@ -283,10 +283,9 @@ bufferline.setup {
     },
     offset_separator = {
       bg = fill_bg,
-    }
+    },
   },
   options = {
-    -- separator_style = "thin",
     separator_style = { "", "" },
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
@@ -370,7 +369,7 @@ require('nvim-treesitter.configs').setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
-    disable = { "latex" },
+    disable = { "latex", "dockerfile" },
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
