@@ -3,8 +3,8 @@
 -- Credit: glepnir
 local lualine = require('lualine')
 
-local current_theme = "macchiato"
--- local current_theme = "mocha"
+local globals = require('globals')
+local current_theme = globals.current_theme
 local palette = require("catppuccin.palettes").get_palette(current_theme)
 
 -- Color table for highlights

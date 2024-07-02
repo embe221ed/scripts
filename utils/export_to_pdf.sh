@@ -47,7 +47,7 @@ prev_wd=$( pwd )
 cd ${tempdir}
 docker \
   run \
-  --entrypoint=convert \
+  --entrypoint=magick \
   -v ${tempdir}/:/imgs \
   dpokidov/imagemagick \
     -quality 100 \

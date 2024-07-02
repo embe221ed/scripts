@@ -8,6 +8,8 @@ require('functions')      -- custom functions
 require('lsp.configs')    -- LSP config
 require('languages')      -- tree-sitter languages
 
+local globals = require('globals')
+
 vim.opt.termguicolors = true
 
 -- PLUGINS
@@ -89,7 +91,7 @@ require("todo-comments").setup {
 require('outline').setup {
   outline_window = {
     relative_width = true,
-    width = 15,
+    width = 20,
     show_cursorline = 'focus_in_outline',
     hide_cursor = true,
   },
@@ -212,7 +214,7 @@ require("illuminate").configure({
 })
 
 -- Catppuccin theme
-local current_theme = "macchiato"
+local current_theme = globals.current_theme
 local palette = require("catppuccin.palettes").get_palette(current_theme)
 require('catppuccin').setup  {
     flavour = current_theme, -- latte, frappe, macchiato, mocha
@@ -286,6 +288,7 @@ bufferline.setup {
     },
   },
   options = {
+    -- style_preset = bufferline.style_preset.minimal,
     separator_style = { "", "" },
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",

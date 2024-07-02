@@ -1,1 +1,1 @@
-/opt/scripts/configs/nvim/lua/languages.lua.aptos
+/opt/scripts/configs/nvim/lua/languages.lua.sui

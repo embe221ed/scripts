@@ -42,21 +42,27 @@ sky_blue="#a7c7e7"
 spotify_green="#1db954"
 spotify_black="#191414"
 
+thm_fg=$subtext1
+IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
+if [ "${IS_DARK}" = "Dark" ]; then
+	# macchiato
+	thm_bg="#24273A"
+else
+	# background for latte catppuccin terminal theme
+	thm_bg="#eff1f5"
+fi
+
 # background for frappe catppuccin terminal theme
 # thm_bg="#303446"
 
 # background for macchiato catppuccin terminal theme
-thm_bg="#24273A"
+# thm_bg="#24273A"
 
 # background for mocha catppuccin terminal theme
 # thm_bg="#1E1E2E"
 
 # background for OneDark terminal theme
 # thm_bg="#1f2329"
-
-# thm_fg="#8e93ab"
-thm_fg=$subtext1
-
 
 
 TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
