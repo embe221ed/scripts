@@ -2,7 +2,6 @@
 vim.api.nvim_create_user_command(
   "NNP",
   function(opts)
-    local palette = require("catppuccin.palettes").get_palette("macchiato")
     assert(#opts.fargs > 0, "invalid params number: " .. #opts.fargs .. ", at least 1 argument required")
     -- fetch the NoNeckPain config
     local config = require("no-neck-pain").config
@@ -33,6 +32,7 @@ vim.api.nvim_create_user_command(
     desc = "Open NoNeckPain layout with provided width [and scratchPad name(s)] parameters",
     complete = function(_, cmd, _)
       local lfiles_set = {}
+      local rfiles_set = {}
       local i = string.find(cmd, "NNP")
       if i == nil then return {} end
       -- first argument was not set (width)
@@ -40,18 +40,19 @@ vim.api.nvim_create_user_command(
       for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
         local lfile = string.match(file, "(.*)-left.norg")
         if lfile ~= nil then lfiles_set[lfile] = 1 end
-      end
-      local lfiles = {}
-      for filename, _ in pairs(lfiles_set) do
-        table.insert(lfiles, filename)
-      end
-      -- second argument was not set (left filename / both)
-      if string.match(cmd, "NNP%s+%d+%s+%w+%s") == nil then return lfiles end
-      local rfiles_set = {}
-      for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
+
         local rfile = string.match(file, "(.*)-right.norg")
         if rfile ~= nil then rfiles_set[rfile] = 1 end
       end
+      local files = {}
+      for filename, _ in pairs(lfiles_set) do
+        table.insert(files, filename)
+      end
+      for filename, _ in pairs(rfiles_set) do
+        table.insert(files, filename)
+      end
+      -- second argument was not set (left filename / both)
+      if string.match(cmd, "NNP%s+%d+%s+%w+%s") == nil then return files end
       local rfiles = {}
       for filename, _ in pairs(rfiles_set) do
         table.insert(rfiles, filename)

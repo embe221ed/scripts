@@ -46,20 +46,20 @@ thm_fg=$subtext1
 IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
 if [ "${IS_DARK}" = "Dark" ]; then
 	# macchiato
-	thm_bg="#24273A"
+	thm_bg="#24273a"
 else
 	# background for latte catppuccin terminal theme
 	thm_bg="#eff1f5"
 fi
 
+# background for mocha catppuccin terminal theme
+# thm_bg="#1e1e2e"
+
 # background for frappe catppuccin terminal theme
 # thm_bg="#303446"
 
 # background for macchiato catppuccin terminal theme
-# thm_bg="#24273A"
-
-# background for mocha catppuccin terminal theme
-# thm_bg="#1E1E2E"
+# thm_bg="#24273a"
 
 # background for OneDark terminal theme
 # thm_bg="#1f2329"

@@ -161,15 +161,15 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-b>']     = cmp.mapping.scroll_docs(-4),
+    ['<C-f>']     = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-e>']     = cmp.mapping.abort(),
+    ['<CR>']      = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'luasnip' }, -- For vsnip users.
+    { name = 'luasnip' }, -- For luasnip users.
   }, {
     { name = 'buffer' },
     { name = 'path' },
@@ -257,7 +257,7 @@ require('catppuccin').setup  {
         NvimTreeRootFolder      = { fg = palette.peach },
         NvimTreeStatusLine      = { fg = palette.base, bg = palette.base },
         NvimTreeStatusLineNC    = { fg = palette.base, bg = palette.base },
-        NoiceCmdlinePopupBorder = { fg = palette.subtext0 },
+        NoiceCmdlinePopupBorder = { fg = palette.mauve },
     }, -- Override highlight groups
     default_integrations = false,
     integrations = {
@@ -288,7 +288,6 @@ bufferline.setup {
     },
   },
   options = {
-    -- style_preset = bufferline.style_preset.minimal,
     separator_style = { "", "" },
     diagnostics = "nvim_lsp",
     buffer_close_icon = "󰅖",
@@ -362,6 +361,8 @@ bufferline.setup {
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "cpp", "lua", "rust", "python", "javascript", "markdown", "markdown_inline" },
+  ignore_install = {},
+  modules = {},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -450,7 +451,7 @@ local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-  vim.api.nvim_set_hl(0, "IblScope", { fg = palette.light_grey })
+  vim.api.nvim_set_hl(0, "IblScope", { fg = palette.mauve })
 end)
 
 require("ibl").setup {
