@@ -1,34 +1,13 @@
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Set border for floating windows
-local _border = "rounded"
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = _border
-  }
-)
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = _border
-  }
-)
-
-vim.diagnostic.config {
-  float = {
-    border = _border
-  }
-}
-
 -- -- goto-preview config
 require('goto-preview').setup {
-  default_mappings = true;
-  width = 120; -- Width of the floating window
+  default_mappings = true,
+  width = 120, -- Width of the floating window
   -- width = 200; -- Width of the floating window
-  border = {"󰮻", "─" ,"╮", "│", "╯", "─", "╰", "│"}; -- Border characters of the floating window
-  height = 20; -- Height of the floating window
+  border = {"󰮻", "─" ,"╮", "│", "╯", "─", "╰", "│"}, -- Border characters of the floating window
+  height = 20, -- Height of the floating window
 }
 
 -- -- LSP config

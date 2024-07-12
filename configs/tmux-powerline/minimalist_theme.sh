@@ -42,11 +42,13 @@ sky_blue="#a7c7e7"
 spotify_green="#1db954"
 spotify_black="#191414"
 
-thm_fg=$subtext1
+thm_fg=$subtext0
 IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
 if [ "${IS_DARK}" = "Dark" ]; then
 	# macchiato
-	thm_bg="#24273a"
+	# thm_bg="#24273a"
+	# frappe
+	thm_bg="#303446"
 else
 	# background for latte catppuccin terminal theme
 	thm_bg="#eff1f5"

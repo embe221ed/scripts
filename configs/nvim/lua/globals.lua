@@ -3,8 +3,8 @@ local function determine_theme()
   if result == 256 then
     return "latte"
   else
-    return "macchiato"
-    -- return "frappe"
+    -- return "macchiato"
+    return "frappe"
   end
 end
 

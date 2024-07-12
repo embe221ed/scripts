@@ -19,4 +19,9 @@ elseif globals.current_theme == "latte" then
   vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#1e66f5 guibg=#e6e9ef ]]
   vim.cmd [[ highlight BufferlineOffsetTitleBright        cterm=bold gui=bold guifg=#1e66f5 guibg=#e6e9ef ]]
   vim.cmd [[ highlight TreesitterContextLineNumber        cterm=bold gui=bold guifg=#6c6f85 guibg=#eff1f5 ]]
+elseif globals.current_theme == "frappe" then
+  -- latte
+  vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#8caaee guibg=#292c3c ]]
+  vim.cmd [[ highlight BufferlineOffsetTitleBright        cterm=bold gui=bold guifg=#8caaee guibg=#292c3c ]]
+  vim.cmd [[ highlight TreesitterContextLineNumber        cterm=bold gui=bold guifg=#a5adce guibg=#303446 ]]
 end
