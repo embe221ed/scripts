@@ -44,7 +44,12 @@ spotify_black="#191414"
 
 thm_fg=$subtext0
 
-IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
+SYSTEM=$(source /opt/scripts/utils/determine_system.sh)
+if [ "${SYSTEM}" == "Darwin" ]; then
+	IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
+else
+	IS_DARK="Dark"
+fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
 	# macchiato

@@ -1,6 +1,14 @@
 #!/bin/sh
 
+SCRIPT_NAME=$(basename "$0")
+CURRENT_FILE=$(basename "${BASH_SOURCE[0]}")
+
 UNAME=$(uname)
+
+if [[ "${SCRIPT_NAME}" != "${CURRENT_FILE}" ]]; then
+    echo "${UNAME}"
+    exit 0
+fi
 
 case "${UNAME}" in
     Linux)
