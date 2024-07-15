@@ -44,15 +44,7 @@ spotify_black="#191414"
 
 thm_fg=$subtext0
 
-/opt/scripts/utils/determine_system.sh
-OUT=$?
-if [ $OUT -eq 0 ]; then
-	IS_MACOS=false
-	IS_DARK="Dark"
-elif [ $OUT -eq 1 ]; then
-	IS_MACOS=true
-	IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
-fi
+IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
 
 if [ "${IS_DARK}" = "Dark" ]; then
 	# macchiato
