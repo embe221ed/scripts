@@ -102,7 +102,10 @@ require('outline').setup {
     auto_preview = true,
     open_hover_on_preview = true,
     live = true,
-  }
+  },
+  symbols = {
+    icon_source = "lspkind"
+  },
 }
 
 -- -- auto-pairs
@@ -246,19 +249,21 @@ require('catppuccin').setup  {
     },
     color_overrides = {},
     custom_highlights = {
-        NoicePopup              = { bg = palette.mantle },
-        TabLineSel              = { bg = palette.mauve },
-        FloatBorder             = { fg = palette.mauve, bg = palette.base, style = { "bold" } },
-        StatusLine              = { fg = palette.base, bg = palette.base },
-        StatusLineNC            = { fg = palette.base, bg = palette.base },
-        OutlineCurrent          = { fg = palette.green, bg = "", style = { "bold" } },
-        TelescopeTitle          = { fg = palette.cyan },
-        NvimTreeExecFile        = { fg = palette.red },
-        NvimTreeOpenedHL        = { fg = palette.subtext0, style = { "italic" } },
-        NvimTreeRootFolder      = { fg = palette.peach },
-        NvimTreeStatusLine      = { fg = palette.base, bg = palette.base },
-        NvimTreeStatusLineNC    = { fg = palette.base, bg = palette.base },
-        NoiceCmdlinePopupBorder = { fg = palette.mauve },
+        NoicePopup                  = { bg = palette.mantle },
+        TabLineSel                  = { bg = palette.mauve },
+        FloatBorder                 = { fg = palette.mauve, bg = palette.base, style = { "bold" } },
+        StatusLine                  = { fg = palette.base, bg = palette.base },
+        StatusLineNC                = { fg = palette.base, bg = palette.base },
+        OutlineCurrent              = { fg = palette.green, bg = "", style = { "bold" } },
+        TelescopeTitle              = { fg = palette.cyan },
+        NvimTreeExecFile            = { fg = palette.red },
+        TreesitterContext           = { bg = palette.mantle },
+        NvimTreeOpenedHL            = { fg = palette.subtext0, style = { "italic" } },
+        NvimTreeRootFolder          = { fg = palette.peach },
+        NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
+        NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
+        NoiceCmdlinePopupBorder     = { fg = palette.mauve },
+        TreesitterContextLineNumber = { bg = palette.mantle, fg = palette.surface1 },
     }, -- Override highlight groups
     default_integrations = false,
     integrations = {
@@ -277,87 +282,7 @@ require('catppuccin').setup  {
 
 vim.cmd.colorscheme "catppuccin"
 
-local bufferline  = require('bufferline')
-local fill_bg     = palette.mantle
-bufferline.setup {
-  highlights = {
-    fill = {
-      bg = fill_bg,
-    },
-    offset_separator = {
-      bg = fill_bg,
-    },
-  },
-  options = {
-    separator_style = { "", "" },
-    diagnostics = "nvim_lsp",
-    buffer_close_icon = "󰅖",
-    indicator = {
-      icon = '▎', -- this should be omitted if indicator style is not 'icon'
-      style = 'icon',
-    },
-    offsets = {
-      {
-          filetype = "NvimTree",
-          text = " FILE EXPLORER",
-          separator = false,
-          text_align = "left",
-          highlight = "BufferlineOffsetTitleBright",
-      },
-      {
-          filetype = "Outline",
-          text = " OUTLINE",
-          text_align = "left",
-          separator = "▏",
-          highlight = "BufferlineOffsetTitleBase",
-      },
-    },
-    custom_filter = function(buf_number, buf_numbers)
-        -- filter out by buffer name
-        if vim.fn.bufname(buf_number) ~= "" then
-            return true
-        end
-        return false
-    end,
-    custom_areas = {
-      right = function()
-          local result = {}
-          local seve = vim.diagnostic.severity
-          local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
-          local warn = #vim.diagnostic.get(0, { severity = seve.WARN })
-          local info = #vim.diagnostic.get(0, { severity = seve.INFO })
-          local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
-
-          local error_text = ""
-          if error ~= 0 then
-            error_text = "   " .. error .. " "
-          end
-          table.insert(result, { text = error_text, fg = "#EC5241" })
-
-          local warn_text = ""
-          if warn ~= 0 then
-            warn_text = "   " .. warn .. " "
-          end
-          table.insert(result, { text = warn_text, fg = "#EFB839" })
-
-          local hint_text = ""
-          if hint ~= 0 then
-            hint_text = " 󱜸  " .. hint .. " "
-          end
-          table.insert(result, { text = hint_text , fg = "#A3BA5E" })
-
-
-          local info_text = ""
-          if info ~= 0 then
-            info_text = "   " .. info .. " "
-          end
-          table.insert(result, { text = info_text, fg = "#7EA9A7" })
-
-          return result
-      end,
-    }
-  }
-}
+require('_bufferline')
 
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
@@ -394,13 +319,9 @@ require('treesitter-context').setup {
   max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
   min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   line_numbers = true,
-  multiline_threshold = 10, -- Maximum number of lines to collapse for a single context line
+  multiline_threshold = 1, -- Maximum number of lines to collapse for a single context line
   trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
   mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
-  -- Separator between context and content. Should be a single character string, like '-'.
-  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-  -- separator = "─",
-  separator = "⎺",
   zindex = 20,              -- The Z-index of the context window
   on_attach = nil,          -- (fun(buf: integer): boolean) return false to disable attaching
 }
