@@ -13,6 +13,9 @@ end
 
 local globals = {
   current_theme = determine_theme(),
+  generate_desc = function(desc)
+    return desc .. string.rep(' ' , 40)
+  end
 }
 
 return globals

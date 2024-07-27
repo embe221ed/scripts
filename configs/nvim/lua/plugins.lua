@@ -4,6 +4,8 @@
 -- vim.cmd [[packadd packer.nvim]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
+local generate_desc = require('globals').generate_desc
+
 local opts = {
   ui = {
     border = "rounded",
@@ -123,18 +125,18 @@ return require("lazy").setup(
           theme = 'doom',
           config = {
             header = {
-              '', '', '', '', '', '', '',
+              '', '', '', '', '', '',
               ' ██████╗  █████╗ ███████╗██╗  ██╗██████╗  ██████╗  █████╗ ██████╗ ██████╗  ',
               ' ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗ ',
               ' ██║  ██║███████║███████╗███████║██████╔╝██║   ██║███████║██████╔╝██║  ██║ ',
               ' ██║  ██║██╔══██║╚════██║██╔══██║██╔══██╗██║   ██║██╔══██║██╔══██╗██║  ██║ ',
               ' ██████╔╝██║  ██║███████║██║  ██║██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝ ',
               ' ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ',
-              '',
+              '', '',
             },
             center = {
               {
-                desc = 'update plugins',
+                desc = generate_desc('update plugins'),
                 desc_hl = '@property',
                 action = 'Lazy sync',
                 key = 'u',
@@ -143,7 +145,7 @@ return require("lazy").setup(
               },
               {
                 icon_hl = '@property',
-                desc = 'find file',
+                desc = generate_desc('find file'),
                 desc_hl = '@property',
                 action = 'Telescope find_files',
                 key = 'f',
@@ -151,7 +153,7 @@ return require("lazy").setup(
                 key_format = ' %s',
               },
               {
-                desc = 'open file explorer',
+                desc = generate_desc('open file explorer'),
                 desc_hl = '@property',
                 action = 'Telescope file_browser',
                 key = 'e',
@@ -159,7 +161,7 @@ return require("lazy").setup(
                 key_format = ' %s',
               },
               {
-                desc = 'find word',
+                desc = generate_desc('find word'),
                 desc_hl = '@property',
                 action = 'Telescope live_grep',
                 key = 's',
@@ -167,7 +169,7 @@ return require("lazy").setup(
                 key_format = ' %s',
               },
               {
-                desc = 'LSP debug level',
+                desc = generate_desc('LSP debug level'),
                 desc_hl = '@property',
                 action = 'lua vim.lsp.set_log_level("debug")',
                 key = 'd',
@@ -175,7 +177,7 @@ return require("lazy").setup(
                 key_format = ' %s',
               },
               {
-                desc = 'quit',
+                desc = generate_desc('quit'),
                 desc_hl = '@property',
                 action = 'quitall',
                 key = 'q',
@@ -206,6 +208,12 @@ return require("lazy").setup(
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
+    },
+    {
+      'MeanderingProgrammer/markdown.nvim',
+      main = "render-markdown",
+      opts = {},
+      dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     },
   },
   opts
