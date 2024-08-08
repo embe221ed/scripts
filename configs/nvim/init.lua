@@ -257,13 +257,13 @@ require('catppuccin').setup  {
         OutlineCurrent              = { fg = palette.green, bg = "", style = { "bold" } },
         TelescopeTitle              = { fg = palette.cyan },
         NvimTreeExecFile            = { fg = palette.red },
-        TreesitterContext           = { bg = palette.mantle },
+        -- TreesitterContext           = { bg = palette.mantle },
         NvimTreeOpenedHL            = { fg = palette.subtext0, style = { "italic" } },
         NvimTreeRootFolder          = { fg = palette.peach },
         NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
         NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
         NoiceCmdlinePopupBorder     = { fg = palette.mauve },
-        TreesitterContextLineNumber = { bg = palette.mantle, fg = palette.surface1 },
+        -- TreesitterContextLineNumber = { bg = palette.mantle, fg = palette.surface1 },
     }, -- Override highlight groups
     default_integrations = false,
     integrations = {
