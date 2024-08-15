@@ -193,6 +193,13 @@ local rust_on_attach = function(client, bufnr)
 end
 
 --[[ vim.g.rustaceanvim = {
+  tools = {
+    hover_actions = {
+      replace_builtin_hover = false,
+    },
+  },
+} ]]
+--[[ vim.g.rustaceanvim = {
     tools = { -- rust-tools options
         autoSetHints = true,
         inlay_hints = {

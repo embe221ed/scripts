@@ -67,4 +67,15 @@ api.nvim_create_autocmd(
   }
 )
 
+api.nvim_create_autocmd(
+  "FileType",
+  {
+    pattern = { "markdown", "norg" },
+    callback = function()
+      api.nvim_set_option_value("spell",      true,    { scope = "local" })
+      api.nvim_set_option_value("spelllang",  "en_us", { scope = "local" })
+    end,
+  }
+)
+
 vim.lsp.set_log_level("off")

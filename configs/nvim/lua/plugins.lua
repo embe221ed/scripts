@@ -65,7 +65,6 @@ return require("lazy").setup(
     "HiPhish/rainbow-delimiters.nvim",                                -- rainbow parens
     {                                                                 -- Rust LSP
       'mrcjkb/rustaceanvim',
-      version = "^3",
       event = "BufReadPost",
       ft = { 'rust' },
     },
@@ -161,6 +160,14 @@ return require("lazy").setup(
                 key_format = ' %s',
               },
               {
+                desc = generate_desc('recently opened'),
+                desc_hl = '@property',
+                action = 'Telescope oldfiles',
+                key = 'h',
+                key_hl = '@markup.strong',
+                key_format = ' %s',
+              },
+              {
                 desc = generate_desc('find word'),
                 desc_hl = '@property',
                 action = 'Telescope live_grep',
@@ -210,11 +217,21 @@ return require("lazy").setup(
       },
     },
     {
-      'MeanderingProgrammer/markdown.nvim',
-      main = "render-markdown",
+      'MeanderingProgrammer/render-markdown.nvim',
       opts = {},
       dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     },
+    -- {
+    --   "OXY2DEV/markview.nvim",
+    --   lazy = false,      -- Recommended
+    --   dependencies = {
+    --       -- You will not need this if you installed the
+    --       -- parsers manually
+    --       -- Or if the parsers are in your $RUNTIMEPATH
+    --       "nvim-treesitter/nvim-treesitter",
+    --       "nvim-tree/nvim-web-devicons"
+    --   }
+    -- },
   },
   opts
 )

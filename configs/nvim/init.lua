@@ -256,6 +256,7 @@ require('catppuccin').setup  {
         StatusLineNC                = { fg = palette.base, bg = palette.base },
         OutlineCurrent              = { fg = palette.green, bg = "", style = { "bold" } },
         TelescopeTitle              = { fg = palette.cyan },
+        TelescopeBorder             = { fg = palette.mauve },
         NvimTreeExecFile            = { fg = palette.red },
         -- TreesitterContext           = { bg = palette.mantle },
         NvimTreeOpenedHL            = { fg = palette.subtext0, style = { "italic" } },
@@ -325,6 +326,12 @@ require('treesitter-context').setup {
   zindex = 20,              -- The Z-index of the context window
   on_attach = nil,          -- (fun(buf: integer): boolean) return false to disable attaching
 }
+local ctx_render = require('treesitter-context.render')
+local _open = ctx_render.open
+ctx_render.open = function(bufnr, winid, ctx_ranges, ctx_lines)
+  _open(bufnr, winid, ctx_ranges, ctx_lines)
+  vim.cmd('IBLEnableScope')
+end
 
 -- -- load custom highlights before `noice.nvim`
 require('highlights')
@@ -399,6 +406,10 @@ require("no-neck-pain").setup({
       location = os.getenv("HOME") .. "/Desktop/nnp-notes/",
     },
   },
+})
+
+require('render-markdown').setup({
+  file_types = { 'markdown', 'norg' }
 })
 
 -- obsidian vault integration
