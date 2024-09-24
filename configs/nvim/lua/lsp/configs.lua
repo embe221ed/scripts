@@ -2,13 +2,18 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- -- goto-preview config
-require('goto-preview').setup {
+require('goto-preview').setup({
   default_mappings = true,
   width = 120, -- Width of the floating window
   -- width = 200; -- Width of the floating window
   border = {"󰮻", "─" ,"╮", "│", "╯", "─", "╰", "│"}, -- Border characters of the floating window
   height = 20, -- Height of the floating window
-}
+  post_open_hook = function(_, winid)
+    local config = vim.api.nvim_win_get_config(winid)
+    config.title = { { " " .. config.title[1][1] .. " " } }
+    vim.api.nvim_win_set_config(winid, config)
+  end,
+})
 
 -- -- LSP config
 local opts = { noremap=true, silent=true }
@@ -78,7 +83,7 @@ lsp.clangd.setup({
   capabilities = capabilities
 })
 -- -- -- tsserver
-lsp.tsserver.setup({
+lsp.ts_ls.setup({
   capabilities = capabilities
 })
 -- -- -- texlab

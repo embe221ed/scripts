@@ -168,10 +168,26 @@ return require("lazy").setup(
                 key_format = ' %s',
               },
               {
+                desc = generate_desc('restore session'),
+                desc_hl = '@property',
+                action = 'lua require(\'persistence\').load()',
+                key = 'r',
+                key_hl = '@markup.strong',
+                key_format = ' %s',
+              },
+              {
+                desc = generate_desc('sessions'),
+                desc_hl = '@property',
+                action = 'lua require(\'persistence\').select()',
+                key = 's',
+                key_hl = '@markup.strong',
+                key_format = ' %s',
+              },
+              {
                 desc = generate_desc('find word'),
                 desc_hl = '@property',
                 action = 'Telescope live_grep',
-                key = 's',
+                key = 'w',
                 key_hl = '@markup.strong',
                 key_format = ' %s',
               },
@@ -220,6 +236,17 @@ return require("lazy").setup(
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {},
       dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    },
+    {
+      "folke/persistence.nvim",
+      event = "BufReadPre", -- this will only start session saving when an actual file was opened
+      opts = {
+        -- add any custom options here
+      },
+    },
+    {
+      'stevearc/dressing.nvim',
+      opts = {},
     },
     -- {
     --   "OXY2DEV/markview.nvim",

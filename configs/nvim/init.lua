@@ -8,6 +8,9 @@ require('functions')      -- custom functions
 require('lsp.configs')    -- LSP config
 require('languages')      -- tree-sitter languages
 
+require('_render-markdown')
+-- require('_markview')
+
 local globals = require('globals')
 
 vim.opt.termguicolors = true
@@ -247,7 +250,11 @@ require('catppuccin').setup  {
         operators = {},
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
     },
-    color_overrides = {},
+    color_overrides = {
+      frappe = {
+        lavender = "#b4b5ee",
+      }
+    },
     custom_highlights = {
         NoicePopup                  = { bg = palette.mantle },
         TabLineSel                  = { bg = palette.mauve },
@@ -406,10 +413,6 @@ require("no-neck-pain").setup({
       location = os.getenv("HOME") .. "/Desktop/nnp-notes/",
     },
   },
-})
-
-require('render-markdown').setup({
-  file_types = { 'markdown', 'norg' }
 })
 
 -- obsidian vault integration
