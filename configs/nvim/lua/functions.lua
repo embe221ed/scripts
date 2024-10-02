@@ -31,24 +31,24 @@ vim.api.nvim_create_user_command(
     nargs = "+",
     desc = "Open NoNeckPain layout with provided width [and scratchPad name(s)] parameters",
     complete = function(_, cmd, _)
-      local lfiles_set = {}
-      local rfiles_set = {}
+      local rfiles_set  = {}
+      local files_set   = {}
       local i = string.find(cmd, "NNP")
       if i == nil then return {} end
       -- first argument was not set (width)
       if string.match(cmd, "NNP%s+%d+%s+") == nil then return {} end
       for file in io.popen('ls ${HOME}/Desktop/nnp-notes'):lines() do
         local lfile = string.match(file, "(.*)-left.norg")
-        if lfile ~= nil then lfiles_set[lfile] = 1 end
+        if lfile ~= nil then files_set[lfile]  = 1 end
 
         local rfile = string.match(file, "(.*)-right.norg")
-        if rfile ~= nil then rfiles_set[rfile] = 1 end
+        if rfile ~= nil then
+          files_set[rfile]  = 1
+          rfiles_set[rfile] = 1
+        end
       end
       local files = {}
-      for filename, _ in pairs(lfiles_set) do
-        table.insert(files, filename)
-      end
-      for filename, _ in pairs(rfiles_set) do
+      for filename, _ in pairs(files_set) do
         table.insert(files, filename)
       end
       -- second argument was not set (left filename / both)

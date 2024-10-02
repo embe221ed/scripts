@@ -13,9 +13,10 @@ elif [[ $# == 2 ]]; then
   output_dir="$2/"
 fi
 
-filename=$1
-if [[ ! -f ${filename} ]]; then
-  echo "[!] file ${filename} does not exist!"
+file_path=$1
+filename=$(basename ${file_path})
+if [[ ! -f ${file_path} ]]; then
+  echo "[!] file ${file_path} does not exist!"
   exit
 fi
 if [[ ! -d ${output_dir} ]]; then
@@ -23,7 +24,7 @@ if [[ ! -d ${output_dir} ]]; then
   exit
 fi
 
-lines=$( wc -l "$1" | awk '{print $1}' )
+lines=$( wc -l "${file_path}" | awk '{print $1}' )
 images=$(( lines / max_lines ))
 echo "[*] lines: ${lines}, images: $(( ${images}+1 ))"
 
@@ -31,11 +32,11 @@ tempdir=$(mktemp -d)
 echo "[*] tempdir: ${tempdir}"
 
 for i in $( seq 0 ${images} ); do
-  head -$(( (i+1) * max_lines )) ${filename} | \
+  head -$(( (i+1) * max_lines )) ${file_path} | \
   tail -${max_lines} | \
   silicon \
     --theme GitHub \
-    --language html \
+    --language Rust \
     --no-round-corner \
     --no-window-controls \
     --line-offset $(( i*max_lines + 1 ))\
