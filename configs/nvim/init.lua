@@ -315,30 +315,35 @@ require('tokyonight').setup({
   --- You can override specific color groups to use other groups or a hex color
   --- function will be called with a ColorScheme table
   ---@param colors ColorScheme
-  on_colors = function(colors) end,
+  on_colors = function(colors)
+    colors.border_highlight = "#29a4bd"
+  end,
 
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with a Highlights and ColorScheme table
   ---@param highlights tokyonight.Highlights
   ---@param colors ColorScheme
   on_highlights = function(highlights, colors)
-    highlights.NoicePopup                  = { bg = palette.bg_dark }
-    -- highlights.TabLineSel                  = { bg = palette.mauve }
-    -- highlights.FloatBorder                 = { fg = palette.mauve, bg = palette.base, style = { "bold" } }
-    highlights.StatusLine                  = { fg = palette.bg, bg = palette.bg }
-    highlights.StatusLineNC                = { fg = palette.bg, bg = palette.bg }
-    -- highlights.OutlineCurrent              = { fg = palette.green, bg = "", style = { "bold" } }
-    highlights.TelescopeTitle              = { fg = palette.cyan }
-    -- highlights.TelescopeBorder             = { fg = palette.mauve }
-    highlights.NvimTreeExecFile            = { fg = palette.red }
-    -- highlights.TreesitterContext           = { bg = palette.mantle }
-    -- highlights.NvimTreeOpenedHL            = { fg = palette.subtext0, style = { "italic" } }
-    highlights.NvimTreeRootFolder          = { fg = palette.magenta2 }
-    highlights.NvimTreeStatusLine          = { fg = palette.bg_dark, bg = palette.bg_dark }
-    highlights.NvimTreeStatusLineNC        = { fg = palette.bg_dark, bg = palette.bg_dark }
-    highlights.NvimTreeWinSeparator        = { fg = palette.bg_dark, bg = palette.bg_dark }
-    -- highlights.NoiceCmdlinePopupBorder     = { fg = palette.mauve }
-    -- highlights.TreesitterContextLineNumber = { bg = palette.mantle, fg = palette.surface1 }
+    highlights.NoicePopup                  = { bg = colors.bg_dark }
+    -- highlights.TabLineSel                  = { bg = colors.mauve }
+    highlights.FloatBorder                 = { fg = colors.border_highlight, bg = colors.bg, bold = true }
+    highlights.StatusLine                  = { fg = colors.bg, bg = colors.bg }
+    highlights.StatusLineNC                = { fg = colors.bg, bg = colors.bg }
+    highlights.OutlineCurrent              = { fg = colors.green, bg = "", bold = true }
+    highlights.TelescopeTitle              = { fg = colors.cyan }
+    highlights.TelescopePromptTitle        = { fg = colors.orange, bg = colors.bg }
+    highlights.TelescopeNormal             = { bg = colors.bg }
+    highlights.TelescopeBorder             = { fg = colors.border_highlight, bg = colors.bg }
+    highlights.TelescopePromptBorder       = { fg = colors.orange, bg = colors.bg }
+    highlights.NvimTreeExecFile            = { fg = colors.red }
+    highlights.TreesitterContext           = { bg = colors.purple }
+    highlights.NvimTreeOpenedHL            = { fg = colors.comment, italic = true }
+    highlights.NvimTreeRootFolder          = { fg = colors.magenta2 }
+    highlights.NvimTreeStatusLine          = { fg = colors.bg_dark, bg = colors.bg_dark }
+    highlights.NvimTreeStatusLineNC        = { fg = colors.bg_dark, bg = colors.bg_dark }
+    highlights.NvimTreeWinSeparator        = { fg = colors.bg_dark, bg = colors.bg_dark }
+    -- highlights.NoiceCmdlinePopupBorder     = { fg = colors.mauve }
+    -- highlights.TreesitterContextLineNumber = { bg = colors.mantle, fg = colors.surface1 }
   end,
 
   cache = true, -- When set to true, the theme will be cached for better performance
