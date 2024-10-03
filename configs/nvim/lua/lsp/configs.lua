@@ -146,12 +146,14 @@ lsp.lua_ls.setup {
 lsp.solidity_ls_nomicfoundation.setup {
   -- on_attach = on_attach, -- probably you will need this.
   capabilities = capabilities,
+  root_dir = lsp.util.find_git_ancestor,
+  single_file_support = true,
   settings = {
     -- example of global remapping
-    solidity = {
+    -- solidity = {
       -- includePath = '',
       -- remapping = { ["@openzeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@5.0.1/' }
-    }
+    -- }
   },
 }
 -- -- -- bash
