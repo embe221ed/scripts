@@ -336,7 +336,7 @@ require('tokyonight').setup({
     highlights.TelescopeBorder             = { fg = colors.border_highlight, bg = colors.bg }
     highlights.TelescopePromptBorder       = { fg = colors.orange, bg = colors.bg }
     highlights.NvimTreeExecFile            = { fg = colors.red }
-    highlights.TreesitterContext           = { bg = colors.purple }
+    highlights.TreesitterContext           = { bg = colors.bg }
     highlights.NvimTreeOpenedHL            = { fg = colors.comment, italic = true }
     highlights.NvimTreeRootFolder          = { fg = colors.magenta2 }
     highlights.NvimTreeStatusLine          = { fg = colors.bg_dark, bg = colors.bg_dark }
