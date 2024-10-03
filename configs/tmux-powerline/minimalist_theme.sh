@@ -55,7 +55,9 @@ if [ "${IS_DARK}" = "Dark" ]; then
 	# macchiato
 	# thm_bg="#24273a"
 	# frappe
-	thm_bg="#303446"
+	# thm_bg="#303446"
+	# tokyonight-storm
+	thm_bg="#24283b"
 else
 	# background for latte catppuccin terminal theme
 	thm_bg="#eff1f5"

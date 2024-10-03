@@ -5,12 +5,14 @@ local lualine = require('lualine')
 
 local globals = require('globals')
 local current_theme = globals.current_theme
-local palette = require("catppuccin.palettes").get_palette(current_theme)
+-- local palette = require("catppuccin.palettes").get_palette(current_theme)
+local palette = require("tokyonight.colors." .. current_theme)
 
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg        = palette.base,
+  -- bg        = palette.base,
+  bg        = palette.bg,
   fg        = '#bbc2cf',
   yellow    = palette.yellow,
   cyan      = '#008080',
@@ -22,7 +24,8 @@ local colors = {
   blue      = palette.blue,
   red       = palette.red,
   mauve     = palette.mauve,
-  pink      = palette.pink,
+  -- pink      = palette.pink,
+  pink      = palette.magenta2,
 }
 
 local conditions = {

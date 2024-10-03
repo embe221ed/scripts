@@ -22,4 +22,9 @@ elseif globals.current_theme == "frappe" then
   vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#8caaee guibg=#292c3c ]]
   vim.cmd [[ highlight BufferlineOffsetTitleBright        cterm=bold gui=bold guifg=#8caaee guibg=#292c3c ]]
   vim.cmd [[ highlight TreesitterContextBottom            gui=underline, guisp=#51576d                    ]]
+elseif globals.current_theme == "storm" then
+  -- latte
+  vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#8caaee guibg=#1f2335 ]]
+  vim.cmd [[ highlight BufferlineOffsetTitleBright        cterm=bold gui=bold guifg=#8caaee guibg=#1f2335 ]]
+  vim.cmd [[ highlight TreesitterContextBottom            gui=underline, guisp=#51576d                    ]]
 end

@@ -1,20 +1,27 @@
 local current_theme = require('globals').current_theme
-local palette = require("catppuccin.palettes").get_palette(current_theme)
+-- local palette = require("catppuccin.palettes").get_palette(current_theme)
+local palette = require("tokyonight.colors." .. current_theme)
+
 
 local function get_highlights(_palette)
     local colors        = require('bufferline.colors')
     local hex           = colors.get_color
     local tint          = colors.shade_color
 
-    local fill_bg       = _palette.mantle
+    -- local fill_bg       = _palette.mantle
+    local fill_bg       = _palette.bg_dark
     local error_fg      = _palette.red
-    local warning_fg    = _palette.peach
+    -- local warning_fg    = _palette.peach
+    local warning_fg    = _palette.red1
     local info_fg       = _palette.rosewater
     local hint_fg       = _palette.blue
-    local comment_fg    = _palette.overlay0
-    local visible_fg    = _palette.overlay0
+    -- local comment_fg    = _palette.overlay0
+    local comment_fg    = _palette.comment
+    -- local visible_fg    = _palette.overlay0
+    local visible_fg    = _palette.comment
     local string_fg     = _palette.green
-    local normal_bg     = _palette.base
+    -- local normal_bg     = _palette.base
+    local normal_bg     = _palette.bg
 
     return {
         fill = {
@@ -314,7 +321,7 @@ bufferline.setup {
       {
           filetype = "NvimTree",
           text = " FILE EXPLORER",
-          separator = false,
+          separator = true,
           text_align = "left",
           highlight = "BufferlineOffsetTitleBright",
       },

@@ -1,5 +1,8 @@
 local function determine_theme()
-  local dark, light = "frappe", "latte"
+  -- catppuccin
+  -- local dark, light = "frappe", "latte"
+  -- tokyonight
+  local dark, light = "storm", "day"
   local out = os.execute("/opt/scripts/utils/determine_system.sh") / 256
   -- not Darwin (MacOS), early return
   if out ~= 1 then return dark end

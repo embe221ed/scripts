@@ -33,6 +33,12 @@ return require("lazy").setup(
       dependencies = { "nvim-tree/nvim-web-devicons" }                -- filesystem icons
     },
     { "catppuccin/nvim", name = "catppuccin" },                       -- catppuccin theme plugin
+    {                                                                 -- tokyonight theme plugin
+      "folke/tokyonight.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
+    },
     -- { "embe221ed/onedark.nvim", name = "onedark" },                   -- OneDark
     {
       "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
