@@ -327,6 +327,7 @@ require('tokyonight').setup({
     highlights.NoicePopup                  = { bg = colors.bg_dark }
     -- highlights.TabLineSel                  = { bg = colors.mauve }
     highlights.FloatBorder                 = { fg = colors.border_highlight, bg = colors.bg, bold = true }
+    highlights.FloatTitle                  = { fg = colors.border_highlight, bg = colors.bg }
     highlights.StatusLine                  = { fg = colors.bg, bg = colors.bg }
     highlights.StatusLineNC                = { fg = colors.bg, bg = colors.bg }
     highlights.OutlineCurrent              = { fg = colors.green, bg = "", bold = true }
@@ -442,7 +443,7 @@ require("noice").setup {
         col = "50%",
       },
       size = {
-        width = "25%",
+        width = "auto",
         height = "auto",
       },
       border = {

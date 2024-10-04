@@ -23,7 +23,8 @@ local colors = {
   magenta   = '#c678dd',
   blue      = palette.blue,
   red       = palette.red,
-  mauve     = palette.mauve,
+  -- mauve     = palette.mauve,
+  mauve     = palette.magenta,
   -- pink      = palette.pink,
   pink      = palette.magenta2,
 }
