@@ -361,6 +361,7 @@ require('tokyonight').setup({
     -- for all possible plugins, see:
     --   * https://github.com/folke/tokyonight.nvim/tree/main/lua/tokyonight/groups
     -- telescope = true,
+    bufferline = false,
   },
 })
 
