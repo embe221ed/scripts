@@ -2,7 +2,6 @@ local current_theme = require('globals').current_theme
 -- local palette = require("catppuccin.palettes").get_palette(current_theme)
 local palette = require("tokyonight.colors." .. current_theme)
 
-
 local function get_highlights(_palette)
     local colors        = require('bufferline.colors')
     local hex           = colors.get_color
@@ -308,74 +307,69 @@ end
 
 local bufferline  = require('bufferline')
 bufferline.setup {
-  highlights = get_highlights(palette),
-  options = {
-    separator_style = { "", "" },
-    diagnostics = "nvim_lsp",
-    buffer_close_icon = "󰅖",
-    indicator = {
-      -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
-      style = 'underline',
-    },
-    offsets = {
-      {
-          filetype = "NvimTree",
-          text = " FILE EXPLORER",
-          separator = true,
-          text_align = "left",
-          highlight = "BufferlineOffsetTitleBright",
-      },
-      {
-          filetype = "Outline",
-          text = " OUTLINE",
-          text_align = "left",
-          separator = "▏",
-          highlight = "BufferlineOffsetTitleBase",
-      },
-    },
-    custom_filter = function(buf_number, buf_numbers)
-        -- filter out by buffer name
-        if vim.fn.bufname(buf_number) ~= "" then
-            return true
-        end
-        return false
-    end,
-    custom_areas = {
-      right = function()
-          local result = {}
-          local seve = vim.diagnostic.severity
-          local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
-          local warn = #vim.diagnostic.get(0, { severity = seve.WARN })
-          local info = #vim.diagnostic.get(0, { severity = seve.INFO })
-          local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
+    highlights = get_highlights(palette),
+    options = {
+        separator_style = { "", "" },
+        diagnostics = "nvim_lsp",
+        buffer_close_icon = "󰅖",
+        indicator = {
+          -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
+          style = 'underline',
+        },
+        offsets = {
+            {
+                filetype = "NvimTree",
+                text = " FILE EXPLORER",
+                separator = true,
+                text_align = "left",
+                highlight = "BufferlineOffsetTitleBright",
+            },
+            {
+                filetype = "Outline",
+                text = " OUTLINE",
+                text_align = "left",
+                separator = "▏",
+                highlight = "BufferlineOffsetTitleBase",
+            },
+        },
+        numbers = function(opts)
+            return string.format('%s', opts.raise(opts.id))
+        end,
+        custom_filter = function(buf_number, buf_numbers)
+            -- filter out by buffer name
+            if vim.fn.bufname(buf_number) ~= "" then
+                return true
+            end
+            return false
+        end,
+        custom_areas = {
+            right = function()
+                local result = {}
+                local seve = vim.diagnostic.severity
+                local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
+                local warn = #vim.diagnostic.get(0, { severity = seve.WARN })
+                local info = #vim.diagnostic.get(0, { severity = seve.INFO })
+                local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
-          local error_text = ""
-          if error ~= 0 then
-            error_text = "   " .. error .. " "
-          end
-          table.insert(result, { text = error_text, fg = "#EC5241" })
+                local error_text = ""
+                if error ~= 0 then error_text = "  " .. error .. " " end
+                table.insert(result, { text = error_text, fg = "#EC5241" })
 
-          local warn_text = ""
-          if warn ~= 0 then
-            warn_text = "   " .. warn .. " "
-          end
-          table.insert(result, { text = warn_text, fg = "#EFB839" })
+                local warn_text = ""
+                if warn ~= 0 then warn_text = "  " .. warn .. " " end
+                table.insert(result, { text = warn_text, fg = "#EFB839" })
 
-          local hint_text = ""
-          if hint ~= 0 then
-            hint_text = " 󱜸  " .. hint .. " "
-          end
-          table.insert(result, { text = hint_text , fg = "#A3BA5E" })
+                local hint_text = ""
+                if hint ~= 0 then hint_text = " 󱜸 " .. hint .. " " end
+                table.insert(result, { text = hint_text , fg = "#A3BA5E" })
 
 
-          local info_text = ""
-          if info ~= 0 then
-            info_text = "   " .. info .. " "
-          end
-          table.insert(result, { text = info_text, fg = "#7EA9A7" })
+                local info_text = ""
+                if info ~= 0 then info_text = "  " .. info .. " " end
+                table.insert(result, { text = info_text, fg = "#7EA9A7" })
 
-          return result
-      end,
+                return result
+            end,
+        }
     }
-  }
 }
