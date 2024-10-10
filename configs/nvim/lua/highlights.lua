@@ -27,4 +27,9 @@ elseif globals.current_theme == "storm" then
   vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#8caaee guibg=#1f2335 ]]
   vim.cmd [[ highlight BufferlineOffsetTitleBright        cterm=bold gui=bold guifg=#8caaee guibg=#1f2335 ]]
   vim.cmd [[ highlight TreesitterContextBottom            gui=underline, guisp=#51576d                    ]]
+elseif globals.current_theme == "day" then
+  -- latte
+  vim.cmd [[ highlight BufferlineOffsetTitleBase          cterm=bold gui=bold guifg=#8caaee guibg=#d0d5e3 ]]
+  vim.cmd [[ highlight BufferlineOffsetTitleBright        cterm=bold gui=bold guifg=#8caaee guibg=#d0d5e3 ]]
+  vim.cmd [[ highlight TreesitterContextBottom            gui=underline, guisp=#51576d                    ]]
 end

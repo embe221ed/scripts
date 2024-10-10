@@ -2,11 +2,11 @@
 require('opts')           -- Options
 require('keys')           -- Keymaps
 require('plugins')        -- Plugins
-require('lualineconfig')  -- LuaLine config
 require('snippets')       -- LuaSnip custom snippets
 require('functions')      -- custom functions
 require('lsp.configs')    -- LSP config
 require('languages')      -- tree-sitter languages
+require('lualineconfig')  -- LuaLine config
 
 require('_render-markdown')
 -- require('_markview')
@@ -289,10 +289,10 @@ require("illuminate").configure({
 -- }
 
 local current_theme = globals.current_theme
-local palette = require('tokyonight.colors.' .. current_theme)
+local palette = globals.get_palette(globals.colorscheme, current_theme)
 ---@class tokyonight.Config
 require('tokyonight').setup({
-  style = "storm", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
+  style = current_theme, -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
   light_style = "day", -- The theme is used when the background is set to light
   transparent = false, -- Enable this to disable setting the background color
   terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
@@ -340,9 +340,9 @@ require('tokyonight').setup({
     highlights.TreesitterContext           = { bg = colors.bg }
     highlights.NvimTreeOpenedHL            = { fg = colors.comment, italic = true }
     highlights.NvimTreeRootFolder          = { fg = colors.magenta2 }
-    highlights.NvimTreeStatusLine          = { fg = colors.bg_dark, bg = colors.bg_dark }
-    highlights.NvimTreeStatusLineNC        = { fg = colors.bg_dark, bg = colors.bg_dark }
-    highlights.NvimTreeWinSeparator        = { fg = colors.bg_dark, bg = colors.bg_dark }
+    highlights.NvimTreeStatusLine          = { fg = colors.bg, bg = colors.bg }
+    highlights.NvimTreeStatusLineNC        = { fg = colors.bg, bg = colors.bg }
+    highlights.NvimTreeWinSeparator        = { fg = colors.bg, bg = colors.bg }
     -- highlights.NoiceCmdlinePopupBorder     = { fg = colors.mauve }
     -- highlights.TreesitterContextLineNumber = { bg = colors.mantle, fg = colors.surface1 }
   end,
@@ -365,8 +365,7 @@ require('tokyonight').setup({
   },
 })
 
--- vim.cmd.colorscheme "catppuccin"
-vim.cmd.colorscheme "tokyonight"
+vim.cmd.colorscheme(globals.colorscheme)
 
 require('_bufferline')
 

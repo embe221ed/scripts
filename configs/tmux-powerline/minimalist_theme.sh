@@ -62,7 +62,9 @@ if [ "${IS_DARK}" = "Dark" ]; then
 	thm_bg="#24283b"
 else
 	# background for latte catppuccin terminal theme
-	thm_bg="#eff1f5"
+	# thm_bg="#eff1f5"
+  # tokyonight-day
+  thm_bg="#e1e2e7"
 fi
 
 # background for mocha catppuccin terminal theme

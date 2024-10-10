@@ -1,6 +1,5 @@
-local current_theme = require('globals').current_theme
--- local palette = require("catppuccin.palettes").get_palette(current_theme)
-local palette = require("tokyonight.colors." .. current_theme)
+local globals = require('globals')
+local palette = globals.get_palette(globals.colorscheme, globals.current_theme)
 
 local function get_highlights(_palette)
     local colors        = require('bufferline.colors')
@@ -320,7 +319,7 @@ bufferline.setup {
             {
                 filetype = "NvimTree",
                 text = " FILE EXPLORER",
-                separator = true,
+                separator = false,
                 text_align = "left",
                 highlight = "BufferlineOffsetTitleBright",
             },
