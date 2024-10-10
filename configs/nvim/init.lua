@@ -368,6 +368,7 @@ require('tokyonight').setup({
 vim.cmd.colorscheme(globals.colorscheme)
 
 require('_bufferline')
+require('colorizer').setup()
 
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"

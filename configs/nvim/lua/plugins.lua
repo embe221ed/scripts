@@ -25,21 +25,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- return require("packer").startup(function(use)
 return require("lazy").setup(
   {
     {
       "nvim-tree/nvim-tree.lua",                                      -- filesystem navigation
       dependencies = { "nvim-tree/nvim-web-devicons" }                -- filesystem icons
     },
-    { "catppuccin/nvim", name = "catppuccin" },                       -- catppuccin theme plugin
+    -- { "catppuccin/nvim", name = "catppuccin" },                       -- catppuccin theme plugin
     {                                                                 -- tokyonight theme plugin
       "folke/tokyonight.nvim",
       lazy = false,
       priority = 1000,
       opts = {},
     },
-    -- { "embe221ed/onedark.nvim", name = "onedark" },                   -- OneDark
     {
       "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
       build = ":TSUpdate"
@@ -56,7 +54,6 @@ return require("lazy").setup(
       "nvim-lualine/lualine.nvim",                                    -- status line
       dependencies = { "nvim-tree/nvim-web-devicons", opt = true },   -- filesystem icons
     },
-    -- { "arkav/lualine-lsp-progress" },                              -- LSP progress bar
     "neovim/nvim-lspconfig",                                          -- Configurations for Nvim LSP
     {
       "RRethy/vim-illuminate",                                        -- highlight word under cursor
@@ -124,7 +121,7 @@ return require("lazy").setup(
       dependencies = "nvim-lua/plenary.nvim",
     },
     {
-      'glepnir/dashboard-nvim',                                       -- dashboard
+      "glepnir/dashboard-nvim",                                       -- dashboard
       config = function()
         require('dashboard').setup {
           theme = 'doom',
@@ -217,7 +214,7 @@ return require("lazy").setup(
           },
         }
       end,
-      dependencies = {'nvim-tree/nvim-web-devicons'},
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
     { 'nmac427/guess-indent.nvim' },                                  -- guess the indent type in the current buffer
     {
@@ -239,7 +236,7 @@ return require("lazy").setup(
       },
     },
     {
-      'MeanderingProgrammer/render-markdown.nvim',
+      "MeanderingProgrammer/render-markdown.nvim",
       opts = {},
       dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     },
@@ -250,9 +247,12 @@ return require("lazy").setup(
         -- add any custom options here
       },
     },
-    {
-      'stevearc/dressing.nvim',
+    {                                                                 -- Neovim plugin to improve the default vim.ui interfaces
+      "stevearc/dressing.nvim",
       opts = {},
+    },
+    {                                                                 -- A high-performance color highlighter for Neovim
+      "norcalli/nvim-colorizer.lua",
     },
     -- {
     --   "OXY2DEV/markview.nvim",
