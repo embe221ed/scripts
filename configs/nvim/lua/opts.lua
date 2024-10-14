@@ -73,10 +73,18 @@ api.nvim_create_autocmd(
 )
 
 api.nvim_create_autocmd(
-  "PersistenceSavePre",
+  "User",
   {
-    desc      = "ensure that the NoNeckPain is disabled before saving the session",
-    callback  = function() require('no-neck-pain').disable() end,
+    desc      = "ensure that the NoNeckPain buffers are closed before saving the session",
+    pattern   = "PersistenceSavePre",
+    callback  = function()
+      local ft_to_close = "norg"
+      for _, buf in ipairs(api.nvim_list_bufs()) do
+        if api.nvim_buf_is_loaded(buf) and api.nvim_get_option_value("filetype", { buf = buf }) == ft_to_close then
+          api.nvim_buf_delete(buf, {})
+        end
+      end
+    end,
   }
 )
 
