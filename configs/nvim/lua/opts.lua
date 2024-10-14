@@ -33,24 +33,28 @@ vim.g.indentLine_fileTypeExclude = {
 
 local api = vim.api
 
-api.nvim_create_autocmd(
-  "FileType",
-  {
-    pattern = { "markdown", "txt" },
-    callback = function()
-      vim.o.shiftwidth  = 4
-      vim.o.tabstop     = 4
-    end,
-  }
-)
-
 api.nvim_create_user_command('Markserv', '!tmux new -d "markserv . --silent"', {})
 
 api.nvim_create_autocmd(
   "FileType",
   {
-    pattern = { "move" },
-    callback = function()
+    desc      = "enable spellcheck for markdown and norg files, set indentation to 4 spaces",
+    pattern   = { "markdown", "txt", "norg" },
+    callback  = function()
+      vim.o.shiftwidth  = 4
+      vim.o.tabstop     = 4
+      api.nvim_set_option_value("spell",      true,    { scope = "local" })
+      api.nvim_set_option_value("spelllang",  "en_us", { scope = "local" })
+    end,
+  }
+)
+
+api.nvim_create_autocmd(
+  "FileType",
+  {
+    desc      = "set the commentstring for move files",
+    pattern   = { "move" },
+    callback  = function()
       api.nvim_set_option_value("commentstring",  "// %s", { scope = "local" })
     end,
   }
@@ -59,8 +63,9 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "TermOpen",
   {
-    pattern = { "*" },
-    callback = function()
+    desc      = "do not show line numbers in terminal buffer",
+    pattern   = { "*" },
+    callback  = function()
       api.nvim_set_option_value("number",          false,  { scope = "local" })
       api.nvim_set_option_value("relativenumber",  false,  { scope = "local" })
     end,
@@ -68,13 +73,10 @@ api.nvim_create_autocmd(
 )
 
 api.nvim_create_autocmd(
-  "FileType",
+  "PersistenceSavePre",
   {
-    pattern = { "markdown", "norg" },
-    callback = function()
-      api.nvim_set_option_value("spell",      true,    { scope = "local" })
-      api.nvim_set_option_value("spelllang",  "en_us", { scope = "local" })
-    end,
+    desc      = "ensure that the NoNeckPain is disabled before saving the session",
+    callback  = function() require('no-neck-pain').disable() end,
   }
 )
 
