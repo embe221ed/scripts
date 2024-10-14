@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- -- Comment
 -- -- -- manually set comments for Move
 local ft = require("Comment.ft")
-ft.set('move', {'//%s', '/*%s*/'})
+ft.set('move', { '//%s', '/*%s*/' })
 require('Comment').setup {
   comment_empty = false
 }
