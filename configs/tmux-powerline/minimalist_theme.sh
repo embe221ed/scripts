@@ -99,7 +99,6 @@ TMUX_POWERLINE_SEG_VCS_BRANCH_GIT_SYMBOL_COLOUR=$thm_fg
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
-		"│" \
 		"#[$(format inverse)]" \
 		" #I#F" \
 		"$TMUX_POWERLINE_SEPARATOR_THIN" \
@@ -116,7 +115,7 @@ fi
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
 		"#[$(format regular)]" \
-		"│ #I#{#F,}" \
+		" #I#{#F,}" \
 		"$TMUX_POWERLINE_SEPARATOR_THIN" \
 		" #W "
 	)
@@ -151,7 +150,7 @@ fi
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info $thm_bg $blue"
+		"tmux_session_info $thm_bg $thm_fg"
 		"hostname $thm_bg $eggplant"
 		# "ifstat 30 255" \
 		#"ifstat_sys 30 255" \
@@ -168,7 +167,7 @@ fi
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
 		# "earthquake 3 0" \
-		"pwd $thm_bg $eggplant"
+		"pwd $thm_bg $thm_fg"
 		#"macos_notification_count 29 255" \
 		#"mailcount 9 255" \
 		# "now_playing $thm_bg $spotify_green" \
@@ -180,8 +179,8 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 		#"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
 		#"xkb_layout 125 117" \
 		# "date_day $thm_bg $eggplant" \
-		"date $thm_bg $eggplant ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
-		"time $thm_bg $eggplant ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+		"date $thm_bg $thm_fg ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+		"time $thm_bg $thm_fg ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
 		#"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 	)
 fi

@@ -1,5 +1,10 @@
 local _colorscheme = 'tokyonight'
 
+local function _get_tokyonight_day_palette(palette)
+  local opts = {}
+  return palette(opts)
+end
+
 local function determine_theme(colorscheme)
   local dark, light
   if colorscheme == 'catppuccin' then
@@ -24,10 +29,12 @@ local function get_palette(colorscheme, theme)
     palette = require("catppuccin.palettes").get_palette(theme)
   elseif colorscheme == 'tokyonight' then
     palette = require('tokyonight.colors.' .. theme)
-    if theme == "day" then return palette({}) end
+    if theme == "day" then return _get_tokyonight_day_palette(palette) end
   end
   return palette
 end
+
+--- prepare the globals table
 
 local globals = {
   colorscheme = _colorscheme,

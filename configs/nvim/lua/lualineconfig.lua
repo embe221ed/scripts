@@ -101,7 +101,7 @@ ins_left(
     function()
       return ''
     end,
-    color = { fg = colors.mauve }, -- Sets highlighting of component
+    color = { fg = colors.fg }, -- Sets highlighting of component
     padding = { left = 1, right = 1 }, -- We don't need space before this
   },
   true
@@ -113,7 +113,7 @@ ins_left {
     return " " .. require("lualine.utils.mode").get_mode()
   end,
   fmt = string.lower,
-  color = function()
+  --[[ color = function()
     -- auto change color according to neovims mode
     local mode_color = {
       n = colors.pink,
@@ -138,7 +138,7 @@ ins_left {
       t = colors.red,
     }
     return { fg = mode_color[vim.fn.mode()] }
-  end,
+  end, ]]
   padding = { right = 1 },
 }
 
@@ -152,12 +152,10 @@ ins_left(
   {
     'filename',
     cond = conditions.buffer_not_empty,
-    color = { fg = colors.magenta, gui = 'bold' },
+    color = { fg = colors.fg, gui = 'bold' },
   },
   true
 )
-
-ins_left { 'location' }
 
 -- ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
@@ -190,7 +188,7 @@ ins_left {
     return msg
   end,
   icon = ' LSP:',
-  color = { fg = colors.pink, gui = 'bold' },
+  color = { fg = colors.fg, gui = 'bold' },
 }
 
 
@@ -202,10 +200,12 @@ ins_left {
   end,
 } ]]
 
+ins_right { 'location' }
+
 -- Add components to right sections
 ins_right {
   'selectioncount',
-  color = { fg = colors.magenta, gui = 'bold' },
+  color = { fg = colors.fg, gui = 'bold' },
 }
 
 --[[ ins_right {

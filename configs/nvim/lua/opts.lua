@@ -79,6 +79,8 @@ api.nvim_create_autocmd(
     pattern   = "PersistenceSavePre",
     callback  = function()
       require('no-neck-pain').disable()
+      require('nvim-tree.api').tree.close()
+      require('outline').close()
       local ft_to_close = "norg"
       for _, buf in ipairs(api.nvim_list_bufs()) do
         if api.nvim_buf_is_loaded(buf) and api.nvim_get_option_value("filetype", { buf = buf }) == ft_to_close then
