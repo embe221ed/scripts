@@ -80,13 +80,15 @@ require("todo-comments").setup {
   keywords = {
     AUDIT       = { icon = "󰒃 ", color = "audit" },
     QUESTION    = { icon = " ", color = "question" },
-    FINDING     = { icon = "󰈸 ", color = "error" },
+    FINDING     = { icon = "󰈸 ", color = "error", alt = { "BUG", "ISSUE" } },
+    SUGGESTION  = { icon = " ", color = "sugg", alt = { "NIT", "SUG" } },
     IDEA        = { icon = " ", color = "idea" },
   },
   colors = {
     idea      = { "#ffd600" },
     audit     = { "#de85f5" },
-    question  = { "#ffffc6" },
+    question  = { "#2e7de9" },
+    sugg      = { "#07879d" },
   }
 }
 

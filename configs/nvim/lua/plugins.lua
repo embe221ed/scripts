@@ -139,16 +139,16 @@ return require("lazy").setup(
             center = {
               {
                 desc = generate_desc('update plugins'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'Lazy sync',
                 key = 'u',
                 key_hl = '@markup.strong',
                 key_format = ' %s',
               },
               {
-                icon_hl = '@property',
+                icon_hl = 'Identifier',
                 desc = generate_desc('find file'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'Telescope find_files',
                 key = 'f',
                 key_hl = '@markup.strong',
@@ -156,7 +156,7 @@ return require("lazy").setup(
               },
               {
                 desc = generate_desc('open file explorer'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'Telescope file_browser',
                 key = 'e',
                 key_hl = '@markup.strong',
@@ -164,7 +164,7 @@ return require("lazy").setup(
               },
               {
                 desc = generate_desc('recently opened'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'Telescope oldfiles',
                 key = 'h',
                 key_hl = '@markup.strong',
@@ -172,7 +172,7 @@ return require("lazy").setup(
               },
               {
                 desc = generate_desc('restore session'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'lua require(\'persistence\').load()',
                 key = 'r',
                 key_hl = '@markup.strong',
@@ -180,7 +180,7 @@ return require("lazy").setup(
               },
               {
                 desc = generate_desc('sessions'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'lua require(\'persistence\').select()',
                 key = 's',
                 key_hl = '@markup.strong',
@@ -188,7 +188,7 @@ return require("lazy").setup(
               },
               {
                 desc = generate_desc('find word'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'Telescope live_grep',
                 key = 'w',
                 key_hl = '@markup.strong',
@@ -196,7 +196,7 @@ return require("lazy").setup(
               },
               {
                 desc = generate_desc('LSP debug level'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'lua vim.lsp.set_log_level("debug")',
                 key = 'd',
                 key_hl = '@markup.strong',
@@ -204,7 +204,7 @@ return require("lazy").setup(
               },
               {
                 desc = generate_desc('quit'),
-                desc_hl = '@property',
+                desc_hl = 'Identifier',
                 action = 'quitall',
                 key = 'q',
                 key_hl = '@markup.strong',
