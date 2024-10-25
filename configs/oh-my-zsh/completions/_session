@@ -1,6 +1,6 @@
-#compdef work
+#compdef session
 
-_work() {
+_session() {
     local curcontext="$curcontext" state line
     typeset -A opt_args
 
@@ -25,4 +25,4 @@ _work() {
     esac
 }
 
-_work "$@"
+_session "$@"
