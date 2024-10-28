@@ -373,6 +373,7 @@ require('_bufferline')
 require('colorizer').setup({
   '*';
   '!lazy';
+  '!notify';
 })
 
 require('nvim-treesitter.configs').setup {

@@ -77,7 +77,9 @@ return require("lazy").setup(
       dependencies = { "nvim-lua/plenary.nvim" },
     },
     {
-      "rmagatti/goto-preview",                                        -- GoTo preview
+      -- "rmagatti/goto-preview",                                        -- GoTo preview
+      "embe221ed/goto-preview",                                       -- GoTo preview (fixed vim.lsp.handlers)
+      branch = "fix_get_config",
     },
     {
       "nvim-telescope/telescope.nvim",                                -- telescope
