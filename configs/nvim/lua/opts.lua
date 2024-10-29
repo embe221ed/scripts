@@ -91,4 +91,21 @@ api.nvim_create_autocmd(
   }
 )
 
+api.nvim_del_user_command("NoNeckPain")
+api.nvim_create_user_command(
+  "NoNeckPain",
+  function()
+    local state = require("no-neck-pain.state")
+
+    if state.has_tabs(state) and state.is_active_tab_registered(state) then
+      vim.opt.laststatus = 2
+    else
+      vim.opt.laststatus = 0
+    end
+
+    require("no-neck-pain").toggle()
+  end,
+  { desc = "Toggles the plugin. // updated version" }
+)
+
 vim.lsp.set_log_level("off")

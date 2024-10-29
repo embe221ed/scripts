@@ -59,7 +59,8 @@ if [ "${IS_DARK}" = "Dark" ]; then
 	# frappe
 	# thm_bg="#303446"
 	# tokyonight-storm
-	thm_bg="#24283b"
+	# thm_bg="#24283b"
+	thm_bg="#1f2335"
 else
 	# background for latte catppuccin terminal theme
 	# thm_bg="#eff1f5"
@@ -81,10 +82,10 @@ fi
 
 
 TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
-TMUX_POWERLINE_SEPARATOR_LEFT_THIN="|"
+TMUX_POWERLINE_SEPARATOR_LEFT_THIN="┊"
 TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD=""
-TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="|"
-TMUX_POWERLINE_SEPARATOR_THIN=""
+TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="┊"
+TMUX_POWERLINE_SEPARATOR_THIN="∙"
 
 TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-$thm_bg}
 TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR:-$thm_fg}
@@ -99,10 +100,8 @@ TMUX_POWERLINE_SEG_VCS_BRANCH_GIT_SYMBOL_COLOUR=$thm_fg
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
-		"#[$(format inverse)]" \
-		" #I#F" \
-		"$TMUX_POWERLINE_SEPARATOR_THIN" \
-		" #W "
+		"#[$(echo "fg=$thm_pink,bg=$thm_bg,bold,noitalics,nounderscore")]" \
+		"[ #W ]"
 	)
 fi
 
@@ -117,7 +116,7 @@ if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
 		"#[$(format regular)]" \
 		" #I#{#F,}" \
 		"$TMUX_POWERLINE_SEPARATOR_THIN" \
-		" #W "
+		"#W "
 	)
 fi
 
@@ -150,13 +149,13 @@ fi
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info $thm_bg $thm_fg"
 		"hostname $thm_bg $eggplant"
+		"tmux_session_info $thm_bg $thm_fg"
+		"vcs_branch $thm_bg"
 		# "ifstat 30 255" \
 		#"ifstat_sys 30 255" \
 		# "lan_ip $thm_bg $thm_fg ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
 		# "wan_ip $thm_bg $thm_fg" \
-		"vcs_branch $thm_bg"
 		# "vcs_compare 60 255" \
 		#"vcs_staged 64 255" \
 		#"vcs_modified 9 255" \
