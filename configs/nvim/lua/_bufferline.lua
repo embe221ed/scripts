@@ -2,16 +2,16 @@ local globals = require('globals')
 local palette = globals.get_palette(globals.colorscheme, globals.current_theme)
 
 local function get_highlights(_palette)
-    local colors        = require('bufferline.colors')
-    local hex           = colors.get_color
-    local tint          = colors.shade_color
+    -- local colors        = require('bufferline.colors')
+    -- local hex           = colors.get_color
+    -- local tint          = colors.shade_color
 
     -- local fill_bg       = _palette.mantle
     local fill_bg       = _palette.bg_dark
     local error_fg      = _palette.red
     -- local warning_fg    = _palette.peach
-    local warning_fg    = _palette.red1
-    local info_fg       = _palette.rosewater
+    -- local warning_fg    = _palette.red1
+    -- local info_fg       = _palette.rosewater
     local hint_fg       = _palette.blue
     -- local comment_fg    = _palette.overlay0
     local comment_fg    = _palette.comment
@@ -332,9 +332,10 @@ bufferline.setup {
             },
         },
         numbers = function(opts)
+            ---@diagnostic disable-next-line: undefined-field
             return string.format('%s', opts.raise(opts.id))
         end,
-        custom_filter = function(buf_number, buf_numbers)
+        custom_filter = function(buf_number, _)
             -- filter out by buffer name
             if vim.fn.bufname(buf_number) ~= "" then
                 return true

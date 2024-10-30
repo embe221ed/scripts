@@ -65,7 +65,7 @@ else
 	# background for latte catppuccin terminal theme
 	# thm_bg="#eff1f5"
   # tokyonight-day
-  thm_bg="#e1e2e7"
+  thm_bg="#d0d5e3"
 fi
 
 # background for mocha catppuccin terminal theme

@@ -1,5 +1,7 @@
+local api = vim.api
+
 -- open NoNeckPain layout and run NoNeckPainResize with provided parameter
-vim.api.nvim_create_user_command(
+api.nvim_create_user_command(
   "NNP",
   function(opts)
     assert(#opts.fargs > 0, "invalid params number: " .. #opts.fargs .. ", at least 1 argument required")
@@ -87,3 +89,21 @@ vim.api.nvim_create_user_command(
 --     end
 --   end
 -- })
+
+api.nvim_del_user_command("NoNeckPain")
+api.nvim_create_user_command(
+  "NoNeckPain",
+  function()
+    local state = require("no-neck-pain.state")
+
+    if state.has_tabs(state) and state.is_active_tab_registered(state) then
+      vim.opt.laststatus = 2
+    else
+      vim.opt.laststatus = 0
+    end
+
+    require("no-neck-pain").toggle()
+  end,
+  { desc = "Toggles the plugin. // updated version" }
+)
+
