@@ -4,45 +4,10 @@
 ####################################################################################################
 
 # COLORS
-thm_cyan="#99d1db"
-thm_black="#292c3c"
-thm_gray="#414559"
-thm_magenta="#ca9ee6"
 thm_pink="#f4b8e4"
-thm_blue="#8caaee"
-thm_black4="#626880"
-rosewater="#f2d5cf"
-flamingo="#eebebe"
-pink="#f4b8e4"
-mauve="#ca9ee6"
-red="#e78284"
-maroon="#ea999c"
-peach="#ef9f76"
-yellow="#e5c890"
-green="#a6d189"
-teal="#81c8be"
-sky="#99d1db"
-sapphire="#85c1dc"
-# blue="#8caaee"
 blue="#7aa2f7"
-lavender="#babbf1"
-text="#c6d0f5"
-subtext1="#b5bfe2"
 subtext0="#a5adce"
-overlay2="#949cbb"
-overlay1="#838ba7"
-overlay0="#737994"
-surface2="#626880"
-surface1="#51576d"
-surface0="#414559"
-base="#303446"
-mantle="#292c3c"
-crust="#232634"
-# eggplant="#e889d2"
 eggplant="#ff007c"
-sky_blue="#a7c7e7"
-spotify_green="#1db954"
-spotify_black="#191414"
 
 thm_fg=$subtext0
 
@@ -54,32 +19,10 @@ else
 fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
-	# macchiato
-	# thm_bg="#24273a"
-	# frappe
-	# thm_bg="#303446"
-	# tokyonight-storm
-	# thm_bg="#24283b"
-	thm_bg="#1f2335"
+	thm_bg="#3b4261"
 else
-	# background for latte catppuccin terminal theme
-	# thm_bg="#eff1f5"
-  # tokyonight-day
   thm_bg="#d0d5e3"
 fi
-
-# background for mocha catppuccin terminal theme
-# thm_bg="#1e1e2e"
-
-# background for frappe catppuccin terminal theme
-# thm_bg="#303446"
-
-# background for macchiato catppuccin terminal theme
-# thm_bg="#24273a"
-
-# background for OneDark terminal theme
-# thm_bg="#1f2329"
-
 
 TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
 TMUX_POWERLINE_SEPARATOR_LEFT_THIN="┊"

@@ -10,9 +10,8 @@ local palette = globals.get_palette(globals.colorscheme, current_theme)
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  -- bg        = palette.base,
   bg        = palette.bg,
-  fg        = '#bbc2cf',
+  fg        = palette.fg,
   yellow    = palette.yellow,
   cyan      = '#008080',
   darkblue  = '#081633',
@@ -22,9 +21,7 @@ local colors = {
   magenta   = '#c678dd',
   blue      = palette.blue,
   red       = palette.red,
-  -- mauve     = palette.mauve,
   mauve     = palette.magenta,
-  -- pink      = palette.pink,
   pink      = palette.magenta2,
 }
 
@@ -101,7 +98,7 @@ ins_left(
     function()
       return ''
     end,
-    color = { fg = colors.fg }, -- Sets highlighting of component
+    color = { fg = colors.fg, gui = 'bold' }, -- Sets highlighting of component
     padding = { left = 1, right = 1 }, -- We don't need space before this
   },
   true
@@ -110,10 +107,9 @@ ins_left(
 ins_left {
   -- mode component
   function()
-    return " " .. require("lualine.utils.mode").get_mode()
+    return require("lualine.utils.mode").get_mode()
   end,
-  fmt = string.lower,
-  padding = { right = 1 },
+  color = { gui = 'bold' },
 }
 
 ins_left(
