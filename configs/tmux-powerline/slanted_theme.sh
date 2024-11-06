@@ -102,7 +102,6 @@ fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-		"pwd $subtext0 $thm_bg"
 		"battery $thm_bg $blue"
 		"date $subtext0 $thm_bg"
 		"time $subtext0 $thm_bg ┊ $thm_fg $thm_bg"

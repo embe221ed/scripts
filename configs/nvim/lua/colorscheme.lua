@@ -36,28 +36,32 @@ require('tokyonight').setup({
   ---@param highlights tokyonight.Highlights
   ---@param colors ColorScheme
   on_highlights = function(highlights, colors)
-    highlights.NoicePopup                   = { bg = colors.bg_dark }
     highlights.TabLineSel                   = { bg = colors.magenta2 }
     highlights.FloatBorder                  = { fg = colors.border_highlight, bg = colors.bg, bold = true }
     highlights.FloatTitle                   = { fg = colors.border_highlight, bg = colors.bg }
     highlights.StatusLine                   = { fg = colors.bg, bg = colors.bg }
     highlights.StatusLineNC                 = { fg = colors.bg, bg = colors.bg }
+
+    highlights.NoicePopup                   = { bg = colors.bg_dark }
+
     highlights.OutlineCurrent               = { fg = colors.green, bg = "", bold = true }
+
     highlights.TelescopeTitle               = { fg = colors.cyan }
-    highlights.TelescopePromptTitle         = { fg = colors.orange, bg = colors.bg }
     highlights.TelescopeNormal              = { bg = colors.bg }
     highlights.TelescopeBorder              = { fg = colors.border_highlight, bg = colors.bg }
+    highlights.TelescopePromptTitle         = { fg = colors.orange, bg = colors.bg }
     highlights.TelescopePromptBorder        = { fg = colors.orange, bg = colors.bg }
-    highlights.NvimTreeExecFile             = { fg = colors.red }
+
     highlights.TreesitterContext            = { bg = colors.bg }
+
+    highlights.NvimTreeExecFile             = { fg = colors.red }
     highlights.NvimTreeOpenedHL             = { fg = colors.comment, italic = true }
     highlights.NvimTreeRootFolder           = { fg = colors.magenta2, bold = true }
     highlights.NvimTreeStatusLine           = { fg = colors.bg, bg = colors.bg }
     highlights.NvimTreeStatusLineNC         = { fg = colors.bg, bg = colors.bg }
     highlights.NvimTreeWinSeparator         = { fg = colors.bg, bg = colors.bg }
+
     highlights["@namespace"]                = highlights["@module"]
-    -- highlights.NoiceCmdlinePopupBorder     = { fg = colors.mauve }
-    -- highlights.TreesitterContextLineNumber = { bg = colors.mantle, fg = colors.surface1 }
   end,
 
   cache = true, -- When set to true, the theme will be cached for better performance
