@@ -6,10 +6,7 @@
 # COLORS
 thm_pink="#f4b8e4"
 blue="#7aa2f7"
-subtext0="#a5adce"
 eggplant="#ff007c"
-
-thm_fg=$subtext0
 
 SYSTEM=$(source /opt/scripts/utils/determine_system.sh)
 if [ "${SYSTEM}" == "Darwin" ]; then
@@ -19,10 +16,14 @@ else
 fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
+	subtext0="#a5adce"
 	thm_bg="#3b4261"
 else
-  thm_bg="#d0d5e3"
+	subtext0="#58dfce"
+  thm_bg="#a8aecb"
 fi
+
+thm_fg=$subtext0
 
 TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="◤"
 TMUX_POWERLINE_SEPARATOR_LEFT_THIN="◢"

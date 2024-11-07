@@ -1,8 +1,8 @@
 # Main Colors
-unrecognized_file: darkred
+unrecognized_file: blue
 recognized_file:   darkgreen
-executable_file:   green
-dir:               navyblue
+executable_file:   red
+dir:               fuchsia
 
 # Link
 dead_link: red
@@ -14,10 +14,10 @@ blockdev:  darkgray
 chardev:   darkgray
 
 # Access Modes
-write:     red
-read:      sienna
-exec:      navyblue
-no_access: darkviolet
+write:     royalblue
+read:      magenta
+exec:      deeppink
+no_access: dimgray
 
 # Age
 day_old:     red
@@ -36,7 +36,7 @@ tree:   cyan
 empty:  yellow
 error:  red
 normal: darkgray
-inode: violet
+inode:  violet
 
 # Git
 addition:     chartreuse
