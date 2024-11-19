@@ -4,22 +4,23 @@
 ####################################################################################################
 
 # COLORS
-thm_pink="#f4b8e4"
-blue="#7aa2f7"
+blue="#50a0f0"
 eggplant="#ff007c"
 
-SYSTEM=$(source /opt/scripts/utils/determine_system.sh)
-if [ "${SYSTEM}" == "Darwin" ]; then
+SYSTEM=$(source /opt/scripts/utils/determine_system.sh && echo "Darwin" || echo "Linux")
+if [ "${SYSTEM}" = "Darwin" ]; then
 	IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
 else
 	IS_DARK="Dark"
 fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
-	subtext0="#a5adce"
+	subtext0="#ff007c"
+	current_bg="#18ffde"
 	thm_bg="#3b4261"
 else
-	subtext0="#58dfce"
+	subtext0="#18ffde"
+	current_bg="#f048e4"
   thm_bg="#a8aecb"
 fi
 
@@ -44,7 +45,7 @@ TMUX_POWERLINE_SEG_VCS_BRANCH_GIT_SYMBOL_COLOUR=$thm_bg
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
-		"#[$(echo "fg=$thm_bg,bg=$thm_pink,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$thm_bg,bg=$current_bg,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD" \
 		" #W " \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
@@ -95,7 +96,7 @@ fi
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"hostname $subtext0 $eggplant"
+		"hostname $subtext0 $thm_bg"
 		"tmux_session_info $thm_bg $thm_fg"
 		"vcs_branch $subtext0 $thm_bg"
 	)

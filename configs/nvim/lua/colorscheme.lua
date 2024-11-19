@@ -62,6 +62,10 @@ require('tokyonight').setup({
     highlights.NvimTreeWinSeparator         = { fg = colors.bg, bg = colors.bg }
 
     highlights["@namespace"]                = highlights["@module"]
+
+    if current_theme == "day" then
+      highlights.Search                     = { fg = colors.bg_dark, bg = colors.blue2 }
+    end
   end,
 
   cache = true, -- When set to true, the theme will be cached for better performance

@@ -86,6 +86,10 @@ lsp.clangd.setup({
 lsp.ts_ls.setup({
   capabilities = capabilities
 })
+-- -- -- vim-language-server
+lsp.vimls.setup({
+  capabilities = capabilities
+})
 -- -- -- texlab
 lsp.texlab.setup({
   capabilities = capabilities
