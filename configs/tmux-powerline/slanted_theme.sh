@@ -4,7 +4,6 @@
 ####################################################################################################
 
 # COLORS
-blue="#50a0f0"
 eggplant="#ff007c"
 
 SYSTEM=$(source /opt/scripts/utils/determine_system.sh && echo "Darwin" || echo "Linux")
@@ -18,10 +17,12 @@ if [ "${IS_DARK}" = "Dark" ]; then
 	subtext0="#ff007c"
 	current_bg="#18ffde"
 	thm_bg="#3b4261"
+	blue="#50a0f0"
 else
 	subtext0="#18ffde"
 	current_bg="#f048e4"
   thm_bg="#a8aecb"
+	blue="#18e0f0"
 fi
 
 thm_fg=$subtext0
