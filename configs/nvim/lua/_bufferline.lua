@@ -6,20 +6,13 @@ local function get_highlights(_palette)
     -- local hex           = colors.get_color
     -- local tint          = colors.shade_color
 
-    -- local fill_bg       = _palette.mantle
-    local fill_bg       = _palette.bg_dark
+    local fill_bg       = _palette.bg_dark or _palette.mantle
     local error_fg      = _palette.red
-    -- local warning_fg    = _palette.peach
-    -- local warning_fg    = _palette.red1
-    -- local info_fg       = _palette.rosewater
     local hint_fg       = _palette.blue
-    -- local comment_fg    = _palette.overlay0
-    local comment_fg    = _palette.comment
-    -- local visible_fg    = _palette.overlay0
-    local visible_fg    = _palette.comment
+    local comment_fg    = _palette.comment or _palette.overlay0
+    local visible_fg    = _palette.comment or _palette.overlay0
     local string_fg     = _palette.green
-    -- local normal_bg     = _palette.base
-    local normal_bg     = _palette.bg
+    local normal_bg     = _palette.bg or _palette.base
 
     return {
         fill = {

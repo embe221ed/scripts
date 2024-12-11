@@ -1,4 +1,16 @@
-local _colorscheme = 'tokyonight'
+local function _is_dark()
+  local out = os.execute("/opt/scripts/utils/determine_system.sh") / 256
+  -- not Darwin (MacOS), early return
+  if out ~= 1 then return true end
+  local result = os.execute("defaults read -g AppleInterfaceStyle &> /dev/null") / 256
+  if result == 1 then
+    return false
+  else
+    return true
+  end
+end
+
+local _colorscheme = _is_dark() and 'tokyonight' or 'catppuccin'
 
 local function _get_tokyonight_day_palette(palette)
   local opts = {}
@@ -12,15 +24,7 @@ local function determine_theme(colorscheme)
   elseif colorscheme == 'tokyonight' then
     dark, light = "storm", "day"
   end
-  local out = os.execute("/opt/scripts/utils/determine_system.sh") / 256
-  -- not Darwin (MacOS), early return
-  if out ~= 1 then return dark end
-  local result = os.execute("defaults read -g AppleInterfaceStyle &> /dev/null") / 256
-  if result == 1 then
-    return light
-  else
-    return dark
-  end
+  if _is_dark() then return dark else return light end
 end
 
 local function get_palette(colorscheme, theme)
