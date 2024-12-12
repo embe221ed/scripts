@@ -10,19 +10,15 @@ local palette = globals.get_palette(globals.colorscheme, current_theme)
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg        = palette.bg,
-  fg        = palette.fg,
+  bg        = palette.bg or palette.base,
+  fg        = palette.fg or palette.surface2,
   yellow    = palette.yellow,
-  cyan      = '#008080',
-  darkblue  = '#081633',
   green     = palette.green,
-  orange    = palette.orange,
-  violet    = '#a9a1e1',
-  magenta   = '#c678dd',
+  orange    = palette.orange or palette.peach,
   blue      = palette.blue,
   red       = palette.red,
-  mauve     = palette.magenta,
-  pink      = palette.magenta2,
+  mauve     = palette.magenta or palette.mauve,
+  pink      = palette.magenta2 or palette.pink,
 }
 
 local conditions = {

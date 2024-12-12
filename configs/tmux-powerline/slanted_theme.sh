@@ -1,10 +1,11 @@
 ####################################################################################################
-# This is a minimalist theme created by @embe221ed (https://github.com/embe221ed)
-# colors are inspired by catppuccin palettes (https://github.com/catppuccin/catppuccin)
+# This is a slanted theme created by @embe221ed (https://github.com/embe221ed)
+# colors are inspired by catppuccin and tokyonight palettes
 ####################################################################################################
 
-# COLORS
+
 eggplant="#ff007c"
+theme="catppuccin"
 
 SYSTEM=$(source /opt/scripts/utils/determine_system.sh && echo "Darwin" || echo "Linux")
 if [ "${SYSTEM}" = "Darwin" ]; then
@@ -14,15 +15,29 @@ else
 fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
-	subtext0="#ff007c"
-	current_bg="#18ffde"
-	thm_bg="#3b4261"
-	blue="#50a0f0"
+	if [ "${theme}" = "catppuccin" ]; then
+		current_bg="#81c8be"
+		subtext0="#f4b8e4"
+		thm_bg="#838ba7"
+		blue="#8caaee"
+	else
+		current_bg="#18ffde"
+		subtext0="#ff007c"
+		thm_bg="#3b4261"
+		blue="#50a0f0"
+	fi
 else
-	subtext0="#18ffde"
-	current_bg="#f048e4"
-  thm_bg="#a8aecb"
-	blue="#18e0f0"
+	if [ "${theme}" = "catppuccin" ]; then
+		current_bg="#ea76cb"
+		subtext0="#209fb5"
+		thm_bg="#dce0e8"
+		blue="#04a5e5"
+	else
+		current_bg="#f048e4"
+		subtext0="#18ffde"
+		thm_bg="#a8aecb"
+		blue="#18e0f0"
+	fi
 fi
 
 thm_fg=$subtext0

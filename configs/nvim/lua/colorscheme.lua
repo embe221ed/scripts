@@ -89,7 +89,7 @@ if colorscheme == 'tokyonight' then
   })
 elseif colorscheme == 'catppuccin' then
   -- Catppuccin theme
-  local palette = require("catppuccin.palettes").get_palette(current_theme)
+  local palette = globals.get_palette(colorscheme, current_theme)
   require('catppuccin').setup  {
     flavour = current_theme, -- latte, frappe, macchiato, mocha
     transparent_background = false, -- disables setting the background color.
@@ -119,35 +119,58 @@ elseif colorscheme == 'catppuccin' then
       -- miscs = {}, -- Uncomment to turn off hard-coded styles
     },
     color_overrides = {
+      latte = {
+        text = "#5e657a",
+      },
       frappe = {
         lavender = "#b4b5ee",
       }
     },
     custom_highlights = {
       NoicePopup                  = { bg = palette.mantle },
+      NoiceCmdlinePopupBorder     = { fg = palette.mauve },
+
       TabLineSel                  = { bg = palette.mauve },
       FloatBorder                 = { fg = palette.mauve, bg = palette.base, style = { "bold" } },
+
       StatusLine                  = { fg = palette.base, bg = palette.base },
       StatusLineNC                = { fg = palette.base, bg = palette.base },
-      OutlineCurrent              = { fg = palette.green, bg = "", style = { "bold" } },
+
+      CursorLineNr                = { fg = palette.peach, style = { "bold" } },
+
+      OutlineCurrent              = { fg = palette.peach, bg = "", style = { "bold" } },
+
       TelescopeTitle              = { fg = palette.cyan },
-      TelescopeBorder             = { fg = palette.mauve },
+      TelescopeBorder             = { fg = palette.mauve, style = { "bold" } },
+
+      NvimTreeFolderName          = { fg = palette.blue },
+      NvimTreeFolderIcon          = { fg = palette.blue },
+      NvimTreeOpenedFolderName    = { fg = palette.blue },
+      NvimTreeEmptyFolderName     = { fg = palette.blue },
+      NvimTreeIndentMarker        = { fg = palette.overlay0 },
+      NvimTreeWinSeparator        = { fg = palette.base, bg = palette.base, },
+      NvimTreeRootFolder          = { fg = palette.peach, style = { "bold" } },
+      NvimTreeSymlink             = { fg = palette.pink },
+      NvimTreeGitDirty            = { fg = palette.yellow },
+      NvimTreeGitNew              = { fg = palette.blue },
+      NvimTreeGitDeleted          = { fg = palette.red },
+      NvimTreeSpecialFile         = { fg = palette.flamingo },
+      NvimTreeImageFile           = { fg = palette.text },
+      NvimTreeOpenedFile          = { fg = palette.pink },
+      NvimTreeNormal              = { fg = palette.text, bg = palette.mantle },
       NvimTreeExecFile            = { fg = palette.red },
-      -- TreesitterContext           = { bg = palette.mantle },
       NvimTreeOpenedHL            = { fg = palette.subtext0, style = { "italic" } },
-      NvimTreeRootFolder          = { fg = palette.peach },
       NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
       NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
-      NoiceCmdlinePopupBorder     = { fg = palette.mauve },
-      -- TreesitterContextLineNumber = { bg = palette.mantle, fg = palette.surface1 },
+
     }, -- Override highlight groups
     default_integrations = false,
     integrations = {
       cmp = true,
       gitsigns = true,
-      nvimtree = true,
+      nvimtree = false,
       treesitter = true,
-      notify = false,
+      notify = true,
       mini = {
         enabled = true,
         indentscope_color = "",

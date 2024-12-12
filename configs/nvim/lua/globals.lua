@@ -10,7 +10,9 @@ local function _is_dark()
   end
 end
 
-local _colorscheme = _is_dark() and 'tokyonight' or 'catppuccin'
+local _dark_colorscheme = 'catppuccin'
+local _light_colorscheme = 'catppuccin'
+local _colorscheme = _is_dark() and _dark_colorscheme or _light_colorscheme
 
 local function _get_tokyonight_day_palette(palette)
   local opts = {}
