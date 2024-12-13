@@ -78,8 +78,8 @@ require('Comment').setup {
 -- -- todo-comments
 require("todo-comments").setup {
   keywords = {
-    AUDIT       = { icon = "󰒃 ", color = "audit" },
-    QUESTION    = { icon = " ", color = "question" },
+    AUDIT       = { icon = "󰒃 ", color = "audit", alt = { "SECURITY" } },
+    QUESTION    = { icon = " ", color = "question", alt = { "Q", "ASK" } },
     FINDING     = { icon = "󰈸 ", color = "error", alt = { "BUG", "ISSUE" } },
     SUGGESTION  = { icon = " ", color = "sugg", alt = { "NIT", "SUG" } },
     IDEA        = { icon = " ", color = "idea" },

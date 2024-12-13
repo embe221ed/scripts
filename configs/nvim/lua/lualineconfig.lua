@@ -39,7 +39,7 @@ local conditions = {
 local config = {
   options = {
     -- Disable sections and component separators
-    component_separators = '',
+    component_separators = '╱',
     section_separators = '',
     theme = {
       -- We are going to use lualine_c an lualine_x as left and
@@ -141,13 +141,6 @@ ins_left {
 
 -- Add components to right sections
 ins_right {
-  'selectioncount',
-  color = { fg = colors.fg, gui = 'bold' },
-}
-
-ins_right { 'location' }
-
-ins_right {
   'diff',
   symbols = { added = ' ', modified = '󱗜 ', removed = ' ' },
   diff_color = {
@@ -156,6 +149,33 @@ ins_right {
     removed = { fg = colors.red },
   },
   cond = conditions.hide_in_width,
+}
+
+ins_right {
+  'selectioncount',
+  color = { fg = colors.fg, gui = 'bold' },
+}
+
+ins_right { 'location' }
+
+ins_right {
+  function()
+    local cur = vim.fn.line('.')
+    local total = vim.fn.line('$')
+    local p = math.floor(cur / total * 100)
+    local icon = ''
+    if p == 100 then icon = '  '
+    elseif p >= 87 then icon = '▁▁▁'
+    elseif p >= 75 then icon = '▂▂▂'
+    elseif p >= 62 then icon = '▃▃▃'
+    elseif p >= 50 then icon = '▄▄▄'
+    elseif p >= 37 then icon = '▅▅▅'
+    elseif p >= 25 then icon = '▆▆▆'
+    elseif p >= 10 then icon = '▇▇▇'
+    else icon = '███'
+    end
+    return string.format('%s %2d%%%%', icon, p)
+  end
 }
 
 -- Now don't forget to initialize lualine

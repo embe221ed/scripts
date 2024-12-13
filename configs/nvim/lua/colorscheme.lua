@@ -120,7 +120,7 @@ elseif colorscheme == 'catppuccin' then
     },
     color_overrides = {
       latte = {
-        text = "#5e657a",
+        text = "#6c6f85",
       },
       frappe = {
         lavender = "#b4b5ee",
