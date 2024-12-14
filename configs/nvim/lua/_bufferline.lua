@@ -301,7 +301,7 @@ local bufferline  = require('bufferline')
 bufferline.setup {
     highlights = get_highlights(palette),
     options = {
-        separator_style = { "", "" },
+        separator_style = { "|", "|" },
         diagnostics = "nvim_lsp",
         buffer_close_icon = "󰅖",
         indicator = {
