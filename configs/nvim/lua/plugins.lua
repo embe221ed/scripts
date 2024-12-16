@@ -99,19 +99,117 @@ return require("lazy").setup(
       event = "LspAttach"
     },
     -- autocompletion
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-path" },
-    { "hrsh7th/cmp-cmdline" },
-    { "hrsh7th/nvim-cmp" },
-    { "saadparwaiz1/cmp_luasnip" },                                   -- Snippets source for nvim-cmp
     {
-      "L3MON4D3/LuaSnip",
-      build = "make install_jsregexp",
+      'saghen/blink.cmp',
+      lazy = false, -- lazy loading handled internally
+      -- optional: provides snippets for the snippet source
       dependencies = {
-        "rafamadriz/friendly-snippets"
+        { 'rafamadriz/friendly-snippets' },
+        { 'L3MON4D3/LuaSnip', version = 'v2.*' },
       },
-    },                                                                -- Snippets plugin
+
+      -- use a release tag to download pre-built binaries
+      version = 'v0.*',
+      -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+      -- build = 'cargo build --release',
+      -- If you use nix, you can build from source using latest nightly rust with:
+      -- build = 'nix run .#build-plugin',
+
+      ---@module 'blink.cmp'
+      ---@type blink.cmp.Config
+      ---@diagnostic disable: missing-fields
+      opts = {
+        -- 'default' for mappings similar to built-in completion
+        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+        -- see the "default configuration" section below for full documentation on how to define
+        -- your own keymap.
+        keymap = { preset = 'enter' },
+
+        appearance = {
+          -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+          -- Useful for when your theme doesn't support blink.cmp
+          -- will be removed in a future release
+          use_nvim_cmp_as_default = true,
+          -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+          -- Adjusts spacing to ensure icons are aligned
+          nerd_font_variant = 'mono'
+        },
+        snippets = {
+          expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
+          active = function(filter)
+            if filter and filter.direction then
+              return require('luasnip').jumpable(filter.direction)
+            end
+            return require('luasnip').in_snippet()
+          end,
+          jump = function(direction) require('luasnip').jump(direction) end,
+        },
+
+        -- default list of enabled providers defined so that you can extend it
+        -- elsewhere in your config, without redefining it, via `opts_extend`
+        sources = {
+          default = { 'lsp', 'path', 'snippets', 'buffer' },
+          -- optionally disable cmdline completions
+          -- cmdline = {},
+        },
+        completion = {
+          menu = {
+            -- Screen coordinates of the command line
+            cmdline_position = function()
+              if vim.g.ui_cmdline_pos ~= nil then
+                local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
+                return { pos[1] - 1, pos[2] }
+              end
+              local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
+              return { vim.o.lines - height, 0 }
+            end,
+            draw = {
+              components = {
+                label_description = {
+                  highlight = 'Comment',
+                },
+              }
+            }
+          },
+          documentation = {
+            auto_show = true,
+            window = {
+              min_width = 10,
+              max_width = 150,
+              max_height = 40,
+              border = 'padded',
+              winblend = 0,
+              winhighlight = 'Normal:NoicePopup,FloatBorder:NoicePopup,CursorLine:BlinkCmpDocCursorLine,Search:None',
+              -- Note that the gutter will be disabled when border ~= 'none'
+              scrollbar = true,
+              -- Which directions to show the documentation window,
+              -- for each of the possible menu window directions,
+              -- falling back to the next direction when there's not enough space
+              direction_priority = {
+                menu_north = { 'e', 'w', 'n', 's' },
+                menu_south = { 'e', 'w', 's', 'n' },
+              },
+            },
+          },
+        },
+
+        -- experimental signature help support
+        -- signature = { enabled = true }
+      },
+      ---@diagnostic enable: missing-fields
+      -- allows extending the providers array elsewhere in your config
+      -- without having to redefine it
+      opts_extend = { "sources.default" }
+    },
+    -- { "saadparwaiz1/cmp_luasnip" },                                   -- Snippets source for nvim-cmp
+    -- {
+    --   "L3MON4D3/LuaSnip",
+    --   build = "make install_jsregexp",
+    --   dependencies = {
+    --     "rafamadriz/friendly-snippets"
+    --   },
+    -- },                                                                -- Snippets plugin
     -- end
 
     { "lervag/vimtex" },                                              -- LaTeX
