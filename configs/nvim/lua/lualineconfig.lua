@@ -100,9 +100,8 @@ ins_left(
 ins_left {
   -- mode component
   function()
-    return require("lualine.utils.mode").get_mode()
+    return string.format("-- %s --", require("lualine.utils.mode").get_mode())
   end,
-  color = { gui = 'bold' },
 }
 
 ins_left(

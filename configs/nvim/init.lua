@@ -47,7 +47,7 @@ require('nvim-tree').setup {
     add_trailing = true,
     full_name = true,
     root_folder_label = function(path)
-      return "  " .. vim.fn.fnamemodify(path, ":t") .. "/"
+      return " " .. vim.fn.fnamemodify(path, ":t") .. "/"
     end,
     symlink_destination = false,
     indent_markers = {
@@ -73,23 +73,6 @@ local ft = require("Comment.ft")
 ft.set('move', { '//%s', '/*%s*/' })
 require('Comment').setup {
   comment_empty = false
-}
-
--- -- todo-comments
-require("todo-comments").setup {
-  keywords = {
-    AUDIT       = { icon = "󰒃 ", color = "audit", alt = { "SECURITY" } },
-    QUESTION    = { icon = " ", color = "question", alt = { "Q", "ASK" } },
-    FINDING     = { icon = "󰈸 ", color = "error", alt = { "BUG", "ISSUE" } },
-    SUGGESTION  = { icon = " ", color = "sugg", alt = { "NIT", "SUG" } },
-    IDEA        = { icon = " ", color = "idea" },
-  },
-  colors = {
-    idea      = { "#ffd600" },
-    audit     = { "#de85f5" },
-    question  = { "#2e7de9" },
-    sugg      = { "#07879d" },
-  }
 }
 
 -- -- Symbols Outline
@@ -140,6 +123,34 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 	end
 end, {silent = true})
 
+local kind_icons = {
+  Text = "",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰇽",
+  Variable = "󰂡",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "",
+  Event = "",
+  Operator = "󰆕",
+  TypeParameter = "󰅲",
+}
+
 ---@diagnostic disable-next-line: redundant-parameter
 cmp.setup({
   snippet = {
@@ -151,20 +162,20 @@ cmp.setup({
   window = {
     completion = {
       winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-      col_offset = -3,
-      side_padding = 0,
+      col_offset = 0,
+      side_padding = 1,
+    },
+    documentation = {
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
     },
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-      local strings = vim.split(kind.kind, "%s", { trimempty = true })
-      kind.kind = " " .. (strings[1] or "") .. " "
-      kind.menu = "    (" .. (strings[2] or "") .. ")"
-
-      return kind
-    end,
+      local kind = string.format('\t\t%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+      require('lspkind').cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+      vim_item.kind = kind
+      return vim_item
+    end
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>']     = cmp.mapping.scroll_docs(-4),
@@ -224,6 +235,25 @@ require("illuminate").configure({
 require('colorscheme')    -- colorscheme
 local current_theme = globals.current_theme
 local palette = globals.get_palette(globals.colorscheme, current_theme)
+
+-- -- todo-comments
+require("todo-comments").setup {
+  keywords = {
+    AUDIT       = { icon = "󰒃 ", color = "audit", alt = { "SECURITY" } },
+    QUESTION    = { icon = " ", color = "question", alt = { "Q", "ASK" } },
+    FINDING     = { icon = "󰈸 ", color = "error", alt = { "BUG", "ISSUE" } },
+    SUGGESTION  = { icon = " ", color = "sugg", alt = { "NIT", "SUG" } },
+    NOTE        = { icon = "", color = "hint", alt = { "INFO" } },
+    IDEA        = { icon = " ", color = "idea" },
+  },
+  colors = {
+    idea      = { palette.yellow },
+    audit     = { palette.mauve },
+    question  = { palette.sky },
+    sugg      = { palette.teal },
+  }
+}
+
 
 require('_bufferline')
 require('colorizer').setup({
@@ -304,11 +334,11 @@ require("noice").setup {
     cmdline_popup = {
       position = { row = "20%", col = "50%", },
       size = { width = "auto", height = "auto", },
-      border = { style = "rounded", },
+      border = { style = "rounded" },
       filter_options = {},
       win_options = {
         winhighlight = {
-          FloatBorder = "FloatBorder"
+          FloatBorder = "FloatBorder",
         },
       },
     },
@@ -347,6 +377,8 @@ require("no-neck-pain").setup({
     },
   },
 })
+
+require("nvim-web-devicons").set_default_icon('', '#6d8086', 66)
 
 -- obsidian vault integration
 require("obsidian").setup({
