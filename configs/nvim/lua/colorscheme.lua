@@ -127,11 +127,12 @@ elseif colorscheme == 'catppuccin' then
       }
     },
     custom_highlights = {
-      NoicePopup                  = { bg = palette.crust },
-      NoiceCmdlinePopupBorder     = { fg = palette.surface1, style = { "bold" } },
-
+      WinSeparator                = { fg = palette.surface0 },
       TabLineSel                  = { bg = palette.mauve },
       FloatBorder                 = { fg = palette.surface1, bg = palette.base, style = { "bold" } },
+
+      NoicePopup                  = { bg = palette.crust },
+      NoiceCmdlinePopupBorder     = { fg = palette.surface1, style = { "bold" } },
 
       StatusLine                  = { fg = palette.base, bg = palette.base },
       StatusLineNC                = { fg = palette.base, bg = palette.base },

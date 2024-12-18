@@ -16,11 +16,10 @@ else
 fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
-  # Use a slightly cooler cyan for dark mode:
   cyan="%F{117}" # Approximation of sky (#99d1db)
 else
-  # Use a teal-like cyan for non-dark mode:
-  cyan="%F{116}" # Approximation of teal (#81c8be)
+  # Inspired by Latte's sky (approx #04a5e5):
+  cyan="%F{39}"
 fi
 
 red="%F{203}"      # Approx red (#e78284)
