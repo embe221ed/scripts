@@ -19,7 +19,7 @@ if [ "${IS_DARK}" = "Dark" ]; then
 		current_bg="#81c8be"
 		subtext0="#f4b8e4"
 		thm_bg="#838ba7"
-		blue="#8caaee"
+		blue="#70c0fc"
 	else
 		current_bg="#18ffde"
 		subtext0="#ff007c"

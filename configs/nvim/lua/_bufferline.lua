@@ -13,6 +13,7 @@ local function get_highlights(_palette)
     local visible_fg    = _palette.comment or _palette.overlay0
     local string_fg     = _palette.green
     local normal_bg     = _palette.bg or _palette.base
+    local sep_fg        = _palette.surface0
 
     return {
         fill = {
@@ -253,15 +254,15 @@ local function get_highlights(_palette)
             italic = true,
         },
         separator_selected = {
-            -- fg = '<colour-value-here>',
+            fg = sep_fg,
             bg = normal_bg,
         },
         separator_visible = {
-            -- fg = '<colour-value-here>',
+            fg = sep_fg,
             bg = fill_bg,
         },
         separator = {
-            -- fg = '<colour-value-here>',
+            fg = sep_fg,
             bg = fill_bg,
         },
         indicator_visible = {
