@@ -24,7 +24,7 @@ fi
 
 red="%F{203}"      # Approx red (#e78284)
 blue="%F{110}"     # Approx blue (#8caaee)
-green="%F{151}"    # Approx green (#a6d189)
+green="%F{149}"    # Approx green (#a6d189)
 yellow="%F{179}"   # Approx yellow (#e5c890)
 magenta="%F{176}"  # Approx mauve (#ca9ee6)
 reset="%f%k%F{default}%K{default}%b%u"
