@@ -16,9 +16,9 @@ fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
 	if [ "${theme}" = "catppuccin" ]; then
-		current_bg="#81c8be"
+		current_bg="#fb78fb"
 		subtext0="#f4b8e4"
-		surface0="#414559",
+		surface0="#626880",
 		thm_bg="#838ba7"
 		blue="#70c0fc"
 	else
