@@ -18,6 +18,7 @@ if [ "${IS_DARK}" = "Dark" ]; then
 	if [ "${theme}" = "catppuccin" ]; then
 		current_bg="#81c8be"
 		subtext0="#f4b8e4"
+		surface0="#414559",
 		thm_bg="#838ba7"
 		blue="#70c0fc"
 	else
@@ -30,6 +31,8 @@ else
 	if [ "${theme}" = "catppuccin" ]; then
 		current_bg="#ea76cb"
 		subtext0="#209fb5"
+		surface0="#ccd0da",
+		base="#eff1f5",
 		thm_bg="#dce0e8"
 		blue="#04a5e5"
 	else
@@ -63,7 +66,12 @@ if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
 		"#[$(echo "fg=$thm_bg,bg=$current_bg,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD" \
+		" #I#{#F,} " \
+		"#[$(echo "fg=$surface0,bg=$current_bg,bold,noitalics,nounderscore")]" \
+		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
+		"#[$(echo "fg=$subtext0,bg=$surface0,bold,noitalics,nounderscore")]" \
 		" #W " \
+		"#[$(echo "fg=$thm_bg,bg=$surface0,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
 	)
 fi
@@ -76,10 +84,15 @@ fi
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-		"#[$(format regular)]" \
-		" #I#{#F,}" \
-		"$TMUX_POWERLINE_SEPARATOR_THIN" \
-		"#W "
+		"#[$(echo "fg=$thm_bg,bg=$subtext0,nobold,noitalics,nounderscore")]" \
+		"$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD" \
+		" #I#{#F,} " \
+		"#[$(echo "fg=$surface0,bg=$subtext0,nobold,noitalics,nounderscore")]" \
+		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
+		"#[$(echo "fg=$subtext0,bg=$surface0,nobold,noitalics,nounderscore")]" \
+		" #W "
+		"#[$(echo "fg=$thm_bg,bg=$surface0,nobold,noitalics,nounderscore")]" \
+		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD"
 	)
 fi
 
