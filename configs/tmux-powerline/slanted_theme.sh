@@ -16,35 +16,33 @@ fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
 	if [ "${theme}" = "catppuccin" ]; then
-		subtext0="#f4b8e4"
-		surface0="#626880",
-		peach="#ef9f76",
-		current_bg=$peach
-		thm_bg="#737994"
+		alt_bg="#f4b8e4"
+		tint_bg="#626880"
+		selected="#ef9f76"
+		default_bg="#737994"
 		blue="#70c0fc"
 	else
-		current_bg="#18ffde"
-		subtext0="#ff007c"
-		thm_bg="#3b4261"
+		selected="#18ffde"
+		alt_bg="#ff007c"
+		default_bg="#3b4261"
 		blue="#50a0f0"
 	fi
 else
 	if [ "${theme}" = "catppuccin" ]; then
-		subtext0="#209fb5"
-		surface0="#ccd0da",
-		peach="#fe640b",
-		current_bg=$peach
-		thm_bg="#dce0e8"
+		alt_bg="#209fb5"
+		tint_bg="#ccd0da"
+		selected="#fe640b"
+		default_bg="#dce0e8"
 		blue="#04a5e5"
 	else
-		current_bg="#f048e4"
-		subtext0="#18ffde"
-		thm_bg="#a8aecb"
+		selected="#f048e4"
+		alt_bg="#18ffde"
+		default_bg="#a8aecb"
 		blue="#18e0f0"
 	fi
 fi
 
-thm_fg=$subtext0
+default_fg=$alt_bg
 
 TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="◤"
 TMUX_POWERLINE_SEPARATOR_LEFT_THIN="◢"
@@ -52,27 +50,27 @@ TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="◢"
 TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="◤"
 TMUX_POWERLINE_SEPARATOR_THIN=""
 
-TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-$thm_bg}
-TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR:-$thm_fg}
+TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-$default_bg}
+TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR:-$default_fg}
 
 TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR:-$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}
 TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR:-$TMUX_POWERLINE_SEPARATOR_LEFT_THIN}
 
-TMUX_POWERLINE_SEG_VCS_BRANCH_GIT_SYMBOL_COLOUR=$thm_bg
+TMUX_POWERLINE_SEG_VCS_BRANCH_GIT_SYMBOL_COLOUR=$default_bg
 
 # See man tmux.conf for additional formatting options for the status line.
 # The `format regular` and `format inverse` functions are provided as conveinences
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
-		"#[$(echo "fg=$thm_bg,bg=$current_bg,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$default_bg,bg=$selected,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD" \
 		" #I#{#F,} " \
-		"#[$(echo "fg=$surface0,bg=$current_bg,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$tint_bg,bg=$selected,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
-		"#[$(echo "fg=$current_bg,bg=$surface0,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$selected,bg=$tint_bg,bold,noitalics,nounderscore")]" \
 		" #W " \
-		"#[$(echo "fg=$thm_bg,bg=$surface0,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$default_bg,bg=$tint_bg,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
 	)
 fi
@@ -85,14 +83,14 @@ fi
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-		"#[$(echo "fg=$thm_bg,bg=$subtext0,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$default_bg,bg=$alt_bg,nobold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD" \
 		" #I#{#F,} " \
-		"#[$(echo "fg=$surface0,bg=$subtext0,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$tint_bg,bg=$alt_bg,nobold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
-		"#[$(echo "fg=$subtext0,bg=$surface0,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$alt_bg,bg=$tint_bg,nobold,noitalics,nounderscore")]" \
 		" #W "
-		"#[$(echo "fg=$thm_bg,bg=$surface0,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$default_bg,bg=$tint_bg,nobold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD"
 	)
 fi
@@ -126,16 +124,16 @@ fi
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"hostname $subtext0 $thm_bg"
-		"tmux_session_info $thm_bg $thm_fg"
-		"vcs_branch $subtext0 $thm_bg"
+		"hostname $alt_bg $default_bg"
+		"tmux_session_info $tint_bg $default_fg"
 	)
 fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-		"battery $thm_bg $blue"
-		"date $subtext0 $thm_bg"
-		"time $subtext0 $thm_bg ┊ $thm_fg $thm_bg"
+		"vcs_branch $alt_bg $default_bg"
+		"battery $default_bg $blue"
+		"date $alt_bg $default_bg"
+		"time $alt_bg $default_bg ┊ $default_fg $default_bg"
 	)
 fi
