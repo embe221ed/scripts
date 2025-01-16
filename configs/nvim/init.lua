@@ -388,8 +388,8 @@ require("obsidian").setup({
   -- You can also provide configuration overrides for each workspace through the `overrides` field.
   workspaces = {
     {
-      name = "CTF",
-      path = "~/Desktop/knowledge/CTF",
+      name = "notes",
+      path = "~/Desktop/knowledge",
     },
     {
       name = "work",

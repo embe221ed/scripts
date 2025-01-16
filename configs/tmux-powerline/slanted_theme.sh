@@ -30,10 +30,10 @@ if [ "${IS_DARK}" = "Dark" ]; then
 	fi
 else
 	if [ "${theme}" = "catppuccin" ]; then
-		current_bg="#ea76cb"
 		subtext0="#209fb5"
 		surface0="#ccd0da",
 		peach="#fe640b",
+		current_bg=$peach
 		thm_bg="#dce0e8"
 		blue="#04a5e5"
 	else
