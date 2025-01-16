@@ -4,8 +4,12 @@
 ####################################################################################################
 
 
-eggplant="#ff007c"
 theme="catppuccin"
+if [ "${theme}" = "catppuccin" ]; then
+	eggplant="#ea76cb"
+else
+	eggplant="#ff007c"
+fi
 
 SYSTEM=$(source /opt/scripts/utils/determine_system.sh && echo "Darwin" || echo "Linux")
 if [ "${SYSTEM}" = "Darwin" ]; then
@@ -17,7 +21,8 @@ fi
 if [ "${IS_DARK}" = "Dark" ]; then
 	if [ "${theme}" = "catppuccin" ]; then
 		alt_bg="#f4b8e4"
-		tint_bg="#626880"
+		tint_bg0="#626880"
+		tint_bg1="#949cbb"
 		selected="#ef9f76"
 		default_bg="#737994"
 		blue="#70c0fc"
@@ -30,7 +35,8 @@ if [ "${IS_DARK}" = "Dark" ]; then
 else
 	if [ "${theme}" = "catppuccin" ]; then
 		alt_bg="#209fb5"
-		tint_bg="#ccd0da"
+		tint_bg0="#ccd0da"
+		tint_bg1="#9ca0b0"
 		selected="#fe640b"
 		default_bg="#dce0e8"
 		blue="#04a5e5"
@@ -66,11 +72,11 @@ if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
 		"#[$(echo "fg=$default_bg,bg=$selected,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD" \
 		" #I#{#F,} " \
-		"#[$(echo "fg=$tint_bg,bg=$selected,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$tint_bg0,bg=$selected,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
-		"#[$(echo "fg=$selected,bg=$tint_bg,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$selected,bg=$tint_bg0,bold,noitalics,nounderscore")]" \
 		" #W " \
-		"#[$(echo "fg=$default_bg,bg=$tint_bg,bold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$default_bg,bg=$tint_bg0,bold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
 	)
 fi
@@ -83,14 +89,14 @@ fi
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
 	TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-		"#[$(echo "fg=$default_bg,bg=$alt_bg,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$default_bg,bg=$tint_bg1,nobold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_LEFT_BOLD" \
 		" #I#{#F,} " \
-		"#[$(echo "fg=$tint_bg,bg=$alt_bg,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$tint_bg0,bg=$tint_bg1,nobold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD" \
-		"#[$(echo "fg=$alt_bg,bg=$tint_bg,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$tint_bg1,bg=$tint_bg0,nobold,noitalics,nounderscore")]" \
 		" #W "
-		"#[$(echo "fg=$default_bg,bg=$tint_bg,nobold,noitalics,nounderscore")]" \
+		"#[$(echo "fg=$default_bg,bg=$tint_bg0,nobold,noitalics,nounderscore")]" \
 		"$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD"
 	)
 fi
@@ -124,8 +130,8 @@ fi
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"hostname $alt_bg $default_bg"
-		"tmux_session_info $tint_bg $default_fg"
+		"hostname $eggplant $default_bg"
+		"tmux_session_info $tint_bg0 $eggplant"
 	)
 fi
 
