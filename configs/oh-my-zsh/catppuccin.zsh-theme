@@ -12,7 +12,7 @@ SYSTEM=$?
 if [ "${SYSTEM}" = "1" ]; then
 	IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
 else
-	IS_DARK="Dark"
+	IS_DARK="${DISPLAY_MODE}"
 fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
