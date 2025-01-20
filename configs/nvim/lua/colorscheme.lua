@@ -144,6 +144,8 @@ elseif colorscheme == 'catppuccin' then
       TelescopeTitle              = { fg = palette.cyan },
       TelescopeBorder             = { fg = palette.surface1, style = { "bold" } },
 
+      AvanteInlineHint            = { fg = palette.overlay2, style = { "italic" } },
+
       NvimTreeFolderName          = { fg = palette.peach },
       NvimTreeFolderIcon          = { fg = palette.peach },
       NvimTreeOpenedFolderName    = { fg = palette.peach },
