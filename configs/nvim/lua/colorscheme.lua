@@ -130,6 +130,7 @@ elseif colorscheme == 'catppuccin' then
       WinSeparator                = { fg = palette.surface0 },
       TabLineSel                  = { bg = palette.mauve },
       FloatBorder                 = { fg = palette.surface1, bg = palette.base, style = { "bold" } },
+      PmenuSel                    = { bg = palette.surface1, style = {} },
 
       NoicePopup                  = { bg = palette.crust },
       NoiceCmdlinePopupBorder     = { fg = palette.surface1, style = { "bold" } },
