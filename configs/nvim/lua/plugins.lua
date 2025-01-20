@@ -162,12 +162,13 @@ return require("lazy").setup(
             selection = { preselect = false, auto_insert = true, }
           },
           menu = {
+            scrollbar = false,
             draw = {
               treesitter = { 'lsp' },
-              columns = {
-                { "label", "label_description", gap = 3 },
-                { "kind_icon", "kind", gap = 1 },
-              },
+              -- columns = {
+              --   { "label", "label_description", gap = 3 },
+              --   { "kind_icon", "kind", gap = 1 },
+              -- },
               components = {
                 label_description = {
                   highlight = 'Comment',
@@ -185,7 +186,7 @@ return require("lazy").setup(
               winblend = 0,
               winhighlight = 'Normal:NoicePopup,FloatBorder:NoicePopup,CursorLine:BlinkCmpDocCursorLine,Search:None',
               -- Note that the gutter will be disabled when border ~= 'none'
-              scrollbar = true,
+              scrollbar = false,
               -- Which directions to show the documentation window,
               -- for each of the possible menu window directions,
               -- falling back to the next direction when there's not enough space
