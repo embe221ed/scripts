@@ -1,7 +1,7 @@
 -- custom configuration for the render-markdown.nvim plugin
 
 require('render-markdown').setup({
-  file_types = { 'markdown', 'norg' },
+  file_types = { 'markdown', 'norg', 'Avante' },
   heading = {
     enabled = true,
     sign = true,

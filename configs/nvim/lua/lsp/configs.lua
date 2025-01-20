@@ -97,7 +97,11 @@ lsp.texlab.setup({
 })
 -- -- -- move-analyzer
 lsp.move_analyzer.setup({
-  capabilities = capabilities
+  capabilities = capabilities,
+  init_options = {
+    inlayHintsParam = true,
+    inlayHintsType = true,
+  }
 })
 -- -- -- golang
 lsp.gopls.setup({

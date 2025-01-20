@@ -127,26 +127,27 @@ elseif colorscheme == 'catppuccin' then
       }
     },
     custom_highlights = {
-      NoicePopup                  = { bg = palette.mantle },
-      NoiceCmdlinePopupBorder     = { fg = palette.mauve },
-
+      WinSeparator                = { fg = palette.surface0 },
       TabLineSel                  = { bg = palette.mauve },
-      FloatBorder                 = { fg = palette.mauve, bg = palette.base, style = { "bold" } },
+      FloatBorder                 = { fg = palette.surface1, bg = palette.base, style = { "bold" } },
+
+      NoicePopup                  = { bg = palette.crust },
+      NoiceCmdlinePopupBorder     = { fg = palette.surface1, style = { "bold" } },
 
       StatusLine                  = { fg = palette.base, bg = palette.base },
       StatusLineNC                = { fg = palette.base, bg = palette.base },
 
-      CursorLineNr                = { fg = palette.peach, style = { "bold" } },
+      CursorLineNr                = { fg = palette.mauve, style = { "bold" } },
 
       OutlineCurrent              = { fg = palette.peach, bg = "", style = { "bold" } },
 
       TelescopeTitle              = { fg = palette.cyan },
-      TelescopeBorder             = { fg = palette.mauve, style = { "bold" } },
+      TelescopeBorder             = { fg = palette.surface1, style = { "bold" } },
 
-      NvimTreeFolderName          = { fg = palette.blue },
-      NvimTreeFolderIcon          = { fg = palette.blue },
-      NvimTreeOpenedFolderName    = { fg = palette.blue },
-      NvimTreeEmptyFolderName     = { fg = palette.blue },
+      NvimTreeFolderName          = { fg = palette.peach },
+      NvimTreeFolderIcon          = { fg = palette.peach },
+      NvimTreeOpenedFolderName    = { fg = palette.peach },
+      NvimTreeEmptyFolderName     = { fg = palette.peach },
       NvimTreeIndentMarker        = { fg = palette.overlay0 },
       NvimTreeWinSeparator        = { fg = palette.base, bg = palette.base, },
       NvimTreeRootFolder          = { fg = palette.peach, style = { "bold" } },
@@ -162,6 +163,14 @@ elseif colorscheme == 'catppuccin' then
       NvimTreeOpenedHL            = { fg = palette.subtext0, style = { "italic" } },
       NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
       NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
+
+      TreesitterContextBottom     = { sp = palette.surface1, style = { "underline" } },
+
+      BufferlineOffsetTitleBase   = { fg = palette.overlay0, bg = palette.mantle },
+      BufferlineOffsetTitleBright = { fg = palette.overlay0, bg = palette.mantle },
+
+      ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
+      ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },
 
     }, -- Override highlight groups
     default_integrations = false,

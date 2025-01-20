@@ -124,7 +124,13 @@ return require("lazy").setup(
         -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
         -- see the "default configuration" section below for full documentation on how to define
         -- your own keymap.
-        keymap = { preset = 'enter' },
+        keymap = {
+          preset = 'enter',
+          ['<Tab>']   = { 'select_next', 'fallback' },
+          ['<S-Tab>'] = { 'select_prev', 'fallback' },
+          ['<C-L>']   = { 'snippet_forward', 'fallback' },
+          ['<C-J>']   = { 'snippet_backward', 'fallback' },
+        },
 
         appearance = {
           -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -154,17 +160,12 @@ return require("lazy").setup(
           -- cmdline = {},
         },
         completion = {
+          list = {
+            selection = { preselect = false, auto_insert = true, }
+          },
           menu = {
-            -- Screen coordinates of the command line
-            cmdline_position = function()
-              if vim.g.ui_cmdline_pos ~= nil then
-                local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
-                return { pos[1] - 1, pos[2] }
-              end
-              local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
-              return { vim.o.lines - height, 0 }
-            end,
             draw = {
+              treesitter = { 'lsp' },
               components = {
                 label_description = {
                   highlight = 'Comment',
@@ -355,6 +356,36 @@ return require("lazy").setup(
     {                                                                 -- A high-performance color highlighter for Neovim
       "norcalli/nvim-colorizer.lua",
     },
+    {
+      "yetone/avante.nvim",
+      event = "VeryLazy",
+      lazy = false,
+      version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+      opts = {
+        provider = "openai",
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4o-mini",
+          timeout = 30000, -- Timeout in milliseconds
+          temperature = 0,
+          max_tokens = 4096,
+        },
+      },
+      -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+      build = "make",
+      dependencies = {
+        "stevearc/dressing.nvim",
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        --- The below dependencies are optional,
+        "echasnovski/mini.pick", -- for file_selector provider mini.pick
+        "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+        "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+        "ibhagwan/fzf-lua", -- for file_selector provider fzf
+        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+        -- "zbirenbaum/copilot.lua", -- for providers='copilot'
+      },
+    }
     -- {
     --   "OXY2DEV/markview.nvim",
     --   lazy = false,      -- Recommended

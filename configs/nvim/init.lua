@@ -47,7 +47,7 @@ require('nvim-tree').setup {
     add_trailing = true,
     full_name = true,
     root_folder_label = function(path)
-      return "  " .. vim.fn.fnamemodify(path, ":t") .. "/"
+      return " " .. vim.fn.fnamemodify(path, ":t") .. "/"
     end,
     symlink_destination = false,
     indent_markers = {
@@ -73,23 +73,6 @@ local ft = require("Comment.ft")
 ft.set('move', { '//%s', '/*%s*/' })
 require('Comment').setup {
   comment_empty = false
-}
-
--- -- todo-comments
-require("todo-comments").setup {
-  keywords = {
-    AUDIT       = { icon = "󰒃 ", color = "audit", alt = { "SECURITY" } },
-    QUESTION    = { icon = " ", color = "question", alt = { "Q", "ASK" } },
-    FINDING     = { icon = "󰈸 ", color = "error", alt = { "BUG", "ISSUE" } },
-    SUGGESTION  = { icon = " ", color = "sugg", alt = { "NIT", "SUG" } },
-    IDEA        = { icon = " ", color = "idea" },
-  },
-  colors = {
-    idea      = { "#ffd600" },
-    audit     = { "#de85f5" },
-    question  = { "#2e7de9" },
-    sugg      = { "#07879d" },
-  }
 }
 
 -- -- Symbols Outline
@@ -139,6 +122,34 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 		luasnip.change_choice(1)
 	end
 end, {silent = true})
+
+local kind_icons = {
+  Text = "",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰇽",
+  Variable = "󰂡",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "",
+  Event = "",
+  Operator = "󰆕",
+  TypeParameter = "󰅲",
+}
 
 ---@diagnostic disable-next-line: redundant-parameter
 -- cmp.setup({
@@ -225,6 +236,25 @@ require('colorscheme')    -- colorscheme
 local current_theme = globals.current_theme
 local palette = globals.get_palette(globals.colorscheme, current_theme)
 
+-- -- todo-comments
+require("todo-comments").setup {
+  keywords = {
+    AUDIT       = { icon = "󰒃 ", color = "audit", alt = { "SECURITY" } },
+    QUESTION    = { icon = " ", color = "question", alt = { "Q", "ASK" } },
+    FINDING     = { icon = "󰈸 ", color = "error", alt = { "BUG", "ISSUE" } },
+    SUGGESTION  = { icon = " ", color = "sugg", alt = { "NIT", "SUG" } },
+    NOTE        = { icon = "", color = "hint", alt = { "INFO" } },
+    IDEA        = { icon = " ", color = "idea" },
+  },
+  colors = {
+    idea      = { palette.yellow },
+    audit     = { palette.mauve },
+    question  = { palette.sky },
+    sugg      = { palette.teal },
+  }
+}
+
+
 require('_bufferline')
 require('colorizer').setup({
   '*';
@@ -304,11 +334,11 @@ require("noice").setup {
     cmdline_popup = {
       position = { row = "20%", col = "50%", },
       size = { width = "auto", height = "auto", },
-      border = { style = "rounded", },
+      border = { style = "rounded" },
       filter_options = {},
       win_options = {
         winhighlight = {
-          FloatBorder = "FloatBorder"
+          FloatBorder = "FloatBorder",
         },
       },
     },
@@ -348,6 +378,8 @@ require("no-neck-pain").setup({
   },
 })
 
+require("nvim-web-devicons").set_default_icon('', '#6d8086', 66)
+
 -- obsidian vault integration
 require("obsidian").setup({
   -- A list of vault names and paths.
@@ -356,8 +388,8 @@ require("obsidian").setup({
   -- You can also provide configuration overrides for each workspace through the `overrides` field.
   workspaces = {
     {
-      name = "CTF",
-      path = "~/Desktop/knowledge/CTF",
+      name = "notes",
+      path = "~/Desktop/knowledge",
     },
     {
       name = "work",

@@ -1,6 +1,6 @@
 # Main Colors
 unrecognized_file: blue
-recognized_file:   darkgreen
+recognized_file:   darkcyan
 executable_file:   red
 dir:               fuchsia
 
