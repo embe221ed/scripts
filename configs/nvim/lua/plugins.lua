@@ -156,8 +156,6 @@ return require("lazy").setup(
         -- elsewhere in your config, without redefining it, via `opts_extend`
         sources = {
           default = { 'lsp', 'path', 'snippets', 'buffer' },
-          -- optionally disable cmdline completions
-          -- cmdline = {},
         },
         completion = {
           list = {
@@ -166,6 +164,10 @@ return require("lazy").setup(
           menu = {
             draw = {
               treesitter = { 'lsp' },
+              columns = {
+                { "label", "label_description", gap = 3 },
+                { "kind_icon", "kind", gap = 1 },
+              },
               components = {
                 label_description = {
                   highlight = 'Comment',
