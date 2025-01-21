@@ -179,6 +179,7 @@ elseif colorscheme == 'catppuccin' then
     default_integrations = false,
     integrations = {
       cmp = true,
+      blink_cmp = true,
       gitsigns = true,
       nvimtree = false,
       treesitter = true,

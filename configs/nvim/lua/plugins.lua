@@ -33,12 +33,12 @@ return require("lazy").setup(
       dependencies = { "nvim-tree/nvim-web-devicons" }                -- filesystem icons
     },
     { "catppuccin/nvim", name = "catppuccin" },                       -- catppuccin theme plugin
-    {                                                                 -- tokyonight theme plugin
-      "folke/tokyonight.nvim",
-      lazy = false,
-      priority = 1000,
-      opts = {},
-    },
+    -- {                                                                 -- tokyonight theme plugin
+    --   "folke/tokyonight.nvim",
+    --   lazy = false,
+    --   priority = 1000,
+    --   opts = {},
+    -- },
     {
       "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
       build = ":TSUpdate"
@@ -146,7 +146,7 @@ return require("lazy").setup(
           -- Sets the fallback highlight groups to nvim-cmp's highlight groups
           -- Useful for when your theme doesn't support blink.cmp
           -- will be removed in a future release
-          use_nvim_cmp_as_default = true,
+          use_nvim_cmp_as_default = false,
           -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
           -- Adjusts spacing to ensure icons are aligned
           nerd_font_variant = 'mono'
@@ -175,10 +175,10 @@ return require("lazy").setup(
             scrollbar = false,
             draw = {
               treesitter = { 'lsp' },
-              -- columns = {
-              --   { "label", "label_description", gap = 3 },
-              --   { "kind_icon", "kind", gap = 1 },
-              -- },
+              columns = {
+                { "label", "label_description", gap = 3 },
+                { "kind_icon", "kind", gap = 1 },
+              },
               components = {
                 label_description = {
                   highlight = 'Comment',
@@ -196,7 +196,7 @@ return require("lazy").setup(
               winblend = 0,
               winhighlight = 'Normal:NoicePopup,FloatBorder:NoicePopup,CursorLine:BlinkCmpDocCursorLine,Search:None',
               -- Note that the gutter will be disabled when border ~= 'none'
-              scrollbar = false,
+              scrollbar = true,
               -- Which directions to show the documentation window,
               -- for each of the possible menu window directions,
               -- falling back to the next direction when there's not enough space
