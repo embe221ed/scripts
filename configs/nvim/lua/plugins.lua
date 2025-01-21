@@ -139,7 +139,7 @@ return require("lazy").setup(
           ['<Tab>']   = { 'select_next', 'fallback' },
           ['<S-Tab>'] = { 'select_prev', 'fallback' },
           ['<C-L>']   = { 'snippet_forward', 'fallback' },
-          ['<C-J>']   = { 'snippet_backward', 'fallback' },
+          ['<C-H>']   = { 'snippet_backward', 'fallback' },
         },
 
         appearance = {
@@ -172,18 +172,13 @@ return require("lazy").setup(
             selection = { preselect = false, auto_insert = true, }
           },
           menu = {
-            scrollbar = false,
+            -- scrollbar = false,
             draw = {
               treesitter = { 'lsp' },
-              columns = {
-                { "label", "label_description", gap = 3 },
-                { "kind_icon", "kind", gap = 1 },
-              },
-              components = {
-                label_description = {
-                  highlight = 'Comment',
-                },
-              }
+              -- columns = {
+              --   { "label", "label_description", gap = 3 },
+              --   { "kind_icon", "kind", gap = 1 },
+              -- },
             }
           },
           documentation = {
@@ -192,18 +187,7 @@ return require("lazy").setup(
               min_width = 10,
               max_width = 150,
               max_height = 40,
-              border = 'padded',
-              winblend = 0,
               winhighlight = 'Normal:NoicePopup,FloatBorder:NoicePopup,CursorLine:BlinkCmpDocCursorLine,Search:None',
-              -- Note that the gutter will be disabled when border ~= 'none'
-              scrollbar = true,
-              -- Which directions to show the documentation window,
-              -- for each of the possible menu window directions,
-              -- falling back to the next direction when there's not enough space
-              direction_priority = {
-                menu_north = { 'e', 'w', 'n', 's' },
-                menu_south = { 'e', 'w', 's', 'n' },
-              },
             },
           },
         },
@@ -382,6 +366,15 @@ return require("lazy").setup(
           timeout = 30000, -- Timeout in milliseconds
           temperature = 0,
           max_tokens = 4096,
+        },
+        mappings = {
+          diff = {
+            ours = "<leader>co",
+            theirs = "<leader>ct",
+            all_theirs = "<leader>ca",
+            both = "<leader>cb",
+            cursor = "<leader>cc",
+          },
         },
       },
       -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

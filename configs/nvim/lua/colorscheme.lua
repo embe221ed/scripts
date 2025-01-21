@@ -90,6 +90,7 @@ if colorscheme == 'tokyonight' then
 elseif colorscheme == 'catppuccin' then
   -- Catppuccin theme
   local palette = globals.get_palette(colorscheme, current_theme)
+  -- local utils = require('catppuccin.utils.colors')
   require('catppuccin').setup  {
     flavour = current_theme, -- latte, frappe, macchiato, mocha
     transparent_background = false, -- disables setting the background color.
@@ -131,6 +132,9 @@ elseif colorscheme == 'catppuccin' then
       TabLineSel                  = { bg = palette.mauve },
       FloatBorder                 = { fg = palette.surface1, bg = palette.base, style = { "bold" } },
       PmenuSel                    = { bg = palette.surface1, style = {} },
+      -- PmenuSbar                   = { bg = utils.darken(palette.surface0, 0.8, palette.crust), },
+
+      BlinkCmpLabelDescription    = { fg = palette.overlay0, style = { "italic" } },
 
       NoicePopup                  = { bg = palette.crust },
       NoiceCmdlinePopupBorder     = { fg = palette.surface1, style = { "bold" } },
