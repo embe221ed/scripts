@@ -6,7 +6,7 @@ require('snippets')       -- LuaSnip custom snippets
 require('functions')      -- custom functions
 require('lsp.configs')    -- LSP config
 require('languages')      -- tree-sitter languages
-require('lualineconfig')  -- LuaLine config
+require('ui.lualineconfig')  -- LuaLine config
 
 require('_render-markdown')
 -- require('_markview')
@@ -62,10 +62,10 @@ require('nvim-tree').setup {
   },
 }
 -- -- -- auto_close working implementation
-vim.api.nvim_create_autocmd('BufEnter', {
-    command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
-    nested = true,
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+--     nested = true,
+-- })
 
 -- -- Comment
 -- -- -- manually set comments for Move
@@ -255,7 +255,7 @@ require("todo-comments").setup {
 }
 
 
-require('_bufferline')
+require('ui._bufferline')
 require('colorizer').setup({
   '*';
   '!lazy';

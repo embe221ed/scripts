@@ -18,7 +18,13 @@ require('goto-preview').setup({
 
 -- -- LSP config
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+local open_float = function()
+  local fopts = {
+    border = "single",
+  }
+  vim.diagnostic.open_float(fopts)
+end
+vim.keymap.set('n', '<space>e', open_float, opts)
 vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, opts)
 vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
