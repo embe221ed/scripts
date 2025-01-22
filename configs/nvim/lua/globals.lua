@@ -1,7 +1,7 @@
 local function _is_dark()
   local out = os.execute("/opt/scripts/utils/determine_system.sh") / 256
   -- not Darwin (MacOS), early return
-  if out ~= 1 then return os.getenv("DISPLAY_MODE") != "Light" end
+  if out ~= 1 then return os.getenv("DISPLAY_MODE") ~= "Light" end
   local result = os.execute("defaults read -g AppleInterfaceStyle &> /dev/null") / 256
   if result == 1 then
     return false
