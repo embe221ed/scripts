@@ -47,7 +47,7 @@ require('nvim-tree').setup {
     add_trailing = true,
     full_name = true,
     root_folder_label = function(path)
-      return " " .. vim.fn.fnamemodify(path, ":t") .. "/"
+      return " " .. vim.fn.fnamemodify(path, ":t") .. "/"
     end,
     symlink_destination = false,
     indent_markers = {
