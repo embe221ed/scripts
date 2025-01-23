@@ -353,11 +353,11 @@ bufferline.setup {
                 table.insert(result, { text = error_text, fg = "#EC5241" })
 
                 local warn_text = ""
-                if warn ~= 0 then warn_text = "  " .. warn .. " " end
+                if warn ~= 0 then warn_text = "  " .. warn .. " " end
                 table.insert(result, { text = warn_text, fg = "#EFB839" })
 
                 local hint_text = ""
-                if hint ~= 0 then hint_text = " 󱜸 " .. hint .. " " end
+                if hint ~= 0 then hint_text = "  " .. hint .. " " end
                 table.insert(result, { text = hint_text , fg = "#A3BA5E" })
 
 
