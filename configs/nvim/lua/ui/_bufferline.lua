@@ -305,6 +305,9 @@ bufferline.setup {
         separator_style = { "∣", "∣" },
         diagnostics = "nvim_lsp",
         buffer_close_icon = "×",
+        name_formatter = function(buf)
+            return " " .. buf.name
+        end,
         indicator = {
           -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
           style = 'underline',

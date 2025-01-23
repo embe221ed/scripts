@@ -1,12 +1,13 @@
 -- IMPORTS
-require('opts')           -- Options
-require('keys')           -- Keymaps
-require('plugins')        -- Plugins
-require('snippets')       -- LuaSnip custom snippets
-require('functions')      -- custom functions
-require('lsp.configs')    -- LSP config
-require('languages')      -- tree-sitter languages
-require('ui.lualineconfig')  -- LuaLine config
+require('opts')               -- Options
+require('keys')               -- Keymaps
+require('plugins')            -- Plugins
+require('snippets')           -- LuaSnip custom snippets
+require('functions')          -- custom functions
+require('lsp.configs')        -- LSP config
+require('languages')          -- tree-sitter languages
+require('ui.lualineconfig')   -- LuaLine config
+require('ui.devicons')        -- nvim-web-devicons
 
 require('_render-markdown')
 -- require('_markview')
@@ -31,36 +32,8 @@ require('guess-indent').setup {
     "prompt",
   },
 }
--- -- nvim-tree
-require('nvim-tree').setup {
-  view = {
-    adaptive_size = true,
-    centralize_selection = false,
-    width = 40,
-    side = "left",
-    preserve_window_proportions = true,
-    number = false,
-    relativenumber = false,
-    signcolumn = "yes",
-  },
-  renderer = {
-    add_trailing = true,
-    full_name = true,
-    root_folder_label = function(path)
-      return " " .. vim.fn.fnamemodify(path, ":t") .. "/"
-    end,
-    symlink_destination = false,
-    indent_markers = {
-      enable = true,
-    },
-    highlight_opened_files = "all",
-  },
-  actions = {
-    open_file = {
-      resize_window = false,
-    }
-  },
-}
+
+require('ui.nvimtree')
 -- -- -- auto_close working implementation
 -- vim.api.nvim_create_autocmd('BufEnter', {
 --     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
@@ -377,8 +350,6 @@ require("no-neck-pain").setup({
     },
   },
 })
-
-require("nvim-web-devicons").set_default_icon('', '#6d8086', 66)
 
 -- obsidian vault integration
 require("obsidian").setup({
