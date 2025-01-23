@@ -304,7 +304,7 @@ bufferline.setup {
     options = {
         separator_style = { "∣", "∣" },
         diagnostics = "nvim_lsp",
-        buffer_close_icon = "󰅖",
+        buffer_close_icon = "×",
         indicator = {
           -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
           style = 'underline',
@@ -319,7 +319,7 @@ bufferline.setup {
             },
             {
                 filetype = "Outline",
-                text = " OUTLINE",
+                text = " › OUTLINE",
                 text_align = "left",
                 separator = "▏",
                 highlight = "BufferlineOffsetTitleBase",

@@ -73,6 +73,7 @@ return {
       menu = {
         -- scrollbar = false,
         draw = {
+          gap = 2,
           treesitter = { 'lsp' },
           -- columns = {
           --   { "label", "label_description", gap = 3 },

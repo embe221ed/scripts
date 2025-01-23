@@ -138,7 +138,7 @@ ins_left {
 -- Add components to right sections
 ins_right {
   'diff',
-  symbols = { added = ' ', modified = '󱗜 ', removed = ' ' },
+  symbols = { added = '  ', modified = '󱗜  ', removed = '  ' },
   diff_color = {
     added = { fg = colors.green },
     modified = { fg = colors.orange },

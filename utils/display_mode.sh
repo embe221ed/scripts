@@ -18,8 +18,8 @@ else
   kitten theme "${KITTEN_DARK}"
 fi
 
-source ~/.zshrc
-
 if tmux ls >/dev/null 2>&1; then
   tmux source-file ~/.tmux.conf
 fi
+
+echo "source ~/.zshrc"
