@@ -1,3 +1,10 @@
+local function is_directory(path)
+  local expanded_path = vim.fn.expand(path)
+  ---@diagnostic disable-next-line: undefined-field
+  local stat = vim.loop.fs_stat(expanded_path)
+  return stat and stat.type == "directory"
+end
+
 local function _is_dark()
   local out = os.execute("/opt/scripts/utils/determine_system.sh") / 256
   -- not Darwin (MacOS), early return
@@ -46,6 +53,7 @@ local globals = {
   colorscheme   = _colorscheme,
   current_theme = determine_theme(_colorscheme),
   get_palette   = get_palette,
+  is_directory  = is_directory,
   generate_desc = function(desc)
     return desc .. string.rep(' ' , 40)
   end

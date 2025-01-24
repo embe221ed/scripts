@@ -291,7 +291,6 @@ require('highlights')
 -- -- noice
 require('ui._noice')
 
-
 local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
@@ -325,23 +324,25 @@ require("no-neck-pain").setup({
 })
 
 -- obsidian vault integration
-require("obsidian").setup({
-  -- A list of vault names and paths.
-  -- Each path should be the path to the vault root. If you use the Obsidian app,
-  -- the vault root is the parent directory of the `.obsidian` folder.
-  -- You can also provide configuration overrides for each workspace through the `overrides` field.
-  workspaces = {
-    {
-      name = "notes",
-      path = "~/Desktop/knowledge",
-    },
-    {
-      name = "work",
-      path = "~/Desktop/osec_io/knowledge/notes",
-    },
-    {
-      name = "general",
-      path = "~/Documents/Obsidian Vault",
-    },
-  },
-})
+local is_directory = globals.is_directory
+local workspaces = {
+    { name = "notes",   path = "~/Desktop/knowledge", },
+    { name = "work",    path = "~/Desktop/osec_io/knowledge/notes", },
+    { name = "general", path = "~/Documents/Obsidian Vault", },
+}
+for i = #workspaces, 1, -1 do
+    local el = workspaces[i]
+    if not is_directory(el.path) then
+        table.remove(workspaces, i)
+    end
+end
+
+if #workspaces > 0 then
+  require("obsidian").setup({
+    -- A list of vault names and paths.
+    -- Each path should be the path to the vault root. If you use the Obsidian app,
+    -- the vault root is the parent directory of the `.obsidian` folder.
+    -- You can also provide configuration overrides for each workspace through the `overrides` field.
+    workspaces = workspaces,
+  })
+end

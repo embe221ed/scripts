@@ -1,9 +1,21 @@
+local format = {
+  cmdline     = { pattern = "^:", icon = "_", lang = "vim" },
+  telescope   = { pattern = "^:%s*Tel?e?s?c?o?p?e?%s+", icon = "", lang = "vim" },
+}
+if vim.g.symbol_font then
+  format = {
+    cmdline     = { pattern = "^:", icon = "_", lang = "vim" },
+    telescope   = { pattern = "^:%s*Tel?e?s?c?o?p?e?%s+", icon = " ", lang = "vim" },
+    lua         = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = " ", lang = "lua" },
+    help        = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+    search_down = { kind = "search", pattern = "^/", icon = "  ", lang = "regex" },
+    search_up   = { kind = "search", pattern = "^%?", icon = "  ", lang = "regex" },
+  }
+end
+
 require("noice").setup {
   cmdline = {
-    format = {
-      cmdline =   { pattern = "^:", icon = "_", lang = "vim" },
-      telescope = { pattern = "^:%s*Tel?e?s?c?o?p?e?%s+", icon = " ", lang = "vim" },
-    },
+    format = format,
   },
   -- you can enable a preset for easier configuration
   presets = {
