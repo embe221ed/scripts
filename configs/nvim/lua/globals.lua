@@ -43,9 +43,9 @@ end
 --- prepare the globals table
 
 local globals = {
-  colorscheme = _colorscheme,
+  colorscheme   = _colorscheme,
   current_theme = determine_theme(_colorscheme),
-  get_palette = get_palette,
+  get_palette   = get_palette,
   generate_desc = function(desc)
     return desc .. string.rep(' ' , 40)
   end

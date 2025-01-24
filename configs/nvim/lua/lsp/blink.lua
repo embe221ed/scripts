@@ -1,3 +1,6 @@
+local gap = 1
+if vim.g.symbol_font then gap = 2 end
+
 return {
   'saghen/blink.cmp',
   lazy = false, -- lazy loading handled internally
@@ -73,7 +76,7 @@ return {
       menu = {
         -- scrollbar = false,
         draw = {
-          gap = 2,
+          gap = gap,
           treesitter = { 'lsp' },
           -- columns = {
           --   { "label", "label_description", gap = 3 },

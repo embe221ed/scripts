@@ -306,7 +306,10 @@ bufferline.setup {
         diagnostics = "nvim_lsp",
         buffer_close_icon = "×",
         name_formatter = function(buf)
-            return " " .. buf.name
+            ---@diagnostic disable: undefined-field
+            if vim.g.symbol_font then return " " .. buf.name end
+            return buf.name
+            ---@diagnostic enable: undefined-field
         end,
         indicator = {
           -- icon = '▎', -- this should be omitted if indicator style is not 'icon'

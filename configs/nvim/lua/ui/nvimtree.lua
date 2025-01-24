@@ -1,3 +1,6 @@
+local padding = " "
+if vim.g.symbol_font then padding = "  " end
+
 require('nvim-tree').setup({
   view = {
     adaptive_size = true,
@@ -11,13 +14,13 @@ require('nvim-tree').setup({
   },
   renderer = {
     icons = {
-      padding = "  ",
+      padding = padding,
       git_placement = "signcolumn",
     },
     add_trailing = true,
     full_name = true,
     root_folder_label = function(path)
-      return "  " .. vim.fn.fnamemodify(path, ":t") .. "/"
+      return "" .. padding .. vim.fn.fnamemodify(path, ":t") .. "/"
     end,
     symlink_destination = false,
     indent_markers = {
