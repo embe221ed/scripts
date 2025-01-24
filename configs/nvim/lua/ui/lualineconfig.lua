@@ -175,4 +175,5 @@ ins_right {
 }
 
 -- Now don't forget to initialize lualine
+---@diagnostic disable-next-line: undefined-field
 lualine.setup(config)
