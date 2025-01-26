@@ -2,4 +2,5 @@ lazy-lock.json
 package.json
 package-lock.json
 kitty.conf.bak
+configs/kitty/current-theme.conf
 languages.lua
