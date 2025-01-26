@@ -80,6 +80,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- language servers
 local lsp = require('lspconfig')
+local util = require('lspconfig.util')
 
 -- -- -- python-lsp-server
 lsp.pylsp.setup({
@@ -158,16 +159,26 @@ lsp.lua_ls.setup {
   },
 }
 -- -- -- solidity
+local root_files = {
+  'hardhat.config.js',
+  'hardhat.config.ts',
+  'foundry.toml',
+  'remappings.txt',
+  'truffle.js',
+  'truffle-config.js',
+  'ape-config.yaml',
+}
+
 lsp.solidity_ls_nomicfoundation.setup {
   -- on_attach = on_attach, -- probably you will need this.
   capabilities = capabilities,
-  root_dir = lsp.util.find_git_ancestor,
+  root_dir = util.root_pattern(unpack(root_files)) or util.root_pattern('.git', 'package.json'),
   single_file_support = true,
   settings = {
     -- example of global remapping
     -- solidity = {
-      -- includePath = '',
-      -- remapping = { ["@openzeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@5.0.1/' }
+    --   includePath = '',
+    --   remapping = { ["@openzeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@5.0.1/' }
     -- }
   },
 }
@@ -339,4 +350,5 @@ require("symbol-usage").setup {
 --     SymbolKind.Operator,
 --     SymbolKind.TypeParameter,
   },
+  disable = { lsp = { "solidity_ls_nomicfoundation", }, },
 }
