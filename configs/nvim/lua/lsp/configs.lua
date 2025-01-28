@@ -17,6 +17,9 @@ require('goto-preview').setup({
 })
 
 -- -- LSP config
+vim.diagnostic.config({
+  virtual_lines = true,
+})
 local opts = { noremap=true, silent=true }
 local open_float = function()
   local fopts = {
