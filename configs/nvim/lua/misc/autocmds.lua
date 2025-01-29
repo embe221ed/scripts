@@ -19,6 +19,19 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "FileType",
   {
+    desc      = "disable virtual_lines for filetypes",
+    pattern   = { "lazy", },
+    callback  = function()
+      vim.diagnostic.config({
+        virtual_lines = false,
+      })
+    end,
+  }
+)
+
+api.nvim_create_autocmd(
+  "FileType",
+  {
     desc      = "set the commentstring for move files",
     pattern   = { "move" },
     callback  = function()

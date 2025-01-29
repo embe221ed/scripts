@@ -4,7 +4,7 @@ require('misc.autocmds')      -- autocmds
 require('keys')               -- Keymaps
 require('plugins')            -- Plugins
 require('snippets')           -- LuaSnip custom snippets
-require('functions')          -- custom functions
+require('misc.functions')     -- custom functions
 require('lsp.configs')        -- LSP config
 require('languages')          -- tree-sitter languages
 require('ui.lualineconfig')   -- LuaLine config
