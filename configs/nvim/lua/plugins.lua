@@ -95,7 +95,7 @@ return require("lazy").setup(
       event = "LspAttach"
     },
     -- autocompletion
-    require('lsp.blink'),
+    require('editor.blink'),
     -- { "saadparwaiz1/cmp_luasnip" },                                   -- Snippets source for nvim-cmp
     -- {
     --   "L3MON4D3/LuaSnip",

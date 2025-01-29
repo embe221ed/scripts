@@ -1,14 +1,14 @@
 -- IMPORTS
-require('opts')               -- Options (load first for global setting)
-require('misc.autocmds')      -- autocmds
-require('keys')               -- Keymaps
-require('plugins')            -- Plugins
-require('snippets')           -- LuaSnip custom snippets
-require('misc.functions')     -- custom functions
-require('lsp.configs')        -- LSP config
-require('languages')          -- tree-sitter languages
-require('ui.lualineconfig')   -- LuaLine config
-require('ui.devicons')        -- nvim-web-devicons
+require('opts')              -- Options (load first for global setting)
+require('misc.autocmds')     -- autocmds
+require('keys')              -- Keymaps
+require('plugins')           -- Plugins
+require('snippets')          -- LuaSnip custom snippets
+require('misc.functions')    -- custom functions
+require('editor.configs')    -- LSP config
+require('languages')         -- tree-sitter languages
+require('ui.lualineconfig')  -- LuaLine config
+require('ui.devicons')       -- nvim-web-devicons
 
 require('_render-markdown')
 -- require('_markview')
@@ -35,11 +35,6 @@ require('guess-indent').setup {
 }
 
 require('ui.nvimtree')
--- -- -- auto_close working implementation
--- vim.api.nvim_create_autocmd('BufEnter', {
---     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
---     nested = true,
--- })
 
 -- -- Comment
 -- -- -- manually set comments for Move
