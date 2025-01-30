@@ -108,3 +108,10 @@ api.nvim_create_user_command(
   { desc = "Toggles the plugin. // updated version" }
 )
 
+api.nvim_create_user_command(
+  "ToggleInlayHints",
+  function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled());
+  end,
+  { desc = "toggles the inlay_hint" }
+)
