@@ -109,9 +109,11 @@ api.nvim_create_user_command(
 )
 
 api.nvim_create_user_command(
-  "ToggleInlayHints",
+  "RedrawLsp",
   function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled());
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled());
+    require('symbol-usage').toggle();
   end,
   { desc = "toggles the inlay_hint" }
 )

@@ -11,7 +11,9 @@ require('goto-preview').setup({
   height = 20, -- Height of the floating window
   post_open_hook = function(_, winid)
     local config = vim.api.nvim_win_get_config(winid)
-    config.title = { { " " .. config.title[1][1] .. " " } }
+    local title = " " .. config.title[1][1] .. " "
+    if vim.g.symbol_font then title = " " .. title end
+    config.title = { { title } }
     vim.api.nvim_win_set_config(winid, config)
   end,
 })

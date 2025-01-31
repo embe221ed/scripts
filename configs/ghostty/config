@@ -49,7 +49,7 @@
 # 
 # Changing this configuration at runtime will only affect new terminals, i.e.
 # new windows, tabs, etc.
-font-family = JetBrainsMono Nerd Font Mono
+font-family = Iosevka Custom
 
 font-family-bold = 
 font-family-italic = 
@@ -174,7 +174,50 @@ font-variation-bold-italic =
 # 
 # Changing this configuration at runtime will only affect new terminals,
 # i.e. new windows, tabs, etc.
-font-codepoint-map = 
+
+#: E.g. symbol_map U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols
+# https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
+
+# Seti-UI + Custom
+font-codepoint-map = U+e5fa-U+e6b7=Symbols Nerd Font Mono
+# Devicons
+font-codepoint-map = U+e700-U+e8ef=Symbols Nerd Font Mono
+# Font Awesome
+font-codepoint-map = U+d000-U+f2ff=Symbols Nerd Font Mono
+# Font Awesome Extension
+font-codepoint-map = U+e200-U+e2a9=Symbols Nerd Font Mono
+# Material Design Icons
+font-codepoint-map = U+f0001-U+f1af0=Symbols Nerd Font Mono
+# Weather
+font-codepoint-map = U+e300-U+e3e3=Symbols Nerd Font Mono
+# Octicons
+font-codepoint-map = U+f400-U+f533=Symbols Nerd Font Mono
+font-codepoint-map = U+2665=Symbols Nerd Font Mono
+font-codepoint-map = U+26a1=Symbols Nerd Font Mono
+# [Powerline Symbols] Mono
+font-codepoint-map = U+e0a0-U+e0a2=Symbols Nerd Font Mono
+font-codepoint-map = U+e0b0-U+e0b3=Symbols Nerd Font Mono
+# Powerline Extra Symbols Mono
+font-codepoint-map = U+e0a3=Symbols Nerd Font Mono
+font-codepoint-map = U+e0b4-U+e0c8=Symbols Nerd Font Mono
+font-codepoint-map = U+e0ca=Symbols Nerd Font Mono
+font-codepoint-map = U+e0cc-U+e0d7=Symbols Nerd Font Mono
+# IEC Power Symbols Mono
+font-codepoint-map = U+23fb-U+23fe=Symbols Nerd Font Mono
+font-codepoint-map = U+2b58=Symbols Nerd Font Mono
+# Font Logos (Formerly Font Linux)
+font-codepoint-map = U+f300-U+f381=Symbols Nerd Font Mono
+# Pomicons
+font-codepoint-map = U+e000-U+e00a=Symbols Nerd Font Mono
+# Codicons
+font-codepoint-map = U+ea60-U+ec1e=Symbols Nerd Font Mono
+# Additional Sets
+## Heavy Angle Brackets
+font-codepoint-map = U+276c-U+2771=Symbols Nerd Font Mono
+## Box Drawing
+font-codepoint-map = U+2500-U+259f=Symbols Nerd Font Mono
+## Progress
+font-codepoint-map = U+ee00-U+ee0b=Symbols Nerd Font Mono
 
 # Draw fonts with a thicker stroke, if supported. This is only supported
 # currently on macOS.
@@ -205,9 +248,9 @@ font-thicken = false
 #   * Powerline glyphs will be adjusted along with the cell height so
 #     that things like status lines continue to look aligned.
 
-adjust-cell-width = -10%
+# adjust-cell-width = -10%
 
-adjust-cell-height = 20%
+adjust-cell-height = 34%
 
 # Distance in pixels or percentage adjustment from the bottom of the cell to the text baseline.
 # Increase to move baseline UP, decrease to move baseline DOWN.
@@ -217,7 +260,7 @@ adjust-font-baseline =
 # Distance in pixels or percentage adjustment from the top of the cell to the top of the underline.
 # Increase to move underline DOWN, decrease to move underline UP.
 # See the notes about adjustments in `adjust-cell-width`.
-adjust-underline-position = 
+adjust-underline-position = 12
 
 # Thickness in pixels of the underline.
 # See the notes about adjustments in `adjust-cell-width`.

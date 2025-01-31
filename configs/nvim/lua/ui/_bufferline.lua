@@ -305,11 +305,14 @@ bufferline.setup {
         separator_style = { "∣", "∣" },
         diagnostics = "nvim_lsp",
         buffer_close_icon = "×",
-        name_formatter = function(buf)
-            ---@diagnostic disable: undefined-field
-            if vim.g.symbol_font then return " " .. buf.name end
-            return buf.name
-            ---@diagnostic enable: undefined-field
+        get_element_icon = function(element)
+          -- element consists of {filetype: string, path: string, extension: string, directory: string}
+          -- This can be used to change how bufferline fetches the icon
+          -- for an element e.g. a buffer or a tab.
+          -- e.g.
+          local icon, hl = require('nvim-web-devicons').get_icon_by_filetype(element.filetype, { default = true })
+          if vim.g.symbol_font then icon = icon .. " " end
+          return icon, hl
         end,
         indicator = {
           -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
