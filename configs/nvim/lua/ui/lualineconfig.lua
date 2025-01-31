@@ -89,7 +89,7 @@ end
 ins_left(
   {
     function()
-      return ''
+      return ' '
     end,
     color = { fg = colors.fg, gui = 'bold' }, -- Sets highlighting of component
     padding = { left = 1, right = 1 }, -- We don't need space before this
