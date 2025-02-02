@@ -4,6 +4,7 @@ local colorscheme = globals.colorscheme
 local current_theme = globals.current_theme
 
 if colorscheme == 'tokyonight' then
+  ---@diagnostic disable: inject-field, undefined-field, undefined-doc-name
   ---@class tokyonight.Config
   require('tokyonight').setup({
     style = current_theme, -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
@@ -87,6 +88,7 @@ if colorscheme == 'tokyonight' then
       bufferline = false,
     },
   })
+  ---@diagnostic enable: inject-field, undefined-field, undefined-doc-name
 elseif colorscheme == 'catppuccin' then
   -- Catppuccin theme
   local palette = globals.get_palette(colorscheme, current_theme)
@@ -167,7 +169,7 @@ elseif colorscheme == 'catppuccin' then
       NvimTreeOpenedFile          = { fg = palette.pink },
       NvimTreeNormal              = { fg = palette.text, bg = palette.mantle },
       NvimTreeExecFile            = { fg = palette.red },
-      NvimTreeOpenedHL            = { fg = palette.subtext0, style = { "italic" } },
+      NvimTreeOpenedHL            = { fg = palette.subtext0 },
       NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
       NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
 

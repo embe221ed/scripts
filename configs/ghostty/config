@@ -49,7 +49,7 @@
 # 
 # Changing this configuration at runtime will only affect new terminals, i.e.
 # new windows, tabs, etc.
-font-family = Iosevka Custom
+font-family = Iosevka Custom Medium
 
 font-family-bold = 
 font-family-italic = 
