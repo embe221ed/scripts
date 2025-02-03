@@ -54,6 +54,8 @@ return require("lazy").setup(
       dependencies = { "nvim-tree/nvim-web-devicons", opt = true },   -- filesystem icons
     },
     "neovim/nvim-lspconfig",                                          -- Configurations for Nvim LSP
+    "mfussenegger/nvim-dap",                                          -- Debug Adapter Protocol client implementation for Neovim
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
     {
       "RRethy/vim-illuminate",                                        -- highlight word under cursor
       dependencies = "neovim/nvim-lspconfig"

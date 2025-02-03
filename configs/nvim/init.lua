@@ -1,14 +1,14 @@
 -- IMPORTS
-require('opts')              -- Options (load first for global setting)
-require('misc.autocmds')     -- autocmds
-require('keys')              -- Keymaps
-require('plugins')           -- Plugins
-require('snippets')          -- LuaSnip custom snippets
-require('misc.functions')    -- custom functions
-require('editor.configs')    -- LSP config
-require('languages')         -- tree-sitter languages
-require('ui.lualineconfig')  -- LuaLine config
-require('ui.devicons')       -- nvim-web-devicons
+require('opts')               -- Options (load first for global setting)
+require('misc.autocmds')      -- autocmds
+require('keys')               -- Keymaps
+require('plugins')            -- Plugins
+require('snippets')           -- LuaSnip custom snippets
+require('misc.functions')     -- custom functions
+require('editor.lsp')         -- LSP config
+require('languages')          -- tree-sitter languages
+require('ui.lualineconfig')   -- LuaLine config
+require('ui.devicons')        -- nvim-web-devicons
 
 require('_render-markdown')
 -- require('_markview')
@@ -33,8 +33,6 @@ require('guess-indent').setup {
     "prompt",
   },
 }
-
-require('ui.nvimtree')
 
 -- -- Comment
 -- -- -- manually set comments for Move
@@ -341,3 +339,7 @@ if #workspaces > 0 then
     workspaces = workspaces,
   })
 end
+
+-- load after colorscheme to apply correct highlights
+require('ui.nvimtree')
+require('editor.dap')         -- DAP configs
