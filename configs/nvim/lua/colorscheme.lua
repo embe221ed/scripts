@@ -108,10 +108,10 @@ elseif colorscheme == 'catppuccin' then
     no_underline = false, -- Force no underline
     styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
       comments = { "italic" }, -- Change the style of comments
-      conditionals = { "italic" },
+      conditionals = {},
       loops = {},
       functions = {},
-      keywords = { "italic" },
+      keywords = {},
       strings = {},
       variables = {},
       numbers = {},
@@ -131,7 +131,7 @@ elseif colorscheme == 'catppuccin' then
     },
     custom_highlights = {
       WinSeparator                = { fg = palette.surface0 },
-      TabLineSel                  = { bg = palette.mauve },
+      TabLineSel                  = { bg = palette.pink },
       FloatBorder                 = { fg = palette.surface1, bg = palette.base, style = { "bold" } },
       PmenuSel                    = { bg = palette.surface1, style = {} },
       -- PmenuSbar                   = { bg = utils.darken(palette.surface0, 0.8, palette.crust), },
@@ -144,7 +144,7 @@ elseif colorscheme == 'catppuccin' then
       StatusLine                  = { fg = palette.base, bg = palette.base },
       StatusLineNC                = { fg = palette.base, bg = palette.base },
 
-      CursorLineNr                = { fg = palette.mauve, style = { "bold" } },
+      CursorLineNr                = { fg = palette.pink, style = { "bold" } },
 
       OutlineCurrent              = { fg = palette.peach, bg = "", style = { "bold" } },
 
@@ -167,9 +167,9 @@ elseif colorscheme == 'catppuccin' then
       NvimTreeSpecialFile         = { fg = palette.flamingo },
       NvimTreeImageFile           = { fg = palette.text },
       NvimTreeOpenedFile          = { fg = palette.pink },
-      NvimTreeNormal              = { fg = palette.text, bg = palette.mantle },
+      NvimTreeNormal              = { bg = palette.mantle },
       NvimTreeExecFile            = { fg = palette.red },
-      NvimTreeOpenedHL            = { fg = palette.subtext0 },
+      NvimTreeOpenedHL            = { fg = palette.surface2 },
       NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
       NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
 

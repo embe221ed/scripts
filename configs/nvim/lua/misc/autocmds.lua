@@ -58,7 +58,10 @@ api.nvim_create_autocmd(
     desc      = "ensure that the NoNeckPain buffers are closed before saving the session",
     pattern   = "PersistenceSavePre",
     callback  = function()
-      require('no-neck-pain').disable()
+      local active_tab = require('no-neck-pain.state').active_tab
+      if active_tab ~= 1 then
+        require('no-neck-pain').disable()
+      end
       require('nvim-tree.api').tree.close()
       require('outline').close()
       local ft_to_close = "norg"

@@ -5,11 +5,6 @@
 
 
 theme="catppuccin"
-if [ "${theme}" = "catppuccin" ]; then
-	eggplant="#ea76cb"
-else
-	eggplant="#ff007c"
-fi
 
 SYSTEM=$(source /opt/scripts/utils/determine_system.sh && echo "Darwin" || echo "Linux")
 if [ "${SYSTEM}" = "Darwin" ]; then
@@ -20,13 +15,15 @@ fi
 
 if [ "${IS_DARK}" = "Dark" ]; then
 	if [ "${theme}" = "catppuccin" ]; then
-		alt_bg="#f4b8e4"
+		eggplant="#f4b8e4"
+		alt_bg=$eggplant
 		tint_bg0="#626880"
 		tint_bg1="#949cbb"
 		selected="#ef9f76"
 		default_bg="#737994"
 		blue="#70c0fc"
 	else
+		eggplant="#ff007c"
 		selected="#18ffde"
 		alt_bg="#ff007c"
 		default_bg="#3b4261"
@@ -34,7 +31,9 @@ if [ "${IS_DARK}" = "Dark" ]; then
 	fi
 else
 	if [ "${theme}" = "catppuccin" ]; then
-		alt_bg="#209fb5"
+		eggplant="#ea76cb"
+		alt_bg=$eggplant
+		# alt_bg="#209fb5"
 		tint_bg0="#ccd0da"
 		tint_bg1="#9ca0b0"
 		selected="#fe640b"

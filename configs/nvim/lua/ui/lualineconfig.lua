@@ -121,7 +121,7 @@ ins_left(
   {
     'filename',
     cond = conditions.buffer_not_empty,
-    color = { fg = colors.mauve, gui = 'bold' },
+    color = { fg = colors.pink, gui = 'bold' },
   },
   true
 )
@@ -183,7 +183,7 @@ ins_right {
     elseif p >= 10 then icon = '▇▇▇'
     else icon = '███'
     end
-    return string.format('%s %2d%%%%', icon, p)
+    return string.format('%%#Float#%s %2d%%%%', icon, p)
   end
 }
 

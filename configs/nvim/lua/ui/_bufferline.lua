@@ -14,6 +14,7 @@ local function get_highlights(_palette)
     local string_fg     = _palette.green
     local normal_bg     = _palette.bg or _palette.base
     local sep_fg        = _palette.surface0
+    local selected_fg   = _palette.pink
 
     return {
         fill = {
@@ -64,12 +65,12 @@ local function get_highlights(_palette)
             fg = visible_fg,
             bg = fill_bg,
         },
-        -- buffer_selected = {
-        --     fg = '<colour-value-here>',
-        --     bg = '<colour-value-here>',
-        --     bold = true,
-        --     italic = true,
-        -- },
+        buffer_selected = {
+            fg = selected_fg,
+            bg = normal_bg,
+            bold = false,
+            italic = false,
+        },
         numbers = {
             fg = comment_fg,
             bg = fill_bg,
@@ -203,13 +204,13 @@ local function get_highlights(_palette)
             -- fg = error_fg,
             bg = fill_bg,
         },
-        -- error_selected = {
-        --     fg = '<colour-value-here>',
-        --     bg = '<colour-value-here>',
-        --     sp = '<colour-value-here>',
-        --     bold = true,
-        --     italic = true,
-        -- },
+        error_selected = {
+            fg = error_fg,
+            -- bg = '<colour-value-here>',
+            -- sp = '<colour-value-here>',
+            -- bold = true,
+            -- italic = true,
+        },
         error_diagnostic = {
             -- fg = '<colour-value-here>',
             -- sp = '<colour-value-here>',
@@ -302,6 +303,10 @@ local bufferline  = require('bufferline')
 bufferline.setup {
     highlights = get_highlights(palette),
     options = {
+        style_preset = {
+            bufferline.style_preset.no_italic,
+            bufferline.style_preset.no_bold,
+        },
         separator_style = { "∣", "∣" },
         diagnostics = "nvim_lsp",
         buffer_close_icon = "×",
