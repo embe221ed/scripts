@@ -7,12 +7,13 @@ require('goto-preview').setup({
   default_mappings = true,
   width = 120, -- Width of the floating window
   -- width = 200; -- Width of the floating window
-  border = {"󰮻", "─" ,"╮", "│", "╯", "─", "╰", "│"}, -- Border characters of the floating window
+  border = {"├", "─" ,"╮", "│", "╯", "─", "╰", "│"}, -- Border characters of the floating window
   height = 20, -- Height of the floating window
+  preview_window_title = { enabled = true, position = "right" },
   post_open_hook = function(_, winid)
     local config = vim.api.nvim_win_get_config(winid)
     local title = " " .. config.title[1][1] .. " "
-    if vim.g.symbol_font then title = " " .. title end
+    -- if vim.g.symbol_font then title = " " .. title end
     config.title = { { title } }
     vim.api.nvim_win_set_config(winid, config)
   end,

@@ -36,8 +36,10 @@ local conditions = {
 local config = {
   options = {
     -- Disable sections and component separators
-    component_separators = '╱',
-    section_separators = '',
+    -- component_separators = '╱',
+    component_separators = { left = '', right = '' },
+    -- section_separators = '',
+    section_separators = { left = '', right = '' },
     theme = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
@@ -95,7 +97,7 @@ end
 local function ins_right(component, inactive)
   table.insert(config.sections.lualine_x, component)
   if inactive then
-    table.insert(config.inactive_sections.lualine_c, component)
+    table.insert(config.inactive_sections.lualine_x, component)
   end
 end
 

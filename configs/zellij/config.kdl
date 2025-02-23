@@ -242,7 +242,7 @@ load_plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "tokyo-night-storm"
+theme "catppuccin-latte"
  
 // Choose the base input mode of zellij.
 // Default: normal

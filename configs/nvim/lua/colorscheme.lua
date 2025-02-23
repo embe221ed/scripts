@@ -91,7 +91,22 @@ if colorscheme == 'tokyonight' then
   ---@diagnostic enable: inject-field, undefined-field, undefined-doc-name
 elseif colorscheme == 'catppuccin' then
   -- Catppuccin theme
+  local color_overrides = {
+    latte = {
+      text = "#6c6f85",
+      peach = "#f28d5e"
+    },
+    frappe = {
+      lavender = "#b4b5ee",
+    }
+  }
   local palette = globals.get_palette(colorscheme, current_theme)
+
+  if color_overrides[current_theme] then
+    for key, value in pairs(color_overrides[current_theme]) do
+      palette[key] = value
+    end
+  end
   -- local utils = require('catppuccin.utils.colors')
   require('catppuccin').setup  {
     flavour = current_theme, -- latte, frappe, macchiato, mocha
@@ -121,14 +136,7 @@ elseif colorscheme == 'catppuccin' then
       operators = {},
       -- miscs = {}, -- Uncomment to turn off hard-coded styles
     },
-    color_overrides = {
-      latte = {
-        text = "#6c6f85",
-      },
-      frappe = {
-        lavender = "#b4b5ee",
-      }
-    },
+    color_overrides = color_overrides,
     custom_highlights = {
       WinSeparator                = { fg = palette.surface0 },
       TabLineSel                  = { bg = palette.pink },
@@ -175,8 +183,8 @@ elseif colorscheme == 'catppuccin' then
 
       TreesitterContextBottom     = { sp = palette.surface1, style = { "underline" } },
 
-      BufferlineOffsetTitleBase   = { fg = palette.overlay0, bg = palette.mantle },
-      BufferlineOffsetTitleBright = { fg = palette.overlay0, bg = palette.mantle },
+      BufferlineOffsetTitleBase   = { fg = palette.pink, bg = palette.mantle },
+      BufferlineOffsetTitleBright = { fg = palette.pink, bg = palette.mantle },
 
       ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
       ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },

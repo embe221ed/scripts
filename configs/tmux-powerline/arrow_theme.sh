@@ -33,10 +33,9 @@ else
 	if [ "${theme}" = "catppuccin" ]; then
 		eggplant="#ea76cb"
 		alt_bg=$eggplant
-		# alt_bg="#209fb5"
 		tint_bg0="#ccd0da"
-		tint_bg1="#9ca0b0"
-		selected="#fe640b"
+		tint_bg1="#7c7f93"
+		selected="#dd7878"
 		default_bg="#dce0e8"
 		blue="#04a5e5"
 	else
@@ -49,10 +48,10 @@ fi
 
 default_fg=$alt_bg
 
-TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="◥"
-TMUX_POWERLINE_SEPARATOR_LEFT_THIN="╲"
-TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="◤"
-TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="╱"
+TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
+TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD=""
+TMUX_POWERLINE_SEPARATOR_LEFT_THIN=""
+TMUX_POWERLINE_SEPARATOR_RIGHT_THIN=""
 TMUX_POWERLINE_SEPARATOR_THIN=""
 
 TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-$default_bg}
