@@ -290,10 +290,10 @@ local function get_highlights()
             bold = true,
             italic = true,
         },
-        -- trunc_marker = {
-        --     fg = '<colour-value-here>',
-        --     bg = '<colour-value-here>',
-        -- }
+        trunc_marker = {
+            fg = comment_fg,
+            bg = fill_bg,
+        }
       }
 end
 
