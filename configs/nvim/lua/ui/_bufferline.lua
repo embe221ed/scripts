@@ -1,21 +1,18 @@
-local utils = require('utils')
-local palette = utils.get_palette(vim.g.colorscheme.name, vim.g.colorscheme.theme)
-
-local function get_highlights(_palette)
+local function get_highlights()
     if vim.g.colorscheme.vanilla then return {} end
     -- local colors        = require('bufferline.colors')
     -- local hex           = colors.get_color
     -- local tint          = colors.shade_color
 
     local fill_bg       = vim.g.colors.dark_bg
-    local error_fg      = _palette.red
-    local hint_fg       = _palette.blue
+    local error_fg      = vim.g.colors.red
+    local hint_fg       = vim.g.colors.blue
     local comment_fg    = vim.g.colors.comment
     local visible_fg    = vim.g.colors.comment
-    local string_fg     = _palette.green
+    local string_fg     = vim.g.colors.green
     local normal_bg     = vim.g.colors.bg
-    local sep_fg        = _palette.surface0
-    local selected_fg   = _palette.pink
+    local sep_fg        = vim.g.colors.light_fg
+    local selected_fg   = vim.g.colors.pink
 
     return {
         fill = {
@@ -315,7 +312,7 @@ if vim.g.colorscheme.vanilla then
 end
 
 bufferline.setup {
-    highlights = get_highlights(palette),
+    highlights = get_highlights(),
     options = {
         style_preset = style_preset,
         separator_style = { "∣", "∣" },

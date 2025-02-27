@@ -60,7 +60,7 @@ require("nord").setup({
 
     -- highlights.CursorLineNr                = { fg = colors.pink, style = { "bold" } }
 
-    -- highlights.OutlineCurrent              = { fg = colors.aurora.orange, bg = "", bold = true }
+    highlights.OutlineCurrent              = { bold = true }
 
     -- highlights.TelescopeTitle              = { fg = colors.cyan }
     -- highlights.TelescopeBorder             = { fg = colors.surface1, style = { "bold" } }
@@ -89,7 +89,7 @@ require("nord").setup({
     highlights.NvimTreeStatusLine          = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
     highlights.NvimTreeStatusLineNC        = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
     --
-    -- highlights.TreesitterContextBottom     = { sp = colors.surface1, style = { "underline" } }
+    highlights.TreesitterContextBottom     = { sp = colors.polar_night.brightest, underline = true }
     --
     -- highlights["@parameter.readonly"]     = { fg = colors.maroon, style = { "italic" } }
     -- highlights["@parameter.modification"] = { fg = colors.maroon, style = { "italic" } }
