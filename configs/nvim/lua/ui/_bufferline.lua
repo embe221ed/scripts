@@ -4,15 +4,15 @@ local function get_highlights()
     -- local hex           = colors.get_color
     -- local tint          = colors.shade_color
 
-    local fill_bg       = vim.g.colors.dark_bg
+    local fill_bg       = vim.g.colors.alt_bg
     local error_fg      = vim.g.colors.red
     local hint_fg       = vim.g.colors.blue
     local comment_fg    = vim.g.colors.comment
     local visible_fg    = vim.g.colors.comment
     local string_fg     = vim.g.colors.green
     local normal_bg     = vim.g.colors.bg
-    local sep_fg        = vim.g.colors.light_fg
-    local selected_fg   = vim.g.colors.pink
+    local sep_fg        = vim.g.colors.alt_fg
+    local selected_fg   = vim.g.colors.accent
 
     return {
         fill = {

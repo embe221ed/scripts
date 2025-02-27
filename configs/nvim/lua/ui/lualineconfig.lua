@@ -27,8 +27,8 @@ local config = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
       -- are just setting default looks o statusline
-      normal = { c = { fg = colors.light_fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.light_fg, bg = colors.bg } },
+      normal = { c = { fg = colors.alt_fg, bg = colors.bg } },
+      inactive = { c = { fg = colors.alt_fg, bg = colors.bg } },
     },
     disabled_filetypes = {
       'NvimTree',
@@ -89,7 +89,7 @@ ins_left(
     function()
       return ' '
     end,
-    color = { fg = colors.light_fg, gui = 'bold' }, -- Sets highlighting of component
+    color = { fg = colors.alt_fg, gui = 'bold' }, -- Sets highlighting of component
     padding = { left = 1, right = 1 }, -- We don't need space before this
   },
   true
@@ -106,7 +106,7 @@ ins_left(
   {
     'filename',
     cond = conditions.buffer_not_empty,
-    color = { fg = colors.pink, gui = 'bold' },
+    color = { fg = colors.accent, gui = 'bold' },
   },
   true
 )
@@ -130,7 +130,7 @@ ins_left {
     return msg
   end,
   icon = ' LSP:',
-  color = { fg = colors.light_fg, gui = 'bold' },
+  color = { fg = colors.alt_fg, gui = 'bold' },
 }
 
 -- Add components to right sections
@@ -174,9 +174,8 @@ ins_right {
 }
 
 -- Now don't forget to initialize lualine
----@diagnostic disable-next-line: undefined-field
-if vim.g.colorscheme.vanilla then
-  lualine.setup({})
-else
-  lualine.setup(config)
+---@diagnostic disable: undefined-field
+if vim.g.colorscheme.vanilla then lualine.setup({})
+else lualine.setup(config)
 end
+---@diagnostic enable: undefined-field
