@@ -52,7 +52,7 @@ require("nord").setup({
 
     -- highlights.BlinkCmpLabelDescription    = { fg = colors.overlay0, style = { "italic" } }
 
-    -- highlights.NoicePopup                  = { bg = colors.crust }
+    highlights.NoicePopup                  = { bg = colors.polar_night.brighter }
     -- highlights.NoiceCmdlinePopupBorder     = { fg = colors.surface1, style = { "bold" } }
 
     highlights.StatusLine                  = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
@@ -65,7 +65,7 @@ require("nord").setup({
     -- highlights.TelescopeTitle              = { fg = colors.cyan }
     -- highlights.TelescopeBorder             = { fg = colors.surface1, style = { "bold" } }
 
-    -- highlights.AvanteInlineHint            = { fg = colors.overlay2, style = { "italic" } }
+    highlights.AvanteInlineHint            = { italic = true }
 
     -- highlights.NvimTreeFolderName          = { fg = colors.peach }
     -- highlights.NvimTreeFolderIcon          = { fg = colors.peach }
@@ -83,7 +83,7 @@ require("nord").setup({
     -- highlights.NvimTreeOpenedFile          = { fg = colors.pink }
     highlights.NvimTreeNormal              = { bg = colors.polar_night.bright }
     highlights.NvimTreeNormalNC            = { bg = colors.polar_night.bright }
-    -- highlights.NvimTreeCursorLine          = { bg = colors.polar_night.brighter }
+    highlights.NvimTreeCursorLine          = { bg = colors.polar_night.brighter }
     -- highlights.NvimTreeExecFile            = { fg = colors.red }
     -- highlights.NvimTreeOpenedHL            = { fg = colors.surface2 }
     highlights.NvimTreeStatusLine          = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
