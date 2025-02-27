@@ -1,4 +1,4 @@
-local generate_desc = require('globals').generate_desc
+local generate_desc = require('utils').generate_desc
 
 return {
   "glepnir/dashboard-nvim",                                       -- dashboard

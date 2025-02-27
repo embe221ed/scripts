@@ -1,18 +1,19 @@
-local globals = require('globals')
-local palette = globals.get_palette(globals.colorscheme, globals.current_theme)
+local utils = require('utils')
+local palette = utils.get_palette(vim.g.colorscheme.name, vim.g.colorscheme.theme)
 
 local function get_highlights(_palette)
+    if vim.g.colorscheme.vanilla then return {} end
     -- local colors        = require('bufferline.colors')
     -- local hex           = colors.get_color
     -- local tint          = colors.shade_color
 
-    local fill_bg       = _palette.bg_dark or _palette.mantle
+    local fill_bg       = vim.g.colors.dark_bg
     local error_fg      = _palette.red
     local hint_fg       = _palette.blue
-    local comment_fg    = _palette.comment or _palette.overlay0
-    local visible_fg    = _palette.comment or _palette.overlay0
+    local comment_fg    = vim.g.colors.comment
+    local visible_fg    = vim.g.colors.comment
     local string_fg     = _palette.green
-    local normal_bg     = _palette.bg or _palette.base
+    local normal_bg     = vim.g.colors.bg
     local sep_fg        = _palette.surface0
     local selected_fg   = _palette.pink
 
@@ -300,13 +301,23 @@ local function get_highlights(_palette)
 end
 
 local bufferline  = require('bufferline')
+
+local style_preset = {
+    bufferline.style_preset.no_italic,
+    bufferline.style_preset.no_bold,
+}
+if vim.g.colorscheme.vanilla then
+    style_preset = {
+        bufferline.style_preset.no_italic,
+        bufferline.style_preset.no_bold,
+        bufferline.style_preset.minimal,
+    }
+end
+
 bufferline.setup {
     highlights = get_highlights(palette),
     options = {
-        style_preset = {
-            bufferline.style_preset.no_italic,
-            bufferline.style_preset.no_bold,
-        },
+        style_preset = style_preset,
         separator_style = { "∣", "∣" },
         diagnostics = "nvim_lsp",
         buffer_close_icon = "×",
@@ -329,14 +340,14 @@ bufferline.setup {
                 text = " EXPLORER",
                 separator = false,
                 text_align = "left",
-                highlight = "BufferlineOffsetTitleBright",
+                highlight = "BufferLineBackground",
             },
             {
                 filetype = "Outline",
                 text = " › OUTLINE",
                 text_align = "left",
                 separator = "▏",
-                highlight = "BufferlineOffsetTitleBase",
+                highlight = "BufferLineBackground",
             },
         },
         numbers = function(opts)

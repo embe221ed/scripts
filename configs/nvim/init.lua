@@ -1,21 +1,19 @@
 -- IMPORTS
-require('opts')               -- Options (load first for global setting)
+require('opts')               -- options (load first for global setting)
+require('globals')            -- custom global options
 require('misc.autocmds')      -- autocmds
-require('keys')               -- Keymaps
-require('plugins')            -- Plugins
+require('keys')               -- keymaps
+require('plugins')            -- plugins
 require('snippets')           -- LuaSnip custom snippets
 require('misc.functions')     -- custom functions
 require('editor.lsp')         -- LSP config
 require('languages')          -- tree-sitter languages
-require('ui.lualineconfig')   -- LuaLine config
 require('ui.devicons')        -- nvim-web-devicons
 
 require('_render-markdown')
 -- require('_markview')
 
-local globals = require('globals')
-
-vim.opt.termguicolors = true
+local utils = require('utils')
 
 -- PLUGINS
 -- -- guess indent
@@ -199,9 +197,9 @@ require("illuminate").configure({
   },
 })
 
-require('colorscheme')    -- colorscheme
-local current_theme = globals.current_theme
-local palette = globals.get_palette(globals.colorscheme, current_theme)
+require('ui.colorscheme')   -- colorscheme
+local current_theme = vim.g.colorscheme.theme
+local palette = utils.get_palette(vim.g.colorscheme.name, current_theme)
 
 -- -- todo-comments
 require("todo-comments").setup {
@@ -210,19 +208,19 @@ require("todo-comments").setup {
     QUESTION    = { icon = " ", color = "question", alt = { "Q", "ASK" } },
     FINDING     = { icon = "󰈸 ", color = "error", alt = { "BUG", "ISSUE" } },
     SUGGESTION  = { icon = " ", color = "sugg", alt = { "NIT", "SUG" } },
-    NOTE        = { icon = "", color = "hint", alt = { "INFO" } },
+    NOTE        = { icon = " ", color = "hint", alt = { "INFO" } },
     IDEA        = { icon = " ", color = "idea" },
   },
+  -- TODO: use global colors
   colors = {
-    idea      = { palette.yellow },
-    audit     = { palette.mauve },
-    question  = { palette.sky },
-    sugg      = { palette.teal },
+    idea      = { vim.g.colors.yellow },
+    audit     = { vim.g.colors.mauve },
+    question  = { vim.g.colors.sky },
+    sugg      = { vim.g.colors.teal },
   }
 }
 
 
-require('ui._bufferline')
 require('colorizer').setup({
   '*';
   '!lazy';
@@ -279,15 +277,11 @@ ctx_render.open = function(bufnr, winid, ctx_ranges, ctx_lines)
   vim.cmd('IBLEnableScope')
 end
 
--- -- load custom highlights before `noice.nvim`
-require('highlights')
-
--- -- noice
-require('ui._noice')
 
 local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
+-- TODO: use global colors
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   vim.api.nvim_set_hl(0, "IblScope", { fg = palette.pink })
 end)
@@ -318,7 +312,7 @@ require("no-neck-pain").setup({
 })
 
 -- obsidian vault integration
-local is_directory = globals.is_directory
+local is_directory = utils.is_directory
 local workspaces = {
     { name = "notes",   path = "~/Desktop/knowledge", },
     { name = "work",    path = "~/Desktop/osec_io/knowledge/notes", },
@@ -343,4 +337,9 @@ end
 
 -- load after colorscheme to apply correct highlights
 require('ui.nvimtree')
+require('ui.lualineconfig')   -- LuaLine config
+require('ui._bufferline')
+require('highlights')         -- load custom highlights before `noice.nvim`
+require('ui._noice')          -- noice
+
 require('editor.dap')         -- DAP configs

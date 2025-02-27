@@ -7,7 +7,7 @@ require('goto-preview').setup({
   default_mappings = true,
   width = 120, -- Width of the floating window
   -- width = 200; -- Width of the floating window
-  border = {"├", "─" ,"╮", "│", "╯", "─", "╰", "│"}, -- Border characters of the floating window
+  border = vim.g.goto_preview.border,
   height = 20, -- Height of the floating window
   preview_window_title = { enabled = true, position = "right" },
   post_open_hook = function(_, winid)
@@ -26,7 +26,7 @@ vim.diagnostic.config({
 local opts = { noremap=true, silent=true }
 local open_float = function()
   local fopts = {
-    border = "single",
+    border = vim.g.lsp.diagnostic.border,
   }
   vim.diagnostic.open_float(fopts)
 end
@@ -234,7 +234,7 @@ end
 vim.g.rustaceanvim = {
   tools = {
     float_win_config = {
-      border = "rounded",
+      border = vim.g.border,
     },
   },
 }

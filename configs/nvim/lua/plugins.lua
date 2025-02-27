@@ -6,7 +6,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 local opts = {
   ui = {
-    border = "rounded",
+    border = vim.g.border,
     backdrop = 100,
   },
 }
@@ -30,13 +30,7 @@ return require("lazy").setup(
       "nvim-tree/nvim-tree.lua",                                      -- filesystem navigation
       dependencies = { "nvim-tree/nvim-web-devicons" }                -- filesystem icons
     },
-    { "catppuccin/nvim", name = "catppuccin" },                       -- catppuccin theme plugin
-    -- {                                                                 -- tokyonight theme plugin
-    --   "folke/tokyonight.nvim",
-    --   lazy = false,
-    --   priority = 1000,
-    --   opts = {},
-    -- },
+    vim.g.colorscheme.plugin(),
     {
       "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
       build = ":TSUpdate"

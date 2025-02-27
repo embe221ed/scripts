@@ -1,22 +1,8 @@
 local lualine = require('lualine')
 
-local globals = require('globals')
-local current_theme = globals.current_theme
-local palette = globals.get_palette(globals.colorscheme, current_theme)
-
 -- Color table for highlights
 -- stylua: ignore
-local colors = {
-  bg        = palette.bg or palette.base,
-  fg        = palette.fg or palette.surface2,
-  yellow    = palette.yellow,
-  green     = palette.green,
-  orange    = palette.orange or palette.peach,
-  blue      = palette.blue,
-  red       = palette.red,
-  mauve     = palette.magenta or palette.mauve,
-  pink      = palette.magenta2 or palette.pink,
-}
+local colors = vim.g.colors
 
 local conditions = {
   buffer_not_empty = function()
@@ -35,17 +21,14 @@ local conditions = {
 -- Config
 local config = {
   options = {
-    -- Disable sections and component separators
-    -- component_separators = '╱',
     component_separators = { left = '', right = '' },
-    -- section_separators = '',
     section_separators = { left = '', right = '' },
     theme = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
       -- are just setting default looks o statusline
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.bg } },
+      normal = { c = { fg = colors.light_fg, bg = colors.bg } },
+      inactive = { c = { fg = colors.light_fg, bg = colors.bg } },
     },
     disabled_filetypes = {
       'NvimTree',
@@ -106,7 +89,7 @@ ins_left(
     function()
       return ' '
     end,
-    color = { fg = colors.fg, gui = 'bold' }, -- Sets highlighting of component
+    color = { fg = colors.light_fg, gui = 'bold' }, -- Sets highlighting of component
     padding = { left = 1, right = 1 }, -- We don't need space before this
   },
   true
@@ -147,7 +130,7 @@ ins_left {
     return msg
   end,
   icon = ' LSP:',
-  color = { fg = colors.fg, gui = 'bold' },
+  color = { fg = colors.light_fg, gui = 'bold' },
 }
 
 -- Add components to right sections
@@ -164,7 +147,7 @@ ins_right {
 
 ins_right {
   'selectioncount',
-  color = { fg = colors.fg, gui = 'bold' },
+  color = { fg = colors.light_fg, gui = 'bold' },
 }
 
 ins_right { 'location' }
@@ -185,10 +168,15 @@ ins_right {
     elseif p >= 10 then icon = '▇▇▇'
     else icon = '███'
     end
-    return string.format('%%#Float#%s %2d%%%%', icon, p)
-  end
+    return string.format('%s %2d%%%%', icon, p)
+  end,
+  color = { fg = colors.orange, gui = 'bold' },
 }
 
 -- Now don't forget to initialize lualine
 ---@diagnostic disable-next-line: undefined-field
-lualine.setup(config)
+if vim.g.colorscheme.vanilla then
+  lualine.setup({})
+else
+  lualine.setup(config)
+end
