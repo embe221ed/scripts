@@ -49,31 +49,30 @@ require("nord").setup({
     -- highlights.TabLineSel                  = { bg = colors.pink }
     -- highlights.FloatBorder                 = { fg = colors.surface1, bg = colors.base, style = { "bold" } }
     -- highlights.PmenuSel                    = { bg = colors.surface1, style = {} }
-    -- highlights.-- PmenuSbar                   = { bg = utils.darken(colors.surface0, 0.8, colors.crust), }
-    --
+
     -- highlights.BlinkCmpLabelDescription    = { fg = colors.overlay0, style = { "italic" } }
-    --
+
     -- highlights.NoicePopup                  = { bg = colors.crust }
     -- highlights.NoiceCmdlinePopupBorder     = { fg = colors.surface1, style = { "bold" } }
-    --
-    -- highlights.StatusLine                  = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
-    -- highlights.StatusLineNC                = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
-    --
+
+    highlights.StatusLine                  = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
+    highlights.StatusLineNC                = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
+
     -- highlights.CursorLineNr                = { fg = colors.pink, style = { "bold" } }
-    --
+
     -- highlights.OutlineCurrent              = { fg = colors.aurora.orange, bg = "", bold = true }
-    --
+
     -- highlights.TelescopeTitle              = { fg = colors.cyan }
     -- highlights.TelescopeBorder             = { fg = colors.surface1, style = { "bold" } }
-    --
+
     -- highlights.AvanteInlineHint            = { fg = colors.overlay2, style = { "italic" } }
-    --
+
     -- highlights.NvimTreeFolderName          = { fg = colors.peach }
     -- highlights.NvimTreeFolderIcon          = { fg = colors.peach }
     -- highlights.NvimTreeOpenedFolderName    = { fg = colors.peach }
     -- highlights.NvimTreeEmptyFolderName     = { fg = colors.peach }
     -- highlights.NvimTreeIndentMarker        = { fg = colors.overlay0 }
-    -- highlights.NvimTreeWinSeparator        = { fg = colors.polar_night.origin, bg = colors.polar_night.origin, }
+    highlights.NvimTreeWinSeparator        = { fg = colors.polar_night.origin, bg = colors.polar_night.origin, }
     -- highlights.NvimTreeRootFolder          = { fg = colors.peach, style = { "bold" } }
     -- highlights.NvimTreeSymlink             = { fg = colors.pink }
     -- highlights.NvimTreeGitDirty            = { fg = colors.yellow }
@@ -82,18 +81,15 @@ require("nord").setup({
     -- highlights.NvimTreeSpecialFile         = { fg = colors.flamingo }
     -- highlights.NvimTreeImageFile           = { fg = colors.text }
     -- highlights.NvimTreeOpenedFile          = { fg = colors.pink }
-    -- highlights.NvimTreeNormal              = { bg = colors.polar_night.bright }
-    -- highlights.NvimTreeNormalNC            = { bg = colors.polar_night.bright }
+    highlights.NvimTreeNormal              = { bg = colors.polar_night.bright }
+    highlights.NvimTreeNormalNC            = { bg = colors.polar_night.bright }
     -- highlights.NvimTreeCursorLine          = { bg = colors.polar_night.brighter }
     -- highlights.NvimTreeExecFile            = { fg = colors.red }
     -- highlights.NvimTreeOpenedHL            = { fg = colors.surface2 }
-    -- highlights.NvimTreeStatusLine          = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
-    -- highlights.NvimTreeStatusLineNC        = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
+    highlights.NvimTreeStatusLine          = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
+    highlights.NvimTreeStatusLineNC        = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
     --
     -- highlights.TreesitterContextBottom     = { sp = colors.surface1, style = { "underline" } }
-    --
-    -- highlights.BufferlineOffsetTitleBase   = { fg = colors.pink, bg = colors.mantle }
-    -- highlights.BufferlineOffsetTitleBright = { fg = colors.pink, bg = colors.mantle }
     --
     -- highlights["@parameter.readonly"]     = { fg = colors.maroon, style = { "italic" } }
     -- highlights["@parameter.modification"] = { fg = colors.maroon, style = { "italic" } }

@@ -88,15 +88,13 @@ require('catppuccin').setup({
     NvimTreeImageFile           = { fg = palette.text },
     NvimTreeOpenedFile          = { fg = palette.pink },
     NvimTreeNormal              = { bg = palette.mantle },
+    NvimTreeNormalNC            = { bg = palette.mantle },
     NvimTreeExecFile            = { fg = palette.red },
     NvimTreeOpenedHL            = { fg = palette.surface2 },
     NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
     NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
 
     TreesitterContextBottom     = { sp = palette.surface1, style = { "underline" } },
-
-    BufferlineOffsetTitleBase   = { fg = palette.pink, bg = palette.mantle },
-    BufferlineOffsetTitleBright = { fg = palette.pink, bg = palette.mantle },
 
     ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
     ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },
