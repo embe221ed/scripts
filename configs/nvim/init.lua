@@ -198,8 +198,6 @@ require("illuminate").configure({
 })
 
 require('ui.colorscheme')   -- colorscheme
-local current_theme = vim.g.colorscheme.theme
-local palette = utils.get_palette(vim.g.colorscheme.name, current_theme)
 
 -- -- todo-comments
 require("todo-comments").setup {
@@ -283,7 +281,7 @@ local hooks = require("ibl.hooks")
 -- every time the colorscheme changes
 -- TODO: use global colors
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-  vim.api.nvim_set_hl(0, "IblScope", { fg = palette.pink })
+  vim.api.nvim_set_hl(0, "IblScope", { fg = vim.g.colors.accent })
 end)
 
 require("ibl").setup {

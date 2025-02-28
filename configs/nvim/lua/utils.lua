@@ -1,6 +1,11 @@
+local function _get_tokyonight_day_palette(palette)
+  local opts = {}
+  return palette(opts)
+end
+
 local utils = {}
 
-utils.is_dark = function()
+function utils.is_dark()
   local out = os.execute("/opt/scripts/utils/determine_system.sh") / 256
   -- not Darwin (MacOS), early return
   if out ~= 1 then return os.getenv("DISPLAY_MODE") ~= "Light" end
@@ -12,19 +17,14 @@ utils.is_dark = function()
   end
 end
 
-local function _get_tokyonight_day_palette(palette)
-  local opts = {}
-  return palette(opts)
-end
-
-utils.is_directory = function(path)
+function utils.is_directory(path)
   local expanded_path = vim.fn.expand(path)
   ---@diagnostic disable-next-line: undefined-field
   local stat = vim.loop.fs_stat(expanded_path)
   return stat and stat.type == "directory"
 end
 
-utils.get_palette = function(colorscheme, theme)
+function utils.get_palette(colorscheme, theme)
   local palette
   if colorscheme == 'catppuccin' then
     palette = require("catppuccin.palettes").get_palette(theme)
@@ -37,7 +37,7 @@ utils.get_palette = function(colorscheme, theme)
   return palette
 end
 
-utils.generate_desc = function(desc)
+function utils.generate_desc(desc)
   return desc .. string.rep(' ' , 40)
 end
 

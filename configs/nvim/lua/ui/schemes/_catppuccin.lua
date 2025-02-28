@@ -19,6 +19,10 @@ if color_overrides[current_theme] then
     palette[key] = value
   end
 end
+
+require('ui.colors').initialize_colors(palette)
+local colors = vim.g.colors
+
 -- local utils = require('catppuccin.utils.colors')
 require('catppuccin').setup({
   flavour = current_theme, -- latte, frappe, macchiato, mocha
@@ -51,50 +55,50 @@ require('catppuccin').setup({
   color_overrides = color_overrides,
   custom_highlights = {
     WinSeparator                = { fg = palette.surface0 },
-    TabLineSel                  = { bg = palette.pink },
-    FloatBorder                 = { fg = palette.surface1, bg = palette.base, style = { "bold" } },
-    PmenuSel                    = { bg = palette.surface1, style = {} },
+    TabLineSel                  = { bg = colors.accent },
+    FloatBorder                 = { fg = colors.alt_fg, bg = colors.base, style = { "bold" } },
+    PmenuSel                    = { bg = colors.alt_fg, style = {} },
     -- PmenuSbar                   = { bg = utils.darken(palette.surface0, 0.8, palette.crust), },
 
-    BlinkCmpLabelDescription    = { fg = palette.overlay0, style = { "italic" } },
+    BlinkCmpLabelDescription    = { fg = colors.comment, style = { "italic" } },
 
     NoicePopup                  = { bg = palette.crust },
-    NoiceCmdlinePopupBorder     = { fg = palette.surface1, style = { "bold" } },
+    NoiceCmdlinePopupBorder     = { fg = colors.alt_fg, style = { "bold" } },
 
-    StatusLine                  = { fg = palette.base, bg = palette.base },
-    StatusLineNC                = { fg = palette.base, bg = palette.base },
+    StatusLine                  = { fg = colors.bg, bg = colors.bg },
+    StatusLineNC                = { fg = colors.bg, bg = colors.bg },
 
-    CursorLineNr                = { fg = palette.pink, style = { "bold" } },
+    CursorLineNr                = { fg = colors.accent, style = { "bold" } },
 
-    OutlineCurrent              = { fg = palette.peach, bg = "", style = { "bold" } },
+    OutlineCurrent              = { fg = colors.orange, bg = "", style = { "bold" } },
 
     TelescopeTitle              = { fg = palette.cyan },
-    TelescopeBorder             = { fg = palette.surface1, style = { "bold" } },
+    TelescopeBorder             = { fg = colors.alt_fg, style = { "bold" } },
 
     AvanteInlineHint            = { fg = palette.overlay2, style = { "italic" } },
 
-    NvimTreeFolderName          = { fg = palette.peach },
-    NvimTreeFolderIcon          = { fg = palette.peach },
-    NvimTreeOpenedFolderName    = { fg = palette.peach },
-    NvimTreeEmptyFolderName     = { fg = palette.peach },
-    NvimTreeIndentMarker        = { fg = palette.overlay0 },
-    NvimTreeWinSeparator        = { fg = palette.base, bg = palette.base, },
-    NvimTreeRootFolder          = { fg = palette.peach, style = { "bold" } },
-    NvimTreeSymlink             = { fg = palette.pink },
-    NvimTreeGitDirty            = { fg = palette.yellow },
-    NvimTreeGitNew              = { fg = palette.blue },
-    NvimTreeGitDeleted          = { fg = palette.red },
+    NvimTreeFolderName          = { fg = colors.orange },
+    NvimTreeFolderIcon          = { fg = colors.orange },
+    NvimTreeOpenedFolderName    = { fg = colors.orange },
+    NvimTreeEmptyFolderName     = { fg = colors.orange },
+    NvimTreeIndentMarker        = { fg = colors.comment },
+    NvimTreeWinSeparator        = { fg = colors.bg, bg = colors.bg, },
+    NvimTreeRootFolder          = { fg = colors.orange, style = { "bold" } },
+    NvimTreeSymlink             = { fg = colors.pink },
+    NvimTreeGitDirty            = { fg = colors.yellow },
+    NvimTreeGitNew              = { fg = colors.blue },
+    NvimTreeGitDeleted          = { fg = colors.red },
     NvimTreeSpecialFile         = { fg = palette.flamingo },
-    NvimTreeImageFile           = { fg = palette.text },
-    NvimTreeOpenedFile          = { fg = palette.pink },
+    NvimTreeImageFile           = { fg = colors.fg },
+    NvimTreeOpenedFile          = { fg = colors.pink },
     NvimTreeNormal              = { bg = palette.mantle },
     NvimTreeNormalNC            = { bg = palette.mantle },
-    NvimTreeExecFile            = { fg = palette.red },
+    NvimTreeExecFile            = { fg = colors.red },
     NvimTreeOpenedHL            = { fg = palette.surface2 },
-    NvimTreeStatusLine          = { fg = palette.base, bg = palette.base },
-    NvimTreeStatusLineNC        = { fg = palette.base, bg = palette.base },
+    NvimTreeStatusLine          = { fg = colors.bg, bg = colors.bg },
+    NvimTreeStatusLineNC        = { fg = colors.bg, bg = colors.bg },
 
-    TreesitterContextBottom     = { sp = palette.surface1, style = { "underline" } },
+    TreesitterContextBottom     = { sp = colors.alt_fg, style = { "underline" } },
 
     ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
     ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },

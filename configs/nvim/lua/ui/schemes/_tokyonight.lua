@@ -35,6 +35,7 @@ require('tokyonight').setup({
   ---@param highlights tokyonight.Highlights
   ---@param colors ColorScheme
   on_highlights = function(highlights, colors)
+    require('ui.colors').initialize_colors(colors)
     highlights.TabLineSel                   = { bg = colors.magenta2 }
     highlights.FloatBorder                  = { fg = colors.border_highlight, bg = colors.bg, bold = true }
     highlights.FloatTitle                   = { fg = colors.border_highlight, bg = colors.bg }

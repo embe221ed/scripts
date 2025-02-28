@@ -44,7 +44,9 @@ require("nord").setup({
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with all highlights and the colorScheme table
   ---@param colors Nord.Palette
-  on_highlights = function(highlights, colors)
+  on_highlights = function(highlights, _colors)
+    require('ui.colors').initialize_colors(_colors)
+    local colors = vim.g.colors
     -- highlights.WinSeparator                = { fg = colors.surface0 }
     -- highlights.TabLineSel                  = { bg = colors.pink }
     -- highlights.FloatBorder                 = { fg = colors.surface1, bg = colors.base, style = { "bold" } }
@@ -52,11 +54,11 @@ require("nord").setup({
 
     -- highlights.BlinkCmpLabelDescription    = { fg = colors.overlay0, style = { "italic" } }
 
-    highlights.NoicePopup                  = { bg = colors.polar_night.brighter }
+    highlights.NoicePopup                  = { bg = _colors.polar_night.brighter }
     -- highlights.NoiceCmdlinePopupBorder     = { fg = colors.surface1, style = { "bold" } }
 
-    highlights.StatusLine                  = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
-    highlights.StatusLineNC                = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
+    highlights.StatusLine                  = { fg = colors.bg, bg = colors.bg }
+    highlights.StatusLineNC                = { fg = colors.bg, bg = colors.bg }
 
     -- highlights.CursorLineNr                = { fg = colors.pink, style = { "bold" } }
 
@@ -72,7 +74,7 @@ require("nord").setup({
     -- highlights.NvimTreeOpenedFolderName    = { fg = colors.peach }
     -- highlights.NvimTreeEmptyFolderName     = { fg = colors.peach }
     -- highlights.NvimTreeIndentMarker        = { fg = colors.overlay0 }
-    highlights.NvimTreeWinSeparator        = { fg = colors.polar_night.origin, bg = colors.polar_night.origin, }
+    highlights.NvimTreeWinSeparator        = { fg = colors.bg, bg = colors.bg, }
     -- highlights.NvimTreeRootFolder          = { fg = colors.peach, style = { "bold" } }
     -- highlights.NvimTreeSymlink             = { fg = colors.pink }
     -- highlights.NvimTreeGitDirty            = { fg = colors.yellow }
@@ -81,15 +83,15 @@ require("nord").setup({
     -- highlights.NvimTreeSpecialFile         = { fg = colors.flamingo }
     -- highlights.NvimTreeImageFile           = { fg = colors.text }
     -- highlights.NvimTreeOpenedFile          = { fg = colors.pink }
-    highlights.NvimTreeNormal              = { bg = colors.polar_night.bright }
-    highlights.NvimTreeNormalNC            = { bg = colors.polar_night.bright }
+    highlights.NvimTreeNormal              = { bg = colors.alt_bg }
+    highlights.NvimTreeNormalNC            = { bg = colors.alt_bg }
     highlights.NvimTreeCursorLine          = { bg = colors.polar_night.brighter }
     -- highlights.NvimTreeExecFile            = { fg = colors.red }
     -- highlights.NvimTreeOpenedHL            = { fg = colors.surface2 }
-    highlights.NvimTreeStatusLine          = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
-    highlights.NvimTreeStatusLineNC        = { fg = colors.polar_night.origin, bg = colors.polar_night.origin }
+    highlights.NvimTreeStatusLine          = { fg = colors.bg, bg = colors.bg }
+    highlights.NvimTreeStatusLineNC        = { fg = colors.bg, bg = colors.bg }
     --
-    highlights.TreesitterContextBottom     = { sp = colors.polar_night.brightest, underline = true }
+    highlights.TreesitterContextBottom     = { sp = colors.alt_fg, underline = true }
     --
     -- highlights["@parameter.readonly"]     = { fg = colors.maroon, style = { "italic" } }
     -- highlights["@parameter.modification"] = { fg = colors.maroon, style = { "italic" } }
