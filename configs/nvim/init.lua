@@ -1,17 +1,22 @@
 -- IMPORTS
 require('opts')               -- options (load first for global setting)
 require('globals')            -- custom global options
-require('misc.autocmds')      -- autocmds
-require('keys')               -- keymaps
 require('plugins')            -- plugins
-require('snippets')           -- LuaSnip custom snippets
+
+require('misc.autocmds')      -- autocmds
+require('misc.keys')          -- keymaps
 require('misc.functions')     -- custom functions
+
+require('editor.snippets')    -- LuaSnip custom snippets
 require('editor.lsp')         -- LSP config
+
 require('languages')          -- tree-sitter languages
+
 require('ui.devicons')        -- nvim-web-devicons
 
 require('_render-markdown')
 -- require('_markview')
+
 
 local utils = require('utils')
 
@@ -334,10 +339,10 @@ if #workspaces > 0 then
 end
 
 -- load after colorscheme to apply correct highlights
-require('ui.nvimtree')
-require('ui.lualineconfig')   -- LuaLine config
-require('ui._bufferline')
-require('highlights')         -- load custom highlights before `noice.nvim`
-require('ui._noice')          -- noice
+require('ui.components.nvimtree')
+require('ui.components.lualineconfig')
+require('ui.components.bufferline')
+require('highlights') -- TODO: this should be removed
+require('ui.components.noice')
 
-require('editor.dap')         -- DAP configs
+require('editor.dap') -- DAP configs

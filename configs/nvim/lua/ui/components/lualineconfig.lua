@@ -147,7 +147,7 @@ ins_right {
 
 ins_right {
   'selectioncount',
-  color = { fg = colors.light_fg, gui = 'bold' },
+  color = { fg = colors.alt_fg, gui = 'bold' },
 }
 
 ins_right { 'location' }
@@ -170,7 +170,7 @@ ins_right {
     end
     return string.format('%s %2d%%%%', icon, p)
   end,
-  color = { fg = colors.orange, gui = 'bold' },
+  color = { fg = colors.orange, },
 }
 
 -- Now don't forget to initialize lualine

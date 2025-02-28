@@ -111,7 +111,7 @@ return require("lazy").setup(
       "folke/todo-comments.nvim",                                     -- special comments like TODO, FIXME, BUG etc
       dependencies = "nvim-lua/plenary.nvim",
     },
-    require('ui.dashboard'),
+    require('ui.components.dashboard'),
     { 'nmac427/guess-indent.nvim' },                                  -- guess the indent type in the current buffer
     {
       "folke/noice.nvim",
