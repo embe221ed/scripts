@@ -85,7 +85,7 @@ require("nord").setup({
     -- highlights.NvimTreeOpenedFile          = { fg = colors.pink }
     highlights.NvimTreeNormal              = { bg = colors.alt_bg }
     highlights.NvimTreeNormalNC            = { bg = colors.alt_bg }
-    highlights.NvimTreeCursorLine          = { bg = colors.polar_night.brighter }
+    highlights.NvimTreeCursorLine          = { bg = _colors.polar_night.brighter }
     -- highlights.NvimTreeExecFile            = { fg = colors.red }
     -- highlights.NvimTreeOpenedHL            = { fg = colors.surface2 }
     highlights.NvimTreeStatusLine          = { fg = colors.bg, bg = colors.bg }
