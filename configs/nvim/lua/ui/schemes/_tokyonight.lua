@@ -11,7 +11,7 @@ require('tokyonight').setup({
     -- Style to be applied to different syntax groups
     -- Value is any valid attr-list value for `:help nvim_set_hl`
     comments = { italic = true },
-    conditionals = { italic = true },
+    conditionals = {},
     keywords = {},
     functions = {},
     variables = {},
@@ -33,30 +33,31 @@ require('tokyonight').setup({
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with a Highlights and ColorScheme table
   ---@param highlights tokyonight.Highlights
-  ---@param colors ColorScheme
-  on_highlights = function(highlights, colors)
-    require('ui.colors').initialize_colors(colors)
-    highlights.TabLineSel                   = { bg = colors.magenta2 }
-    highlights.FloatBorder                  = { fg = colors.border_highlight, bg = colors.bg, bold = true }
-    highlights.FloatTitle                   = { fg = colors.border_highlight, bg = colors.bg }
+  ---@param _colors ColorScheme
+  on_highlights = function(highlights, _colors)
+    require('ui.colors').initialize_colors(_colors)
+    local colors = vim.g.colors
+    highlights.TabLineSel                   = { bg = colors.accent }
+    highlights.FloatBorder                  = { fg = _colors.border_highlight, bg = colors.bg, bold = true }
+    highlights.FloatTitle                   = { fg = _colors.border_highlight, bg = colors.bg }
     highlights.StatusLine                   = { fg = colors.bg, bg = colors.bg }
     highlights.StatusLineNC                 = { fg = colors.bg, bg = colors.bg }
 
-    highlights.NoicePopup                   = { bg = colors.bg_dark }
+    highlights.NoicePopup                   = { bg = colors.alt_bg }
 
     highlights.OutlineCurrent               = { fg = colors.green, bg = "", bold = true }
 
-    highlights.TelescopeTitle               = { fg = colors.cyan }
+    highlights.TelescopeTitle               = { fg = _colors.cyan }
     highlights.TelescopeNormal              = { bg = colors.bg }
-    highlights.TelescopeBorder              = { fg = colors.border_highlight, bg = colors.bg }
+    highlights.TelescopeBorder              = { fg = _colors.border_highlight, bg = colors.bg }
     highlights.TelescopePromptTitle         = { fg = colors.orange, bg = colors.bg }
     highlights.TelescopePromptBorder        = { fg = colors.orange, bg = colors.bg }
 
     highlights.TreesitterContext            = { bg = colors.bg }
 
     highlights.NvimTreeExecFile             = { fg = colors.red }
-    highlights.NvimTreeOpenedHL             = { fg = colors.comment, italic = true }
-    highlights.NvimTreeRootFolder           = { fg = colors.magenta2, bold = true }
+    highlights.NvimTreeOpenedHL             = { fg = colors.comment, }
+    highlights.NvimTreeRootFolder           = { fg = colors.accent, bold = true }
     highlights.NvimTreeStatusLine           = { fg = colors.bg, bg = colors.bg }
     highlights.NvimTreeStatusLineNC         = { fg = colors.bg, bg = colors.bg }
     highlights.NvimTreeWinSeparator         = { fg = colors.bg, bg = colors.bg }
@@ -64,7 +65,7 @@ require('tokyonight').setup({
     highlights["@namespace"]                = highlights["@module"]
 
     if current_theme == "day" then
-      highlights.Search                     = { fg = colors.bg_dark, bg = colors.blue2 }
+      highlights.Search                     = { fg = colors.alt_bg, bg = _colors.blue2 }
     end
   end,
 
