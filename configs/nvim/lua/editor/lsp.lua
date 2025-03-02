@@ -13,7 +13,9 @@ require('goto-preview').setup({
   post_open_hook = function(_, winid)
     local config = vim.api.nvim_win_get_config(winid)
     local max_length = vim.g.goto_preview.title_length
-    local title = vim.fn.fnamemodify(config.title[1][1], ':~:')
+    local title = config.title[1][1]
+    if string.match(title, "^ .* $") then return end
+    title = vim.fn.fnamemodify(title, ':~:')
     if #title > max_length then
       local path_parts = vim.fn.split(title, '/')
       local _title = ''
