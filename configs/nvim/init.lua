@@ -340,9 +340,8 @@ end
 
 -- load after colorscheme to apply correct highlights
 require('ui.components.nvimtree')
-require('ui.components.lualineconfig')
+require('ui.components.lualine')
 require('ui.components.bufferline')
-require('highlights') -- TODO: this should be removed
 require('ui.components.noice')
 
 require('editor.dap') -- DAP configs

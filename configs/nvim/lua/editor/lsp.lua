@@ -12,8 +12,20 @@ require('goto-preview').setup({
   preview_window_title = { enabled = true, position = "right" },
   post_open_hook = function(_, winid)
     local config = vim.api.nvim_win_get_config(winid)
-    local title = " " .. config.title[1][1] .. " "
-    -- if vim.g.symbol_font then title = " " .. title end
+    local max_length = vim.g.goto_preview.title_length
+    local title = vim.fn.fnamemodify(config.title[1][1], ':~:')
+    if #title > max_length then
+      local path_parts = vim.fn.split(title, '/')
+      local _title = ''
+      local tmp = ''
+      for i = #path_parts, 1, -1 do
+          tmp = path_parts[i] .. (_title ~= '' and '/' .. _title or '')
+          if #tmp >= max_length then break end
+          _title = tmp
+      end
+      title = "···/" .. _title
+    end
+    title = " " .. title .. " "
     config.title = { { title } }
     vim.api.nvim_win_set_config(winid, config)
   end,
