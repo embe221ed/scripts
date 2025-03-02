@@ -40,7 +40,7 @@ require('tokyonight').setup({
     highlights.TabLineSel                   = { bg = colors.accent }
     highlights.FloatBorder                  = { fg = _colors.border_highlight, bg = colors.bg, bold = true }
     highlights.FloatTitle                   = { fg = _colors.border_highlight, bg = colors.bg }
-    highlights.NormalFloat                  = { bg = colors.bg }
+    highlights.NormalFloat                  = { bg = colors.none }
     highlights.StatusLine                   = { fg = colors.bg, bg = colors.bg }
     highlights.StatusLineNC                 = { fg = colors.bg, bg = colors.bg }
 

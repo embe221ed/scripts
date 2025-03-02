@@ -50,7 +50,7 @@ require("nord").setup({
     -- highlights.WinSeparator                = { fg = colors.surface0 }
     -- highlights.TabLineSel                  = { bg = colors.pink }
     -- highlights.FloatBorder                 = { fg = colors.surface1, bg = colors.base, style = { "bold" } }
-    highlights.NormalFloat                  = { bg = colors.bg }
+    highlights.NormalFloat                  = { bg = colors.none }
     -- highlights.PmenuSel                    = { bg = colors.surface1, style = {} }
 
     -- highlights.BlinkCmpLabelDescription    = { fg = colors.overlay0, style = { "italic" } }
