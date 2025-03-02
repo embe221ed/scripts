@@ -57,6 +57,7 @@ require('catppuccin').setup({
     WinSeparator                = { fg = palette.surface0 },
     TabLineSel                  = { bg = colors.accent },
     FloatBorder                 = { fg = colors.alt_fg, bg = colors.base, style = { "bold" } },
+    NormalFloat                 = { bg = colors.bg },
     PmenuSel                    = { bg = colors.alt_fg, style = {} },
     -- PmenuSbar                   = { bg = utils.darken(palette.surface0, 0.8, palette.crust), },
 
