@@ -22,7 +22,12 @@ vim.opt.smoothscroll      = true
 vim.opt.list              = true
 
 vim.opt.listchars:append "eol:↴"
-vim.opt.fillchars:append "vert:▏,foldopen:┌,foldclose:›,fold: "
+vim.opt.fillchars = {
+  vert = "▏",
+  foldopen = "┌",
+  foldclose = "›",
+  fold = " ",
+}
 
 vim.opt.termguicolors   = true
 
