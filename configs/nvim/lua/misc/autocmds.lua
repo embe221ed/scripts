@@ -74,7 +74,6 @@ api.nvim_create_autocmd(
   }
 )
 
--- -- update statuscolumn for specific filetypes
 vim.api.nvim_create_autocmd(
   'BufWinEnter',
   {

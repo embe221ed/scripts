@@ -37,10 +37,11 @@ require('goto-preview').setup({
 vim.diagnostic.config({
   signs = {
     text = {
-        [vim.diagnostic.severity.ERROR] = '',
-        [vim.diagnostic.severity.WARN] = '',
-        [vim.diagnostic.severity.INFO] = '',
-        [vim.diagnostic.severity.HINT] = '',
+        -- TODO: use icons
+        -- [vim.diagnostic.severity.ERROR] = ' ',
+        -- [vim.diagnostic.severity.WARN] = ' ',
+        -- [vim.diagnostic.severity.INFO] = ' ',
+        -- [vim.diagnostic.severity.HINT] = ' ',
     },
     numhl = {
         [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
@@ -233,7 +234,7 @@ lsp.bashls.setup {
 --   })
 -- )
 -- -- -- rust-analyzer
-local rust_on_attach = function(client, bufnr)
+--[[ local rust_on_attach = function(client, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()' , { buf = bufnr })
@@ -257,7 +258,7 @@ local rust_on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 
   require('illuminate').on_attach(client)
-end
+end ]]
 
 vim.g.rustaceanvim = {
   tools = {
