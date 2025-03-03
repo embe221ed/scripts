@@ -315,7 +315,7 @@ bufferline.setup {
     highlights = get_highlights(),
     options = {
         style_preset = style_preset,
-        separator_style = { "∣", "∣" },
+        separator_style = { "❘", "❘" },
         diagnostics = "nvim_lsp",
         buffer_close_icon = "×",
         get_element_icon = function(element)
@@ -328,14 +328,14 @@ bufferline.setup {
           return icon, hl
         end,
         indicator = {
-          -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
-          style = 'underline',
+            icon = '▎', -- this should be omitted if indicator style is not 'icon'
+            style = 'icon',
         },
         offsets = {
             {
                 filetype = "NvimTree",
                 text = " EXPLORER",
-                separator = false,
+                separator = " ",
                 text_align = "left",
                 highlight = "BufferLineBackground",
             },

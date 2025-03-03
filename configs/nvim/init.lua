@@ -214,7 +214,6 @@ require("todo-comments").setup {
     NOTE        = { icon = " ", color = "hint", alt = { "INFO" } },
     IDEA        = { icon = " ", color = "idea" },
   },
-  -- TODO: use global colors
   colors = {
     idea      = { vim.g.colors.yellow },
     audit     = { vim.g.colors.mauve },
@@ -266,7 +265,7 @@ require('treesitter-context').setup {
   max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
   min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   line_numbers = true,
-  multiline_threshold = 1, -- Maximum number of lines to collapse for a single context line
+  multiline_threshold = 1,  -- Maximum number of lines to collapse for a single context line
   trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
   mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
   zindex = 20,              -- The Z-index of the context window
@@ -284,7 +283,6 @@ end
 local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
--- TODO: use global colors
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   vim.api.nvim_set_hl(0, "IblScope", { fg = vim.g.colors.accent })
 end)
@@ -345,3 +343,5 @@ require('ui.components.bufferline')
 require('ui.components.noice')
 
 require('editor.dap') -- DAP configs
+
+if vim.g.neovide then require('neovide') end

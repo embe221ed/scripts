@@ -75,7 +75,7 @@ require("nord").setup({
     -- highlights.NvimTreeOpenedFolderName    = { fg = colors.peach }
     -- highlights.NvimTreeEmptyFolderName     = { fg = colors.peach }
     -- highlights.NvimTreeIndentMarker        = { fg = colors.overlay0 }
-    highlights.NvimTreeWinSeparator        = { fg = colors.bg, bg = colors.bg, }
+    highlights.NvimTreeWinSeparator        = { fg = colors.alt_bg, bg = colors.alt_bg, }
     -- highlights.NvimTreeRootFolder          = { fg = colors.peach, style = { "bold" } }
     -- highlights.NvimTreeSymlink             = { fg = colors.pink }
     -- highlights.NvimTreeGitDirty            = { fg = colors.yellow }
@@ -89,8 +89,8 @@ require("nord").setup({
     highlights.NvimTreeCursorLine          = { bg = _colors.polar_night.brighter }
     -- highlights.NvimTreeExecFile            = { fg = colors.red }
     -- highlights.NvimTreeOpenedHL            = { fg = colors.surface2 }
-    highlights.NvimTreeStatusLine          = { fg = colors.bg, bg = colors.bg }
-    highlights.NvimTreeStatusLineNC        = { fg = colors.bg, bg = colors.bg }
+    highlights.NvimTreeStatusLine          = { fg = colors.alt_bg, bg = colors.alt_bg }
+    highlights.NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg }
     --
     highlights.TreesitterContextBottom     = { sp = colors.alt_fg, underline = true }
     --

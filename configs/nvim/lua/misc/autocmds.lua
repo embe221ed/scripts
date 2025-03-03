@@ -20,7 +20,7 @@ api.nvim_create_autocmd(
   "FileType",
   {
     desc      = "disable virtual_lines for filetypes",
-    pattern   = { "lazy", },
+    pattern   = { "lazy" },
     callback  = function()
       vim.diagnostic.config({
         virtual_lines = false,
@@ -71,6 +71,27 @@ api.nvim_create_autocmd(
         end
       end
     end,
+  }
+)
+
+-- -- update statuscolumn for specific filetypes
+vim.api.nvim_create_autocmd(
+  'BufWinEnter',
+  {
+    desc      = "update the statuscolumn for specific filetypes to reduce its size",
+    callback  = function()
+      local ft = vim.bo.filetype
+      local filetypes = {
+        'NvimTree',
+        'Outline',
+      }
+      for _, _ft in ipairs(filetypes) do
+        if ft == _ft then
+          vim.o.statuscolumn = '%s'
+          break
+        end
+      end
+    end
   }
 )
 
