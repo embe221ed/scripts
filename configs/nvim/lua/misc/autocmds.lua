@@ -36,9 +36,6 @@ api.nvim_create_autocmd(
     pattern   = { "move" },
     callback  = function()
       api.nvim_set_option_value("commentstring",  "// %s", { scope = "local" })
-      -- TODO: remove this after `indents.scm` for Move tree-sitter is implemented
-      api.nvim_set_option_value("foldmethod",  "indent", { scope = "local" })
-      api.nvim_set_option_value("foldnestmax",  3, { scope = "local" })
     end,
   }
 )

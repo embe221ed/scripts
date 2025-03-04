@@ -39,6 +39,6 @@ vim.opt.foldexpr          = "v:lua.require('utils').foldexpr()"
 vim.opt.foldtext          = ""
 vim.opt.foldmethod        = "expr"
 vim.opt.foldcolumn        = "auto:9"
-vim.opt.foldnestmax       = 5
+vim.opt.foldnestmax       = 3
 
 vim.lsp.set_log_level("off")
