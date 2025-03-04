@@ -17,7 +17,9 @@ vim.opt.splitbelow        = true
 vim.opt.updatetime        = 500
 vim.opt.conceallevel      = 2
 vim.opt.smoothscroll      = true
+vim.opt.termguicolors     = true
 
+-- -- lists
 vim.opt.list              = true
 
 vim.opt.listchars:append "eol:↴"
@@ -31,12 +33,12 @@ vim.opt.fillchars = {
   fold = " ",
 }
 
-vim.opt.termguicolors     = true
-
+-- -- fold options
 vim.opt.foldlevel         = 99
-vim.opt.foldmethod        = "expr"
-vim.opt.foldcolumn        = "auto:9"
 vim.opt.foldexpr          = "v:lua.require('utils').foldexpr()"
 vim.opt.foldtext          = ""
+vim.opt.foldmethod        = "expr"
+vim.opt.foldcolumn        = "auto:9"
+vim.opt.foldnestmax       = 5
 
 vim.lsp.set_log_level("off")

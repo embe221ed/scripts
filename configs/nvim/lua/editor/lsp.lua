@@ -15,7 +15,7 @@ require('goto-preview').setup({
     local max_length = vim.g.goto_preview.title_length
     local title = config.title[1][1]
     if string.match(title, "^ .* $") then return end
-    title = vim.fn.fnamemodify(title, ':~:')
+    title = vim.fn.fnamemodify(title, ':~:.')
     if #title > max_length then
       local path_parts = vim.fn.split(title, '/')
       local _title = ''
