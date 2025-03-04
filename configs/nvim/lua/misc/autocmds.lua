@@ -32,7 +32,7 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "FileType",
   {
-    desc      = "set the commentstring for move files",
+    desc      = "set some options for move files",
     pattern   = { "move" },
     callback  = function()
       api.nvim_set_option_value("commentstring",  "// %s", { scope = "local" })

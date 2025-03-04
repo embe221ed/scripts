@@ -384,5 +384,5 @@ require("symbol-usage").setup {
 --     SymbolKind.Operator,
 --     SymbolKind.TypeParameter,
   },
-  disable = { lsp = { "solidity_ls_nomicfoundation", }, },
+  disable = { lsp = { "solidity_ls_nomicfoundation", "lua_ls" }, },
 }

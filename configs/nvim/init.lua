@@ -289,7 +289,11 @@ end)
 
 require("ibl").setup {
   indent = {
-    tab_char = require("ibl.config").default_config.indent.char,
+    tab_char = "▏",
+    char = "▏",
+  },
+  scope = {
+    char = "▎",
   },
   exclude = {
     filetypes = {
