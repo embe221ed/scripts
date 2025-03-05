@@ -15,3 +15,17 @@ parser_config.move = {
 }
 -- add NoNeckPain scratchPad highlight as markdown
 vim.treesitter.language.register("markdown", "norg")
+
+-- define icon for filetype
+local devicons = require("nvim-web-devicons")
+devicons.set_icon({
+  move = {
+    icon = "",
+    color = "#4ca4fc",
+    cterm_color = "66",
+    name = "move",
+  },
+})
+devicons.set_icon_by_filetype({
+  move = "move",
+})

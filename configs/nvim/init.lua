@@ -10,9 +10,8 @@ require('misc.functions')     -- custom functions
 require('editor.snippets')    -- LuaSnip custom snippets
 require('editor.lsp')         -- LSP config
 
-require('languages')          -- tree-sitter languages
-
 require('ui.devicons')        -- nvim-web-devicons
+require('languages')          -- tree-sitter languages
 
 require('_render-markdown')
 -- require('_markview')
