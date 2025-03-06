@@ -16,11 +16,14 @@ require('nvim-tree').setup({
     icons = {
       padding = padding,
       git_placement = "signcolumn",
+      show = {
+        folder = false,
+      },
     },
     add_trailing = true,
-    full_name = true,
+    full_name = false,
     root_folder_label = function(path)
-      return "" .. padding .. vim.fn.fnamemodify(path, ":t") .. "/"
+      return vim.fn.fnamemodify(path, ":t") .. "/"
     end,
     symlink_destination = false,
     indent_markers = {
