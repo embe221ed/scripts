@@ -47,7 +47,10 @@ return require("lazy").setup(
       "nvim-lualine/lualine.nvim",                                    -- status line
       dependencies = { "nvim-tree/nvim-web-devicons", opt = true },   -- filesystem icons
     },
-    { "luukvbaal/statuscol.nvim", },
+    {
+      "luukvbaal/statuscol.nvim",
+      dependencies = { "lewis6991/gitsigns.nvim", opt = true }
+    },
     "neovim/nvim-lspconfig",                                          -- Configurations for Nvim LSP
     "mfussenegger/nvim-dap",                                          -- Debug Adapter Protocol client implementation for Neovim
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },

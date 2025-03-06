@@ -1,5 +1,7 @@
 local builtin = require('statuscol.builtin')
 
+require('gitsigns').setup()
+
 require("statuscol").setup({
   segments = {
     { text = { " " } },
