@@ -47,6 +47,7 @@ return require("lazy").setup(
       "nvim-lualine/lualine.nvim",                                    -- status line
       dependencies = { "nvim-tree/nvim-web-devicons", opt = true },   -- filesystem icons
     },
+    { "luukvbaal/statuscol.nvim", },
     "neovim/nvim-lspconfig",                                          -- Configurations for Nvim LSP
     "mfussenegger/nvim-dap",                                          -- Debug Adapter Protocol client implementation for Neovim
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
@@ -159,7 +160,7 @@ return require("lazy").setup(
         provider = "openai",
         openai = {
           endpoint = "https://api.openai.com/v1",
-          model = "gpt-4o-mini",
+          model = "o3-mini",
           timeout = 30000, -- Timeout in milliseconds
           temperature = 0,
           max_tokens = 4096,

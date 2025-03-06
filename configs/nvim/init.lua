@@ -344,6 +344,7 @@ require('ui.components.nvimtree')
 require('ui.components.lualine')
 require('ui.components.bufferline')
 require('ui.components.noice')
+require('ui.components.statuscol')
 
 require('editor.dap') -- DAP configs
 
