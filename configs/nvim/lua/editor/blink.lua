@@ -6,8 +6,9 @@ return {
   lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
   dependencies = {
+    { "mikavilpas/blink-ripgrep.nvim" },
     { 'rafamadriz/friendly-snippets' },
-    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+    { 'L3MON4D3/LuaSnip' },
   },
 
   -- use a release tag to download pre-built binaries
@@ -67,7 +68,28 @@ return {
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = {
+        'lsp',
+        'path',
+        'snippets',
+        'buffer',
+        'ripgrep',
+      },
+      providers = {
+        ripgrep = {
+          module = "blink-ripgrep",
+          name = "Ripgrep",
+          transform_items = function(_, items)
+            for _, item in ipairs(items) do
+              -- example: append a description to easily distinguish rg results
+              item.labelDetails = {
+                description = "(rg)",
+              }
+            end
+            return items
+          end,
+        },
+      },
     },
     completion = {
       list = {
