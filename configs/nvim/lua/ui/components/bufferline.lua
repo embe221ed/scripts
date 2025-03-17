@@ -358,34 +358,5 @@ bufferline.setup {
             end
             return false
         end,
-        custom_areas = {
-            right = function()
-                local result = {}
-                local seve = vim.diagnostic.severity
-                local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
-                local warn = #vim.diagnostic.get(0, { severity = seve.WARN })
-                local info = #vim.diagnostic.get(0, { severity = seve.INFO })
-                local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
-
-                local error_text = ""
-                if error ~= 0 then error_text = "  " .. error .. " " end
-                table.insert(result, { text = error_text, fg = "#EC5241" })
-
-                local warn_text = ""
-                if warn ~= 0 then warn_text = "  " .. warn .. " " end
-                table.insert(result, { text = warn_text, fg = "#EFB839" })
-
-                local hint_text = ""
-                if hint ~= 0 then hint_text = "  " .. hint .. " " end
-                table.insert(result, { text = hint_text , fg = "#A3BA5E" })
-
-
-                local info_text = ""
-                if info ~= 0 then info_text = "  " .. info .. " " end
-                table.insert(result, { text = info_text, fg = "#7EA9A7" })
-
-                return result
-            end,
-        }
     }
 }

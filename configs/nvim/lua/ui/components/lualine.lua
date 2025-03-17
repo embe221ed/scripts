@@ -134,6 +134,8 @@ ins_left {
   color = { fg = colors.alt_fg, gui = 'bold' },
 }
 
+ins_left { 'diagnostics' }
+
 -- Add components to right sections
 ins_right {
   'diff',
