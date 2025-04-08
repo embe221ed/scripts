@@ -98,9 +98,11 @@ api.nvim_create_user_command(
     local state = require("no-neck-pain.state")
 
     if state.has_tabs(state) and state.is_active_tab_registered(state) then
-      vim.opt.laststatus = 2
+      vim.opt.laststatus  = 2
+      vim.opt.showtabline = 2
     else
-      vim.opt.laststatus = 0
+      vim.opt.laststatus  = 0
+      vim.opt.showtabline = 0
     end
 
     require("no-neck-pain").toggle()
@@ -116,4 +118,10 @@ api.nvim_create_user_command(
     require('symbol-usage').refresh();
   end,
   { desc = "toggles the inlay_hint" }
+)
+
+api.nvim_create_user_command(
+  "Converturl",
+  function() vim.fn.system('converturl') end,
+  { desc = "convert the github URL using `converturl` shell command" }
 )
