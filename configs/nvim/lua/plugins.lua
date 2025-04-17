@@ -163,7 +163,7 @@ return require("lazy").setup(
         provider = "openai",
         openai = {
           endpoint = "https://api.openai.com/v1",
-          model = "o3-mini",
+          model = "gpt-4.1",
           timeout = 30000, -- Timeout in milliseconds
           temperature = 0,
           max_tokens = 4096,

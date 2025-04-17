@@ -87,6 +87,7 @@ vim.api.nvim_create_autocmd(
       for _, _ft in ipairs(filetypes) do
         if ft == _ft then
           vim.o.statuscolumn = '%s'
+          vim.o.statusline = nil
           break
         end
       end
