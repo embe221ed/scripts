@@ -127,7 +127,7 @@ return require("lazy").setup(
     { 'onsails/lspkind.nvim' },                                       -- vscode-like pictograms
     { 'shortcuts/no-neck-pain.nvim' },                                -- center the current buffer
     {
-      "epwalsh/obsidian.nvim",
+      "obsidian-nvim/obsidian.nvim",
       version = "*",  -- recommended, use latest release instead of latest commit
       lazy = true,
       ft = "markdown",

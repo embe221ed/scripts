@@ -336,6 +336,10 @@ if #workspaces > 0 then
     -- the vault root is the parent directory of the `.obsidian` folder.
     -- You can also provide configuration overrides for each workspace through the `overrides` field.
     workspaces = workspaces,
+    completion = {
+      nvim_cmp = false,
+      blink = true,
+    },
   })
 end
 

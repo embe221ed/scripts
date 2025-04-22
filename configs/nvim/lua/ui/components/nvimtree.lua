@@ -29,7 +29,7 @@ require('nvim-tree').setup({
     indent_markers = {
       enable = true,
     },
-    highlight_opened_files = "all",
+    highlight_opened_files = "none",
   },
   actions = {
     open_file = {

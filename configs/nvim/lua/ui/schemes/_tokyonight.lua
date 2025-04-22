@@ -58,7 +58,6 @@ require('tokyonight').setup({
     highlights.TreesitterContextBottom      = { sp = colors.alt_fg, underline = true }
 
     highlights.NvimTreeExecFile             = { fg = colors.red }
-    highlights.NvimTreeOpenedHL             = { fg = colors.comment, }
     highlights.NvimTreeRootFolder           = { fg = colors.accent, bold = true }
     highlights.NvimTreeStatusLine           = { fg = colors.alt_bg, bg = colors.alt_bg }
     highlights.NvimTreeStatusLineNC         = { fg = colors.alt_bg, bg = colors.alt_bg }

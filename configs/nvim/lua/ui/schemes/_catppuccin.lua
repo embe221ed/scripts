@@ -91,11 +91,9 @@ require('catppuccin').setup({
     NvimTreeGitDeleted          = { fg = colors.red },
     NvimTreeSpecialFile         = { fg = palette.flamingo },
     NvimTreeImageFile           = { fg = colors.fg },
-    NvimTreeOpenedFile          = { fg = colors.pink },
     NvimTreeNormal              = { bg = colors.alt_bg },
     NvimTreeNormalNC            = { bg = colors.alt_bg },
     NvimTreeExecFile            = { fg = colors.red },
-    NvimTreeOpenedHL            = { fg = palette.surface2 },
     NvimTreeStatusLine          = { fg = colors.alt_bg, bg = colors.alt_bg },
     NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg },
 
