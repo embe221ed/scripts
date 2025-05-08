@@ -98,7 +98,7 @@ api.nvim_create_user_command(
     local state = require("no-neck-pain.state")
 
     if state.has_tabs(state) and state.is_active_tab_registered(state) then
-      vim.opt.laststatus  = 2
+      vim.opt.laststatus  = vim.g.statusline.laststatus
       vim.opt.showtabline = 2
     else
       vim.opt.laststatus  = 0

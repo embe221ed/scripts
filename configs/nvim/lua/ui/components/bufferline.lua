@@ -335,7 +335,6 @@ bufferline.setup {
             {
                 filetype = "NvimTree",
                 text = " EXPLORER",
-                -- separator = " ",
                 separator = "▏",
                 text_align = "left",
                 highlight = "BufferLineBackground",
