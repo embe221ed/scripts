@@ -83,7 +83,7 @@ require('catppuccin').setup({
     NvimTreeOpenedFolderName    = { fg = colors.orange },
     NvimTreeEmptyFolderName     = { fg = colors.orange },
     NvimTreeIndentMarker        = { fg = colors.comment },
-    NvimTreeWinSeparator        = { fg = colors.alt_bg, bg = colors.alt_bg, },
+    -- NvimTreeWinSeparator        = { fg = colors.alt_bg, bg = colors.alt_bg, },
     NvimTreeRootFolder          = { fg = colors.orange, style = { "bold" } },
     NvimTreeSymlink             = { fg = colors.pink },
     NvimTreeGitDirty            = { fg = colors.yellow },
@@ -94,8 +94,8 @@ require('catppuccin').setup({
     NvimTreeNormal              = { bg = colors.alt_bg },
     NvimTreeNormalNC            = { bg = colors.alt_bg },
     NvimTreeExecFile            = { fg = colors.red },
-    NvimTreeStatusLine          = { fg = colors.alt_bg, bg = colors.alt_bg },
-    NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg },
+    -- NvimTreeStatusLine          = { fg = colors.alt_bg, bg = colors.alt_bg },
+    -- NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg },
 
     TreesitterContextBottom     = { sp = colors.alt_fg, style = { "underline" } },
 

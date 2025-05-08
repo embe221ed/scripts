@@ -1,6 +1,6 @@
 -- IMPORTS
-require('opts')               -- options (load first for global setting)
-require('globals')            -- custom global options
+require('globals')            -- custom global options (load first)
+require('opts')               -- options
 require('plugins')            -- plugins
 
 require('misc.autocmds')      -- autocmds

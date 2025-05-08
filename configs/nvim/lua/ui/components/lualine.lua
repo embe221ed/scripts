@@ -18,6 +18,26 @@ local conditions = {
   end,
 }
 
+local disabled_filetypes = {}
+if vim.g.statusline.laststatus < 3 then
+  disabled_filetypes = {
+    'NvimTree',
+    'qf',
+    'loc',
+    'Outline',
+    'norg',
+    'dashboard',
+    'help',
+    'dapui_scopes',
+    'dapui_breakpoints',
+    'dapui_stacks',
+    'dapui_watches',
+    'dapui_watches',
+    'dap-repl',
+    'dapui_console',
+  }
+end
+
 -- Config
 local config = {
   options = {
@@ -31,22 +51,7 @@ local config = {
       normal = { c = { fg = colors.alt_fg, bg = colors.bg } },
       inactive = { c = { fg = colors.alt_fg, bg = colors.bg } },
     },
-    disabled_filetypes = {
-      'NvimTree',
-      'qf',
-      'loc',
-      'Outline',
-      'norg',
-      'dashboard',
-      'help',
-      'dapui_scopes',
-      'dapui_breakpoints',
-      'dapui_stacks',
-      'dapui_watches',
-      'dapui_watches',
-      'dap-repl',
-      'dapui_console',
-    },
+    disabled_filetypes = disabled_filetypes,
   },
   sections = {
     -- these are to remove the defaults

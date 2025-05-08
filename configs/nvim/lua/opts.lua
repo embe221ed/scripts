@@ -17,6 +17,7 @@ vim.opt.updatetime        = 500
 vim.opt.conceallevel      = 2
 vim.opt.smoothscroll      = true
 vim.opt.termguicolors     = true
+vim.opt.laststatus        = vim.g.statusline.laststatus
 
 -- -- lists
 vim.opt.list              = true
@@ -24,6 +25,13 @@ vim.opt.list              = true
 vim.opt.listchars:append "eol:↴"
 vim.opt.fillchars = {
   vert = "▏",
+  vertleft = "▏",
+  vertright = "▏",
+  verthoriz = "▏",
+
+  horizup = "─",
+  horizdown = "─",
+
   foldopen = "",
   foldsep = " ",
   foldclose = "",
