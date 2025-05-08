@@ -26,11 +26,11 @@ vim.opt.listchars:append "eol:↴"
 vim.opt.fillchars = {
   vert = "▏",
   vertleft = "▏",
-  vertright = "▏",
-  verthoriz = "▏",
+  vertright = "░",
+  verthoriz = "░",
 
-  horizup = "─",
-  horizdown = "─",
+  horizup = "🮎",
+  horizdown = "🮏",
 
   foldopen = "",
   foldsep = " ",

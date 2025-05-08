@@ -4,7 +4,7 @@ require('gitsigns').setup()
 
 require("statuscol").setup({
   segments = {
-    { text = { " " } },
+    -- { text = { " " } },
     { text = { "%s" }, click = "v:lua.ScSa" },
     {
       text = { builtin.lnumfunc, " " },
