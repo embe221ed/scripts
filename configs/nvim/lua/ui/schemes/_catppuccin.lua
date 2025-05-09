@@ -57,6 +57,7 @@ require('catppuccin').setup({
     -- WinSeparator                = { fg = palette.surface0 },
     TabLineSel                  = { bg = colors.accent },
     FloatBorder                 = { fg = colors.alt_fg, bg = colors.base, style = { "bold" } },
+    FloatTitle                  = { fg = colors.alt_fg, },
     NormalFloat                 = { bg = colors.none },
     PmenuSel                    = { bg = colors.alt_fg, style = {} },
     -- PmenuSbar                   = { bg = utils.darken(palette.surface0, 0.8, palette.crust), },
@@ -97,7 +98,7 @@ require('catppuccin').setup({
     -- NvimTreeStatusLine          = { fg = colors.alt_bg, bg = colors.alt_bg },
     -- NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg },
 
-    TreesitterContextBottom     = { sp = colors.alt_fg, style = { "underline" } },
+    TreesitterContextBottom     = { sp = palette.crust, style = { "underline" } },
 
     ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
     ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },
