@@ -335,7 +335,7 @@ bufferline.setup {
             {
                 filetype = "NvimTree",
                 text = " EXPLORER",
-                separator = "▏",
+                separator = "",
                 text_align = "left",
                 highlight = "BufferLineBackground",
             },
@@ -343,7 +343,7 @@ bufferline.setup {
                 filetype = "Outline",
                 text = " › OUTLINE",
                 text_align = "left",
-                separator = "▏",
+                separator = "│",
                 highlight = "BufferLineBackground",
             },
         },

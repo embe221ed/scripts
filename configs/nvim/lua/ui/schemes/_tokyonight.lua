@@ -61,7 +61,7 @@ require('tokyonight').setup({
     highlights.NvimTreeRootFolder           = { fg = colors.accent, bold = true }
     -- highlights.NvimTreeStatusLine           = { fg = colors.alt_bg, bg = colors.alt_bg }
     -- highlights.NvimTreeStatusLineNC         = { fg = colors.alt_bg, bg = colors.alt_bg }
-    -- highlights.NvimTreeWinSeparator         = { fg = colors.alt_bg, bg = colors.alt_bg }
+    highlights.NvimTreeWinSeparator         = { fg = colors.bg, bg = colors.bg }
 
     highlights["@namespace"]                = highlights["@module"]
 

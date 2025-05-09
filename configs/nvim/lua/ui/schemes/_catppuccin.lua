@@ -54,7 +54,7 @@ require('catppuccin').setup({
   },
   color_overrides = color_overrides,
   custom_highlights = {
-    WinSeparator                = { fg = palette.surface0 },
+    -- WinSeparator                = { fg = palette.surface0 },
     TabLineSel                  = { bg = colors.accent },
     FloatBorder                 = { fg = colors.alt_fg, bg = colors.base, style = { "bold" } },
     NormalFloat                 = { bg = colors.none },
@@ -83,7 +83,7 @@ require('catppuccin').setup({
     NvimTreeOpenedFolderName    = { fg = colors.orange },
     NvimTreeEmptyFolderName     = { fg = colors.orange },
     NvimTreeIndentMarker        = { fg = colors.comment },
-    -- NvimTreeWinSeparator        = { fg = colors.alt_bg, bg = colors.alt_bg, },
+    NvimTreeWinSeparator        = { fg = colors.bg, bg = colors.bg, },
     NvimTreeRootFolder          = { fg = colors.orange, style = { "bold" } },
     NvimTreeSymlink             = { fg = colors.pink },
     NvimTreeGitDirty            = { fg = colors.yellow },
