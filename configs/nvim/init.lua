@@ -1,17 +1,17 @@
 -- IMPORTS
-require('globals')            -- custom global options (load first)
-require('opts')               -- options
-require('plugins')            -- plugins
+require('globals')             -- custom global options (load first)
+require('opts')                -- options
+require('plugins')             -- plugins
 
-require('misc.autocmds')      -- autocmds
-require('misc.keys')          -- keymaps
-require('misc.functions')     -- custom functions
+require('misc.autocmds')       -- autocmds
+require('misc.keys')           -- keymaps
+require('misc.functions')      -- custom functions
 
-require('editor.snippets')    -- LuaSnip custom snippets
-require('editor.lsp')         -- LSP config
+require('editor.dev.snippets') -- LuaSnip custom snippets
+require('editor.dev.lsp')      -- LSP config
 
-require('ui.devicons')        -- nvim-web-devicons
-require('languages')          -- tree-sitter languages
+require('ui.devicons')         -- nvim-web-devicons
+require('languages')           -- tree-sitter languages
 
 require('_render-markdown')
 -- require('_markview')
@@ -350,6 +350,7 @@ require('ui.components.bufferline')
 require('ui.components.noice')
 require('ui.components.statuscol')
 
-require('editor.dap') -- DAP configs
+require('editor.dev.dap') -- DAP configs
+require('editor.bookmarks')
 
 if vim.g.neovide then require('neovide') end

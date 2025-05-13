@@ -30,30 +30,33 @@ return require("lazy").setup(
       "nvim-tree/nvim-tree.lua",                                      -- filesystem navigation
       dependencies = { "nvim-tree/nvim-web-devicons" }                -- filesystem icons
     },
-    vim.g.colorscheme.plugin(),
+    vim.g.colorscheme.plugin(),                                       -- load desired colorscheme
     {
       "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
       build = ":TSUpdate"
     },
     {
-      "nvim-treesitter/playground",
+      "nvim-treesitter/playground",                                   -- debugging tree-sitter
       dependencies = { 'nvim-treesitter/nvim-treesitter' }
     },
-    {
+    {                                                                 -- pin the current context at the top of the screen
       "nvim-treesitter/nvim-treesitter-context",
       dependencies = { 'nvim-treesitter/nvim-treesitter' }
-    },                                                                -- pin the current context at the top of the screen
+    },
     {
       "nvim-lualine/lualine.nvim",                                    -- status line
       dependencies = { "nvim-tree/nvim-web-devicons", opt = true },   -- filesystem icons
     },
     {
-      "luukvbaal/statuscol.nvim",
+      "luukvbaal/statuscol.nvim",                                     -- extended status column
       dependencies = { "lewis6991/gitsigns.nvim", opt = true }
     },
-    "neovim/nvim-lspconfig",                                          -- Configurations for Nvim LSP
-    "mfussenegger/nvim-dap",                                          -- Debug Adapter Protocol client implementation for Neovim
-    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+    "neovim/nvim-lspconfig",                                          -- configurations for nvim LSP
+    "mfussenegger/nvim-dap",                                          -- D[ebug]A[dapter]P[rotocol] client implementation for neovim
+    {                                                                 -- DAP UI
+      "rcarriga/nvim-dap-ui",
+      dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
+    },
     {
       "RRethy/vim-illuminate",                                        -- highlight word under cursor
       dependencies = "neovim/nvim-lspconfig"
@@ -82,30 +85,18 @@ return require("lazy").setup(
       "nvim-telescope/telescope.nvim",                                -- telescope
       dependencies = { "nvim-lua/plenary.nvim", },
     },
-    {
+    {                                                                 -- telescope picker for nice file tree
       "nvim-telescope/telescope-file-browser.nvim",
       dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     },
-    {
-        "numToStr/Comment.nvim",                                      -- Comments
-    },
-    { "hedyhli/outline.nvim" },                                       -- Symbols bar
+    { "numToStr/Comment.nvim", },                                     -- easier comments management
+    { "hedyhli/outline.nvim" },                                       -- symbols outline
     {
       "Wansmer/symbol-usage.nvim",
       event = "LspAttach"
     },
     -- autocompletion
-    require('editor.blink'),
-    -- { "saadparwaiz1/cmp_luasnip" },                                   -- Snippets source for nvim-cmp
-    -- {
-    --   "L3MON4D3/LuaSnip",
-    --   build = "make install_jsregexp",
-    --   dependencies = {
-    --     "rafamadriz/friendly-snippets"
-    --   },
-    -- },                                                                -- Snippets plugin
-    -- end
-
+    require('editor.dev.blink'),
     { "lervag/vimtex" },                                              -- LaTeX
     {
       "tpope/vim-fugitive",                                           -- Git integration
@@ -154,6 +145,17 @@ return require("lazy").setup(
     {                                                                 -- A high-performance color highlighter for Neovim
       "norcalli/nvim-colorizer.lua",
     },
+    {                                                                 -- persistent bookmarks: hard disk of your thoughts
+      "LintaoAmons/bookmarks.nvim",
+      -- pin the plugin at specific version for stability
+      -- backup your bookmark sqlite db when there are breaking changes
+      -- tag = "v2.3.0",
+      dependencies = {
+        {"kkharji/sqlite.lua"},
+        {"nvim-telescope/telescope.nvim"},
+        {"stevearc/dressing.nvim"} -- optional: better UI
+      },
+    },
     {
       "yetone/avante.nvim",
       event = "VeryLazy",
@@ -184,13 +186,9 @@ return require("lazy").setup(
         "stevearc/dressing.nvim",
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
-        --- The below dependencies are optional,
         "echasnovski/mini.pick", -- for file_selector provider mini.pick
         "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-        -- "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-        -- "ibhagwan/fzf-lua", -- for file_selector provider fzf
         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-        -- "zbirenbaum/copilot.lua", -- for providers='copilot'
       },
     }
     -- {
