@@ -113,31 +113,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- language servers
-local lsp = require('lspconfig')
-local util = require('lspconfig.util')
 
 -- -- -- python-lsp-server
-lsp.pylsp.setup({
+vim.lsp.config('pylsp', {
   capabilities = capabilities
 })
 -- -- -- clangd
-lsp.clangd.setup({
+vim.lsp.config('clangd', {
   capabilities = capabilities
 })
 -- -- -- tsserver
-lsp.ts_ls.setup({
+vim.lsp.config('ts_ls', {
   capabilities = capabilities
 })
 -- -- -- vim-language-server
-lsp.vimls.setup({
+vim.lsp.config('vimls', {
   capabilities = capabilities
 })
 -- -- -- texlab
-lsp.texlab.setup({
+vim.lsp.config('texlab', {
   capabilities = capabilities
 })
 -- -- -- move-analyzer
-lsp.move_analyzer.setup({
+vim.lsp.config('move_analyzer', {
   capabilities = capabilities,
   init_options = {
     inlayHintsParam = true,
@@ -145,7 +143,7 @@ lsp.move_analyzer.setup({
   }
 })
 -- -- -- golang
-lsp.gopls.setup({
+vim.lsp.config('gopls', {
   capabilities = capabilities,
   settings = {
     gopls = {
@@ -162,11 +160,11 @@ lsp.gopls.setup({
   }
 })
 -- -- -- java
-lsp.jdtls.setup({
+vim.lsp.config('jdtls', {
   capabilities = capabilities
 })
 -- -- -- lua
-lsp.lua_ls.setup {
+vim.lsp.config('lua_ls', {
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -191,7 +189,7 @@ lsp.lua_ls.setup {
       },
     },
   },
-}
+})
 -- -- -- solidity
 local root_files = {
   'hardhat.config.js',
@@ -203,7 +201,8 @@ local root_files = {
   'ape-config.yaml',
 }
 
-lsp.solidity_ls_nomicfoundation.setup {
+local util = require('lspconfig.util')
+vim.lsp.config('solidity_ls_nomicfoundation', {
   -- on_attach = on_attach, -- probably you will need this.
   capabilities = capabilities,
   root_dir = util.root_pattern(unpack(root_files)) or util.root_pattern('.git', 'package.json'),
@@ -215,11 +214,11 @@ lsp.solidity_ls_nomicfoundation.setup {
     --   remapping = { ["@openzeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@5.0.1/' }
     -- }
   },
-}
+})
 -- -- -- bash
-lsp.bashls.setup {
+vim.lsp.config('bashls', {
   capabilities = capabilities
-}
+})
 -- -- -- rls
 -- lsp.rls.setup(
 --   coq.lsp_ensure_capabilities({
