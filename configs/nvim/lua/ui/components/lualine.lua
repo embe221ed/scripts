@@ -176,9 +176,9 @@ ins_right {
     elseif p >= 10 then icon = '▇▇▇'
     else icon = '███'
     end
-    return string.format('%s %2d%%%%', icon, p)
+    return string.format('%s %%#lualine_c_normal#%2d%%%%', icon, p)
   end,
-  color = { fg = colors.orange, },
+  color = { fg = colors.bg, },
 }
 
 -- Now don't forget to initialize lualine
