@@ -199,21 +199,22 @@ local root_files = {
   'truffle.js',
   'truffle-config.js',
   'ape-config.yaml',
+  ".git",
+  "package.json"
 }
 
-local util = require('lspconfig.util')
 vim.lsp.config('solidity_ls_nomicfoundation', {
-  -- on_attach = on_attach, -- probably you will need this.
   capabilities = capabilities,
-  root_dir = util.root_pattern(unpack(root_files)) or util.root_pattern('.git', 'package.json'),
+  cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
+  root_markers = root_files,
   single_file_support = true,
-  settings = {
+  -- settings = {
     -- example of global remapping
     -- solidity = {
     --   includePath = '',
     --   remapping = { ["@openzeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@5.0.1/' }
     -- }
-  },
+  -- },
 })
 -- -- -- bash
 vim.lsp.config('bashls', {

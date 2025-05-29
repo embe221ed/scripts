@@ -48,8 +48,8 @@ local config = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
       -- are just setting default looks o statusline
-      normal = { c = { fg = colors.alt_fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.alt_fg, bg = colors.bg } },
+      normal = { c = { fg = colors.fg, bg = colors.dark_bg } },
+      inactive = { c = { fg = colors.fg, bg = colors.dark_bg } },
     },
     disabled_filetypes = disabled_filetypes,
   },
@@ -95,7 +95,7 @@ ins_left(
     function()
       return ' '
     end,
-    color = { fg = colors.alt_fg, gui = 'bold' }, -- Sets highlighting of component
+    color = { fg = colors.fg, gui = 'bold' }, -- Sets highlighting of component
     padding = { left = 1, right = 1 }, -- We don't need space before this
   },
   true
@@ -136,7 +136,7 @@ ins_left {
     return msg
   end,
   icon = ' LSP:',
-  color = { fg = colors.alt_fg, gui = 'bold' },
+  color = { fg = colors.fg, gui = 'bold' },
 }
 
 ins_left { 'diagnostics' }
@@ -155,7 +155,7 @@ ins_right {
 
 ins_right {
   'selectioncount',
-  color = { fg = colors.alt_fg, gui = 'bold' },
+  color = { fg = colors.fg, gui = 'bold' },
 }
 
 ins_right { 'location' }

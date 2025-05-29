@@ -25,28 +25,26 @@ local function get_highlights()
             -- fg = '<colour-value-here>',
             bg = fill_bg,
         },
-        -- tab = {
-        --     fg = '<colour-value-here>',
-        --     bg = '<colour-value-here>',
-        -- },
-        -- tab_selected = {
-        --     fg = '<colour-value-here>',
-        --     bg = '<colour-value-here>',
-        -- },
-        -- tab_separator = {
-        --   fg = '<colour-value-here>',
-        --   bg = '<colour-value-here>',
-        -- },
-        -- tab_separator_selected = {
-        --   fg = '<colour-value-here>',
-        --   bg = '<colour-value-here>',
-        --   sp = '<colour-value-here>',
-        --   underline = '<colour-value-here>',
-        -- },
-        -- tab_close = {
-        --     fg = '<colour-value-here>',
-        --     bg = '<colour-value-here>',
-        -- },
+        tab = {
+            -- fg = '<colour-value-here>',
+            bg = fill_bg,
+        },
+        tab_selected = {
+            fg = selected_fg,
+            bg = normal_bg,
+        },
+        tab_separator = {
+            fg = fill_bg,
+            bg = fill_bg,
+        },
+        tab_separator_selected = {
+            fg = normal_bg,
+            bg = normal_bg,
+        },
+        tab_close = {
+            fg = comment_fg,
+            bg = fill_bg,
+        },
         close_button = {
             fg = comment_fg,
             bg = fill_bg,
@@ -318,6 +316,7 @@ bufferline.setup {
         separator_style = { "❘", "❘" },
         diagnostics = "nvim_lsp",
         buffer_close_icon = "×",
+        close_icon = "×",
         get_element_icon = function(element)
           -- element consists of {filetype: string, path: string, extension: string, directory: string}
           -- This can be used to change how bufferline fetches the icon

@@ -252,12 +252,13 @@ require('nvim-treesitter.configs').setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-  }
 }
+
+require('rainbow-delimiters.setup').setup({
+  query = {
+    move = 'rainbow-delimiters',
+  }
+})
 
 require('treesitter-context').setup {
   enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)

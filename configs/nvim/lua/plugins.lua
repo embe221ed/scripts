@@ -162,14 +162,11 @@ return require("lazy").setup(
       lazy = false,
       version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
       opts = {
-        provider = "openai",
-        openai = {
-          endpoint = "https://api.openai.com/v1",
-          model = "gpt-4.1",
-          timeout = 30000, -- Timeout in milliseconds
-          temperature = 0,
-          max_tokens = 4096,
-        },
+        ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+        provider = "claude",
+        openai = { model = "gpt-4.1", },
+        gemini = { model = "gemini-2.5-pro-preview-05-06", },
+        claude = { model = "claude-sonnet-4-20250514", },
         mappings = {
           diff = {
             ours = "<leader>co",
