@@ -164,9 +164,11 @@ return require("lazy").setup(
       opts = {
         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
         provider = "claude",
-        openai = { model = "gpt-4.1", },
-        gemini = { model = "gemini-2.5-pro-preview-05-06", },
-        claude = { model = "claude-sonnet-4-20250514", },
+        providers = {
+          openai = { model = "gpt-4.1", },
+          gemini = { model = "gemini-2.5-pro-preview-05-06", },
+          claude = { model = "claude-sonnet-4-20250514", },
+        },
         mappings = {
           diff = {
             ours = "<leader>co",
