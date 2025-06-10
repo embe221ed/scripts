@@ -3,9 +3,9 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs() ---
 
 parser_config.move = {
   install_info = {
-    url = "/opt/tree-sitter-parsers/tree-sitter-move-sui/", -- local path or git repo
+    -- url = "/opt/tree-sitter-parsers/tree-sitter-move-sui/", -- local path or git repo
     -- TODO: update queries and switch to newer version
-    -- url = "/opt/sui/external-crates/move/tooling/tree-sitter", -- local path or git repo
+    url = "/opt/sui/external-crates/move/tooling/tree-sitter", -- local path or git repo
     files = {
       "src/parser.c",
     },
