@@ -188,7 +188,6 @@ return require("lazy").setup(
       dependencies = {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
-        "echasnovski/mini.pick", -- for file_selector provider mini.pick
         "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       },
