@@ -107,6 +107,13 @@ return require("lazy").setup(
       dependencies = "nvim-lua/plenary.nvim",
     },
     require('ui.components.dashboard'),
+    {
+      "folke/snacks.nvim",
+      opts = {
+        input = {},
+        picker = {},
+      }
+    },
     { 'nmac427/guess-indent.nvim' },                                  -- guess the indent type in the current buffer
     {
       "folke/noice.nvim",
@@ -138,10 +145,6 @@ return require("lazy").setup(
         -- add any custom options here
       },
     },
-    {                                                                 -- Neovim plugin to improve the default vim.ui interfaces
-      "stevearc/dressing.nvim",
-      opts = {},
-    },
     {                                                                 -- A high-performance color highlighter for Neovim
       "norcalli/nvim-colorizer.lua",
     },
@@ -151,9 +154,8 @@ return require("lazy").setup(
       -- backup your bookmark sqlite db when there are breaking changes
       -- tag = "v2.3.0",
       dependencies = {
-        {"kkharji/sqlite.lua"},
-        {"nvim-telescope/telescope.nvim"},
-        {"stevearc/dressing.nvim"} -- optional: better UI
+        { "kkharji/sqlite.lua" },
+        { "nvim-telescope/telescope.nvim" },
       },
     },
     {
@@ -162,7 +164,9 @@ return require("lazy").setup(
       lazy = false,
       version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
       opts = {
-        ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+        input = {
+          provider = "snacks",
+        },
         provider = "claude",
         providers = {
           openai = { model = "gpt-4.1", },
@@ -182,14 +186,13 @@ return require("lazy").setup(
       -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
       build = "make",
       dependencies = {
-        "stevearc/dressing.nvim",
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
         "echasnovski/mini.pick", -- for file_selector provider mini.pick
         "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       },
-    }
+    },
     -- {
     --   "OXY2DEV/markview.nvim",
     --   lazy = false,      -- Recommended

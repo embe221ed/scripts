@@ -10,8 +10,16 @@ api.nvim_create_autocmd(
     callback  = function()
       vim.o.shiftwidth  = 4
       vim.o.tabstop     = 4
-      api.nvim_set_option_value("spell",      true,    { scope = "local" })
-      api.nvim_set_option_value("spelllang",  "en_us", { scope = "local" })
+      -- Check if current window is floating
+      local win_config = api.nvim_win_get_config(0)
+      local is_floating = win_config.relative ~= ""
+      local is_special_buffer = vim.bo.buftype ~= ""
+
+      -- Only enable spellcheck if not in a floating window
+      if not is_floating and not is_special_buffer then
+        api.nvim_set_option_value("spell",      true,    { scope = "local" })
+        api.nvim_set_option_value("spelllang",  "en_us", { scope = "local" })
+      end
     end,
   }
 )

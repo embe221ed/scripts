@@ -265,6 +265,18 @@ vim.g.rustaceanvim = {
       border = vim.g.border,
     },
   },
+  server = {
+    on_attach = function(client, bufnr)
+      vim.keymap.set(
+        "n",
+        "<space>ca",
+        function()
+          vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
+        end,
+        { silent = true, buffer = bufnr }
+      )
+    end
+  },
 }
 --[[ vim.g.rustaceanvim = {
     tools = { -- rust-tools options

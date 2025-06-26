@@ -27,3 +27,8 @@ dap.adapters.python = function(cb, config)
   end
 end
 
+-- C/C++/Rust
+dap.adapters.codelldb = {
+  type = "executable",
+  command = "/opt/tools/dap/codelldb/adapter/codelldb",
+}

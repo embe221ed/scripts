@@ -2,11 +2,12 @@
 
 require('render-markdown').setup({
   file_types = { 'markdown', 'norg', 'Avante' },
+  completions = { blink = { enabled = true, }, },
   heading = {
     enabled = true,
     sign = true,
     position = 'overlay',
-    icons = { '󰼏 ', '󰼐 ', '󰼑 ', '󰼒 ', '󰼓 ', '󰼔 ' },
+    icons = { '󰼏  ', '󰼐  ', '󰼑  ', '󰼒  ', '󰼓  ', '󰼔  ' },
     signs = { '󰫎 ' },
     width = 'full',
     left_pad = 1,
