@@ -66,12 +66,19 @@ require('outline').setup {
 }
 
 -- -- auto-pairs
-require('nvim-autopairs').setup {}
+require('nvim-autopairs').setup({})
 
 -- -- telescope
-require('telescope').setup { }
+require('telescope').setup({
+  -- extensions = {
+  --   ["ui-select"] = {
+  --     require('telescope.themes').get_dropdown({}),
+  --   },
+  -- },
+})
 -- -- -- load additional plugins
 require("telescope").load_extension("file_browser")
+-- require("telescope").load_extension("ui-select")
 
 -- -- -- telescope plenary
 require('plenary.filetype').add_file('move')

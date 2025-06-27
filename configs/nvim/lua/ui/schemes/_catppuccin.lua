@@ -104,6 +104,7 @@ require('catppuccin').setup({
     ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },
 
     DapBreakpoint               = { fg = colors.red },
+    DapStopped                  = { fg = colors.green },
 
   }, -- Override highlight groups
   default_integrations = false,

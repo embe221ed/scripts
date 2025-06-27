@@ -1,3 +1,4 @@
+import argparse
 from PIL import Image, ImageDraw, ImageFont
 
 def add_oblique_watermark(input_image_path, output_image_path, watermark_text, font_size=100, font_color=(255, 255, 255, 50), angle=30):
@@ -34,9 +35,16 @@ def add_oblique_watermark(input_image_path, output_image_path, watermark_text, f
     watermarked_image.save(output_image_path, "PNG")
 
 if __name__ == "__main__":
-    input_image_path = "driver.png"  # Path to your input PNG image
-    output_image_path = "output.png"  # Path to save the output PNG image
-    watermark_text = "PayPal"  # The word to be drawn as watermark
+    parser = argparse.ArgumentParser(description='Add watermark to an image')
+    parser.add_argument('input_image_path', help='Path to your input PNG image')
+    parser.add_argument('output_image_path', help='Path to save the output PNG image')
+    parser.add_argument('watermark_text', help='The word to be drawn as watermark')
+
+    args = parser.parse_args()
+
+    input_image_path = args.input_image_path
+    output_image_path = args.output_image_path
+    watermark_text = args.watermark_text
     font_size = 200  # Size of the watermark text
     font_color = (255, 255, 255, 50)  # Light gray color with low opacity
     angle = 30  # Angle at which the text will be drawn

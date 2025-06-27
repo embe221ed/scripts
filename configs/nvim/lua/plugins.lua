@@ -89,6 +89,7 @@ return require("lazy").setup(
       "nvim-telescope/telescope-file-browser.nvim",
       dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     },
+    -- { 'nvim-telescope/telescope-ui-select.nvim' },                    -- telescope `vim.ui.select`
     { "numToStr/Comment.nvim", },                                     -- easier comments management
     { "hedyhli/outline.nvim" },                                       -- symbols outline
     {
@@ -112,7 +113,7 @@ return require("lazy").setup(
       opts = {
         input = {},
         picker = {},
-      }
+      },
     },
     { 'nmac427/guess-indent.nvim' },                                  -- guess the indent type in the current buffer
     {
