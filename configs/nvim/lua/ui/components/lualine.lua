@@ -118,6 +118,12 @@ ins_left(
 )
 
 ins_left {
+  'branch',
+  icon = '󰘬',
+  color = { fg = colors.fg },
+}
+
+ins_left {
   -- Lsp server name .
   function()
     local msg = 'n/a'
@@ -139,7 +145,7 @@ ins_left {
   color = { fg = colors.fg, gui = 'bold' },
 }
 
-ins_left { 'diagnostics' }
+ins_right { 'diagnostics' }
 
 -- Add components to right sections
 ins_right {

@@ -33,6 +33,11 @@ function utils.get_palette(colorscheme, theme)
     if theme == "day" then return _get_tokyonight_day_palette(palette) end
   elseif colorscheme == "nord" then
     palette = require('nord.colors').palette
+  elseif colorscheme == "onedark" then
+    palette = require('onedarkpro.helpers').get_colors(theme)
+  else
+    error(string.format("utils.get_palette for colorscheme=%s, theme=%s not defined", colorscheme, theme))
+    return {}
   end
   return palette
 end

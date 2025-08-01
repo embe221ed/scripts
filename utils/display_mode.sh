@@ -33,11 +33,13 @@ fi
 # Run the Python generator to rebuild configuration files.
 PWD=$(pwd)
 cd ${INTERDOTENSIONAL_PATH}
-python3 generate.py >/dev/null 2>&1
+python3 generate.py >/dev/null 2>&1 || echo -e "echo -e \"[!] python3 generate.py failed! (did you activate virtualenv?)\";"
 cd ${PWD}
 
 if tmux ls >/dev/null 2>&1; then
   tmux source-file ~/.tmux.conf
 fi
 
-echo "source ~/.zshrc"
+echo -e "echo -e \"[*] running: source ~/.zshrc\";"
+echo -e "source ~/.zshrc;"
+echo -e "echo \"[*] remember to apply new kitty config\";"
