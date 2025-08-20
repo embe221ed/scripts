@@ -250,7 +250,7 @@ font-thicken = false
 
 adjust-cell-width = -8%
 
-adjust-cell-height = 30%
+adjust-cell-height = 45%
 
 # Distance in pixels or percentage adjustment from the bottom of the cell to the text baseline.
 # Increase to move baseline UP, decrease to move baseline DOWN.
@@ -291,7 +291,7 @@ adjust-cursor-thickness =
 # Height in pixels or percentage adjustment of the cursor. Currently applies to all cursor types:
 # bar, rect, and outlined rect.
 # See the notes about adjustments in `adjust-cell-width`.
-adjust-cursor-height = 
+adjust-cursor-height = 45%
 
 # Thickness in pixels or percentage adjustment of box drawing characters.
 # See the notes about adjustments in `adjust-cell-width`.
@@ -1875,7 +1875,7 @@ vt-kam-allowed = false
 # 
 # Changing this value at runtime and reloading the configuration will only
 # affect new windows, tabs, and splits.
-custom-shader = 
+# custom-shader = shaders/cursor_smear.glsl
 
 # If `true` (default), the focused terminal surface will run an animation
 # loop when custom shaders are used. This uses slightly more CPU (generally
