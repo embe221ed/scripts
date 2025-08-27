@@ -12,7 +12,7 @@ return {
   },
 
   -- use a release tag to download pre-built binaries
-  version = 'v0.*',
+  version = '1.*',
   -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
   -- build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
@@ -29,6 +29,7 @@ return {
     -- your own keymap.
     keymap = {
       preset          = 'none',
+      -- FIX: for MacOS: https://github.com/Saghen/blink.cmp/issues/1141#issuecomment-2630042207
       ['<C-space>']   = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>']       = { 'hide', 'fallback' },
       ['<CR>']        = { 'accept', 'fallback' },
@@ -41,8 +42,8 @@ return {
 
       ['<Tab>']       = { 'select_next', 'fallback' },
       ['<S-Tab>']     = { 'select_prev', 'fallback' },
-      ['<C-L>']       = { 'snippet_forward', 'fallback' },
-      ['<C-H>']       = { 'snippet_backward', 'fallback' },
+      ['<C-l>']       = { 'snippet_forward', 'fallback' },
+      ['<C-h>']       = { 'snippet_backward', 'fallback' },
     },
 
     appearance = {
@@ -94,7 +95,10 @@ return {
     },
     completion = {
       list = {
-        selection = { preselect = false, auto_insert = true, }
+        selection = {
+          preselect = false,
+          auto_insert = true,
+        }
       },
       menu = {
         -- scrollbar = false,
@@ -116,6 +120,15 @@ return {
           winhighlight = 'Normal:NoicePopup,FloatBorder:NoicePopup,CursorLine:BlinkCmpDocCursorLine,Search:None',
         },
       },
+    },
+
+    cmdline = {
+      keymap = {
+        ['<Tab>'] = {
+          'select_and_accept',
+          'select_next'
+        },
+      }
     },
 
     -- experimental signature help support

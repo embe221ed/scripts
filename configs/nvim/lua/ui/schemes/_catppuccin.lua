@@ -5,7 +5,7 @@ local current_theme = vim.g.colorscheme.theme
 
 local color_overrides = {
   latte = {
-    text = "#6c6f85",
+    -- text = "#6c6f85",
     peach = "#f28d5e"
   },
   frappe = {
