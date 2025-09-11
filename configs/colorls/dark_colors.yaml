@@ -1,46 +1,46 @@
 # Main Colors
-unrecognized_file: cadetblue
-recognized_file:   deepskyblue
-executable_file:   darkturquoise
-dir:               fuchsia
+unrecognized_file:  plum            # muted pink-purple
+recognized_file:    mediumorchid    # Catppuccin-esque purple
+executable_file:    mediumvioletred # deep rose, still readable
+dir:                mediumslateblue # elegant folder tone
 
 # Link
-dead_link: red
-link:      cyan
+dead_link:    indianred               # soft, muted red
+link:         orchid                  # soft pink-lavender, linky
 
-# special files
-socket:    green
-blockdev:  green
-chardev:   green
+# Special files
+socket:       thistle                # soft and mystical
+blockdev:     slateblue              # purple-leaning utility
+chardev:      rebeccapurple          # saturated but not neon
 
 # Access Modes
-write:     royalblue
-read:      magenta
-exec:      deeppink
-no_access: dimgray
+write:        mediumpurple           # subtle writeability
+read:         lavender               # readable and gentle
+exec:         palevioletred          # reddish but not aggressive
+no_access:    lightslategray         # dimmed for contrast
 
 # Age
-day_old:     blueviolet
-hour_old:    darkviolet
-no_modifier: violet
+day_old:      mediumorchid         # same as files – fresh
+hour_old:     orchid               # more vibrant, recent
+no_modifier:  thistle              # fallback subtle tone
 
 # File Size
-file_large:  orange
-file_medium: gold
-file_small:  peachpuff
+file_large:   rosybrown            # warm weighty files
+file_medium:  pink                 # middle-sized, soft
+file_small:   mistyrose            # gentle, tiny files
 
-# Random
-report: white
-user:   darkslateblue
-tree:   cyan
-empty:  yellow
-error:  red
-normal: darkkhaki
-inode:  blue
+# Random / Misc
+report:       lavenderblush             # fits subtle paper/doc
+user:         darkslateblue             # a touch of darkness
+tree:         lightsteelblue            # readable pathing
+empty:        wheat                     # slight warm note
+error:        firebrick                 # still warning, but not neon
+normal:       lightsteelblue            # base default
+inode:        slateblue                 # consistent with blockdev
 
 # Git
-addition:     chartreuse
-modification: darkkhaki
-deletion:     darkred
-untracked:    darkorange
-unchanged:    forestgreen
+addition:     palevioletred       # soft warm-pink add
+modification: mediumorchid        # match modified with base
+deletion:     brown               # toned-down destructive red
+untracked:    salmon              # still visible, less shouty
+unchanged:    darkseagreen        # muted OK green (still fits)
