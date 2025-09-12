@@ -1,46 +1,46 @@
 # Main Colors
-unrecognized_file: blue
-recognized_file:   darkcyan
-executable_file:   red
-dir:               fuchsia
+unrecognized_file: indigo
+recognized_file:   mediumslateblue
+executable_file:   mediumvioletred
+dir:               rebeccapurple
 
 # Link
-dead_link: red
-link:      cyan
+dead_link: firebrick
+link:      slateblue
 
-# special files
-socket:    darkgray
-blockdev:  darkgray
-chardev:   darkgray
+# Special files
+socket:    darkmagenta
+blockdev:  darkslateblue
+chardev:   peru
 
 # Access Modes
-write:     royalblue
-read:      magenta
-exec:      deeppink
+write:     purple
+read:      darkorchid
+exec:      crimson
 no_access: dimgray
 
 # Age
-day_old:     red
-hour_old:    coral
+day_old:     darkorchid
+hour_old:    indianred
 no_modifier: darkviolet
 
 # File Size
-file_large:  red
-file_medium: coral
-file_small:  darkgray
+file_large:  darkred
+file_medium: sienna
+file_small:  peru
 
-# Random
-report: darkviolet
-user:   darkblue
-tree:   cyan
-empty:  yellow
-error:  red
-normal: darkgray
-inode:  violet
+# Misc
+report: mediumpurple
+user:   indigo            # controls BOTH owner & group columns
+tree:   slateblue
+empty:  goldenrod
+error:  firebrick
+normal: darkslategray     # darker base to avoid blending
+inode:  darkorchid
 
 # Git
-addition:     chartreuse
-modification: darkkhaki
+addition:     seagreen
+modification: mediumorchid
 deletion:     darkred
 untracked:    darkorange
-unchanged:    darkgreen
+unchanged:    forestgreen
