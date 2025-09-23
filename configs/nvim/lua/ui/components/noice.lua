@@ -13,7 +13,7 @@ if vim.g.symbol_font then
   }
 end
 
-require("noice").setup {
+require("noice").setup({
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
     override = {
@@ -49,4 +49,4 @@ require("noice").setup {
       },
     },
   },
-}
+})

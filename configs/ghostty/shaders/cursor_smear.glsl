@@ -67,8 +67,8 @@ const vec4 TRAIL_COLOR = vec4(0.976, 0.302, 1.0, 1.0); // cursor
 // const vec4 TRAIL_COLOR = vec4(0.914, 0.702, 0.992, 1.0); // light cursor
 // const vec4 TRAIL_COLOR = vec4(0.016, 0.82, 0.976, 1.0); // cyan
 // const vec4 TRAIL_COLOR = vec4(0.216, 0.957, 0.6, 1.0); // green
-const float OPACITY = 0.6;
-const float DURATION = 0.10; //IN SECONDS
+const float OPACITY = 0.1;
+const float DURATION = 0.1; //IN SECONDS
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {

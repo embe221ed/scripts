@@ -47,20 +47,47 @@ require('Comment').setup {
 -- -- Symbols Outline
 require('outline').setup {
   outline_window = {
+    -- Whether width is relative to the total width of nvim
+    -- When relative_width = true, this means take 25% of the total
+    -- screen width for outline window.
     relative_width = true,
+    -- Percentage or integer of columns
     width = 20,
+    -- true/false/'focus_in_outline'/'focus_in_code'.
+    -- The last two means only show cursorline when the focus is in outline/code.
+    -- 'focus_in_outline' can be used if the outline_items.auto_set_cursor
+    -- operations are too distracting due to visual contrast caused by cursorline.
     show_cursorline = 'focus_in_outline',
+    -- Enable this only if you enabled cursorline so your cursor color can
+    -- blend with the cursorline, in effect, as if your cursor is hidden
+    -- in the outline window.
+    -- This makes your line of cursor have the same color as if the cursor
+    -- wasn't focused on the outline window.
+    -- This feature is experimental.
     hide_cursor = true,
   },
   outline_items = {
+    -- Show extra details with the symbols (lsp dependent) as virtual next
     -- show_symbol_lineno = true,
   },
   preview_window = {
+    -- Automatically open preview of code location when navigating outline window
     auto_preview = true,
+    -- Automatically open hover_symbol when opening preview (see keymaps for
+    -- hover_symbol).
+    -- If you disable this you can still open hover_symbol using your keymap
+    -- below.
     open_hover_on_preview = true,
+    -- Pseudo-transparency of the preview window, see ':h winblend'
+    winblend = 0,
+    -- Experimental feature that let's you edit the source content live
+    -- in the preview window. Like VS Code's "peek editor".
     live = true,
   },
   symbols = {
+    -- 3rd party source for fetching icons. This is used as a fallback if
+    -- icon_fetcher returned an empty string.
+    -- Currently supported values: 'lspkind'
     icon_source = "lspkind"
   },
 }
@@ -344,6 +371,7 @@ if #workspaces > 0 then
     -- the vault root is the parent directory of the `.obsidian` folder.
     -- You can also provide configuration overrides for each workspace through the `overrides` field.
     workspaces = workspaces,
+    legacy_commands = false,
     ui = { enable = false },
     completion = {
       nvim_cmp = false,

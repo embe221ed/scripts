@@ -6,7 +6,7 @@ local current_theme = vim.g.colorscheme.theme
 local color_overrides = {
   latte = {
     -- text = "#6c6f85",
-    peach = "#f28d5e"
+    peach = "#f28d5e",
   },
   frappe = {
     lavender = "#b4b5ee",
@@ -105,6 +105,9 @@ require('catppuccin').setup({
 
     DapBreakpoint               = { fg = colors.red },
     DapStopped                  = { fg = colors.green },
+
+    NotifyERRORIcon             = { fg = colors.red, style = {} },
+    NotifyERRORTitle            = { fg = colors.red, style = {} },
 
   }, -- Override highlight groups
   default_integrations = false,
