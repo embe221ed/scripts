@@ -52,6 +52,11 @@ require('catppuccin').setup({
     operators = {},
     -- miscs = {}, -- Uncomment to turn off hard-coded styles
   },
+  lsp_styles = {
+    inlay_hints = {
+      background = false,
+    }
+  },
   color_overrides = color_overrides,
   custom_highlights = {
     -- WinSeparator                = { fg = palette.surface0 },
