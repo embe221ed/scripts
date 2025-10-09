@@ -42,4 +42,4 @@ fi
 
 echo -e "echo -e \"[*] running: source ~/.zshrc\";"
 echo -e "source ~/.zshrc;"
-echo -e "echo \"[*] remember to apply new kitty config\";"
+echo -e "echo \"[*] remember to apply new configs\";"

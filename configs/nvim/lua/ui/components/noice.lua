@@ -37,6 +37,11 @@ require("noice").setup({
     lsp_doc_border = vim.g.lsp.doc.border, -- add a border to hover docs and signature help
   },
   views = {
+    hover = {
+      win_options = {
+        winblend = vim.g.winblend,
+      },
+    },
     cmdline_popup = {
       position = { row = "20%", col = "50%", },
       size = { width = "auto", height = "auto", },

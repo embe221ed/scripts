@@ -109,7 +109,8 @@ return {
           --   { "label", "label_description", gap = 3 },
           --   { "kind_icon", "kind", gap = 1 },
           -- },
-        }
+        },
+        winblend = vim.g.winblend,
       },
       documentation = {
         auto_show = true,
@@ -117,6 +118,7 @@ return {
           min_width = 10,
           max_width = 150,
           max_height = 40,
+          winblend = vim.g.winblend,
           winhighlight = 'Normal:NoicePopup,FloatBorder:NoicePopup,CursorLine:BlinkCmpDocCursorLine,Search:None',
         },
       },
