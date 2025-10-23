@@ -46,4 +46,4 @@ vim.opt.foldmethod        = "expr"
 vim.opt.foldcolumn        = "1"
 vim.opt.foldnestmax       = 20 -- default value, probably unnecessary
 
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")

@@ -111,8 +111,11 @@ require('catppuccin').setup({
     DapBreakpoint               = { fg = colors.red },
     DapStopped                  = { fg = colors.green },
 
-    NotifyERRORIcon             = { fg = colors.red, style = {} },
     NotifyERRORTitle            = { fg = colors.red, style = {} },
+    NotifyWARNTitle             = { fg = colors.yellow, style = {} },
+    NotifyINFOTitle             = { fg = colors.blue, style = {} },
+    NotifyDEBUGTitle            = { fg = colors.orange, style = {} },
+    NotifyTRACETitle            = { fg = palette.rosewater, style = {} },
 
   }, -- Override highlight groups
   default_integrations = false,

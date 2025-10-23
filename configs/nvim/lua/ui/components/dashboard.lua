@@ -77,7 +77,7 @@ return {
           {
             desc = generate_desc('LSP debug level'),
             desc_hl = 'Identifier',
-            action = 'lua vim.lsp.set_log_level("debug")',
+            action = 'lua vim.lsp.log.set_level("debug")',
             key = 'd',
             key_hl = '@markup.strong',
             key_format = ' %s',
