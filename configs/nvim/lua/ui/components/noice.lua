@@ -13,6 +13,11 @@ if vim.g.symbol_font then
   }
 end
 
+local border = function()
+  if vim.g.neovide then return { style = "none", padding = { 1, 1 } } end
+  return { style = vim.g.border }
+end
+
 require("noice").setup({
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -45,7 +50,7 @@ require("noice").setup({
     cmdline_popup = {
       position = { row = "20%", col = "50%", },
       size = { width = "auto", height = "auto", },
-      border = { style = vim.g.border },
+      border = border(),
       filter_options = {},
       win_options = {
         winhighlight = {

@@ -103,7 +103,7 @@ require('catppuccin').setup({
     -- NvimTreeStatusLine          = { fg = colors.alt_bg, bg = colors.alt_bg },
     -- NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg },
 
-    TreesitterContextBottom     = { sp = colors.dark_bg, style = { "underline" } },
+    TreesitterContextBottom     = { sp = vim.g.neovide and colors.bg or colors.dark_bg, style = { "underline" } },
 
     ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
     ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },

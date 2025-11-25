@@ -13,8 +13,8 @@ require('editor.dev.lsp')      -- LSP config
 require('ui.devicons')         -- nvim-web-devicons
 require('languages')           -- tree-sitter languages
 
-require('_render-markdown')
--- require('_markview')
+-- require('_render-markdown')
+require('_markview')
 
 
 local utils = require('utils')
@@ -97,6 +97,9 @@ require('nvim-autopairs').setup({})
 
 -- -- telescope
 require('telescope').setup({
+  defaults = {
+    border = not vim.g.neovide,
+  },
   -- extensions = {
   --   ["ui-select"] = {
   --     require('telescope.themes').get_dropdown({}),
@@ -231,7 +234,8 @@ require("illuminate").configure({
     'qf',
     'fugitive',
     'NvimTree',
-    'dashboard'
+    'dashboard',
+    'Outline',
   },
 })
 

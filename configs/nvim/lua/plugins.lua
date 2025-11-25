@@ -6,7 +6,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 local opts = {
   ui = {
-    border = vim.g.border,
+    border = vim.g.neovide and "none" or vim.g.border,
     backdrop = 100,
   },
 }
@@ -134,11 +134,11 @@ return require("lazy").setup(
         "nvim-lua/plenary.nvim",
       },
     },
-    {
-      "MeanderingProgrammer/render-markdown.nvim",
-      opts = {},
-      dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    },
+    -- {
+    --   "MeanderingProgrammer/render-markdown.nvim",
+    --   opts = {},
+    --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    -- },
     {
       "folke/persistence.nvim",
       event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -168,11 +168,11 @@ return require("lazy").setup(
         input = {
           provider = "snacks",
         },
-        provider = "claude",
+        provider = "gemini",
         providers = {
-          openai = { model = "gpt-4.1", },
-          gemini = { model = "gemini-2.5-pro-preview-05-06", },
-          claude = { model = "claude-sonnet-4-20250514", },
+          openai = { model = "gpt-5", },
+          gemini = { model = "gemini-3-pro-preview", },
+          claude = { model = "claude-haiku-4-5-20251001", },
         },
         mappings = {
           diff = {
@@ -193,17 +193,17 @@ return require("lazy").setup(
         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       },
     },
-    -- {
-    --   "OXY2DEV/markview.nvim",
-    --   lazy = false,      -- Recommended
-    --   dependencies = {
-    --       -- You will not need this if you installed the
-    --       -- parsers manually
-    --       -- Or if the parsers are in your $RUNTIMEPATH
-    --       "nvim-treesitter/nvim-treesitter",
-    --       "nvim-tree/nvim-web-devicons"
-    --   }
-    -- },
+    {
+      "OXY2DEV/markview.nvim",
+      lazy = false,      -- Recommended
+      dependencies = {
+          -- You will not need this if you installed the
+          -- parsers manually
+          -- Or if the parsers are in your $RUNTIMEPATH
+          "nvim-treesitter/nvim-treesitter",
+          "nvim-tree/nvim-web-devicons"
+      }
+    },
   },
   opts
 )
