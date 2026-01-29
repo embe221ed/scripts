@@ -17,10 +17,10 @@ map('n', '+', [[<C-w>+]], {})
 map('n', '=', [[<C-w>+]], {})
 
 -- buffer management
-map('n', 'b]', [[:BufferLineCycleNext<CR>]], {})
-map('n', 'b[', [[:BufferLineCyclePrev<CR>]], {})
-map('n', 'bx', [[:BufferLinePickClose<CR>]], {})
-map('n', 'bp', [[:BufferLinePick<CR>]], {})
+map('n', 'gb]', [[:BufferLineCycleNext<CR>]], {})
+map('n', 'gb[', [[:BufferLineCyclePrev<CR>]], {})
+map('n', 'gbx', [[:BufferLinePickClose<CR>]], {})
+map('n', 'gbp', [[:BufferLinePick<CR>]], {})
 
 -- terminal
 -- :tnoremap <Esc> <C-\><C-n>

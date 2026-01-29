@@ -40,7 +40,7 @@ vim.opt.fillchars = {
 
 -- -- fold options
 vim.opt.foldlevel         = 99 -- HACK: to unfold all folds by default
-vim.opt.foldexpr          = "v:lua.require('utils').foldexpr()"
+vim.opt.foldexpr          = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext          = ""
 vim.opt.foldmethod        = "expr"
 vim.opt.foldcolumn        = "1"

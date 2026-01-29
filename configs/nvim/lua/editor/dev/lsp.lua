@@ -220,6 +220,24 @@ vim.lsp.config('solidity_ls_nomicfoundation', {
 vim.lsp.config('bashls', {
   capabilities = capabilities
 })
+
+-- -- -- cadence
+vim.filetype.add({
+  extension = {
+    cdc = 'cadence',
+  },
+})
+vim.lsp.config('cadence-language-server', {
+  capabilities = capabilities,
+  cmd = { "flow", "cadence", "language-server" },
+  filetypes = { "cadence" },
+  root_dir = vim.fs.find({ "flow.json" }, { upward = true })[1],
+  init_options = {
+    numberOfAccounts = "1",
+    configPath = vim.fs.find({ "flow.json" }, { upward = true })[1],
+  }
+})
+
 -- -- -- rls
 -- lsp.rls.setup(
 --   coq.lsp_ensure_capabilities({

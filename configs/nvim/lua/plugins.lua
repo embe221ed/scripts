@@ -35,10 +35,10 @@ return require("lazy").setup(
       "nvim-treesitter/nvim-treesitter",                              -- tree-sitter functionality and highlighting
       build = ":TSUpdate"
     },
-    {
-      "nvim-treesitter/playground",                                   -- debugging tree-sitter
-      dependencies = { 'nvim-treesitter/nvim-treesitter' }
-    },
+    -- {
+    --   "nvim-treesitter/playground",                                   -- debugging tree-sitter
+    --   dependencies = { 'nvim-treesitter/nvim-treesitter' }
+    -- },
     {                                                                 -- pin the current context at the top of the screen
       "nvim-treesitter/nvim-treesitter-context",
       dependencies = { 'nvim-treesitter/nvim-treesitter' }

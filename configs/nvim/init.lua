@@ -267,17 +267,13 @@ require('colorizer').setup({
   '!Outline';
 })
 
-require('nvim-treesitter.configs').setup {
-  -- A list of parser names, or "all"
-  ensure_installed = { "c", "cpp", "lua", "rust", "python", "javascript", "markdown", "markdown_inline" },
+require('nvim-treesitter').install({ "c", "cpp", "lua", "rust", "python", "javascript", "markdown", "markdown_inline" })
+require('nvim-treesitter').setup {
   ignore_install = {},
   modules = {},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  auto_install = true,
 
   highlight = {
     -- `false` will disable the whole extension
