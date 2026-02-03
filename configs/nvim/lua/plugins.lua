@@ -51,7 +51,7 @@ return require("lazy").setup(
       "luukvbaal/statuscol.nvim",                                     -- extended status column
       dependencies = { "lewis6991/gitsigns.nvim", opt = true }
     },
-    -- "neovim/nvim-lspconfig",                                          -- configurations for nvim LSP
+    "neovim/nvim-lspconfig",                                          -- configurations for nvim LSP
     "mfussenegger/nvim-dap",                                          -- D[ebug]A[dapter]P[rotocol] client implementation for neovim
     {                                                                 -- DAP UI
       "rcarriga/nvim-dap-ui",
