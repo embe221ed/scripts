@@ -1,4 +1,4 @@
--- Set up lspconfig.
+-- set up LSP
 -- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -101,7 +101,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
 
-  require('illuminate').on_attach(client)
+  -- require('illuminate').on_attach(client)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -339,29 +339,29 @@ vim.g.rustaceanvim = {
 } ]]
 
 -- -- -- metals (scala lsp)
-local metals_config = require("metals").bare_config()
-
--- Example of settings
--- metals_config.settings = {
---   showImplicitArguments = true,
---   excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
--- }
-
-metals_config.capabilities = capabilities
-metals_config.on_attach = on_attach
-
--- Autocmd that will actually be in charging of starting the whole thing
-local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  -- NOTE: You may or may not want java included here. You will need it if you
-  -- want basic Java support but it may also conflict if you are using
-  -- something like nvim-jdtls which also works on a java filetype autocmd.
-  pattern = { "scala", "sbt" },
-  callback = function()
-    require("metals").initialize_or_attach(metals_config)
-  end,
-  group = nvim_metals_group,
-})
+-- local metals_config = require("metals").bare_config()
+--
+-- -- Example of settings
+-- -- metals_config.settings = {
+-- --   showImplicitArguments = true,
+-- --   excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+-- -- }
+--
+-- metals_config.capabilities = capabilities
+-- metals_config.on_attach = on_attach
+--
+-- -- Autocmd that will actually be in charging of starting the whole thing
+-- local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+--   -- NOTE: You may or may not want java included here. You will need it if you
+--   -- want basic Java support but it may also conflict if you are using
+--   -- something like nvim-jdtls which also works on a java filetype autocmd.
+--   pattern = { "scala", "sbt" },
+--   callback = function()
+--     require("metals").initialize_or_attach(metals_config)
+--   end,
+--   group = nvim_metals_group,
+-- })
 
 local SymbolKind = vim.lsp.protocol.SymbolKind
 

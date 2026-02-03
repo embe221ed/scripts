@@ -229,15 +229,15 @@ end, {silent = true})
 ---@diagnostic enable: undefined-field
 
 
-require("illuminate").configure({
-  filetypes_denylist = {
-    'qf',
-    'fugitive',
-    'NvimTree',
-    'dashboard',
-    'Outline',
-  },
-})
+-- require("illuminate").configure({
+--   filetypes_denylist = {
+--     'qf',
+--     'fugitive',
+--     'NvimTree',
+--     'dashboard',
+--     'Outline',
+--   },
+-- })
 
 require('ui.colorscheme')   -- colorscheme
 
