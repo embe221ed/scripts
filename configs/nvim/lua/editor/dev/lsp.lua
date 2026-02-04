@@ -8,6 +8,7 @@ require('goto-preview').setup({
   width = 120, -- Width of the floating window
   -- width = 200; -- Width of the floating window
   border = vim.g.goto_preview.border,
+  opacity = vim.g.winblend, -- 0-100 opacity level of the floating window where 100 is fully transparent.
   height = 20, -- Height of the floating window
   preview_window_title = { enabled = true, position = "right" },
   post_open_hook = function(_, winid)

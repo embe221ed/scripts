@@ -61,16 +61,17 @@ require('catppuccin').setup({
   custom_highlights = {
     -- WinSeparator                = { fg = palette.surface0 },
     TabLineSel                  = { bg = colors.accent },
-    FloatBorder                 = { fg = colors.alt_fg, bg = colors.bg, style = { "bold" } },
-    FloatTitle                  = { fg = colors.alt_fg, bg = colors.bg },
-    NormalFloat                 = { bg = colors.none },
+    FloatBorder                 = { fg = colors.alt_bg, bg = colors.alt_bg, style = { "bold" } },
+    FloatTitle                  = { fg = colors.alt_fg, bg = colors.alt_bg },
+    -- NormalFloat                 = { bg = colors.none },
     PmenuSel                    = { bg = colors.alt_fg, style = {} },
     -- PmenuSbar                   = { bg = utils.darken(palette.surface0, 0.8, palette.crust), },
 
     BlinkCmpLabelDescription    = { fg = colors.comment, style = { "italic" } },
 
     NoicePopup                  = { bg = colors.dark_bg },
-    NoiceCmdlinePopupBorder     = { fg = colors.alt_fg, style = { "bold" } },
+    NoiceCmdlinePopupBorder     = { fg = palette.surface0, bg = colors.bg },
+    NoiceCmdlinePopup           = { bg = palette.surface0 },
 
     StatusLine                  = { fg = colors.bg, bg = colors.bg },
     StatusLineNC                = { fg = colors.bg, bg = colors.bg },
@@ -79,9 +80,22 @@ require('catppuccin').setup({
 
     OutlineCurrent              = { fg = colors.orange, bg = "", style = { "bold" } },
 
+    -- Telescope
     TelescopeTitle              = { fg = palette.cyan },
-    TelescopeBorder             = { fg = colors.alt_fg, style = { "bold" } },
+    TelescopeNormal             = { fg = colors.fg, bg = colors.alt_bg },
+    TelescopeBorder             = { fg = colors.alt_bg, bg = colors.alt_bg },
+    TelescopePromptNormal       = { fg = colors.fg, bg = palette.surface0 },
+    TelescopePromptBorder       = { fg = palette.surface0, bg = palette.surface0 },
+    TelescopePromptTitle        = { fg = palette.surface0, bg = colors.red },
+    TelescopePromptCounter      = { fg = colors.gray, bg = colors.surface0 },
+    TelescopeResultsTitle       = { fg = colors.alt_fg, bg = colors.mauve },
+    TelescopeResultsNormal      = { fg = colors.fg, bg = colors.alt_bg },
+    TelescopeResultsBorder      = { fg = colors.alt_bg, bg = colors.alt_bg },
+    TelescopePreviewTitle       = { fg = palette.surface0, bg = colors.green },
+    TelescopeMatching           = { fg = colors.orange, style = { "bold" } },
+    TelescopeDirectoryCustom    = { fg = colors.comment },
 
+    -- TODO: not working
     AvanteInlineHint            = { fg = palette.overlay2, style = { "italic" } },
 
     NvimTreeFolderName          = { fg = colors.orange },
@@ -103,6 +117,7 @@ require('catppuccin').setup({
     -- NvimTreeStatusLine          = { fg = colors.alt_bg, bg = colors.alt_bg },
     -- NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg },
 
+    TreesitterContext           = { bg = colors.bg },
     TreesitterContextBottom     = { sp = vim.g.neovide and colors.bg or colors.dark_bg, style = { "underline" } },
 
     ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
