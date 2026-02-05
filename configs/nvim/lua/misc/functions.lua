@@ -1,5 +1,31 @@
 local api = vim.api
 
+-- Create the universal command with completion
+api.nvim_create_user_command("Snacks", function(opts)
+  local cmd = opts.fargs[1] -- The first word after :Snacks (e.g., 'grep')
+
+  if not cmd then
+    -- If no arguments, open the picker list (like :Telescope)
+    Snacks.picker()
+  elseif Snacks.picker[cmd] then
+    -- If the subcommand exists (e.g., Snacks.picker.grep), call it
+    Snacks.picker[cmd]()
+  else
+    vim.notify("Snacks: Picker '" .. cmd .. "' not found", vim.log.levels.ERROR)
+  end
+end, {
+  nargs = "?", -- Allow zero or one argument
+  desc = "Universal Snacks Picker Command",
+  complete = function(arg_lead)
+    -- This provides tab-completion for all available pickers
+    local pickers = vim.tbl_keys(Snacks.picker)
+    table.sort(pickers)
+    return vim.tbl_filter(function(key)
+      return key:match("^" .. arg_lead) and type(Snacks.picker[key]) == "function"
+    end, pickers)
+  end,
+})
+
 -- open NoNeckPain layout and run NoNeckPainResize with provided parameter
 api.nvim_create_user_command(
   "NNP",

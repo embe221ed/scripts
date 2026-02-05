@@ -119,6 +119,12 @@ require("telescope").load_extension("file_browser")
 
 -- -- -- telescope plenary
 require('plenary.filetype').add_file('move')
+-- -- -- snacks - neovim way
+vim.filetype.add({
+  extension = {
+    move = "move", -- Maps .move files to the 'move' filetype
+  },
+})
 
   -- Set up nvim-cmp.
 -- local cmp = require('cmp')
