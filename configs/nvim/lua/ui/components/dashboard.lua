@@ -39,7 +39,7 @@ return {
             desc = generate_desc('open file explorer'),
             desc_hl = 'Identifier',
             -- action = 'Telescope file_browser',
-            action = 'lua Snacks.picker.explorer()',
+            action = 'lua Snacks.explorer.open({ layout = { preset = "default", preview = true }, auto_close = true })',
             key = 'e',
             key_hl = '@markup.strong',
             key_format = ' %s',
