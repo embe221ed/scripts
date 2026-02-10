@@ -1,6 +1,6 @@
 local format = {
-  cmdline     = { pattern = "^:", icon = "_", lang = "vim" },
-  telescope   = { pattern = "^:%s*Tel?e?s?c?o?p?e?%s+", icon = "", lang = "vim", title = "" },
+  cmdline     = { pattern = "^:", icon = "", lang = "vim", title = "" },
+  telescope   = { pattern = "^:%s*Tel?e?s?c?o?p?e?%s+", icon = " ", lang = "vim", title = "" },
 }
 if vim.g.symbol_font then
   format = {
@@ -54,7 +54,7 @@ require("noice").setup({
       },
     },
     cmdline_popup = {
-      position = { row = "20%", col = "50%", },
+      position = { row = "30%", col = "50%", },
       size = { width = "25%", height = "auto", },
       border = border(),
       filter_options = {},
@@ -62,11 +62,9 @@ require("noice").setup({
   },
 })
 
--- remove title in cmdline popup - useful for half-block border
--- if vim.g.border == "none" then
---   local formats = require("noice.config").defaults().cmdline.format
---   for k, v in pairs(formats) do
---     v.title = ""
---     format[k] = v
---   end
--- end
+-- remove title in cmdline popup
+local formats = require("noice.config").defaults().cmdline.format
+for k, v in pairs(formats) do
+  v.title = ""
+  format[k] = v
+end

@@ -63,21 +63,21 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "User",
   {
-    desc      = "ensure that the NoNeckPain buffers are closed before saving the session",
+    desc      = "ensure that special buffers are closed before saving the session",
     pattern   = "PersistenceSavePre",
     callback  = function()
-      local active_tab = require('no-neck-pain.state').active_tab
-      if active_tab ~= 1 then
-        require('no-neck-pain').disable()
-      end
+      -- local active_tab = require('no-neck-pain.state').active_tab
+      -- if active_tab ~= 1 then
+      --   require('no-neck-pain').disable()
+      -- end
       require('nvim-tree.api').tree.close()
       require('outline').close()
-      local ft_to_close = "norg"
-      for _, buf in ipairs(api.nvim_list_bufs()) do
-        if api.nvim_buf_is_loaded(buf) and api.nvim_get_option_value("filetype", { buf = buf }) == ft_to_close then
-          api.nvim_buf_delete(buf, {})
-        end
-      end
+      -- local ft_to_close = "norg"
+      -- for _, buf in ipairs(api.nvim_list_bufs()) do
+      --   if api.nvim_buf_is_loaded(buf) and api.nvim_get_option_value("filetype", { buf = buf }) == ft_to_close then
+      --     api.nvim_buf_delete(buf, {})
+      --   end
+      -- end
     end,
   }
 )

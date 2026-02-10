@@ -59,19 +59,21 @@ require('catppuccin').setup({
   },
   color_overrides = color_overrides,
   custom_highlights = {
-    -- WinSeparator                = { fg = palette.surface0 },
+    WinSeparator                = { fg = colors.light_bg },
     TabLineSel                  = { bg = colors.accent },
-    FloatBorder                 = { fg = colors.alt_bg, bg = colors.alt_bg, style = { "bold" } },
-    FloatTitle                  = { fg = colors.alt_fg, bg = colors.alt_bg },
-    -- NormalFloat                 = { bg = colors.none },
+
+    FloatBorder                 = utils.ternary(vim.g.border == "none", { fg = colors.alt_bg, bg = colors.alt_bg }, { fg = colors.light_bg, bg = colors.none }),
+    FloatTitle                  = utils.ternary(vim.g.border == "none", { fg = colors.alt_fg, bg = colors.alt_bg }, { fg = colors.light_bg, bg = colors.none }),
+    NormalFloat                 = utils.ternary(vim.g.border == "none", {}, { bg = colors.none }),
+
     PmenuSel                    = { bg = colors.alt_fg, style = {} },
-    -- PmenuSbar                   = { bg = utils.darken(palette.surface0, 0.8, palette.crust), },
+    -- PmenuSbar                   = { bg = utils.darken(colors.light_bg, 0.8, palette.crust), },
 
     BlinkCmpLabelDescription    = { fg = colors.comment, style = { "italic" } },
 
     NoicePopup                  = { bg = colors.dark_bg },
-    NoiceCmdlinePopupBorder     = { fg = palette.surface0, bg = colors.bg },
-    NoiceCmdlinePopup           = { bg = palette.surface0 },
+    NoiceCmdlinePopupBorder     = utils.ternary(vim.g.border == "none", { fg = colors.light_bg, bg = colors.bg }, { fg = colors.light_bg }),
+    NoiceCmdlinePopup           = utils.ternary(vim.g.border == "none", { bg = colors.light_bg }, {}),
 
     StatusLine                  = { fg = colors.bg, bg = colors.bg },
     StatusLineNC                = { fg = colors.bg, bg = colors.bg },
@@ -84,14 +86,14 @@ require('catppuccin').setup({
     TelescopeTitle              = { fg = palette.cyan },
     TelescopeNormal             = { fg = colors.fg, bg = colors.alt_bg },
     TelescopeBorder             = { fg = colors.alt_bg, bg = colors.alt_bg },
-    TelescopePromptNormal       = { fg = colors.fg, bg = palette.surface0 },
-    TelescopePromptBorder       = { fg = palette.surface0, bg = palette.surface0 },
-    TelescopePromptTitle        = { fg = palette.surface0, bg = colors.red },
+    TelescopePromptNormal       = { fg = colors.fg, bg = colors.light_bg },
+    TelescopePromptBorder       = { fg = colors.light_bg, bg = colors.light_bg },
+    TelescopePromptTitle        = { fg = colors.light_bg, bg = colors.red },
     TelescopePromptCounter      = { fg = colors.gray, bg = colors.surface0 },
-    TelescopeResultsTitle       = { fg = colors.alt_fg, bg = colors.mauve },
+    TelescopeResultsTitle       = { fg = colors.alt_fg, bg = colors.purple },
     TelescopeResultsNormal      = { fg = colors.fg, bg = colors.alt_bg },
     TelescopeResultsBorder      = { fg = colors.alt_bg, bg = colors.alt_bg },
-    TelescopePreviewTitle       = { fg = palette.surface0, bg = colors.green },
+    TelescopePreviewTitle       = { fg = colors.light_bg, bg = colors.green },
     TelescopeMatching           = { fg = colors.orange, style = { "bold" } },
     TelescopeDirectoryCustom    = { fg = colors.comment },
 
@@ -118,7 +120,7 @@ require('catppuccin').setup({
     -- NvimTreeStatusLineNC        = { fg = colors.alt_bg, bg = colors.alt_bg },
 
     TreesitterContext           = { bg = colors.bg },
-    TreesitterContextBottom     = { sp = vim.g.neovide and colors.bg or colors.dark_bg, style = { "underline" } },
+    TreesitterContextBottom     = { sp = vim.g.neovide and colors.bg or colors.light_bg, style = { "underline" } },
 
     ["@parameter.readonly"]     = { fg = palette.maroon, style = { "italic" } },
     ["@parameter.modification"] = { fg = palette.maroon, style = { "italic" } },

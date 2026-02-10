@@ -84,7 +84,7 @@ require('outline').setup {
     -- Options include: single/double/rounded/solid/shadow or an array of border
     -- characters.
     -- See :help nvim_open_win() and search for "border" option.
-    border = vim.g.border,
+    border = utils.ternary(vim.g.border == "none", { " " }, vim.g.border),
     -- winhl options for the preview window, see ':h winhl'
     winhl = 'NormalFloat:NormalFloat',
     -- Experimental feature that let's you edit the source content live
@@ -266,7 +266,7 @@ require("todo-comments").setup {
   },
   colors = {
     idea      = { vim.g.colors.yellow },
-    audit     = { vim.g.colors.mauve },
+    audit     = { vim.g.colors.purple },
     question  = { vim.g.colors.sky },
     sugg      = { vim.g.colors.teal },
   },
@@ -350,18 +350,18 @@ require("ibl").setup {
 }
 
 -- center the current buffer
-require("no-neck-pain").setup({
-  buffers = {
-    scratchPad = {
-      -- When `true`, automatically sets the following options to the side buffers:
-      -- - `autowriteall`
-      -- - `autoread`.
-      --- @type boolean
-      enabled = true,
-      location = os.getenv("HOME") .. "/Desktop/nnp-notes/",
-    },
-  },
-})
+-- require("no-neck-pain").setup({
+--   buffers = {
+--     scratchPad = {
+--       -- When `true`, automatically sets the following options to the side buffers:
+--       -- - `autowriteall`
+--       -- - `autoread`.
+--       --- @type boolean
+--       enabled = true,
+--       location = os.getenv("HOME") .. "/Desktop/nnp-notes/",
+--     },
+--   },
+-- })
 
 -- obsidian vault integration
 local is_directory = utils.is_directory

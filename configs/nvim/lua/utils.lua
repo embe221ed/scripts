@@ -63,5 +63,9 @@ function utils.foldexpr()
   return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
 end
 
+function utils.ternary(cond, t, f)
+  if cond then return t else return f end
+end
+
 
 return utils

@@ -3,11 +3,12 @@
 -- Only required if you have packer configured as `opt`
 -- vim.cmd [[packadd packer.nvim]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local utils = require("utils")
 
 local opts = {
   ui = {
     border = vim.g.neovide and "none" or vim.g.border,
-    backdrop = 100,
+    backdrop = utils.ternary(vim.g.border == "none", 70, 100),
   },
 }
 
@@ -108,13 +109,7 @@ return require("lazy").setup(
       dependencies = "nvim-lua/plenary.nvim",
     },
     require('ui.components.dashboard'),
-    {
-      "folke/snacks.nvim",
-      opts = {
-        input = {},
-        picker = {},
-      },
-    },
+    require('misc._snacks'),
     { 'nmac427/guess-indent.nvim' },                                  -- guess the indent type in the current buffer
     {
       "folke/noice.nvim",
@@ -124,7 +119,7 @@ return require("lazy").setup(
       },
     },
     { 'onsails/lspkind.nvim' },                                       -- vscode-like pictograms
-    { 'shortcuts/no-neck-pain.nvim' },                                -- center the current buffer
+    -- { 'shortcuts/no-neck-pain.nvim' },                                -- center the current buffer
     {
       "obsidian-nvim/obsidian.nvim",
       version = "*",  -- recommended, use latest release instead of latest commit

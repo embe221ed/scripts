@@ -32,6 +32,9 @@ require('goto-preview').setup({
     config.title = { { title } }
     vim.api.nvim_win_set_config(winid, config)
   end,
+  references = { -- Configure the telescope UI for slowing the references cycling window.
+    provider = "snacks", -- telescope|fzf_lua|snacks|mini_pick|default
+  },
 })
 
 -- -- LSP config
