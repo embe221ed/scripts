@@ -1,5 +1,7 @@
 local api = vim.api
 
+api.nvim_create_user_command('Markserv', '!tmux new -d "source ~/.nvm/nvm.sh && nvm use node && markserv . --silent"', {})
+
 -- Create the universal command with completion
 api.nvim_create_user_command("Snacks", function(opts)
   local cmd = opts.fargs[1] -- The first word after :Snacks (e.g., 'grep')

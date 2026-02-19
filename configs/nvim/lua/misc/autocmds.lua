@@ -1,7 +1,5 @@
 local api = vim.api
 
-api.nvim_create_user_command('Markserv', '!tmux new -d "source ~/.nvm/nvm.sh && nvm use node && markserv . --silent"', {})
-
 api.nvim_create_autocmd(
   "FileType",
   {

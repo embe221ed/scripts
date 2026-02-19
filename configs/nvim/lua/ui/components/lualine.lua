@@ -42,7 +42,7 @@ end
 local config = {
   options = {
     -- component_separators = { left = '', right = '' },
-    component_separators = { left = '', right = '' },
+    component_separators = { left = ' ', right = ' ' },
     section_separators = { left = '', right = '' },
     theme = {
       -- We are going to use lualine_c an lualine_x as left and

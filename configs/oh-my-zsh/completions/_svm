@@ -1,0 +1,291 @@
+#compdef svm
+
+        _svm_versions() {
+            local -a versions
+            versions=($(ls -1 $HOME/.svm/versions 2>/dev/null))
+            _describe 'installed versions' versions
+        }
+        
+
+autoload -U is-at-least
+
+_svm() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_svm_commands" \
+"*::: :->svm" \
+&& ret=0
+    case $state in
+    (svm)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:svm-command-$line[1]:"
+        case $line[1] in
+            (remote-list)
+_arguments "${_arguments_options[@]}" : \
+'-n+[]:NETWORK:_default' \
+'--network=[]:NETWORK:_default' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':version:_svm_versions' \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':version:_svm_versions' \
+&& ret=0
+;;
+(use)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':version:_svm_versions' \
+&& ret=0
+;;
+(link)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':name:_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(unset)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_svm__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:svm-help-command-$line[1]:"
+        case $line[1] in
+            (remote-list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(use)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(link)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(unset)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_svm_commands] )) ||
+_svm_commands() {
+    local commands; commands=(
+'remote-list:List available versions on GitHub' \
+'install:Install a version (e.g., v1.63.4 or mainnet-v1.63.4)' \
+'uninstall:Uninstall a version' \
+'use:Switch to an installed/linked version' \
+'link:Link a local build (e.g., svm link custom-dev)' \
+'list:List local versions (active one marked with *)' \
+'show:Show the currently active version' \
+'unset:Deactivate svm by removing shims' \
+'completions:Generate shell completions' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'svm commands' commands "$@"
+}
+(( $+functions[_svm__completions_commands] )) ||
+_svm__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm completions commands' commands "$@"
+}
+(( $+functions[_svm__help_commands] )) ||
+_svm__help_commands() {
+    local commands; commands=(
+'remote-list:List available versions on GitHub' \
+'install:Install a version (e.g., v1.63.4 or mainnet-v1.63.4)' \
+'uninstall:Uninstall a version' \
+'use:Switch to an installed/linked version' \
+'link:Link a local build (e.g., svm link custom-dev)' \
+'list:List local versions (active one marked with *)' \
+'show:Show the currently active version' \
+'unset:Deactivate svm by removing shims' \
+'completions:Generate shell completions' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'svm help commands' commands "$@"
+}
+(( $+functions[_svm__help__completions_commands] )) ||
+_svm__help__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help completions commands' commands "$@"
+}
+(( $+functions[_svm__help__help_commands] )) ||
+_svm__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help help commands' commands "$@"
+}
+(( $+functions[_svm__help__install_commands] )) ||
+_svm__help__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help install commands' commands "$@"
+}
+(( $+functions[_svm__help__link_commands] )) ||
+_svm__help__link_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help link commands' commands "$@"
+}
+(( $+functions[_svm__help__list_commands] )) ||
+_svm__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help list commands' commands "$@"
+}
+(( $+functions[_svm__help__remote-list_commands] )) ||
+_svm__help__remote-list_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help remote-list commands' commands "$@"
+}
+(( $+functions[_svm__help__show_commands] )) ||
+_svm__help__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help show commands' commands "$@"
+}
+(( $+functions[_svm__help__uninstall_commands] )) ||
+_svm__help__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help uninstall commands' commands "$@"
+}
+(( $+functions[_svm__help__unset_commands] )) ||
+_svm__help__unset_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help unset commands' commands "$@"
+}
+(( $+functions[_svm__help__use_commands] )) ||
+_svm__help__use_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help use commands' commands "$@"
+}
+(( $+functions[_svm__install_commands] )) ||
+_svm__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm install commands' commands "$@"
+}
+(( $+functions[_svm__link_commands] )) ||
+_svm__link_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm link commands' commands "$@"
+}
+(( $+functions[_svm__list_commands] )) ||
+_svm__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm list commands' commands "$@"
+}
+(( $+functions[_svm__remote-list_commands] )) ||
+_svm__remote-list_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm remote-list commands' commands "$@"
+}
+(( $+functions[_svm__show_commands] )) ||
+_svm__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm show commands' commands "$@"
+}
+(( $+functions[_svm__uninstall_commands] )) ||
+_svm__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm uninstall commands' commands "$@"
+}
+(( $+functions[_svm__unset_commands] )) ||
+_svm__unset_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm unset commands' commands "$@"
+}
+(( $+functions[_svm__use_commands] )) ||
+_svm__use_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm use commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_svm" ]; then
+    _svm "$@"
+else
+    compdef _svm svm
+fi
+
