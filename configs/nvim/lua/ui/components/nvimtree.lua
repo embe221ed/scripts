@@ -2,6 +2,7 @@ local padding = " "
 if vim.g.symbol_font then padding = "  " end
 
 require('nvim-tree').setup({
+  disable_netrw = true,
   view = {
     adaptive_size = true,
     centralize_selection = false,
