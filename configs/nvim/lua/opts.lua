@@ -17,6 +17,9 @@ vim.opt.updatetime        = 500
 vim.opt.conceallevel      = 2
 vim.opt.smoothscroll      = true
 vim.opt.termguicolors     = true
+vim.opt.inccommand        = "split"
+vim.opt.virtualedit       = "block"
+vim.opt.pumheight         = 10
 vim.opt.laststatus        = vim.g.statusline.laststatus
 
 -- -- lists
@@ -47,3 +50,13 @@ vim.opt.foldcolumn        = "1"
 vim.opt.foldnestmax       = 20 -- default value, probably unnecessary
 
 vim.lsp.log.set_level("off")
+
+-- filetype detection
+vim.filetype.add({
+  extension = {
+    move = "move",
+    mvir = "rust",
+    norg = "norg",
+    cdc = "cadence",
+  },
+})

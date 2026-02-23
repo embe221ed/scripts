@@ -1,13 +1,15 @@
 local api = vim.api
+local group = api.nvim_create_augroup("user_autocmds", { clear = true })
 
 api.nvim_create_autocmd(
   "FileType",
   {
+    group     = group,
     desc      = "enable spellcheck for markdown and norg files, set indentation to 4 spaces",
     pattern   = { "markdown", "txt", "norg" },
     callback  = function()
-      vim.o.shiftwidth  = 4
-      vim.o.tabstop     = 4
+      vim.bo.shiftwidth  = 4
+      vim.bo.tabstop     = 4
       -- Check if current window is floating
       local win_config = api.nvim_win_get_config(0)
       local is_floating = win_config.relative ~= ""
@@ -15,8 +17,8 @@ api.nvim_create_autocmd(
 
       -- Only enable spellcheck if not in a floating window
       if not is_floating and not is_special_buffer then
-        api.nvim_set_option_value("spell",      true,    { scope = "local" })
-        api.nvim_set_option_value("spelllang",  "en_us", { scope = "local" })
+        vim.wo.spell = true
+        vim.bo.spelllang = "en_us"
       end
     end,
   }
@@ -25,6 +27,7 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "FileType",
   {
+    group     = group,
     desc      = "disable virtual_lines for filetypes",
     pattern   = { "lazy" },
     callback  = function()
@@ -38,10 +41,11 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "FileType",
   {
+    group     = group,
     desc      = "set some options for move files",
     pattern   = { "move" },
     callback  = function()
-      api.nvim_set_option_value("commentstring",  "// %s", { scope = "local" })
+      vim.bo.commentstring = "// %s"
     end,
   }
 )
@@ -49,11 +53,12 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "TermOpen",
   {
+    group     = group,
     desc      = "do not show line numbers in terminal buffer",
     pattern   = { "*" },
     callback  = function()
-      api.nvim_set_option_value("number",          false,  { scope = "local" })
-      api.nvim_set_option_value("relativenumber",  false,  { scope = "local" })
+      vim.wo.number = false
+      vim.wo.relativenumber = false
     end,
   }
 )
@@ -61,48 +66,31 @@ api.nvim_create_autocmd(
 api.nvim_create_autocmd(
   "User",
   {
+    group     = group,
     desc      = "ensure that special buffers are closed before saving the session",
     pattern   = "PersistenceSavePre",
     callback  = function()
-      -- local active_tab = require('no-neck-pain.state').active_tab
-      -- if active_tab ~= 1 then
-      --   require('no-neck-pain').disable()
-      -- end
       require('nvim-tree.api').tree.close()
       require('outline').close()
-      -- local ft_to_close = "norg"
-      -- for _, buf in ipairs(api.nvim_list_bufs()) do
-      --   if api.nvim_buf_is_loaded(buf) and api.nvim_get_option_value("filetype", { buf = buf }) == ft_to_close then
-      --     api.nvim_buf_delete(buf, {})
-      --   end
-      -- end
     end,
   }
 )
 
-vim.api.nvim_create_autocmd(
-  'BufWinEnter',
+api.nvim_create_autocmd(
+  { "FileType", "BufWinEnter" },
   {
-    desc      = "update the statuscolumn for specific filetypes to reduce its size",
-    callback  = function()
-      local ft = vim.bo.filetype
-      local filetypes = {
-        'NvimTree',
-        'Outline',
-      }
-      for _, _ft in ipairs(filetypes) do
-        if ft == _ft then
-          vim.o.statuscolumn = '%s'
-          vim.o.statusline = nil
-          break
+    group = group,
+    pattern = { "Outline" },
+    callback = function(args)
+      vim.schedule(function()
+        -- Find all windows displaying this specific buffer
+        local wins = vim.fn.win_findbuf(args.buf)
+        for _, win in ipairs(wins) do
+          -- Apply only to the sidebar windows, not the current active window
+          api.nvim_set_option_value("statuscolumn", "",  { scope = "local", win = win })
+          api.nvim_set_option_value("statusline",   " ", { scope = "local", win = win })
         end
-      end
-    end
+      end)
+    end,
   }
 )
-
--- -- auto_close working implementation
--- vim.api.nvim_create_autocmd('BufEnter', {
---     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
---     nested = true,
--- })

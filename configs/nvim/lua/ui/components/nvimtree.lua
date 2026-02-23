@@ -38,3 +38,21 @@ require('nvim-tree').setup({
     }
   },
 })
+
+local api = vim.api
+local nvim_tree_api = require("nvim-tree.api")
+local Event = nvim_tree_api.events.Event
+
+-- Subscribe to the TreeOpen event
+nvim_tree_api.events.subscribe(
+  Event.TreeOpen,
+  function()
+    -- Use the 2026 API to get the specific window ID of the tree
+    local win = nvim_tree_api.tree.winid()
+
+    if win then
+      api.nvim_set_option_value("statuscolumn", "",  { scope = "local", win = win })
+      api.nvim_set_option_value("statusline",   " ", { scope = "local", win = win })
+    end
+  end
+)

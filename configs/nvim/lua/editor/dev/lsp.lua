@@ -1,12 +1,10 @@
 -- set up LSP
--- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- -- goto-preview config
 require('goto-preview').setup({
   default_mappings = true,
   width = 120, -- Width of the floating window
-  -- width = 200; -- Width of the floating window
   border = vim.g.goto_preview.border,
   opacity = vim.g.winblend, -- 0-100 opacity level of the floating window where 100 is fully transparent.
   height = 20, -- Height of the floating window
@@ -41,10 +39,10 @@ require('goto-preview').setup({
 vim.diagnostic.config({
   signs = {
     text = {
-        [ vim.diagnostic.severity.ERROR ] = '',
-        [ vim.diagnostic.severity.WARN ] = '',
-        [ vim.diagnostic.severity.INFO ] = '',
-        [ vim.diagnostic.severity.HINT ] = '',
+        [ vim.diagnostic.severity.ERROR ] = '',
+        [ vim.diagnostic.severity.WARN ] = '',
+        [ vim.diagnostic.severity.INFO ] = '',
+        [ vim.diagnostic.severity.HINT ] = '',
     },
     numhl = {
         [ vim.diagnostic.severity.ERROR ] = 'ErrorMsg',
@@ -55,6 +53,7 @@ vim.diagnostic.config({
   },
   virtual_lines = true,
 })
+local trouble = require("trouble")
 local opts = { noremap=true, silent=true }
 local open_float = function()
   local fopts = {
@@ -65,7 +64,19 @@ end
 vim.keymap.set('n', '<space>e', open_float, opts)
 vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, opts)
 vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<space>dl', vim.diagnostic.setloclist, opts)
+vim.keymap.set(
+  'n',
+  '<space>dq',
+  function()
+    vim.diagnostic.setqflist({ open = false })
+    trouble.open({
+      mode = "quickfix",
+      win = { relative = "win", },
+    })
+  end,
+  opts
+)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -85,16 +96,11 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD',        vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd',        vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gD',        function() trouble.toggle("lsp_declarations") end, bufopts)
+  vim.keymap.set('n', 'gd',        function() trouble.toggle("lsp_definitions") end, bufopts)
   vim.keymap.set('n', 'K',         vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi',        vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gr',        vim.lsp.buf.references, bufopts)
-  -- Telescope lsp functions
-  -- local telescope_builtin = require("telescope.builtin")
-  -- vim.keymap.set('n', 'gtd',       telescope_builtin.lsp_definitions, bufopts)
-  -- vim.keymap.set('n', 'gtr',       telescope_builtin.lsp_references, bufopts)
-  -- vim.keymap.set('n', 'gti',       telescope_builtin.lsp_implementations, bufopts)
+  vim.keymap.set('n', 'gi',        function() trouble.toggle("lsp_implementations") end, bufopts)
+  vim.keymap.set('n', 'gr',        function() trouble.toggle("lsp_references") end, bufopts)
   vim.keymap.set('n', 'gtd',       Snacks.picker.lsp_definitions, bufopts)
   vim.keymap.set('n', 'gtr',       Snacks.picker.lsp_references, bufopts)
   vim.keymap.set('n', 'gti',       Snacks.picker.lsp_implementations, bufopts)
@@ -107,8 +113,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>D',  vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-
-  -- require('illuminate').on_attach(client)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -198,30 +202,21 @@ vim.lsp.config('lua_ls', {
   },
 })
 -- -- -- solidity
-local root_files = {
-  'hardhat.config.js',
-  'hardhat.config.ts',
-  'foundry.toml',
-  'remappings.txt',
-  'truffle.js',
-  'truffle-config.js',
-  'ape-config.yaml',
-  ".git",
-  "package.json"
-}
-
 vim.lsp.config('solidity_ls_nomicfoundation', {
   capabilities = capabilities,
   cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
-  root_markers = root_files,
+  root_markers = {
+    'hardhat.config.js',
+    'hardhat.config.ts',
+    'foundry.toml',
+    'remappings.txt',
+    'truffle.js',
+    'truffle-config.js',
+    'ape-config.yaml',
+    ".git",
+    "package.json",
+  },
   single_file_support = true,
-  -- settings = {
-    -- example of global remapping
-    -- solidity = {
-    --   includePath = '',
-    --   remapping = { ["@openzeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@5.0.1/' }
-    -- }
-  -- },
 })
 -- -- -- bash
 vim.lsp.config('bashls', {
@@ -229,11 +224,6 @@ vim.lsp.config('bashls', {
 })
 
 -- -- -- cadence
-vim.filetype.add({
-  extension = {
-    cdc = 'cadence',
-  },
-})
 vim.lsp.config('cadence-language-server', {
   capabilities = capabilities,
   cmd = { "flow", "cadence", "language-server" },
@@ -245,45 +235,7 @@ vim.lsp.config('cadence-language-server', {
   }
 })
 
--- -- -- rls
--- lsp.rls.setup(
---   coq.lsp_ensure_capabilities({
--- 	settings = {
--- 	  rust = {
--- 		unstable_features = true,
--- 		build_on_save = false,
--- 		all_features = true,
--- 	  },
--- 	},
---   })
--- )
--- -- -- rust-analyzer
---[[ local rust_on_attach = function(client, bufnr)
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()' , { buf = bufnr })
-  vim.api.nvim_set_option_value('omnifunc'  , 'v:lua.vim.lsp.omnifunc'     , { buf = bufnr })
-  vim.api.nvim_set_option_value('tagfunc'   , 'v:lua.vim.lsp.tagfunc'      , { buf = bufnr })
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-
-  require('illuminate').on_attach(client)
-end ]]
-
+-- -- -- rust (via rustaceanvim plugin)
 vim.g.rustaceanvim = {
   tools = {
     float_win_config = {
@@ -303,72 +255,6 @@ vim.g.rustaceanvim = {
     end
   },
 }
---[[ vim.g.rustaceanvim = {
-    tools = { -- rust-tools options
-        autoSetHints = true,
-        inlay_hints = {
-            auto = true,
-            show_parameter_hints = true,
-            parameter_hints_prefix = "<- ",
-            other_hints_prefix = "=> ",
-        },
-    },
-
-    server = {
-        -- on_attach is a callback called when the language server attachs to the buffer
-        on_attach = rust_on_attach,
-        settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                -- enable clippy on save
-                checkOnSave = false,
-                imports = {
-                  granularity = {
-                    group = "module",
-                  },
-                  prefix = "self",
-                },
-                cargo = {
-                  buildScripts = {
-                    enable = true,
-                  },
-                },
-                procMacro = {
-                  enable = true,
-                },
-                diagnostics = {
-                  experimental = true,
-                },
-            },
-        },
-    },
-} ]]
-
--- -- -- metals (scala lsp)
--- local metals_config = require("metals").bare_config()
---
--- -- Example of settings
--- -- metals_config.settings = {
--- --   showImplicitArguments = true,
--- --   excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
--- -- }
---
--- metals_config.capabilities = capabilities
--- metals_config.on_attach = on_attach
---
--- -- Autocmd that will actually be in charging of starting the whole thing
--- local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
--- vim.api.nvim_create_autocmd("FileType", {
---   -- NOTE: You may or may not want java included here. You will need it if you
---   -- want basic Java support but it may also conflict if you are using
---   -- something like nvim-jdtls which also works on a java filetype autocmd.
---   pattern = { "scala", "sbt" },
---   callback = function()
---     require("metals").initialize_or_attach(metals_config)
---   end,
---   group = nvim_metals_group,
--- })
 
 local SymbolKind = vim.lsp.protocol.SymbolKind
 
@@ -395,31 +281,14 @@ require("symbol-usage").setup {
   text_format = text_format,
   kinds = {
     SymbolKind.Function,
---     SymbolKind.File,
---     SymbolKind.Module,
---     SymbolKind.Namespace,
     SymbolKind.Package,
     SymbolKind.Class,
     SymbolKind.Method,
---     SymbolKind.Property,
---     SymbolKind.Field,
     SymbolKind.Constructor,
---     SymbolKind.Enum,
     SymbolKind.Interface,
---     SymbolKind.Variable,
     SymbolKind.Constant,
---     SymbolKind.String,
---     SymbolKind.Number,
---     SymbolKind.Boolean,
---     SymbolKind.Array,
---     SymbolKind.Object,
---     SymbolKind.Key,
---     SymbolKind.Null,
---     SymbolKind.EnumMember,
     SymbolKind.Struct,
     SymbolKind.Event,
---     SymbolKind.Operator,
---     SymbolKind.TypeParameter,
   },
   disable = { lsp = { "solidity_ls_nomicfoundation", "lua_ls" }, },
 }

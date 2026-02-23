@@ -14,7 +14,7 @@ return {
           layout = { preset = "default", preview = true },
           auto_close = true,
         }
-      }
+      },
     },
   },
 }

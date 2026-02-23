@@ -119,7 +119,6 @@ return {
           max_width = 150,
           max_height = 40,
           winblend = vim.g.winblend,
-          winhighlight = 'Normal:NoicePopup,FloatBorder:NoicePopup,CursorLine:BlinkCmpDocCursorLine,Search:None',
         },
       },
     },

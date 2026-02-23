@@ -19,8 +19,7 @@ end
 
 function utils.is_directory(path)
   local expanded_path = vim.fn.expand(path)
-  ---@diagnostic disable-next-line: undefined-field
-  local stat = vim.loop.fs_stat(expanded_path)
+  local stat = vim.uv.fs_stat(expanded_path)
   return stat and stat.type == "directory"
 end
 

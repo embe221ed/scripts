@@ -4,6 +4,19 @@ local t   = ls.text_node
 local i   = ls.insert_node
 local f   = ls.function_node
 
+require("luasnip.loaders.from_vscode").lazy_load()
+
+-- LuaSnip keymaps
+vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})
+
 
 -- args is a table, where 1 is the text in Placeholder 1, 2 the text in
 -- placeholder 2,...
@@ -17,7 +30,7 @@ ls.add_snippets("move", {
   s("test", {
     t("// Parameters: "),
     -- function, first parameter is the function, second the placeholder's index
-    -- whose text it gets as input. 
+    -- whose text it gets as input.
     f(copy, 2),
     -- simple text with a linebreak (`"\t"`)
     t("#[test]", "\t"),
@@ -43,7 +56,7 @@ ls.add_snippets("move", {
     -- text
     t("// Parameters: "),
     -- function, first parameter is the function, second the placeholder's index
-    -- whose text it gets as input. 
+    -- whose text it gets as input.
     f(copy, 2),
     -- text
     t({ "", "public fun " }),

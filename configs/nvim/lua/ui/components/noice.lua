@@ -33,7 +33,7 @@ require("noice").setup({
       -- override the lsp markdown formatter with Noice
       ["vim.lsp.util.stylize_markdown"] = true,
       -- override cmp documentation with Noice (needs the other options to work)
-      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+      ["cmp.entry.get_documentation"] = false,
     },
   },
   cmdline = {
