@@ -105,7 +105,7 @@ require('catppuccin').setup({
     NvimTreeOpenedFolderName    = { fg = colors.orange },
     NvimTreeEmptyFolderName     = { fg = colors.orange },
     NvimTreeIndentMarker        = { fg = colors.comment },
-    NvimTreeWinSeparator        = { fg = colors.bg, bg = colors.bg, },
+    -- NvimTreeWinSeparator        = { fg = colors.bg, bg = colors.bg, },
     NvimTreeRootFolder          = { fg = colors.orange, style = { "bold" } },
     NvimTreeSymlink             = { fg = colors.pink },
     NvimTreeGitDirty            = { fg = colors.yellow },
