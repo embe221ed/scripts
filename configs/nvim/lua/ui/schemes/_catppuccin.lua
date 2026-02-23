@@ -141,12 +141,16 @@ require('catppuccin').setup({
     blink_cmp = true,
     gitsigns = true,
     nvimtree = false,
-    treesitter = true,
+    flash = true,
+    lsp_trouble = true,
+    markview = true,
     notify = true,
     mini = {
       enabled = true,
       indentscope_color = "",
     },
+    snacks = true,
+    treesitter = true,
     -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
   },
 })
