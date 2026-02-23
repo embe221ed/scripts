@@ -324,7 +324,7 @@ return require("lazy").setup(
     {
       "yetone/avante.nvim",
       lazy = false,
-      version = "*",
+      version = false,
       opts = {
         input = {
           provider = "snacks",
@@ -343,6 +343,11 @@ return require("lazy").setup(
             both = "<leader>cb",
             cursor = "<leader>cc",
           },
+        },
+        windows = {
+          sidebar_header = {
+            rounded = false,
+          }
         },
       },
       build = "make",
