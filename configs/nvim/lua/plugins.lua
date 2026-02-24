@@ -335,7 +335,7 @@ return require("lazy").setup(
         provider = "gemini",
         providers = {
           openai = { model = "gpt-5.2", },
-          gemini = { model = "gemini-3.1-pro-preview", },
+          gemini = { model = "gemini-3-pro-preview", },
           claude = { model = "claude-sonnet-4-6", },
         },
         mappings = {
