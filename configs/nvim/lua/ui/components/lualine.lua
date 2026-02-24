@@ -1,22 +1,4 @@
-local lualine = require('lualine')
-
--- Color table for highlights
--- stylua: ignore
 local colors = vim.g.colors
-
-local conditions = {
-  buffer_not_empty = function()
-    return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
-  end,
-  hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
-  end,
-  check_git_workspace = function()
-    local filepath = vim.fn.expand('%:p:h')
-    local gitdir = vim.fn.finddir('.git', filepath .. ';')
-    return gitdir and #gitdir > 0 and #gitdir < #filepath
-  end,
-}
 
 local disabled_filetypes = {}
 if vim.g.statusline.laststatus < 3 then
@@ -38,158 +20,128 @@ if vim.g.statusline.laststatus < 3 then
   }
 end
 
--- Config
-local config = {
+local theme = {
+  normal = {
+    a = { fg = colors.bg, bg = colors.accent, gui = "bold" },
+    b = { fg = colors.fg, bg = colors.comment, gui = "bold" },
+    c = { fg = colors.dark_bg, bg = colors.bg, gui = "bold" },
+    z = { fg = colors.fg, bg = colors.light_bg, gui = "bold" },
+  },
+  insert = { a = { fg = colors.bg, bg = colors.green, gui = "bold" } },
+  command = { a = { fg = colors.bg, bg = colors.orange, gui = "bold" } },
+  visual = { a = { fg = colors.bg, bg = colors.sky, gui = "bold" } },
+  replace = { a = { fg = colors.bg, bg = colors.green, gui = "bold" } },
+}
+
+local empty = require('lualine.component'):extend()
+function empty:draw(default_highlight)
+  self.status = ''
+  self.applied_separator = ''
+  self:apply_highlights(default_highlight)
+  self:apply_section_separators()
+  return self.status
+end
+
+-- Put proper separators and gaps between components in sections
+local function process_sections(sections)
+  for name, section in pairs(sections) do
+    local left = name:sub(9, 10) < 'x'
+    for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
+      table.insert(section, pos * 2, { empty, color = { fg = colors.bg, bg = colors.bg } })
+    end
+    for id, comp in ipairs(section) do
+      if type(comp) ~= 'table' then
+        comp = { comp }
+        section[id] = comp
+      end
+      comp.separator = left and { right = '' } or { left = '' }
+    end
+  end
+  return sections
+end
+
+local function search_result()
+  if vim.v.hlsearch == 0 then
+    return ''
+  end
+  local last_search = vim.fn.getreg('/')
+  if not last_search or last_search == '' then
+    return ''
+  end
+  local searchcount = vim.fn.searchcount { maxcount = 9999 }
+  return last_search .. ' (' .. searchcount.current .. '/' .. searchcount.total .. ')'
+end
+
+local function modified()
+  if vim.bo.modified then
+    return '+'
+  elseif vim.bo.modifiable == false or vim.bo.readonly == true then
+    return '-'
+  end
+  return ''
+end
+
+require('lualine').setup {
   options = {
-    -- component_separators = { left = '', right = '' },
-    component_separators = { left = ' ', right = ' ' },
-    section_separators = { left = '', right = '' },
-    theme = {
-      -- We are going to use lualine_c an lualine_x as left and
-      -- right section. Both are highlighted by c theme .  So we
-      -- are just setting default looks o statusline
-      normal = { c = { fg = colors.fg, bg = colors.dark_bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.dark_bg } },
-    },
+    theme = theme,
+    component_separators = '',
+    section_separators = { left = '', right = '' },
     disabled_filetypes = disabled_filetypes,
   },
-  sections = {
-    -- these are to remove the defaults
-    lualine_a = {},
-    lualine_b = {},
-    lualine_y = {},
-    lualine_z = {},
-    -- These will be filled later
+  sections = process_sections {
+    lualine_a = { 'mode' },
+    lualine_b = {
+      'branch',
+      { 'filename' },
+      { modified, color = { bg = colors.red } },
+      {
+        '%w',
+        cond = function()
+          return vim.wo.previewwindow
+        end,
+      },
+      {
+        '%r',
+        cond = function()
+          return vim.bo.readonly
+        end,
+      },
+      {
+        '%q',
+        cond = function()
+          return vim.bo.buftype == 'quickfix'
+        end,
+      },
+      {
+        function()
+          -- local msg = 'n/a'
+          local msg = ''
+          local buf_ft = vim.api.nvim_get_option_value('filetype', { scope = "local" })
+          local clients = vim.lsp.get_clients()
+          if next(clients) == nil then
+            return msg
+          end
+          for _, client in ipairs(clients) do
+            ---@diagnostic disable-next-line: undefined-field
+            local filetypes = client.config.filetypes
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+              return client.name
+            end
+          end
+          return msg
+        end,
+        icon = ' ',
+        color = { fg = colors.fg, gui = 'bold' },
+      },
+      'diagnostics',
+    },
     lualine_c = {},
     lualine_x = {},
+    lualine_y = { 'selectioncount', search_result, 'diff', 'filetype' },
+    lualine_z = { '%l:%c', '%p%% / %L' },
   },
   inactive_sections = {
-    -- these are to remove the defaults
-    lualine_a = {},
-    lualine_b = {},
-    lualine_y = {},
-    lualine_z = {},
-    lualine_c = {},
+    lualine_c = { '%f %y %m' },
     lualine_x = {},
   },
 }
-
--- Inserts a component in lualine_c at left section
-local function ins_left(component, inactive)
-  table.insert(config.sections.lualine_c, component)
-  if inactive then
-    table.insert(config.inactive_sections.lualine_c, component)
-  end
-end
-
--- Inserts a component in lualine_x at right section
-local function ins_right(component, inactive)
-  table.insert(config.sections.lualine_x, component)
-  if inactive then
-    table.insert(config.inactive_sections.lualine_x, component)
-  end
-end
-
-ins_left(
-  {
-    function()
-      return ' '
-    end,
-    color = { fg = colors.fg, gui = 'bold' }, -- Sets highlighting of component
-    padding = { left = 1, right = 1 }, -- We don't need space before this
-  },
-  true
-)
-
-ins_left {
-  -- mode component
-  function()
-    return string.format("-- %s --", require("lualine.utils.mode").get_mode())
-  end,
-}
-
-ins_left(
-  {
-    'filename',
-    cond = conditions.buffer_not_empty,
-    color = { fg = colors.accent, gui = 'bold' },
-  },
-  true
-)
-
-ins_left {
-  'branch',
-  icon = '󰘬',
-  color = { fg = colors.fg },
-}
-
-ins_left {
-  -- Lsp server name .
-  function()
-    local msg = 'n/a'
-    local buf_ft = vim.api.nvim_get_option_value('filetype', { scope = "local" })
-    local clients = vim.lsp.get_clients()
-    if next(clients) == nil then
-      return msg
-    end
-    for _, client in ipairs(clients) do
-      ---@diagnostic disable-next-line: undefined-field
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return client.name
-      end
-    end
-    return msg
-  end,
-  icon = ' LSP:',
-  color = { fg = colors.fg, gui = 'bold' },
-}
-
-ins_right { 'diagnostics' }
-
--- Add components to right sections
-ins_right {
-  'diff',
-  symbols = { added = ' ', modified = '󱗝 ', removed = ' ' },
-  diff_color = {
-    added = { fg = colors.green },
-    modified = { fg = colors.orange },
-    removed = { fg = colors.red },
-  },
-  cond = conditions.hide_in_width,
-}
-
-ins_right {
-  'selectioncount',
-  color = { fg = colors.fg, gui = 'bold' },
-}
-
-ins_right { 'location' }
-
-ins_right {
-  function()
-    local cur = vim.fn.line('.')
-    local total = vim.fn.line('$')
-    local p = math.floor(cur / total * 100)
-    local icon = ''
-    if p == 100 then icon = '  '
-    elseif p >= 87 then icon = '▁▁▁'
-    elseif p >= 75 then icon = '▂▂▂'
-    elseif p >= 62 then icon = '▃▃▃'
-    elseif p >= 50 then icon = '▄▄▄'
-    elseif p >= 37 then icon = '▅▅▅'
-    elseif p >= 25 then icon = '▆▆▆'
-    elseif p >= 10 then icon = '▇▇▇'
-    else icon = '███'
-    end
-    return string.format('%s %%#lualine_c_normal#%2d%%%%', icon, p)
-  end,
-  color = { fg = colors.bg, },
-}
-
--- Now don't forget to initialize lualine
----@diagnostic disable: undefined-field
-if vim.g.colorscheme.vanilla then lualine.setup({})
-else lualine.setup(config)
-end
----@diagnostic enable: undefined-field
