@@ -23,6 +23,8 @@ end
 require('ui.colors').initialize_colors(palette)
 local colors = vim.g.colors
 
+local borderless = vim.g.border == "none"
+
 -- local utils = require('catppuccin.utils.colors')
 require('catppuccin').setup({
   flavour = current_theme, -- latte, frappe, macchiato, mocha
@@ -62,9 +64,9 @@ require('catppuccin').setup({
     WinSeparator                = { fg = colors.light_bg },
     TabLineSel                  = { bg = colors.accent },
 
-    FloatBorder                 = utils.ternary(vim.g.border == "none", { fg = colors.alt_bg, bg = colors.alt_bg }, { fg = colors.light_bg, bg = colors.none }),
-    FloatTitle                  = utils.ternary(vim.g.border == "none", { fg = colors.alt_fg, bg = colors.alt_bg }, { fg = colors.light_bg, bg = colors.none }),
-    NormalFloat                 = utils.ternary(vim.g.border == "none", {}, { bg = colors.none }),
+    FloatBorder                 = utils.ternary(borderless, { fg = colors.alt_bg, bg = colors.alt_bg }, { fg = colors.light_bg, bg = colors.none }),
+    FloatTitle                  = utils.ternary(borderless, { fg = colors.alt_fg, bg = colors.alt_bg }, { fg = colors.light_bg, bg = colors.none }),
+    NormalFloat                 = utils.ternary(borderless, {}, { bg = colors.none }),
 
     PmenuSel                    = { bg = colors.alt_fg, style = {} },
     -- PmenuSbar                   = { bg = utils.darken(colors.light_bg, 0.8, palette.crust), },
@@ -72,8 +74,8 @@ require('catppuccin').setup({
     BlinkCmpLabelDescription    = { fg = colors.comment, style = { "italic" } },
 
     NoicePopup                  = { bg = colors.dark_bg },
-    NoiceCmdlinePopupBorder     = utils.ternary(vim.g.border == "none", { fg = colors.light_bg, bg = colors.bg }, { fg = colors.light_bg }),
-    NoiceCmdlinePopup           = utils.ternary(vim.g.border == "none", { bg = colors.light_bg }, {}),
+    NoiceCmdlinePopupBorder     = utils.ternary(borderless, { fg = colors.light_bg, bg = colors.bg }, { fg = colors.light_bg }),
+    NoiceCmdlinePopup           = utils.ternary(borderless, { bg = colors.light_bg }, {}),
 
     StatusLine                  = { fg = colors.bg, bg = colors.bg },
     StatusLineNC                = { fg = colors.bg, bg = colors.bg },

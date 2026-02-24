@@ -155,6 +155,9 @@ return require("lazy").setup(
           symbols = {
             icon_source = "lspkind"
           },
+          symbol_folding = {
+            markers = { vim.g.symbols.expand, vim.g.symbols.collapse }
+          },
         }
       end,
     },

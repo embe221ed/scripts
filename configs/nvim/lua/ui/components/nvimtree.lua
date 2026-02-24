@@ -20,6 +20,12 @@ require('nvim-tree').setup({
       show = {
         folder = false,
       },
+      glyphs = {
+        folder = {
+          arrow_closed = vim.g.symbols.expand,
+          arrow_open = vim.g.symbols.collapse,
+        },
+      },
     },
     add_trailing = true,
     full_name = false,

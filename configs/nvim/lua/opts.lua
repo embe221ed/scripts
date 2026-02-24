@@ -35,9 +35,9 @@ vim.opt.fillchars = {
   -- horizup = "🮎",
   -- horizdown = "🮏",
 
-  foldopen = "",
+  foldopen = vim.g.symbols.collapse,
   foldsep = " ",
-  foldclose = "",
+  foldclose = vim.g.symbols.expand,
   fold = " ",
 }
 
