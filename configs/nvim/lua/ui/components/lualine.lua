@@ -27,10 +27,10 @@ local theme = {
     c = { fg = colors.dark_bg, bg = colors.bg, gui = "bold" },
     z = { fg = colors.fg, bg = colors.light_bg, gui = "bold" },
   },
-  insert = { a = { fg = colors.bg, bg = colors.green, gui = "bold" } },
-  command = { a = { fg = colors.bg, bg = colors.orange, gui = "bold" } },
+  insert = { a = { fg = colors.bg, bg = colors.blue, gui = "bold" } },
+  command = { a = { fg = colors.bg, bg = colors.green, gui = "bold" } },
   visual = { a = { fg = colors.bg, bg = colors.sky, gui = "bold" } },
-  replace = { a = { fg = colors.bg, bg = colors.green, gui = "bold" } },
+  replace = { a = { fg = colors.bg, bg = colors.orange, gui = "bold" } },
 }
 
 local empty = require('lualine.component'):extend()

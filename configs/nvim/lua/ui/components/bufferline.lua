@@ -336,14 +336,14 @@ bufferline.setup {
                 text = " EXPLORER",
                 separator = "",
                 text_align = "left",
-                highlight = "BufferLineBackground",
+                highlight = "MiniFilesTitleFocused",
             },
             {
                 filetype = "Outline",
                 text = " › OUTLINE",
                 text_align = "left",
                 separator = "│",
-                highlight = "BufferLineBackground",
+                highlight = "MiniFilesTitleFocused",
             },
         },
         numbers = function(opts)
