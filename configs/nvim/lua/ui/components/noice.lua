@@ -1,5 +1,5 @@
 local format = {
-  cmdline     = { pattern = "^:", icon = "", lang = "vim", title = "" },
+  cmdline     = { pattern = "^:", icon = "❯", lang = "vim", title = "" },
   telescope   = { pattern = "^:%s*Tel?e?s?c?o?p?e?%s+", icon = " ", lang = "vim", title = "" },
 }
 if vim.g.symbol_font then
@@ -63,8 +63,8 @@ require("noice").setup({
 })
 
 -- remove title in cmdline popup
-local formats = require("noice.config").defaults().cmdline.format
-for k, v in pairs(formats) do
-  v.title = ""
-  format[k] = v
-end
+-- local formats = require("noice.config").defaults().cmdline.format
+-- for k, v in pairs(formats) do
+--   v.title = ""
+--   format[k] = v
+-- end

@@ -332,11 +332,11 @@ return require("lazy").setup(
         input = {
           provider = "snacks",
         },
-        provider = "gemini",
+        provider = "claude",
         providers = {
           openai = { model = "gpt-5.2", },
-          gemini = { model = "gemini-3-pro-preview", },
-          claude = { model = "claude-sonnet-4-6", },
+          gemini = { model = "gemini-3.1-pro-preview", },
+          claude = { model = "claude-opus-4-6", },
         },
         mappings = {
           diff = {
