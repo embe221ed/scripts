@@ -25,7 +25,7 @@ vim.opt.laststatus        = vim.g.statusline.laststatus
 -- -- lists
 vim.opt.list              = true
 
-vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append "eol:󱞣"
 vim.opt.fillchars = {
   -- vert = "▏",
   -- vertleft = "▏",

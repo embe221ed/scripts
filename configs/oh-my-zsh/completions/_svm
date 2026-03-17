@@ -37,6 +37,8 @@ _svm() {
 _arguments "${_arguments_options[@]}" : \
 '-n+[]:NETWORK:_default' \
 '--network=[]:NETWORK:_default' \
+'-p+[Max number of pages to fetch (100 releases per page)]:PAGES:_default' \
+'--pages=[Max number of pages to fetch (100 releases per page)]:PAGES:_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
@@ -57,6 +59,8 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (use)
 _arguments "${_arguments_options[@]}" : \
+'-l[Write .svm-version in current directory instead of setting globally]' \
+'--local[Write .svm-version in current directory instead of setting globally]' \
 '-h[Print help]' \
 '--help[Print help]' \
 ':version:_svm_versions' \

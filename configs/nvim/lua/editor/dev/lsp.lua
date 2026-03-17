@@ -128,7 +128,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- language servers
 
 -- -- -- python-lsp-server
-vim.lsp.config('pylsp', {
+vim.lsp.config('pyrefly', {
   capabilities = capabilities
 })
 -- -- -- clangd

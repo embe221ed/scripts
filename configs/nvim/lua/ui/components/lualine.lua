@@ -1,6 +1,8 @@
 local colors = vim.g.colors
 
-local disabled_filetypes = {}
+local disabled_filetypes = {
+  'dashboard'
+}
 if vim.g.statusline.laststatus < 3 then
   disabled_filetypes = {
     'NvimTree',
