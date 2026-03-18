@@ -34,6 +34,8 @@ function utils.get_palette(colorscheme, theme)
     palette = require('nord.colors').palette
   elseif colorscheme == "onedark" then
     palette = require('onedarkpro.helpers').get_colors(theme)
+  elseif colorscheme == "gruvbox-material" then
+    palette = require("gruvbox-material.colors").get(vim.o.background, theme)
   else
     error(string.format("utils.get_palette for colorscheme=%s, theme=%s not defined", colorscheme, theme))
     return {}
