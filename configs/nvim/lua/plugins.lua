@@ -250,7 +250,7 @@ return require("lazy").setup(
         },
         modes = {
           search = {
-            enabled = true,
+            enabled = false,
           },
         },
       },

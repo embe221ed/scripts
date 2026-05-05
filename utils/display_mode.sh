@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 DARWIN=1
-LIGHT_THEME="catppuccin-latte"
-DARK_THEME="catppuccin-frappe"
+LIGHT_THEME="gruvbox-material-light"
+DARK_THEME="gruvbox-material-dark"
 INTERDOTENSIONAL_PATH="/opt/tools/interdotensional"
 
 /opt/scripts/utils/determine_system.sh
@@ -42,4 +42,6 @@ fi
 
 echo -e "echo -e \"[*] running: source ~/.zshrc\";"
 echo -e "source ~/.zshrc;"
+# Push the freshly-sourced FZF_DEFAULT_OPTS into tmux's global env so popups pick it up
+echo -e "if command -v tmux >/dev/null 2>&1 && tmux ls >/dev/null 2>&1; then tmux setenv -g FZF_DEFAULT_OPTS \"\$FZF_DEFAULT_OPTS\"; fi;"
 echo -e "echo \"[*] remember to apply new configs\";"

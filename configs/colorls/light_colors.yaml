@@ -1,46 +1,47 @@
+
 # Main Colors
-unrecognized_file: indigo
-recognized_file:   mediumslateblue
-executable_file:   mediumvioletred
-dir:               rebeccapurple
+unrecognized_file: "#45707a"
+recognized_file:   "#4c7a5d"
+executable_file:   "#6c782e"
+dir:               "#c35e0a"
 
 # Link
-dead_link: firebrick
-link:      slateblue
+dead_link: "#c14a4a"
+link:      "#4c7a5d"
 
-# Special files
-socket:    darkmagenta
-blockdev:  darkslateblue
-chardev:   peru
+# special files
+socket:    "#6c782e"
+blockdev:  "#6c782e"
+chardev:   "#6c782e"
 
 # Access Modes
-write:     purple
-read:      darkorchid
-exec:      crimson
-no_access: dimgray
+write:     "#45707a"
+read:      "#945e80"
+exec:      "#b85f3d"
+no_access: "#8d877d"
 
 # Age
-day_old:     darkorchid
-hour_old:    indianred
-no_modifier: darkviolet
+day_old:     "#945e80"
+hour_old:    "#a84b3a"
+no_modifier: "#a9a39a"
 
 # File Size
-file_large:  darkred
-file_medium: sienna
-file_small:  peru
+file_large:  "#c35e0a"
+file_medium: "#b47109"
+file_small:  "#6b665f"
 
-# Misc
-report: mediumpurple
-user:   indigo            # controls BOTH owner & group columns
-tree:   slateblue
-empty:  goldenrod
-error:  firebrick
-normal: darkslategray     # darker base to avoid blending
-inode:  darkorchid
+# Random
+report: "#654735"
+user:   "#45707a"
+tree:   "#a9a39a"
+empty:  "#b47109"
+error:  "#c14a4a"
+normal: "#4f3829"
+inode:  "#45707a"
 
 # Git
-addition:     seagreen
-modification: mediumorchid
-deletion:     darkred
-untracked:    darkorange
-unchanged:    forestgreen
+addition:     "#6c782e"
+modification: "#b47109"
+deletion:     "#c14a4a"
+untracked:    "#c35e0a"
+unchanged:    "#4c7a5d"

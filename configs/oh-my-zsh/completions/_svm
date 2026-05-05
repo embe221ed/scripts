@@ -1,9 +1,20 @@
 #compdef svm
 
-        _svm_versions() {
+        _svm_local_versions() {
             local -a versions
             versions=($(ls -1 $HOME/.svm/versions 2>/dev/null))
             _describe 'installed versions' versions
+        }
+        _svm_remote_versions() {
+            local -a versions
+            local cache_file="$HOME/.svm/cache/releases.json"
+            if [[ -f "$cache_file" ]]; then
+                versions=($(cat "$cache_file" | python3 -c "import sys,json;[print(r['tag_name']) for r in json.load(sys.stdin).get('releases',[])]" 2>/dev/null))
+            fi
+            if [[ ${#versions[@]} -eq 0 ]]; then
+                versions=($(svm remote-list --plain 2>/dev/null | tail -n +3 | awk '{print $1}' | grep -v '^$'))
+            fi
+            _describe 'available versions' versions
         }
         
 
@@ -39,6 +50,7 @@ _arguments "${_arguments_options[@]}" : \
 '--network=[]:NETWORK:_default' \
 '-p+[Max number of pages to fetch (100 releases per page)]:PAGES:_default' \
 '--pages=[Max number of pages to fetch (100 releases per page)]:PAGES:_default' \
+'--plain[Print plain table without fzf]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
@@ -47,14 +59,14 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-':version:_svm_versions' \
+':version:_svm_remote_versions' \
 && ret=0
 ;;
 (uninstall)
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-':version:_svm_versions' \
+':version:_svm_local_versions' \
 && ret=0
 ;;
 (use)
@@ -63,14 +75,14 @@ _arguments "${_arguments_options[@]}" : \
 '--local[Write .svm-version in current directory instead of setting globally]' \
 '-h[Print help]' \
 '--help[Print help]' \
-':version:_svm_versions' \
+':version:_svm_local_versions' \
 && ret=0
 ;;
 (link)
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-':name:_default' \
+':name:' \
 && ret=0
 ;;
 (list)
@@ -162,7 +174,7 @@ esac
 (( $+functions[_svm_commands] )) ||
 _svm_commands() {
     local commands; commands=(
-'remote-list:List available versions on GitHub' \
+'remote-list:List available versions on GitHub (uses fzf if available)' \
 'install:Install a version (e.g., v1.63.4 or mainnet-v1.63.4)' \
 'uninstall:Uninstall a version' \
 'use:Switch to an installed/linked version' \
@@ -183,7 +195,7 @@ _svm__completions_commands() {
 (( $+functions[_svm__help_commands] )) ||
 _svm__help_commands() {
     local commands; commands=(
-'remote-list:List available versions on GitHub' \
+'remote-list:List available versions on GitHub (uses fzf if available)' \
 'install:Install a version (e.g., v1.63.4 or mainnet-v1.63.4)' \
 'uninstall:Uninstall a version' \
 'use:Switch to an installed/linked version' \
