@@ -126,12 +126,13 @@ return require("lazy").setup(
       dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     },
     {
-      "numToStr/Comment.nvim",                                        -- easier comments management
-      event = { "BufReadPost", "BufNewFile" },
-      config = function()
-        require("Comment.ft").set('move', { '//%s', '/*%s*/' })
-        require('Comment').setup { comment_empty = false }
-      end,
+      "folke/todo-comments.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
     },
     {
       "hedyhli/outline.nvim",                                         -- symbols outline
@@ -291,10 +292,6 @@ return require("lazy").setup(
             workspaces = workspaces,
             legacy_commands = false,
             ui = { enable = false },
-            completion = {
-              nvim_cmp = false,
-              blink = true,
-            },
           })
         end
       end,
@@ -322,43 +319,6 @@ return require("lazy").setup(
       dependencies = {
         { "kkharji/sqlite.lua" },
         { "nvim-telescope/telescope.nvim" },
-      },
-    },
-    {
-      "yetone/avante.nvim",
-      lazy = false,
-      version = false,
-      opts = {
-        input = {
-          provider = "snacks",
-        },
-        provider = "claude",
-        providers = {
-          openai = { model = "gpt-5.2", },
-          gemini = { model = "gemini-3.1-pro-preview", },
-          claude = { model = "claude-opus-4-6", },
-        },
-        mappings = {
-          diff = {
-            ours = "<leader>co",
-            theirs = "<leader>ct",
-            all_theirs = "<leader>ca",
-            both = "<leader>cb",
-            cursor = "<leader>cc",
-          },
-        },
-        windows = {
-          sidebar_header = {
-            rounded = false,
-          }
-        },
-      },
-      build = "make",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-        "nvim-telescope/telescope.nvim",
-        "nvim-tree/nvim-web-devicons",
       },
     },
     {

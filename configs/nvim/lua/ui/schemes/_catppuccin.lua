@@ -99,10 +99,6 @@ require('catppuccin').setup({
     TelescopeMatching           = { fg = colors.orange, style = { "bold" } },
     TelescopeDirectoryCustom    = { fg = colors.comment },
 
-    -- TODO: not working
-    AvanteInlineHint            = { fg = palette.overlay2, style = { "italic" } },
-    AvanteSidebarWinSeparator   = { fg = colors.light_bg, bg = colors.alt_bg },
-
     NvimTreeFolderName          = { fg = colors.orange },
     NvimTreeFolderIcon          = { fg = colors.orange },
     NvimTreeOpenedFolderName    = { fg = colors.orange },

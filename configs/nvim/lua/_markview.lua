@@ -2,7 +2,7 @@
 
 require('markview').setup({
   preview = {
-    filetypes = { "markdown", "quarto", "rmd", "norg", "Avante" },
+    filetypes = { "markdown", "quarto", "rmd", "norg" },
     ignore_buftypes = {},
   },
   experimental = {

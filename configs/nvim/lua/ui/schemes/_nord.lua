@@ -68,8 +68,6 @@ require("nord").setup({
     -- highlights.TelescopeTitle              = { fg = colors.cyan }
     -- highlights.TelescopeBorder             = { fg = colors.surface1, style = { "bold" } }
 
-    highlights.AvanteInlineHint            = { italic = true }
-
     -- highlights.NvimTreeFolderName          = { fg = colors.peach }
     -- highlights.NvimTreeFolderIcon          = { fg = colors.peach }
     -- highlights.NvimTreeOpenedFolderName    = { fg = colors.peach }
