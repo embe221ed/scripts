@@ -43,6 +43,7 @@ require('catppuccin').setup({
     properties = {},
     types = {},
     operators = {},
+    miscs = {}, -- add this to prevent "italic" on modules/attributes/references etc.
   },
   lsp_styles = {
     inlay_hints = {

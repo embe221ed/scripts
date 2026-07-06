@@ -164,4 +164,13 @@ RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc \
     && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc \
     && echo 'eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"' >> ~/.zshrc
 
+# F. Dev-Container Prompt Indicator
+# Mark the shell as running inside the dev container, then prepend a
+# Docker-blue "‹dev›"-style segment to PROMPT. Appended below OMZ's 'source'
+# line so the theme has already built $PROMPT (and defined $reset) by now.
+ENV DEV_CONTAINER=1
+RUN echo '' >> ~/.zshrc \
+    && echo '# dev-container indicator (docker blue, mirrors the venv segment style)' >> ~/.zshrc \
+    && echo '[[ -n "$DEV_CONTAINER" ]] && PROMPT="%{%F{#2496ED}%}❮%{%F{#ffffff}%}dev%{%F{#2496ED}%}❯%{$reset%} $PROMPT"' >> ~/.zshrc
+
 CMD [ "/usr/bin/zsh" ]
