@@ -10,6 +10,7 @@ api.nvim_create_autocmd(
     callback  = function()
       vim.bo.shiftwidth  = 4
       vim.bo.tabstop     = 4
+      vim.wo.conceallevel = 2
       -- Check if current window is floating
       local win_config = api.nvim_win_get_config(0)
       local is_floating = win_config.relative ~= ""
@@ -91,6 +92,33 @@ api.nvim_create_autocmd(
           api.nvim_set_option_value("statusline",   " ", { scope = "local", win = win })
         end
       end)
+    end,
+  }
+)
+
+api.nvim_create_autocmd(
+  "TextYankPost",
+  {
+    group     = group,
+    desc      = "briefly highlight yanked text",
+    callback  = function()
+      -- vim.hl.on_yank is deprecated on 0.13+ in favour of vim.hl.hl_op
+      local hl = vim.hl.hl_op or vim.hl.on_yank
+      hl({ timeout = 150 })
+    end,
+  }
+)
+
+api.nvim_create_autocmd(
+  "VimEnter",
+  {
+    group     = group,
+    desc      = "open nvim-tree when nvim starts on a directory (nvim-tree is now lazy-loaded)",
+    callback  = function(data)
+      if vim.fn.isdirectory(data.file) == 1 then
+        vim.cmd.cd(data.file)
+        require("nvim-tree.api").tree.open()
+      end
     end,
   }
 )

@@ -51,7 +51,8 @@ vim.diagnostic.config({
         [ vim.diagnostic.severity.HINT ] = 'DiagnosticHint',
     },
   },
-  virtual_lines = true,
+  virtual_lines = { current_line = true },
+  virtual_text = false,
 })
 local trouble = require("trouble")
 local opts = { noremap=true, silent=true }
@@ -96,28 +97,22 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  -- vim.keymap.set('n', 'gD',        function() trouble.toggle("lsp_declarations") end, bufopts)
-  -- vim.keymap.set('n', 'gd',        function() trouble.toggle("lsp_definitions") end, bufopts) -- does not add entry to tagstack
-  vim.keymap.set('n', 'gD',        vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd',        vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K',         vim.lsp.buf.hover, bufopts)
-  -- NOTE: prefer builtin functions as they won't update on cursor change
-  -- vim.keymap.set('n', 'gi',        function() trouble.toggle("lsp_implementations") end, bufopts)
-  -- vim.keymap.set('n', 'gr',        function() trouble.toggle("lsp_references") end, bufopts)
-  vim.keymap.set('n', 'gi',        vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gr',        vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'gtd',       Snacks.picker.lsp_definitions, bufopts)
-  vim.keymap.set('n', 'gtr',       Snacks.picker.lsp_references, bufopts)
-  vim.keymap.set('n', 'gti',       Snacks.picker.lsp_implementations, bufopts)
+  local function d(desc) return vim.tbl_extend('force', bufopts, { desc = desc }) end
+  vim.keymap.set('n', 'gD',        vim.lsp.buf.declaration,             d('Goto declaration'))
+  vim.keymap.set('n', 'gd',        vim.lsp.buf.definition,              d('Goto definition'))
+  vim.keymap.set('n', 'K',         vim.lsp.buf.hover,                   d('Hover'))
+  -- references/implementations open a preview-first picker (LSP-5: unified, gt* removed)
+  vim.keymap.set('n', 'gr',        function() Snacks.picker.lsp_references() end,      d('References'))
+  vim.keymap.set('n', 'gi',        function() Snacks.picker.lsp_implementations() end, d('Goto implementation'))
   -- misc actions
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder,    d('Add workspace folder'))
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, d('Remove workspace folder'))
   vim.keymap.set('n', '<space>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D',  vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  end, d('List workspace folders'))
+  vim.keymap.set('n', '<space>D',  vim.lsp.buf.type_definition,         d('Type definition'))
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename,                  d('Rename'))
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action,             d('Code action'))
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {

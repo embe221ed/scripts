@@ -77,6 +77,8 @@ return {
         'ripgrep',
       },
       providers = {
+        snippets = { min_keyword_length = 2 },
+        buffer   = { min_keyword_length = 4 },
         ripgrep = {
           module = "blink-ripgrep",
           name = "Ripgrep",
@@ -129,11 +131,19 @@ return {
           'select_and_accept',
           'select_next'
         },
-      }
+      },
+      completion = {
+        menu = {
+          auto_show = function() return vim.fn.getcmdtype() == ':' end,
+        },
+      },
     },
 
-    -- experimental signature help support
-    -- signature = { enabled = true }
+    -- signature help (CMP-1) — blink owns it; noice's is disabled to avoid a double popup
+    signature = {
+      enabled = true,
+      window = { show_documentation = true, winblend = vim.g.winblend },
+    },
   },
   ---@diagnostic enable: missing-fields
   -- allows extending the providers array elsewhere in your config

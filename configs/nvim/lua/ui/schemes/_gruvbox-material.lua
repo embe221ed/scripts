@@ -112,6 +112,9 @@ require('catppuccin').setup({
     DapBreakpoint               = { fg = colors.red },
     DapStopped                  = { fg = colors.green },
 
+    GitSignsCurrentLineBlame    = { fg = colors.comment, style = { "italic" } },
+    GitSignsCurrentLineBlameSep = { fg = colors.orange },
+
     NotifyERRORTitle            = { fg = colors.red, style = {} },
     NotifyWARNTitle             = { fg = colors.yellow, style = {} },
     NotifyINFOTitle             = { fg = colors.blue, style = {} },

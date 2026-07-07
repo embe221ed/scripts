@@ -25,7 +25,9 @@ local border = function()
 end
 
 require("noice").setup({
+  notify = { enabled = false }, -- snacks.notifier owns vim.notify
   lsp = {
+    signature = { enabled = false }, -- blink.cmp owns signature help (CMP-1)
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
     override = {
       -- override the default lsp markdown formatter with Noice
