@@ -10,11 +10,23 @@
 # names, so switching to a different theme pair "just works".
 #
 # The script prints a small shell snippet on stdout for the caller to eval,
-# e.g.  eval "$(/opt/scripts/utils/display_mode.sh)"  — this is how the
-# `source ~/.zshrc` and tmux FZF_DEFAULT_OPTS updates take effect in the
-# *caller's* interactive shell. Keep stdout limited to eval-able commands;
-# progress and interdot's own diagnostics go to stderr, which the caller sees
-# directly.
+# e.g.  eval "$(/opt/scripts/utils/display_mode.sh)"  — that snippet reloads the
+# *caller's* interactive shell so it picks up the new theme. Keep stdout limited
+# to eval-able commands; progress and interdot's own diagnostics go to stderr,
+# which the caller sees directly.
+#
+# NOTE: the snippet does not source anything — it `exec zsh`s. Re-sourcing
+# ~/.zshrc re-runs the oh-my-zsh plugins, and zsh-autosuggestions and
+# fast-syntax-highlighting then re-wrap each other's ZLE widget wrappers on every
+# pass (each plugin's guard only recognizes its own wrapper); after ~15 passes
+# every keystroke dies with "maximum nested function level reached" (FUNCNEST).
+# Re-sourcing only the generated files avoids that, but it forces every generated
+# file to stay idempotent forever — an invariant nothing can enforce. A fresh
+# process needs neither: everything a flip changes is a FILE, and a new shell
+# reads files. This is oh-my-zsh's own documented answer (its FAQ calls
+# `source ~/.zshrc` "the common wrong suggestion"); `omz reload` is just
+# `exec zsh` plus a compdump delete we don't want (3x slower, themes no
+# completions).
 
 set -u
 
@@ -102,12 +114,20 @@ else
   fi
 fi
 
-# --- 4. shell/tmux state that must run in the caller's shell -----------------
+# --- 4. reload the caller's shell ---------------------------------------------
 
-emit_echo "[*] running: source ~/.zshrc"
-emit "source ~/.zshrc;"
-# Push the freshly-sourced FZF_DEFAULT_OPTS into tmux's global env so popups pick it up.
-emit 'if command -v tmux >/dev/null 2>&1 && tmux ls >/dev/null 2>&1; then tmux setenv -g FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS"; fi;'
-emit_echo "[*] remember to apply new configs"
+# Everything a theme flip changes is a file on disk; a fresh shell reads files.
+# (tmux's own FZF_DEFAULT_OPTS is pushed by a general.yml hook, not from here:
+# anything emitted after the exec would never run, and anything emitted before it
+# would push the stale pre-flip value.)
+#
+# Only SUSPENDED jobs block the reload — exec silently orphans them into
+# unreachable stopped processes, and unlike `exit` zsh prints no warning.
+# Running background jobs survive exec fine, so they must not block a flip.
+#
+# `exec zsh` — bare, PATH-resolved. Never spell this with an absolute path: if
+# the exec fails, the interactive shell dies outright.
+emit_echo "[*] reloading this shell (exec zsh)"
+emit 'if [[ -n ${(M)jobstates:#suspended*} ]]; then jobs -l; print -u2 "[!] suspended jobs above — shell NOT reloaded. Finish them, then run: exec zsh"; else exec zsh; fi'
 
 exit 0
