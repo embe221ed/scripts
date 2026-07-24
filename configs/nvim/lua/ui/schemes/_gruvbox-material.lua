@@ -106,8 +106,8 @@ require('catppuccin').setup({
     TreesitterContext           = { bg = colors.bg },
     TreesitterContextBottom     = { sp = vim.g.neovide and colors.bg or colors.light_bg, style = { "underline" } },
 
-    ["@parameter.readonly"]     = { fg = colors.orange, style = { "italic" } },
-    ["@parameter.modification"] = { fg = colors.orange, style = { "italic" } },
+    -- ["@parameter.readonly"]     = { fg = colors.orange, style = { "italic" } },
+    -- ["@parameter.modification"] = { fg = colors.orange, style = { "italic" } },
 
     DapBreakpoint               = { fg = colors.red },
     DapStopped                  = { fg = colors.green },

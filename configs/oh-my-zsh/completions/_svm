@@ -87,6 +87,14 @@ _arguments "${_arguments_options[@]}" : \
 ':version:_svm_local_versions' \
 && ret=0
 ;;
+(exec)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':version:_svm_local_versions' \
+'*::command -- Command and arguments (e.g. sui move test):_default' \
+&& ret=0
+;;
 (link)
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
@@ -105,6 +113,13 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
+&& ret=0
+;;
+(which)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::binary:(sui move-analyzer)' \
 && ret=0
 ;;
 (unset)
@@ -201,6 +216,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(exec)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (link)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -210,6 +229,10 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(which)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -262,9 +285,11 @@ _svm_commands() {
 'update:Update the active version to the latest release on its network' \
 'uninstall:Uninstall a version' \
 'use:Switch to an installed/linked version' \
+'exec:Run a command under a specific installed version without switching' \
 'link:Link a local build (e.g. svm link custom-dev)' \
 'list:List local versions (active one marked with *)' \
 'show:Show the currently active version' \
+'which:Print the full path of the binary the active version resolves to' \
 'unset:Deactivate svm by removing shims' \
 'cache:Inspect or clean the download cache' \
 'completions:Generate shell completions' \
@@ -308,6 +333,11 @@ _svm__subcmd__completions_commands() {
     local commands; commands=()
     _describe -t commands 'svm completions commands' commands "$@"
 }
+(( $+functions[_svm__subcmd__exec_commands] )) ||
+_svm__subcmd__exec_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm exec commands' commands "$@"
+}
 (( $+functions[_svm__subcmd__help_commands] )) ||
 _svm__subcmd__help_commands() {
     local commands; commands=(
@@ -316,9 +346,11 @@ _svm__subcmd__help_commands() {
 'update:Update the active version to the latest release on its network' \
 'uninstall:Uninstall a version' \
 'use:Switch to an installed/linked version' \
+'exec:Run a command under a specific installed version without switching' \
 'link:Link a local build (e.g. svm link custom-dev)' \
 'list:List local versions (active one marked with *)' \
 'show:Show the currently active version' \
+'which:Print the full path of the binary the active version resolves to' \
 'unset:Deactivate svm by removing shims' \
 'cache:Inspect or clean the download cache' \
 'completions:Generate shell completions' \
@@ -342,6 +374,11 @@ _svm__subcmd__help__subcmd__cache__subcmd__clean_commands() {
 _svm__subcmd__help__subcmd__completions_commands() {
     local commands; commands=()
     _describe -t commands 'svm help completions commands' commands "$@"
+}
+(( $+functions[_svm__subcmd__help__subcmd__exec_commands] )) ||
+_svm__subcmd__help__subcmd__exec_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help exec commands' commands "$@"
 }
 (( $+functions[_svm__subcmd__help__subcmd__help_commands] )) ||
 _svm__subcmd__help__subcmd__help_commands() {
@@ -393,6 +430,11 @@ _svm__subcmd__help__subcmd__use_commands() {
     local commands; commands=()
     _describe -t commands 'svm help use commands' commands "$@"
 }
+(( $+functions[_svm__subcmd__help__subcmd__which_commands] )) ||
+_svm__subcmd__help__subcmd__which_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm help which commands' commands "$@"
+}
 (( $+functions[_svm__subcmd__install_commands] )) ||
 _svm__subcmd__install_commands() {
     local commands; commands=()
@@ -437,6 +479,11 @@ _svm__subcmd__update_commands() {
 _svm__subcmd__use_commands() {
     local commands; commands=()
     _describe -t commands 'svm use commands' commands "$@"
+}
+(( $+functions[_svm__subcmd__which_commands] )) ||
+_svm__subcmd__which_commands() {
+    local commands; commands=()
+    _describe -t commands 'svm which commands' commands "$@"
 }
 
 if [ "$funcstack[1]" = "_svm" ]; then
