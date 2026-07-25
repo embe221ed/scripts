@@ -121,13 +121,11 @@ RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv \
 # F. Install govman
 RUN curl -sSL https://get.govman.dev/install.sh | bash && ~/.govman/bin/govman init --shell zsh
 
-# G. Setup Python Version & pyenv-virtualenv for interdotensional
-RUN pyenv install 3.12.13 \
-    && pyenv global 3.12.13 \
-    && pyenv virtualenv 3.12.13 venv \
-    && PYENV_VERSION=venv python -m pip install --upgrade pip \
-    && PYENV_VERSION=venv python -m pip install --no-cache-dir -r /opt/tools/interdotensional/requirements.txt \
-    && PYENV_VERSION=venv python /opt/tools/interdotensional/generate.py
+# G. install `uv`
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# H. generate configs with interdotensional
+RUN ~/.local/bin/uv run --directory /opt/tools/interdotensional interdot generate
 
 # --- 8. Configure Shell (.zshrc setup) ---
 

@@ -60,6 +60,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-u[Switch to the version after installing]' \
 '--use[Switch to the version after installing]' \
+'--full[Extract every binary in the archive (sui-node, sui-debug, ...), not just sui and move-analyzer]' \
 '-h[Print help]' \
 '--help[Print help]' \
 ':version:_svm_remote_versions' \
