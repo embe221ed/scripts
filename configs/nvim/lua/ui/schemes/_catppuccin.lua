@@ -150,6 +150,7 @@ require('catppuccin').setup({
     },
     snacks = true,
     treesitter = true,
+    treesitter_context = false,
     -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
   },
 })
