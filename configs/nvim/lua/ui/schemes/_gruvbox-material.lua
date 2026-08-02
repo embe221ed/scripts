@@ -138,5 +138,6 @@ require('catppuccin').setup({
     },
     snacks = true,
     treesitter = true,
+    treesitter_context = false,
   },
 })
