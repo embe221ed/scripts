@@ -1,0 +1,5 @@
+# The build context only ever needs the terminfo source; everything else in the
+# image comes from git clones. Keeping the context at a few KB makes `docker
+# buildx build .` instant instead of shipping the whole directory to the daemon.
+*
+!ghostty.terminfo

@@ -1,0 +1,32 @@
+# ~/.zshenv — read by EVERY zsh (login, interactive, script, `docker exec zsh -c …`).
+#
+# Only PATH and environment go here; nothing interactive, nothing that prints.
+# Symlinked into place:  ln -sf /opt/scripts/configs/zsh/zshenv ~/.zshenv
+#
+# Everything is guarded so the same file works on the host and inside the dev
+# container, where several of these toolchains may be absent.
+
+# Duplicate-free PATH/fpath. Must run BEFORE the first PATH edit — and .zshenv is
+# read before .zshrc, so this is the earliest correct place for it. Without it
+# every `exec zsh` (which is how display_mode.sh reloads the shell) grows $path.
+typeset -U path PATH fpath FPATH cdpath manpath MANPATH
+
+# --- toolchains ---------------------------------------------------------------
+[[ -r "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+
+path=("$HOME/.local/bin" $path)
+[[ -d "$HOME/.svm/bin" ]]     && path=("$HOME/.svm/bin" $path)       # sui + move-analyzer
+[[ -d "$HOME/.foundry/bin" ]] && path=("$HOME/.foundry/bin" $path)   # forge/cast/anvil
+[[ -d "$HOME/osec_io/bin" ]]  && path=("$HOME/osec_io/bin" $path)    # host-only
+
+# --- man ----------------------------------------------------------------------
+# Colored man pages through bat. Guarded: without bat this would break `man`.
+if (( $+commands[bat] )); then
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANROFFOPT="-c"
+fi
+
+# NOTE: deliberately NOT setting RIPGREP_CONFIG_PATH. configs/.ripgreprc contains
+# `--color=always`, which forces SGR escapes even when stdout is a pipe — so
+# `rg -l pat | xargs sed -i` would feed sed filenames wrapped in escape codes.
+# rg already colorizes when stdout is a TTY.
