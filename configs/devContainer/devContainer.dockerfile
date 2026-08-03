@@ -7,7 +7,7 @@
 # BUILD (BuildKit/buildx required — TARGETARCH and heredocs):
 #   cd /opt/scripts/configs/devContainer
 #   ./run_docker.sh build             # or:
-#   docker buildx build -f devContainer.dockerfile -t devcontainer \
+#   docker buildx build -f devContainer.dockerfile -t dev-container \
 #     --build-arg USER_UID=$(id -u) --build-arg USER_GID=$(id -g) .
 #
 # NOTE: the build clones embe221ed/scripts from GitHub, so any change to
@@ -176,13 +176,16 @@ RUN set -eux; \
     lua-language-server --version
 
 # --- 7. Ghostty terminfo ------------------------------------------------------
-# Lets TERM=xterm-ghostty be recognised when the host terminal is Ghostty.
-# TERM itself defaults to xterm-256color and should be overridden at run time
-# (`docker run -e TERM=$TERM`), because the generated tmux conf does
-# `set -g default-terminal "$TERM"` and propagates it into every pane.
+# Lets TERM=xterm-ghostty be recognised when run_docker.sh forwards it. TERM's
+# own default is set with the rest of the run-time env at step 10, so a bare
+# `docker run` needs no -e flag. Whatever TERM ends up holding must have a
+# terminfo entry *inside* the container: the generated tmux conf does
+# `set -g default-terminal "$TERM"`, and tmux refuses to start on an unknown
+# one — which is why run_docker.sh falls back instead of forwarding blindly.
+# ncurses-term covers alacritty/wezterm/foot/rio/contour; xterm-kitty is not
+# in it.
 COPY ./ghostty.terminfo /tmp/ghostty.terminfo
 RUN tic -x /tmp/ghostty.terminfo && rm /tmp/ghostty.terminfo
-ENV TERM=xterm-256color
 
 # --- 8. User ------------------------------------------------------------------
 # Build with --build-arg USER_UID=$(id -u) --build-arg USER_GID=$(id -g) so that
@@ -219,8 +222,27 @@ ENV PYENV_ROOT="$HOME/.pyenv"
 # This PATH is what `docker exec <c> <cmd>` and the RUN steps below see; the
 # interactive shell rebuilds it from configs/zsh/{zshenv,zshrc}.
 ENV PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.svm/bin:$HOME/.foundry/bin:$PYENV_ROOT/bin:$PYENV_ROOT/shims:/opt/scripts/utils:$PATH"
+# DEV_CONTAINER is what the prompt badge keys off. It is an ENV, not something
+# the wrapper script passes, so it is set for `docker run`, `docker exec`, every
+# tmux pane, and any nested or re-exec'd shell.
 ENV DEV_CONTAINER=1
+# Only reaches non-interactive processes (`docker exec`, the RUN steps below).
+# Every interactive shell gets its value from $ZSH_CUSTOM/interdot.zsh instead,
+# which oh-my-zsh sources after this — the generated fragment is the source of
+# truth, and under `run_docker.sh live` (host output/ bind-mounted) it can
+# legitimately disagree with the value here.
 ENV DISPLAY_MODE=Dark
+# Defaults for a bare `docker run --rm -it dev-container` with no -e flags.
+#
+# COLORTERM is load-bearing, not cosmetic. fast-syntax-highlighting ends with
+#     [[ ${COLORTERM-} == (24bit|truecolor) || ${terminfo[colors]} -eq 16777216 ]] \
+#       || zmodload zsh/nearcolor
+# and xterm-256color's terminfo reports 256, so without COLORTERM every 24-bit
+# hex colour in the generated theme — the whole gruvbox palette and the ❮dev❯
+# badge — gets silently rounded to the nearest xterm-256 colour. The host gets
+# COLORTERM from its terminal; the container has to assert it.
+ENV TERM=xterm-256color
+ENV COLORTERM=truecolor
 
 # --- 11. Oh My Zsh + custom plugins ------------------------------------------
 # --keep-zshrc: ~/.zshrc is a symlink into the repo (step 22), not a generated file.
@@ -407,10 +429,15 @@ RUN set -eux; \
 # only work above oh-my-zsh.sh and cannot be appended after it at all.
 # Placed after every installer above, because rustup/nvm/foundryup append PATH
 # lines to ~/.zshenv and ~/.zshrc — which would otherwise land in the repo files.
+#
+# ~/work is what run_docker.sh bind-mounts over; ~/.local/state has to exist and
+# be user-owned before docker initialises the named volume from it. They are
+# created here rather than next to the ENV block at step 10 so that they cost one
+# cheap layer instead of invalidating every toolchain below.
 RUN set -eux; \
     ln -sf /opt/scripts/configs/zsh/zshrc  "$HOME/.zshrc"; \
     ln -sf /opt/scripts/configs/zsh/zshenv "$HOME/.zshenv"; \
-    mkdir -p "$HOME/.config"; \
+    mkdir -p "$HOME/.config" "$HOME/work" "$HOME/.local/state"; \
     ln -sfn /opt/scripts/configs/nvim "$HOME/.config/nvim"; \
     ln -sfn /opt/tools/interdotensional/output/colorls "$HOME/.config/colorls"; \
     ln -sf /opt/tools/interdotensional/output/tmux/.tmux.conf "$HOME/.tmux.conf"; \
@@ -420,14 +447,63 @@ RUN set -eux; \
 RUN cat > "$HOME/.zshrc.local" <<'ZSHRC_LOCAL'
 # Sourced by /opt/scripts/configs/zsh/zshrc — container-only settings.
 
-# Docker-blue "❮dev❯" badge, mirroring the theme's venv segment style. The theme
-# snapshots $PROMPT into $_transient_full and restores it from a precmd hook, so
-# the snapshot has to be updated too or the badge is wiped on the first prompt.
+# Keep the state worth keeping on the one path run_docker.sh puts a named volume
+# on. zsh defaults HISTFILE to ~/.zsh_history and zoxide defaults its database to
+# ~/.local/share/zoxide; neither is on the volume, so with --rm both would be
+# thrown away at the end of every run.
+export HISTFILE="$HOME/.local/state/zsh/history"
+export _ZO_DATA_DIR="$HOME/.local/state/zoxide"
+[[ -d ${HISTFILE:h} ]] || mkdir -p ${HISTFILE:h}
+
+# Docker-blue "❮dev❯" badge: the marker that says this shell is not the host.
+# Same delimiter shape as the theme's own segments.
+#
+# Prepended from a precmd hook rather than by editing $PROMPT once, because the
+# theme implements a transient prompt: a line-finish zle hook collapses PROMPT to
+# a lone ❯, and its own precmd hook restores PROMPT from a snapshot taken when
+# the theme loaded — i.e. before this file ran. Hooks fire in registration order,
+# so a hook added here always runs after that restore and re-prepends the badge,
+# without this file having to know the generated theme's private variables.
+#
+# _transient is redefined for the same reason: otherwise every line that has
+# already run collapses to a bare ❯ identical to the host's, and the badge exists
+# only on the prompt being typed on — nothing in the scrollback, and nothing in a
+# tmux pane you left ten minutes ago, is marked.
+#
+# "dev" is the terminal's default foreground made bold, not a literal #ffffff:
+# `interdot toggle` — and `run_docker.sh live`, which mounts the host's own
+# generated output/ — flip the palette to light, where white on the light
+# background #fbf1c7 is a 1.1:1 contrast ratio and the word simply vanishes.
 if [[ -n "$DEV_CONTAINER" ]]; then
-  PROMPT="%{%F{#2496ED}%}❮%{%F{#ffffff}%}dev%{%F{#2496ED}%}❯%{%f%k%b%u%} $PROMPT"
-  [[ -n ${_transient_full+x} ]] && _transient_full=$PROMPT
+  _dev_badge='%{%F{#2496ED}%}❮%B%{%f%}dev%b%{%F{#2496ED}%}❯%{%f%k%b%u%} '
+
+  autoload -Uz add-zsh-hook
+  _dev_badge_precmd() {
+    [[ $PROMPT == "$_dev_badge"* ]] || PROMPT="${_dev_badge}${PROMPT}"
+  }
+  add-zsh-hook precmd _dev_badge_precmd
+  _dev_badge_precmd
+
+  # Guarded, so this file stays valid if the theme is ever regenerated without a
+  # transient prompt. $green/$reset are the theme's; re-read at call time.
+  if (( $+functions[_transient] )); then
+    _transient() { PROMPT="${_dev_badge}%{$green%}❯%{$reset%} "; RPS1=''; zle .reset-prompt }
+  fi
 fi
 ZSHRC_LOCAL
+
+# The same marker for the non-zsh ways in. `docker exec -it <c> bash` and
+# `sudo -s` would otherwise be indistinguishable from a host shell.
+# It has to go in the two ~/.bashrc files, not /etc/bash.bashrc: Ubuntu's skel
+# .bashrc sets PS1 unconditionally and is sourced after the system one.
+# env_keep is what carries DEV_CONTAINER across sudo's default env_reset.
+RUN set -eux; \
+    printf 'Defaults env_keep += "DEV_CONTAINER DISPLAY_MODE"\n' \
+      | sudo tee /etc/sudoers.d/dev-container-env >/dev/null; \
+    sudo chmod 0440 /etc/sudoers.d/dev-container-env; \
+    badge='[ -n "$DEV_CONTAINER" ] && PS1="\[\e[38;2;36;150;237m\]❮\[\e[0m\]dev\[\e[38;2;36;150;237m\]❯\[\e[0m\] $PS1"'; \
+    printf '%s\n' "$badge" >> "$HOME/.bashrc"; \
+    printf '%s\n' "$badge" | sudo tee -a /root/.bashrc >/dev/null
 
 # Git identity — otherwise the first commit inside the container aborts. Both are
 # recorded in `docker history`, so pass empty strings if you ever share the image.
@@ -492,8 +568,8 @@ RUN set -eux; \
 # --- 25. Entrypoint -----------------------------------------------------------
 # atd is interdimux's job runner for the dashboard's Schedule/Jobs entries; there
 # is no init system in the container, so start it here.
-RUN sudo tee /usr/local/bin/devcontainer-entrypoint >/dev/null <<'ENTRYPOINT' \
- && sudo chmod 755 /usr/local/bin/devcontainer-entrypoint
+RUN sudo tee /usr/local/bin/dev-container-entrypoint >/dev/null <<'ENTRYPOINT' \
+ && sudo chmod 755 /usr/local/bin/dev-container-entrypoint
 #!/bin/sh
 if command -v atd >/dev/null 2>&1 && ! pgrep -x atd >/dev/null 2>&1; then
   sudo /usr/sbin/atd 2>/dev/null || true
@@ -501,5 +577,5 @@ fi
 exec "$@"
 ENTRYPOINT
 
-ENTRYPOINT ["/usr/local/bin/devcontainer-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/dev-container-entrypoint"]
 CMD ["/usr/bin/zsh"]

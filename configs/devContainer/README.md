@@ -6,19 +6,51 @@ pipeline, tmux with [interdimux](https://github.com/embe221ed/interdimux), the
 neovim config from `configs/nvim`, and the toolchains behind the LSP servers that
 config expects.
 
-## Build & run
+## Run
+
+The image is self-contained. From anywhere, with nothing else installed:
+
+```sh
+docker run --rm -it dev-container:latest
+```
+
+That gives you the full environment — prompt, theme, tmux + interdimux, neovim,
+LSPs — and lands you in `~`. The `❮dev❯` badge on the prompt is how you tell a
+container shell from a host shell: it stays on lines that have already run (the
+theme collapses those to a bare `❯`, which is exactly what the host shows), and
+it is on `docker exec … bash` and `sudo -s` too.
+
+`run_docker.sh` is a convenience wrapper, never a requirement. It adds only the
+things the image cannot know about itself:
 
 ```sh
 ./run_docker.sh build              # build (passes your uid/gid through)
 ./run_docker.sh build --refresh    # …and pin every clone to current upstream HEAD
-./run_docker.sh                    # run, $PWD mounted at ~/work
-./run_docker.sh live               # run with /opt/scripts and /opt/tools bind-mounted
+./run_docker.sh                    # run: $PWD at ~/work, your $TERM, ssh agent, state volume
+./run_docker.sh live               # …plus /opt/scripts and /opt/tools bind-mounted
+```
+
+| Wrapper adds | Bare `docker run` instead gets | Worth a flag? |
+|---|---|---|
+| `-e TERM=$TERM` | `xterm-256color` from the image | only if the outer terminal is ghostty and you want its exact terminfo. The wrapper checks the entry exists in the image first and falls back — tmux refuses to start on an unknown `TERM`, and `xterm-kitty` is not in the image |
+| `$PWD` → `~/work` | empty `~/work` in the image | add `-v "$PWD:/home/embe221ed/work" -w /home/embe221ed/work` to work on a checkout |
+| ssh agent | no agent | add `-v "$SSH_AUTH_SOCK:/ssh-agent" -e SSH_AUTH_SOCK=/ssh-agent` to push |
+| `dev-container-state` volume | state discarded on exit | add `-v dev-container-state:/home/embe221ed/.local/state` to keep zsh history, the zoxide db and nvim's shada/undo |
+
+`COLORTERM` is *not* forwarded — the image asserts `COLORTERM=truecolor` itself.
+Without it fast-syntax-highlighting loads `zsh/nearcolor` and quantises every
+24-bit colour in the theme (and in the `❮dev❯` badge) down to 256.
+
+## Build
+
+```sh
+./run_docker.sh build
 ```
 
 Or by hand — BuildKit is required (`TARGETARCH`, heredocs):
 
 ```sh
-docker buildx build -f devContainer.dockerfile -t devcontainer \
+docker buildx build -f devContainer.dockerfile -t dev-container \
   --build-arg USER_UID=$(id -u) --build-arg USER_GID=$(id -g) .
 ```
 
@@ -35,8 +67,16 @@ rustup, node, ruby and the nvim warm-up.
 
 `$SSH_AUTH_SOCK` is forwarded when set, so `git push` works from inside the
 container against the SSH remotes. `$HOME/.local/state` is a named volume
-(`devcontainer-state`), so shell history, the zoxide database and nvim's
+(`dev-container-state`), and `~/.zshrc.local` points `HISTFILE` and
+`$_ZO_DATA_DIR` into it, so shell history, the zoxide database and nvim's
 shada/undo survive `--rm`.
+
+> Images and the volume were named `devcontainer`/`devcontainer-state` before.
+> To carry the old state over once:
+> ```sh
+> docker run --rm -v devcontainer-state:/from -v dev-container-state:/to \
+>   alpine sh -c 'cp -a /from/. /to/' && docker volume rm devcontainer-state
+> ```
 
 > **Security note.** `live` mounts your real dotfiles read-write and forwards
 > your ssh agent into a container that has NOPASSWD sudo. Code running in there

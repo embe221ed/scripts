@@ -5,13 +5,23 @@
 #   ./run_docker.sh [run] [extra docker args…]
 #   ./run_docker.sh live            # run with the host repos bind-mounted
 #
+# This script is a convenience, never a requirement. The image is self-contained:
+#
+#   docker run --rm -it dev-container:latest
+#
+# works from anywhere and gives you the full environment — prompt, theme, tmux,
+# nvim, LSPs. What this script adds on top is only the host-coupled parts, none
+# of which the image can set for itself: your real $TERM, your ssh agent, the
+# current directory mounted at ~/work, and a named volume so shell history and
+# nvim state outlive --rm.
+#
 # --refresh pins every clone to the current upstream HEAD, which both makes the
 # build reproducible and busts Docker's layer cache (otherwise a rebuild silently
 # reuses a weeks-old checkout of embe221ed/scripts). The clone layer sits below
 # every toolchain, so a refresh is cheap — it does not rebuild rust/python/node.
 set -euo pipefail
 
-IMAGE="${IMAGE:-devcontainer}"
+IMAGE="${IMAGE:-dev-container}"
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 USER_NAME="${CONTAINER_USER:-embe221ed}"
 HOME_IN="/home/${USER_NAME}"
@@ -42,15 +52,29 @@ cmd_build() {
 }
 
 # TERM is passed through so the generated tmux conf's `default-terminal "$TERM"`
-# matches the outer terminal; the ghostty terminfo is compiled into the image.
+# matches the outer terminal; the ghostty terminfo is compiled into the image and
+# ncurses-term covers alacritty/wezterm/foot/rio/contour. It is *checked* first
+# because tmux exits with "missing or unsuitable terminal" on an entry the
+# container does not have (xterm-kitty is the common one), which would be a
+# strictly worse session than the image's own xterm-256color default.
 #
-# devcontainer-state is a named volume for $HOME state that is worth keeping
+# COLORTERM is deliberately not forwarded: the image sets COLORTERM=truecolor
+# itself, because fast-syntax-highlighting falls back to zsh/nearcolor without it
+# and quantises the whole 24-bit theme to 256 colours.
+#
+# dev-container-state is a named volume for $HOME state that is worth keeping
 # across `--rm` runs: shell history, the zoxide database, nvim's shada/undo.
+# ~/.zshrc.local in the image points HISTFILE and $_ZO_DATA_DIR at it.
 cmd_run() {
+  local term="${TERM:-xterm-256color}"
+  if [[ "$term" != xterm-256color ]] \
+     && ! docker run --rm "$IMAGE" infocmp "$term" >/dev/null 2>&1; then
+    echo "note: no terminfo for '$term' in $IMAGE — using xterm-256color" >&2
+    term=xterm-256color
+  fi
   docker run --rm -it \
-    -e TERM="${TERM:-xterm-256color}" \
-    -e "COLORTERM=${COLORTERM:-truecolor}" \
-    -v devcontainer-state:"${HOME_IN}/.local/state" \
+    -e TERM="$term" \
+    -v dev-container-state:"${HOME_IN}/.local/state" \
     ${SSH_AUTH_SOCK:+-v "$SSH_AUTH_SOCK":/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent} \
     --mount type=bind,source="$PWD",target="${HOME_IN}/work" \
     -w "${HOME_IN}/work" \
