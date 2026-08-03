@@ -56,6 +56,10 @@ return {
       nerd_font_variant = 'mono'
     },
     snippets = {
+      -- 'luasnip' preset so snippets registered via ls.add_snippets() (e.g. `remote`,
+      -- `test`, `debug`) show up in the menu. The default preset only scans VSCode JSON
+      -- files; friendly-snippets still work because from_vscode loads them into LuaSnip.
+      preset = 'luasnip',
       expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
       active = function(filter)
         if filter and filter.direction then

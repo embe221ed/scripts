@@ -78,3 +78,20 @@ ls.add_snippets("python", {
     t("\".split()"),
   }),
 })
+
+-- -- TOML
+ls.add_snippets("toml", {
+  -- `audits` -> "$OSEC/audits" (raw path; a trailing slash on $OSEC is normalized)
+  -- The path is read from the OSEC env var at EXPANSION time (function node),
+  -- so it never lives in the repo. If OSEC is unset it expands to an empty
+  -- string. Keep this function node side-effect-free: LuaSnip also calls it to
+  -- build the completion-menu preview, so no vim.notify() etc.
+  s("audits", {
+    f(function()
+      local osec = os.getenv("OSEC")
+      if not osec then return "" end
+      return (osec:gsub("/+$", "")) .. "/audits"
+    end),
+    i(0),
+  }),
+})
