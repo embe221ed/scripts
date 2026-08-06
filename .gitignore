@@ -1,6 +1,7 @@
-lazy-lock.json
 package.json
 package-lock.json
-kitty.conf.bak
-configs/kitty/current-theme.conf
-languages.lua
+
+# Anchored at this repo's root, so `filter-repo --path configs` drops it and the
+# dotfiles repo (where this file IS committed) never sees it. Keeps the file out
+# of `scripts` for the 2.10 -> Phase 6 window in which it is still on disk here.
+/configs/nvim/lazy-lock.json
