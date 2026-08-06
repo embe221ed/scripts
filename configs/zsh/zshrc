@@ -48,8 +48,11 @@ plugins=(
   nvm
 )
 
-# Hand-written completions (_audits, _session, _svm, _rustup).
-[[ -d /opt/scripts/configs/oh-my-zsh/completions ]] && fpath+=/opt/scripts/configs/oh-my-zsh/completions
+# Hand-written completions (_audits, _session, _svm, _rustup), linked into place
+# by install.sh in embe221ed/dotfiles. XDG path, not a repo path, so moving the
+# repo needs no edit here.
+[[ -d ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/completions ]] && \
+  fpath+=${XDG_CONFIG_HOME:-$HOME/.config}/zsh/completions
 
 # zsh-completions does not register itself on fpath when cloned into
 # $ZSH_CUSTOM/plugins, so do it here — guarded, since it is not installed today.
