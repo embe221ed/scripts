@@ -1,0 +1,53 @@
+# ------------------------------------------------------------------------------
+# embe221ed/dotfiles — .gitignore
+#
+# Everything here is MACHINE-LOCAL output: either interdotensional writes it, or
+# install.sh does. Nothing hand-written is ignored. Two things you might expect
+# to see are deliberately ABSENT:
+#   lazy-lock.json      — COMMITTED. Reproducing the editor on a new machine is
+#                         the point of this repo; an unpinned `Lazy! sync`
+#                         resolves ~46 plugins to upstream HEAD.
+#   nvim/spell/*.add    — COMMITTED. That is your dictionary. Only the compiled
+#                         .spl is ignored, because nvim regenerates it.
+# ------------------------------------------------------------------------------
+
+# install.sh --lang picks the profile; both languages.lua.sui and
+# languages.lua.aptos are tracked. This is the relative symlink it creates.
+nvim/lua/languages.lua
+
+# `interdot link` fills these; nvim/lua/globals.lua and nvim/lua/ui/colors.lua
+# are committed shims that pcall-load them and work without them.
+nvim/lua/globals.generated.lua
+nvim/lua/ui/colors.generated.lua
+
+# nvim compiles this from spell/en.utf-8.add on demand.
+# NOTE: this rule is inert on its own — `en.utf-8.add.spl` is ALREADY TRACKED
+# (`git ls-files configs/nvim/spell` lists both files) and .gitignore has no
+# effect on a tracked path. 2.6e runs `git rm --cached` on it, which is what
+# actually makes this line do anything.
+nvim/spell/en.utf-8.add.spl
+
+# kitty's generated slot. DORMANT INSURANCE — read the reason, because the rule
+# is deliberately kept even though nothing can trip it today.
+#
+# kitty is installed on NEITHER machine (0.5.1: ABSENT on the Mac; never on the
+# VPS), so install.sh has no kitty row and nothing makes ~/.config/kitty a
+# symlink into this repo. general.yml's ~/.config/kitty/kitty.conf entry
+# therefore writes into a plain $HOME directory that no repository claims, and
+# this rule matches nothing.
+#
+# It stays because the day kitty IS installed, the fix is to add a Darwin
+# manifest row linking the whole DIRECTORY (~/.config/kitty -> $DOTFILES/kitty) —
+# it has to be the directory, because kitty resolves `include` relative to the
+# file holding kitty.conf and discovers its OS-appearance themes
+# (dark-theme.auto.conf) by filename in that same directory. From that moment the
+# generated 86 KiB machine-specific kitty.conf lands straight in this repo's
+# working tree, shows up as `??` in every `git status`, and one `git add -A`
+# commits it into a repo whose whole point is that it is portable. A one-line
+# ignore rule now is cheaper than that discovery later.
+#
+# The six kitty/*.conf THEME files next to it are hand-vendored and stay tracked;
+# only the generated slot and kitty's own scratch files are ignored.
+kitty/kitty.conf
+kitty/current-theme.conf
+kitty/kitty.conf.bak
