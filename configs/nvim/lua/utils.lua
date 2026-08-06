@@ -5,18 +5,6 @@ end
 
 local utils = {}
 
-function utils.is_dark()
-  local out = os.execute("/opt/scripts/utils/determine_system.sh") / 256
-  -- not Darwin (MacOS), early return
-  if out ~= 1 then return os.getenv("DISPLAY_MODE") ~= "Light" end
-  local result = os.execute("defaults read -g AppleInterfaceStyle &> /dev/null") / 256
-  if result == 1 then
-    return false
-  else
-    return true
-  end
-end
-
 function utils.is_directory(path)
   local expanded_path = vim.fn.expand(path)
   local stat = vim.uv.fs_stat(expanded_path)
