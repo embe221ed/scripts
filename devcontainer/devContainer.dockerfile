@@ -10,10 +10,11 @@
 #   docker buildx build -f devContainer.dockerfile -t dev-container \
 #     --build-arg USER_UID=$(id -u) --build-arg USER_GID=$(id -g) .
 #
-# NOTE: the build clones embe221ed/scripts from GitHub, so any change to
-# configs/zsh/* or configs/nvim/* must be COMMITTED AND PUSHED before it shows up
-# in the image. Use ./run_docker.sh --refresh to pin the clones to current HEADs,
-# or bind-mount /opt/scripts at run time to iterate without rebuilding.
+# NOTE: the build clones embe221ed/scripts AND embe221ed/dotfiles from GitHub, so
+# any change to the dotfiles repo's zsh/* or nvim/* must be COMMITTED AND PUSHED
+# before it shows up in the image. Use ./run_docker.sh --refresh to pin the clones
+# to current HEADs, or bind-mount /opt/dotfiles at run time to iterate without
+# rebuilding.
 
 FROM ubuntu:24.04
 
@@ -211,7 +212,7 @@ RUN set -eux; \
 # would mean `--refresh` (or any push to embe221ed/scripts) re-runs CPython,
 # rustup, node, ruby and the nvim warm-up for a one-line dotfile change.
 RUN install -d -o "$USERNAME" -g "$USERNAME" \
-      /opt/scripts /opt/tools /opt/tools/interdotensional /opt/tools/interdimux \
+      /opt/scripts /opt/dotfiles /opt/tools /opt/tools/interdotensional /opt/tools/interdimux \
       /opt/tree-sitter-parsers /opt/tree-sitter-parsers/tree-sitter-move-sui
 
 # --- 10. User environment -----------------------------------------------------
@@ -220,7 +221,7 @@ WORKDIR /home/$USERNAME
 ENV HOME=/home/$USERNAME
 ENV PYENV_ROOT="$HOME/.pyenv"
 # This PATH is what `docker exec <c> <cmd>` and the RUN steps below see; the
-# interactive shell rebuilds it from configs/zsh/{zshenv,zshrc}.
+# interactive shell rebuilds it from the dotfiles repo's zsh/{zshenv,zshrc}.
 ENV PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.svm/bin:$HOME/.foundry/bin:$PYENV_ROOT/bin:$PYENV_ROOT/shims:/opt/scripts/utils:$PATH"
 # DEV_CONTAINER is what the prompt badge keys off. It is an ENV, not something
 # the wrapper script passes, so it is set for `docker run`, `docker exec`, every
@@ -389,6 +390,12 @@ RUN set -eux; \
       PATH="$HOME/.govman/bin:$HOME/go/bin:$PATH" go install golang.org/x/tools/gopls@latest; \
     fi
 
+# Set HERE, not up at the PATH block in step 10: an ENV that early invalidates
+# every toolchain layer below it. Nothing load-bearing reads it — zsh/zshenv
+# derives $DOTFILES from its own location — but `interdot` and an interactive
+# shell both benefit from it being right.
+ENV DOTFILES=/opt/dotfiles
+
 # --- 20. Repositories ---------------------------------------------------------
 # Deliberately after every toolchain: this is the layer that changes whenever you
 # push a dotfile, and everything below it is cheap to redo.
@@ -400,52 +407,88 @@ RUN set -eux; \
 # default branch name (scripts/interdimux/tree-sitter-move-sui are on main,
 # interdotensional on master).
 ARG SCRIPTS_REF=HEAD
+ARG DOTFILES_REF=HEAD
 ARG INTERDOT_REF=HEAD
 ARG INTERDIMUX_REF=HEAD
 ARG TSMOVE_REF=HEAD
 RUN set -eux; \
     clone() { git clone --filter=blob:none "$1" "$2" && { [ "$3" = HEAD ] || git -C "$2" checkout --quiet "$3"; }; }; \
     clone https://github.com/embe221ed/scripts              /opt/scripts                                   "$SCRIPTS_REF"; \
+    clone https://github.com/embe221ed/dotfiles             /opt/dotfiles                                  "$DOTFILES_REF"; \
     clone https://github.com/embe221ed/interdotensional     /opt/tools/interdotensional                    "$INTERDOT_REF"; \
     clone https://github.com/embe221ed/interdimux           /opt/tools/interdimux                          "$INTERDIMUX_REF"; \
     clone https://github.com/embe221ed/tree-sitter-move-sui /opt/tree-sitter-parsers/tree-sitter-move-sui  "$TSMOVE_REF"; \
-    test -f /opt/scripts/configs/zsh/zshrc || { \
-      echo "ERROR: /opt/scripts/configs/zsh/zshrc is missing from the clone." >&2; \
-      echo "       Commit and push configs/zsh/{zshrc,zshenv} to embe221ed/scripts first." >&2; exit 1; }
+    test -x /opt/dotfiles/install.sh || { \
+      echo "ERROR: /opt/dotfiles/install.sh missing from the clone" >&2; \
+      echo "       Commit and push install.sh to embe221ed/dotfiles first." >&2; exit 1; }
 
-# --- 21. Generate + link the interdotensional configs -------------------------
-# `generate` renders output/; `link` installs the symlinks declared in
-# config/general.yml — $ZSH_CUSTOM/interdot.zsh (which is the only thing that
-# exports DISPLAY_MODE and themes the syntax highlighter) and the prompt theme.
-# Must run after oh-my-zsh exists.
-RUN set -eux; \
-    uv run --directory /opt/tools/interdotensional interdot generate; \
-    uv run --directory /opt/tools/interdotensional interdot link; \
-    test -L "$HOME/.oh-my-zsh/custom/themes/theme.zsh-theme"
-
-# --- 22. Dotfiles -------------------------------------------------------------
+# --- 21. Dotfiles -------------------------------------------------------------
+# ORDER IS LOAD-BEARING: this runs BEFORE `interdot link` (step 22), not after.
+# general.yml targets ~/.config/nvim/lua/*.generated.lua, and `interdot link`
+# does target.parent.mkdir(parents=True). If it ran first it would create a REAL
+# ~/.config/nvim/lua, and the ln below would nest inside it — the build would
+# succeed and the image would ship a broken nvim.
+#
 # Symlinks into the repo, not `echo >>` appends: several settings (typeset -U,
 # ZSH_THEME, plugins=(), fpath, ZSH_AUTOSUGGEST_STRATEGY, the nvm-lazy zstyle)
 # only work above oh-my-zsh.sh and cannot be appended after it at all.
-# Placed after every installer above, because rustup/nvm/foundryup append PATH
-# lines to ~/.zshenv and ~/.zshrc — which would otherwise land in the repo files.
+#
+# --force is MANDATORY and not defensive: rustup-init (step ~12) detects zsh and
+# appends `. "$HOME/.cargo/env"` to a REAL ~/.zshenv long before this layer, so
+# install.sh's pre-flight correctly classifies both zsh files as `conflict` and
+# refuses. --force moves each to <dest>.bak-<STAMP> and links over it.
+# CONSEQUENCE, accepted knowingly: the finished image carries ~/.zshenv.bak-* and
+# ~/.zshrc.bak-* holding the lines rustup/nvm/foundryup appended. They are inert
+# — nothing sources them — but they are visible, and they are deliberately NOT
+# deleted here: if the install ever goes wrong they are the only copy of what the
+# installers wrote.
 #
 # ~/work is what run_docker.sh bind-mounts over; ~/.local/state has to exist and
 # be user-owned before docker initialises the named volume from it. They are
 # created here rather than next to the ENV block at step 10 so that they cost one
 # cheap layer instead of invalidating every toolchain below.
 RUN set -eux; \
-    ln -sf /opt/scripts/configs/zsh/zshrc  "$HOME/.zshrc"; \
-    ln -sf /opt/scripts/configs/zsh/zshenv "$HOME/.zshenv"; \
     mkdir -p "$HOME/.config" "$HOME/work" "$HOME/.local/state"; \
-    ln -sfn /opt/scripts/configs/nvim "$HOME/.config/nvim"; \
-    ln -sfn /opt/tools/interdotensional/output/colorls "$HOME/.config/colorls"; \
-    ln -sf /opt/tools/interdotensional/output/tmux/.tmux.conf "$HOME/.tmux.conf"; \
-    ln -sf languages.lua.sui /opt/scripts/configs/nvim/lua/languages.lua
+    sh /opt/dotfiles/install.sh --force
 
-# Container-only shell overlay, sourced by configs/zsh/zshrc after the theme.
+# The install above is the only thing standing between this image and a stock
+# shell/editor. `install.sh` verifies each link itself, but a future edit to this
+# Dockerfile could reorder it back behind rustup — so assert the end state here,
+# where a regression fails the BUILD rather than surfacing as "nvim looks weird".
+RUN set -eux; \
+    for l in "$HOME/.zshenv" "$HOME/.zshrc" "$HOME/.config/nvim" \
+             "$HOME/.config/zsh/completions"; do \
+      test -L "$l" || { echo "ERROR: $l is not a symlink after install.sh" >&2; exit 1; }; \
+      test -e "$l" || { echo "ERROR: $l is a DANGLING symlink" >&2; exit 1; }; \
+      printf '%s -> %s\n' "$l" "$(readlink "$l")"; \
+    done; \
+    case "$(readlink "$HOME/.zshrc")" in /opt/dotfiles/*) ;; \
+      *) echo "ERROR: ~/.zshrc does not point into /opt/dotfiles" >&2; exit 1;; esac; \
+    test -e "$HOME/.config/nvim/lua/languages.lua"; \
+    ls -1 "$HOME"/.zsh*.bak-* 2>/dev/null || true
+
+# --- 22. Generate + link the interdotensional configs -------------------------
+# `generate` renders output/; `link` installs the symlinks declared in
+# config/general.yml — $ZSH_CUSTOM/interdot.zsh (which is the only thing that
+# exports DISPLAY_MODE and themes the syntax highlighter) and the prompt theme.
+# Must run after oh-my-zsh exists AND after step 21 (see the ordering note there).
+#
+# This layer also now creates ~/.config/colorls and ~/.tmux.conf, which used to be
+# hand-made `ln` lines in step 21 with no owner. general.yml owns them as of the
+# split, from the same sources, one layer later. It additionally creates
+# ~/.config/{kitty,ghostty,zellij}/ as real directories each holding one generated
+# symlink: none of those terminals exists in the container, so they are inert —
+# not a bug, and the same shape the macOS machine ends up with.
+RUN set -eux; \
+    uv run --directory /opt/tools/interdotensional interdot generate; \
+    uv run --directory /opt/tools/interdotensional interdot link; \
+    test -L "$HOME/.oh-my-zsh/custom/themes/theme.zsh-theme"; \
+    test -L "$HOME/.config/colorls"; \
+    test -L "$HOME/.tmux.conf"
+
+# Container-only shell overlay, sourced by /opt/dotfiles/zsh/zshrc after the theme.
 RUN cat > "$HOME/.zshrc.local" <<'ZSHRC_LOCAL'
-# Sourced by /opt/scripts/configs/zsh/zshrc — container-only settings.
+# Sourced by /opt/dotfiles/zsh/zshrc — container-only settings.
 
 # Keep the state worth keeping on the one path run_docker.sh puts a named volume
 # on. zsh defaults HISTFILE to ~/.zsh_history and zoxide defaults its database to
@@ -515,7 +558,7 @@ ARG GIT_USER_EMAIL=baniak996@gmail.com
 RUN set -eux; \
     [ -z "$GIT_USER_NAME" ]  || git config --global user.name  "$GIT_USER_NAME"; \
     [ -z "$GIT_USER_EMAIL" ] || git config --global user.email "$GIT_USER_EMAIL"; \
-    for d in /opt/scripts /opt/tools/interdotensional /opt/tools/interdimux \
+    for d in /opt/scripts /opt/dotfiles /opt/tools/interdotensional /opt/tools/interdimux \
              /opt/tree-sitter-parsers/tree-sitter-move-sui; do \
       git config --global --add safe.directory "$d"; \
     done

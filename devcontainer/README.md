@@ -27,7 +27,7 @@ things the image cannot know about itself:
 ./run_docker.sh build              # build (passes your uid/gid through)
 ./run_docker.sh build --refresh    # …and pin every clone to current upstream HEAD
 ./run_docker.sh                    # run: $PWD at ~/work, your $TERM, ssh agent, state volume
-./run_docker.sh live               # …plus /opt/scripts and /opt/tools bind-mounted
+./run_docker.sh live               # …plus /opt/dotfiles, /opt/scripts and /opt/tools bind-mounted
 ```
 
 | Wrapper adds | Bare `docker run` instead gets | Worth a flag? |

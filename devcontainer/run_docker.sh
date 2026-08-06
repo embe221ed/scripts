@@ -26,7 +26,13 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 USER_NAME="${CONTAINER_USER:-embe221ed}"
 HOME_IN="/home/${USER_NAME}"
 
-head_of() { git ls-remote "https://github.com/embe221ed/$1" HEAD | cut -f1; }
+# This script is `set -euo pipefail` and the refs below are built inside an array
+# assignment, so a failing command substitution kills the whole run before docker
+# is ever invoked — with no clue as to which repo failed. Say which.
+head_of() {
+  git ls-remote "https://github.com/embe221ed/$1" HEAD | cut -f1 |
+    grep -E '^[0-9a-f]{40}$' || { echo "cannot resolve HEAD of embe221ed/$1" >&2; exit 1; }
+}
 
 cmd_build() {
   local refs=()
@@ -35,6 +41,7 @@ cmd_build() {
     echo "resolving upstream HEADs…" >&2
     refs=(
       --build-arg "SCRIPTS_REF=$(head_of scripts)"
+      --build-arg "DOTFILES_REF=$(head_of dotfiles)"
       --build-arg "INTERDOT_REF=$(head_of interdotensional)"
       --build-arg "INTERDIMUX_REF=$(head_of interdimux)"
       --build-arg "TSMOVE_REF=$(head_of tree-sitter-move-sui)"
@@ -92,13 +99,25 @@ cmd_run() {
 #
 # SECURITY: this mounts your real dotfiles read-write and forwards your ssh
 # agent into a container that has NOPASSWD sudo. Anything running in here can
-# rewrite /opt/scripts/configs/zsh/zshrc, which your host shell then sources.
+# rewrite /opt/dotfiles/zsh/zshrc, which your host shell then sources.
 # Use plain `run` — not `live` — when the working directory holds code you do
 # not trust.
+#
+# The host-side sources are overridable so a machine that does not keep its
+# checkouts under /opt is not excluded. The container-side targets stay
+# hardcoded: the image's own clones live at those paths and its ~/.zshrc points
+# into /opt/dotfiles.
+#
+# CAVEAT on a non-/opt host: the dotfiles repo's intra-repo generated links
+# (nvim/lua/*.generated.lua) are ABSOLUTE into that host's interdotensional
+# checkout, so under `live` they dangle inside the container. nvim still starts —
+# the committed shims fall back — but unthemed. Use plain `run`, or re-run
+# `interdot link` inside the container.
 cmd_live() {
   cmd_run \
-    --mount type=bind,source=/opt/scripts,target=/opt/scripts \
-    --mount type=bind,source=/opt/tools/interdotensional,target=/opt/tools/interdotensional \
+    --mount type=bind,source="${DOTFILES:-/opt/dotfiles}",target=/opt/dotfiles \
+    --mount type=bind,source="${SCRIPTS:-/opt/scripts}",target=/opt/scripts \
+    --mount type=bind,source="${INTERDOT:-/opt/tools/interdotensional}",target=/opt/tools/interdotensional \
     --mount type=bind,source=/opt/tools/interdimux,target=/opt/tools/interdimux \
     --mount type=volume,target=/opt/tools/interdotensional/.venv \
     "$@"
