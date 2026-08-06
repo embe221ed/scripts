@@ -5,7 +5,7 @@
 # behind the LSP servers the nvim config configures).
 #
 # BUILD (BuildKit/buildx required — TARGETARCH and heredocs):
-#   cd /opt/scripts/configs/devContainer
+#   cd /opt/scripts/devcontainer
 #   ./run_docker.sh build             # or:
 #   docker buildx build -f devContainer.dockerfile -t dev-container \
 #     --build-arg USER_UID=$(id -u) --build-arg USER_GID=$(id -g) .
