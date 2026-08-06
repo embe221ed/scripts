@@ -6,10 +6,21 @@
 # ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}"
 # ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
-/opt/scripts/utils/determine_system.sh
-SYSTEM=$?
+# --- which OS? ---------------------------------------------------------------
+# determine_system.sh is resolved by NAME, never by path: $DETERMINE_SYSTEM
+# wins, then $PATH. The script itself lives in embe221ed/scripts (utils/), which
+# this repository does not depend on: `uname` is the floor, and it is exactly
+# what --print echoes, so a machine with no scripts checkout — or a stale one —
+# degrades to the same answer instead of silently inverting the light/dark
+# branch below on the machine you are not sitting at.
+_ds="${DETERMINE_SYSTEM:-}"
+if [ -z "${_ds}" ]; then _ds="$(command -v determine_system.sh 2>/dev/null)" || _ds=""; fi
+SYSTEM=""
+if [ -x "${_ds}" ]; then SYSTEM="$("${_ds}" --print 2>/dev/null)" || SYSTEM=""; fi
+if [ -z "${SYSTEM}" ]; then SYSTEM="$(uname)"; fi
+unset _ds
 
-if [ "${SYSTEM}" = "1" ]; then
+if [ "${SYSTEM}" = "Darwin" ]; then
 	IS_DARK=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
 else
 	IS_DARK="Dark"
