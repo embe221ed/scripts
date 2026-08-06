@@ -1,32 +1,19 @@
-# ~/.zshenv — read by EVERY zsh (login, interactive, script, `docker exec zsh -c …`).
+# TOMBSTONE — the dotfiles moved to https://github.com/embe221ed/dotfiles
 #
-# Only PATH and environment go here; nothing interactive, nothing that prints.
-# Symlinked into place:  ln -sf /opt/scripts/configs/zsh/zshenv ~/.zshenv
-#
-# Everything is guarded so the same file works on the host and inside the dev
-# container, where several of these toolchains may be absent.
-
-# Duplicate-free PATH/fpath. Must run BEFORE the first PATH edit — and .zshenv is
-# read before .zshrc, so this is the earliest correct place for it. Without it
-# every `exec zsh` (which is how display_mode.sh reloads the shell) grows $path.
-typeset -U path PATH fpath FPATH cdpath manpath MANPATH
-
-# --- toolchains ---------------------------------------------------------------
-[[ -r "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
-
-path=("$HOME/.local/bin" $path)
-[[ -d "$HOME/.svm/bin" ]]     && path=("$HOME/.svm/bin" $path)       # sui + move-analyzer
-[[ -d "$HOME/.foundry/bin" ]] && path=("$HOME/.foundry/bin" $path)   # forge/cast/anvil
-[[ -d "$HOME/osec_io/bin" ]]  && path=("$HOME/osec_io/bin" $path)    # host-only
-
-# --- man ----------------------------------------------------------------------
-# Colored man pages through bat. Guarded: without bat this would break `man`.
-if (( $+commands[bat] )); then
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-  export MANROFFOPT="-c"
-fi
-
-# NOTE: deliberately NOT setting RIPGREP_CONFIG_PATH. configs/.ripgreprc contains
-# `--color=always`, which forces SGR escapes even when stdout is a pipe — so
-# `rg -l pat | xargs sed -i` would feed sed filenames wrapped in escape codes.
-# rg already colorizes when stdout is a TTY.
+# ~/.zshenv is read by EVERY zsh: every `zsh -c`, every script, every
+# `docker exec zsh -c …`, every editor subshell. An unconditional `print -u2`
+# here would inject two lines of stderr into all of them, for a week — which
+# breaks anything that parses a zsh script's stderr and trains you to ignore the
+# message you actually wanted to see. So: warn only when a human is looking.
+# The chain below stays unguarded — that is the part that keeps the machine
+# working, and it must run in non-interactive shells too.
+[[ -o interactive ]] && {
+  print -u2 "[!] dotfiles moved to https://github.com/embe221ed/dotfiles"
+  print -u2 "[!] run: git clone https://github.com/embe221ed/dotfiles /opt/dotfiles && /opt/dotfiles/install.sh"
+}
+# Try every root this repo has ever suggested, not just the Mac's. A host that
+# put its clone at /opt/dotfiles got the warning but no chain from the old form.
+for _r in "${DOTFILES:-}" "$HOME/src/dotfiles" /opt/dotfiles; do
+  [ -n "$_r" ] && [ -r "$_r/zsh/zshenv" ] && { . "$_r/zsh/zshenv"; break; }
+done
+unset _r
